@@ -11,3 +11,7 @@ build/
 dist/
 graphify-out/cache/
 .claude/settings.local.json
+
+# Real policies (may encode real DB structure) — only the generic example is tracked
+policies/*.yaml
+!policies/example.yaml
