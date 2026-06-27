@@ -5,6 +5,14 @@ All notable changes to GuardMCP are documented here. This project adheres to
 
 ## [Unreleased]
 
+## [0.0.1-alpha] — 2026-06-27
+
+First public alpha. Policy-enforced multi-backend MCP server (MongoDB live;
+PostgreSQL/MySQL plugins). Governance core (policy/risk/approval/masking/audit/
+rate-limit), 44 MCP tools (`db_*` + `mongodb_*` aliases + 6 `guardmcp_*` meta),
+query cost estimation, policy explain/simulator, type marshalling. Full notes:
+[RELEASE_NOTES.md](RELEASE_NOTES.md). 546 tests, 38 evals.
+
 ### Changed
 
 #### Audit log default moved to a platform per-user state dir (minor behavior change)

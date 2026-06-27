@@ -199,7 +199,10 @@
       "Bash(GUARDMCP_TRANSPORT=streamable-http GUARDMCP_APPROVAL_API_TOKEN=\"\" python -m guardmcp)",
       "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'docs: QUICKSTART + INSTALL; fix docker-compose H1 token requirement *)",
       "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'docs: refresh README to current multi-backend reality *)",
-      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'chore: remove real data from the repo *)"
+      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'chore: remove real data from the repo *)",
+      "Bash(python -c \"import guardmcp; print\\('version check ok'\\)\")",
+      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'release: v0.0.1-alpha *)",
+      "Bash(git tag *)"
     ]
   }
 }

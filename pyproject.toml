@@ -4,8 +4,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "guardmcp"
-version = "0.1.0"
-description = "Policy-enforced MongoDB MCP server — AI proposes, GuardMCP decides"
+version = "0.0.1a1"
+description = "Policy-enforced multi-backend MCP server for governed database access — AI proposes, GuardMCP decides"
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.12"
