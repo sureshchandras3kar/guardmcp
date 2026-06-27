@@ -1,0 +1,22 @@
+name: action_not_in_allow_list
+description: "action not in actions.allow list is denied"
+tags: [authorization, deny]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+  actions:
+    allow: [find, count]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: aggregate
+  params:
+    pipeline_stages: []
+
+expected:
+  decision: deny
+  reason_contains: "aggregate"

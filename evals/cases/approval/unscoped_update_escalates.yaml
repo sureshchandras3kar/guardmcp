@@ -1,0 +1,24 @@
+name: unscoped_update_many_requires_approval
+description: "S-4: update_many with empty filter is a mass mutation -> CRITICAL -> approval"
+tags: [approval, risk, scope]
+
+policy:
+  agent: test-agent
+  mode: readwrite
+  collections:
+    allow: [customers]
+  approval:
+    high: false      # HIGH gate OFF — proves escalation to CRITICAL is what triggers
+    critical: true
+
+request:
+  agent: test-agent
+  collection: customers
+  action: update_many
+  params:
+    filter: {}
+    update: {$set: {status: inactive}}
+
+expected:
+  decision: approval_required
+  approval_required: true

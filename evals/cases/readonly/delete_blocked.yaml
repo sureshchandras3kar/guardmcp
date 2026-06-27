@@ -1,0 +1,21 @@
+name: readonly_delete_blocked
+description: "delete_many is blocked in readonly mode"
+tags: [readonly, write]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: delete_many
+  params:
+    filter: {}
+
+expected:
+  decision: deny
+  status: denied
+  reason_contains: "readonly"

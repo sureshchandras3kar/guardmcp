@@ -1,0 +1,32 @@
+name: nested_field_masked
+description: "masked field inside nested doc is recursively masked"
+tags: [masking, nested]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [users]
+  mask_fields: [email]
+
+fixtures:
+  - collection: users
+    documents:
+      - name: Alice
+        contact:
+          email: alice@example.com
+          phone: "555-1234"
+
+request:
+  agent: test-agent
+  collection: users
+  action: find
+  params:
+    filter: {}
+    limit: 5
+
+expected:
+  status: success
+  masked_fields: ["contact.email"]
+  unmasked_fields: [name]
+  data_count: 1

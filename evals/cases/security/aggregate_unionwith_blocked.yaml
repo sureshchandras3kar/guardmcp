@@ -1,0 +1,25 @@
+name: aggregate_unionwith_to_denied_collection_blocked
+description: >
+  C1: an aggregate $unionWith that reaches a denied collection (payroll) is
+  rejected before execution — the union cannot be used to read a forbidden
+  collection's documents.
+tags: [security, authorization, aggregation]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [orders]
+    deny: [payroll]
+
+request:
+  agent: test-agent
+  collection: orders
+  action: aggregate
+  params:
+    pipeline:
+      - $unionWith: payroll
+
+expected:
+  decision: deny
+  reason_contains: "payroll"

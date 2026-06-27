@@ -1,0 +1,24 @@
+name: update_many_requires_approval
+description: "update_many is HIGH risk and requires approval when approval.high=true"
+tags: [approval, high]
+
+policy:
+  agent: test-agent
+  mode: readwrite
+  collections:
+    allow: [customers]
+  approval:
+    high: true
+    critical: true
+
+request:
+  agent: test-agent
+  collection: customers
+  action: update_many
+  params:
+    filter: {}
+    update: {$set: {status: inactive}}
+
+expected:
+  decision: approval_required
+  approval_required: true

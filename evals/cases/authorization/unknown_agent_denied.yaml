@@ -1,0 +1,19 @@
+name: unknown_agent_denied
+description: "agent with no policy is always denied"
+tags: [authorization, deny]
+
+policy:
+  agent: known-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+
+request:
+  agent: unknown-agent
+  collection: customers
+  action: find
+  params: {}
+
+expected:
+  decision: deny
+  reason_contains: "unknown-agent"

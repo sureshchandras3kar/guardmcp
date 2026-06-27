@@ -1,0 +1,26 @@
+name: aggregate_addfields_mask_leak_blocked
+description: >
+  SEC-2: an aggregation with $addFields{x:"$ssn"} aliases a masked field to a
+  new, non-masked key 'x' — the masked value would leak under 'x'. DENIED by
+  the masked-field-reference guard.
+tags: [security, masking, aggregation]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+  mask_fields: [ssn]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: aggregate
+  params:
+    pipeline:
+      - $addFields:
+          x: $ssn
+
+expected:
+  decision: deny
+  reason_contains: "ssn"

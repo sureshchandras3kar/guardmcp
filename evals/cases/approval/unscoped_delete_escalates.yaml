@@ -1,0 +1,26 @@
+name: unscoped_delete_one_requires_approval
+description: >
+  S-4: delete_one with an empty filter {} is a mass-deletion risk -> escalates
+  to CRITICAL -> approval required. HIGH gate is OFF to prove the escalation to
+  CRITICAL is what triggers (mirrors unscoped_update_many).
+tags: [approval, risk, scope, delete]
+
+policy:
+  agent: test-agent
+  mode: readwrite
+  collections:
+    allow: [customers]
+  approval:
+    high: false      # HIGH gate OFF
+    critical: true
+
+request:
+  agent: test-agent
+  collection: customers
+  action: delete_one
+  params:
+    filter: {}
+
+expected:
+  decision: approval_required
+  approval_required: true

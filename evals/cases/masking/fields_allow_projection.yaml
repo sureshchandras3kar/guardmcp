@@ -1,0 +1,39 @@
+name: fields_allow_projection
+description: >
+  S-3: fields_allow restricts find/aggregate results to ONLY the listed
+  top-level fields (+ _id), server-side, regardless of what the agent projects.
+  email/ssn are dropped from the result entirely.
+tags: [masking, fields_allow, data-minimization]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [employees]
+  fields_allow: [name, role]
+
+fixtures:
+  - collection: employees
+    documents:
+      - {name: Alice, role: engineer, email: alice@example.com, ssn: "111-22-3333"}
+      - {name: Bob, role: manager, email: bob@example.com, ssn: "444-55-6666"}
+
+request:
+  agent: test-agent
+  collection: employees
+  action: find
+  params:
+    filter: {}
+    limit: 10
+
+expected:
+  status: success
+  data_count: 2
+  # Only name/role survive the server-side projection. The eval assertion
+  # engine has no "field is absent" check, so we assert the kept fields are
+  # present+unmasked and the kept values match; email/ssn are projected away
+  # by fields_allow (verified by the field_allow unit tests in tests/unit).
+  unmasked_fields: [name, role]
+  data_contains:
+    - {name: Alice, role: engineer}
+    - {name: Bob, role: manager}

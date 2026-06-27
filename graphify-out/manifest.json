@@ -1,0 +1,1012 @@
+{
+  ".claude/settings.local.json": {
+    "mtime": 1782565989.2088215,
+    "ast_hash": "125f044f8b6ab3ccc9a1b06a062cbe3d",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/__init__.py": {
+    "mtime": 1782236894.5898995,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/__main__.py": {
+    "mtime": 1782559138.67922,
+    "ast_hash": "26db319db9f4477fa8f4fd2446bc858f",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/api/__init__.py": {
+    "mtime": 1782236894.5928385,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/api/approval.py": {
+    "mtime": 1782398123.683082,
+    "ast_hash": "2a3f5b8d405920c5e2670aa888543a5b",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/config.py": {
+    "mtime": 1782558777.0449636,
+    "ast_hash": "c7077461e3d1b22da8ec1b3205ccebb4",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/conformance/__init__.py": {
+    "mtime": 1782404891.9725282,
+    "ast_hash": "1c15708f89f644970492d5042329f677",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/conformance/plugin_conformance.py": {
+    "mtime": 1782558777.0462637,
+    "ast_hash": "5240cee57e1e02fca83081f65e5aa8f7",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/__init__.py": {
+    "mtime": 1782397894.2940645,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/approval/__init__.py": {
+    "mtime": 1782397894.3424244,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/approval/models.py": {
+    "mtime": 1782236791.2702353,
+    "ast_hash": "99764cb4489c0e70c67b74b63fcb557e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/approval/store.py": {
+    "mtime": 1782558777.0454068,
+    "ast_hash": "4d03efec473fab0462d2174a60e41f67",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/audit/__init__.py": {
+    "mtime": 1782397894.3529246,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/audit/logger.py": {
+    "mtime": 1782559321.8434134,
+    "ast_hash": "107da9de84b021f4d5d9c9c2f526e71d",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/interfaces/__init__.py": {
+    "mtime": 1782397894.415594,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/interfaces/backend.py": {
+    "mtime": 1782558777.0480077,
+    "ast_hash": "8b1dd146ae35939139f0190397a52df7",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/interfaces/capability.py": {
+    "mtime": 1782557323.3854363,
+    "ast_hash": "e9ef3718f2856dd5f4e35a2734c7a487",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/interfaces/errors.py": {
+    "mtime": 1782545967.6969564,
+    "ast_hash": "fb427d69476c5a8c3a25b810e495b8e3",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/interfaces/identity.py": {
+    "mtime": 1782558777.0453837,
+    "ast_hash": "b23462843cc028b128b6d372e33a9406",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/interfaces/plugin.py": {
+    "mtime": 1782558777.0460062,
+    "ast_hash": "e00cafdb8d022edf64d10eb5e6e3dfca",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/interfaces/stores.py": {
+    "mtime": 1782559316.7204602,
+    "ast_hash": "d67348b7dc61f8123924fad5ce16a78f",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/masking/__init__.py": {
+    "mtime": 1782397894.368973,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/masking/masker.py": {
+    "mtime": 1782563314.5028992,
+    "ast_hash": "bec2f67d2140cacefcb0f229396431ff",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/models/__init__.py": {
+    "mtime": 1782397894.3074472,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/models/domain.py": {
+    "mtime": 1782558777.0492978,
+    "ast_hash": "1cc2a0bcc48d55b6a767adf680b0937e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/observability/__init__.py": {
+    "mtime": 1782468993.5369887,
+    "ast_hash": "9951cb754fadfba989ad2ec420f8c65f",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/observability/log.py": {
+    "mtime": 1782558776.917147,
+    "ast_hash": "532cb0d597793537a194319a5f7a7629",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/pipeline.py": {
+    "mtime": 1782565421.254474,
+    "ast_hash": "2e58fea5598c3136af4cdf9a8a3f9270",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/policy/__init__.py": {
+    "mtime": 1782397894.3197012,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/policy/engine.py": {
+    "mtime": 1782559189.3390217,
+    "ast_hash": "fb89f34fff565c9d347d242c736b77c5",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/policy/loader.py": {
+    "mtime": 1782561288.915748,
+    "ast_hash": "361b7f6ea93f5d9c9a40de196df629fe",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/policy/models.py": {
+    "mtime": 1782558777.0532377,
+    "ast_hash": "8085100a92767a8769446128ce0e87fd",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/ratelimit/__init__.py": {
+    "mtime": 1782397894.3810694,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/ratelimit/limiter.py": {
+    "mtime": 1782558777.0450566,
+    "ast_hash": "026bdb412effb9fc7a5212e980b31202",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/registry/__init__.py": {
+    "mtime": 1782397894.3965318,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/registry/adapter.py": {
+    "mtime": 1782558777.0461264,
+    "ast_hash": "bf7665993945a163bb34b5f47498cc83",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/registry/connections.py": {
+    "mtime": 1782561091.138851,
+    "ast_hash": "c7f054fa3d147a3933de36dbfffdaffc",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/registry/registry.py": {
+    "mtime": 1782558777.0480437,
+    "ast_hash": "f29a6871f611dba3a50d00fc959c1725",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/risk/__init__.py": {
+    "mtime": 1782397894.3306146,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/risk/engine.py": {
+    "mtime": 1782558777.0487525,
+    "ast_hash": "180612ff4d0bb6cb519f3dc23a3a39ad",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/validation.py": {
+    "mtime": 1782559148.5302699,
+    "ast_hash": "46d5de594b31d57c661ebfa781d457f6",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/__init__.py": {
+    "mtime": 1782317807.1546788,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/__main__.py": {
+    "mtime": 1782443976.7305324,
+    "ast_hash": "470ebc9c3d9621d3ace3882ed82730bd",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/assertions/__init__.py": {
+    "mtime": 1782317836.5900314,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/assertions/engine.py": {
+    "mtime": 1782559190.826791,
+    "ast_hash": "5ae0d1876f57227dc2e52adf14eb7e0c",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/cli.py": {
+    "mtime": 1782558777.0483403,
+    "ast_hash": "954b8d4879f534d09794fc3abdb07d4d",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/fixture.py": {
+    "mtime": 1782558777.0486584,
+    "ast_hash": "6aec3c745faa7b442c73b868f688e008",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/loader.py": {
+    "mtime": 1782558777.049212,
+    "ast_hash": "926b7880b9897c8a2bde04a8ba77b5e7",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/models.py": {
+    "mtime": 1782558777.0501256,
+    "ast_hash": "db492a8000e5d8a581fcf70e97e99850",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/reports/__init__.py": {
+    "mtime": 1782317894.9811547,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/reports/console.py": {
+    "mtime": 1782558777.0451725,
+    "ast_hash": "0242b40b86c66ee7264fee7460e7f49e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/reports/json_report.py": {
+    "mtime": 1782558777.0454972,
+    "ast_hash": "0e4aefc89265b62ce2d2f7dfb9a54868",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/reports/junit.py": {
+    "mtime": 1782558777.0460174,
+    "ast_hash": "f43c81e8d91545f43713ad79f8056fd7",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/eval/runner.py": {
+    "mtime": 1782561078.7656202,
+    "ast_hash": "5d83948f67058873b1fcbb971b0afa6f",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/__init__.py": {
+    "mtime": 1782397894.438356,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/__init__.py": {
+    "mtime": 1782397894.4537084,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/client.py": {
+    "mtime": 1782561259.6437817,
+    "ast_hash": "bb8a8acd4b5043584b75b5f09ac67c5d",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/executor.py": {
+    "mtime": 1782565749.4154367,
+    "ast_hash": "904e328c846bd2d7be4f95d57b3126b6",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/guard.py": {
+    "mtime": 1782558777.0503001,
+    "ast_hash": "fe43dae139eb3ec6f03ad0c444ea0394",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/plugin.py": {
+    "mtime": 1782558777.0510714,
+    "ast_hash": "baa0b2c77beb4482f37ce469f196a193",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/schema.py": {
+    "mtime": 1782559194.051339,
+    "ast_hash": "46163243e5581fefa55d3f9d50efccb3",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mysql/__init__.py": {
+    "mtime": 1782401485.7900248,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mysql/plugin.py": {
+    "mtime": 1782559099.2157283,
+    "ast_hash": "1083d37c3bb90bc81039b9f8e39f848c",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mysql/translate.py": {
+    "mtime": 1782558777.1264586,
+    "ast_hash": "5f21f1204349f446b0da9cef266ef72c",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mysql/validate.py": {
+    "mtime": 1782565313.5880573,
+    "ast_hash": "97e359279a1734e3ca00a0144878d22a",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/postgres/__init__.py": {
+    "mtime": 1782400446.8583539,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/postgres/plugin.py": {
+    "mtime": 1782558777.0452461,
+    "ast_hash": "cbdc94f9c3018bf5b45ffde070b39c22",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/postgres/translate.py": {
+    "mtime": 1782558777.0459743,
+    "ast_hash": "b7b81a1f48d11361b6c78b9006cdbe9b",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/postgres/validate.py": {
+    "mtime": 1782565307.9682486,
+    "ast_hash": "7f758bcfd39b686fb7cb1ab04a515e5b",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/sql/__init__.py": {
+    "mtime": 1782452361.8033664,
+    "ast_hash": "5ac836dab1e4c46f3597269927389e42",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/sql/translate_base.py": {
+    "mtime": 1782559149.4264035,
+    "ast_hash": "fb830080cdf64b216af1405c3be7173d",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/__init__.py": {
+    "mtime": 1782397894.4651163,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/responses.py": {
+    "mtime": 1782558777.1105878,
+    "ast_hash": "98de071d009f9a7fc0715850a265eab8",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/__init__.py": {
+    "mtime": 1782559288.487998,
+    "ast_hash": "a45c9ac5b5f0465a2013e448c4dc64c4",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/_common.py": {
+    "mtime": 1782563343.7345521,
+    "ast_hash": "4286c53a26e500c45d9761535c044270",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/_registry.py": {
+    "mtime": 1782452639.6576376,
+    "ast_hash": "520d6259d0a553a32353596189038a18",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/read.py": {
+    "mtime": 1782559229.9403162,
+    "ast_hash": "deecc996e66e1236b8df09afad6663d2",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/write.py": {
+    "mtime": 1782559234.4444332,
+    "ast_hash": "93c98f0dba6334e10580082c2c8f5198",
+    "semantic_hash": ""
+  },
+  "tests/__init__.py": {
+    "mtime": 1782398322.863882,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "tests/conformance/__init__.py": {
+    "mtime": 1782404930.1131477,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "tests/conformance/test_builtin_conformance.py": {
+    "mtime": 1782558777.131506,
+    "ast_hash": "e1a19235d6cac9e1ecec9ebf1d015ea3",
+    "semantic_hash": ""
+  },
+  "tests/conftest.py": {
+    "mtime": 1782443976.817757,
+    "ast_hash": "c696bbb17180f7c053bacff5503a8cdd",
+    "semantic_hash": ""
+  },
+  "tests/integration/__init__.py": {
+    "mtime": 1782398322.8470352,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "tests/integration/test_connection_usecases.py": {
+    "mtime": 1782558777.1300972,
+    "ast_hash": "2240eb1263e5e8ecaac267c594031328",
+    "semantic_hash": ""
+  },
+  "tests/integration/test_live_backends.py": {
+    "mtime": 1782558777.1300092,
+    "ast_hash": "09e3abce5ede90adf0adb3f5a0660353",
+    "semantic_hash": ""
+  },
+  "tests/integration/test_new_features.py": {
+    "mtime": 1782558777.1314,
+    "ast_hash": "7ad1198026fc0ccd5048d2837e13793c",
+    "semantic_hash": ""
+  },
+  "tests/integration/test_pipeline.py": {
+    "mtime": 1782558777.1312714,
+    "ast_hash": "b89ef606fe8372bba94965ba52e2500b",
+    "semantic_hash": ""
+  },
+  "tests/unit/__init__.py": {
+    "mtime": 1782398322.7502081,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_aggregate_cap.py": {
+    "mtime": 1782558777.1317136,
+    "ast_hash": "ce8b8aaae200496d6573bd9ade72d2f6",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_aggregation_guard.py": {
+    "mtime": 1782558777.1286163,
+    "ast_hash": "48ed84a8e6428795243fb91673dc124a",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_approval_store.py": {
+    "mtime": 1782443860.016139,
+    "ast_hash": "b399f8a4f180d32c0c51769c36954957",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_audit_logger.py": {
+    "mtime": 1782398322.7131486,
+    "ast_hash": "0bc7156810f9f401f3ea36e22f400445",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_audit_persistent_handle.py": {
+    "mtime": 1782558777.1300795,
+    "ast_hash": "01b3f45f2492fbfbd138187935e41068",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_capability_adapter.py": {
+    "mtime": 1782558777.1315322,
+    "ast_hash": "4bb96c080001795b19096a422754a1e3",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_capability_request_fields.py": {
+    "mtime": 1782558777.1315334,
+    "ast_hash": "04fc422c8f26b217a3974594f7822622",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_connections.py": {
+    "mtime": 1782558777.1313531,
+    "ast_hash": "03cae3fad1aff233871344cee3a8f94b",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_connections_config.py": {
+    "mtime": 1782453421.373457,
+    "ast_hash": "8a9c0f0edddef1fb2ca1f3e79d9670e7",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_dotted_mask.py": {
+    "mtime": 1782558777.0453682,
+    "ast_hash": "5125a7455f46785fdee5b544d116b71e",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_error_contract.py": {
+    "mtime": 1782545698.7422724,
+    "ast_hash": "4b92726eb4020a464bd7a72e60321e76",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_evaluate_capability.py": {
+    "mtime": 1782558777.0466018,
+    "ast_hash": "bdac993624522a1fcad2b63560bbac78",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_explain_masking.py": {
+    "mtime": 1782398322.663107,
+    "ast_hash": "acc8e135c85e46920ff3b383cf23eda3",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_field_allow_integration.py": {
+    "mtime": 1782558777.048724,
+    "ast_hash": "dd54da8f2ff90fe94f5563472e569795",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_field_masker.py": {
+    "mtime": 1782563316.6561155,
+    "ast_hash": "30e374af1212a5d038f45acbead4e53c",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_interfaces.py": {
+    "mtime": 1782558777.0496576,
+    "ast_hash": "ebf6d242efcacfde294d8466e243be41",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_mcp_tooling.py": {
+    "mtime": 1782558777.1279457,
+    "ast_hash": "e17ad01397908f01beb1eeba869cc733",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_mongo_plugin.py": {
+    "mtime": 1782447730.7369719,
+    "ast_hash": "7cb8c9af9aefe2fc2554890e24682e93",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_multibackend_build.py": {
+    "mtime": 1782558777.1290429,
+    "ast_hash": "19e33cc6239908ca3951a4a15487e216",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_mysql_plugin.py": {
+    "mtime": 1782558777.05521,
+    "ast_hash": "82c99d197d9a45064340f8c2e2225e19",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_neutral_envelope.py": {
+    "mtime": 1782563378.707328,
+    "ast_hash": "67528ce6e3e224212a3985bb3a07a743",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_objectid_coercion.py": {
+    "mtime": 1782558777.0564954,
+    "ast_hash": "c7338088ae19609c19be4310d6ac03f1",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_observability_and_codes.py": {
+    "mtime": 1782558777.1267886,
+    "ast_hash": "1bd5b859afe4b9b4d207fcdec6d09be6",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_plugin_manifest.py": {
+    "mtime": 1782469135.8586795,
+    "ast_hash": "74e21f6225da3fdfe1fc5659f81913d3",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_policy_directory.py": {
+    "mtime": 1782453413.2943866,
+    "ast_hash": "7ee7df2ba35a9be35748338067ff49c0",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_policy_engine.py": {
+    "mtime": 1782558777.0526867,
+    "ast_hash": "e812bac7156ceb7e2bcca72f9e5a4be5",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_policy_evolution.py": {
+    "mtime": 1782558777.1278086,
+    "ast_hash": "de67f749f9bb6507001a492bd3c442d0",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_policy_hot_reload.py": {
+    "mtime": 1782398322.7233167,
+    "ast_hash": "5b66a762d3ab24577d43799fab0f696e",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_postgres_plugin.py": {
+    "mtime": 1782558777.130596,
+    "ast_hash": "73a4df1e1689f9647bd61bc10ed138cd",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_predicate_seam.py": {
+    "mtime": 1782558777.1300952,
+    "ast_hash": "47734bfc0411ca87afe2210a7a132ad7",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_rate_limiter.py": {
+    "mtime": 1782398322.7889042,
+    "ast_hash": "1d2b71713f5c94011e510b4964ac54b6",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_risk_engine.py": {
+    "mtime": 1782558777.1277359,
+    "ast_hash": "1cc760b1c70dfff8698bd089efac5ec9",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_schema.py": {
+    "mtime": 1782443976.8159142,
+    "ast_hash": "28e943d1e3607855f916a19625173665",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_seams.py": {
+    "mtime": 1782558777.1289885,
+    "ast_hash": "f0647d0ffce91bf0fcbe4397ec472cdf",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_sql_translate_base.py": {
+    "mtime": 1782558777.1284823,
+    "ast_hash": "3ebd5dff088de498b52196a08c6d706c",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_switch_connection_policy.py": {
+    "mtime": 1782558777.129222,
+    "ast_hash": "a3f0ef2531448e075a56216a650b21ce",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_traceparent.py": {
+    "mtime": 1782469150.8015866,
+    "ast_hash": "9a2393b2b8ef8a00614a39db704f3a0e",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_validation.py": {
+    "mtime": 1782558777.1305385,
+    "ast_hash": "cc745842366493fc4828d3b2064d0ebb",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_write_retry.py": {
+    "mtime": 1782558777.1315148,
+    "ast_hash": "198eb7dba1ab39de1dff413a47887c48",
+    "semantic_hash": ""
+  },
+  ".github/workflows/ci.yml": {
+    "mtime": 1782561376.2593474,
+    "ast_hash": "04e5ed1a6ac4d6f98f4e73b46c341435",
+    "semantic_hash": ""
+  },
+  "CHANGELOG.md": {
+    "mtime": 1782554339.047407,
+    "ast_hash": "ec7bd79ba2e3c100a71c218872c2b28b",
+    "semantic_hash": ""
+  },
+  "CONTRIBUTING.md": {
+    "mtime": 1782561370.3377535,
+    "ast_hash": "5bc54006d7f30c7e407c77c02383f1a1",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1782557877.1526046,
+    "ast_hash": "895b804f80dbd24aac3416d1892b5a45",
+    "semantic_hash": ""
+  },
+  "SECURITY.md": {
+    "mtime": 1782372625.324149,
+    "ast_hash": "2f86fc417b4885921146e7c9054d15a1",
+    "semantic_hash": ""
+  },
+  "docker-compose.yml": {
+    "mtime": 1782236999.9160748,
+    "ast_hash": "eda4fd586b9e563491061757247c4756",
+    "semantic_hash": ""
+  },
+  "docs/ARCHITECTURE.md": {
+    "mtime": 1782451013.0652444,
+    "ast_hash": "a348b31138bfa478f8f10b50bfe22a38",
+    "semantic_hash": ""
+  },
+  "docs/PLUGIN_AUTHORS.md": {
+    "mtime": 1782452129.2959237,
+    "ast_hash": "f50332026f827673433ce25b34c3fb0a",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-06-23-guardmcp-v0.1.md": {
+    "mtime": 1782226114.599948,
+    "ast_hash": "5c1383d2982c3535da3dd06b6b429501",
+    "semantic_hash": ""
+  },
+  "evals/cases/approval/delete_many_requires_approval.yaml": {
+    "mtime": 1782318013.1993546,
+    "ast_hash": "bf5686191a7cefa8d2dc1b48498adbdf",
+    "semantic_hash": ""
+  },
+  "evals/cases/approval/insert_allowed_without_approval.yaml": {
+    "mtime": 1782318024.979927,
+    "ast_hash": "a43118746ab33fa51566524129fbeca9",
+    "semantic_hash": ""
+  },
+  "evals/cases/approval/unscoped_delete_escalates.yaml": {
+    "mtime": 1782542059.523968,
+    "ast_hash": "d9a6c34b70b99a1f99eef1f8c1e46f1c",
+    "semantic_hash": ""
+  },
+  "evals/cases/approval/unscoped_update_escalates.yaml": {
+    "mtime": 1782404791.6878824,
+    "ast_hash": "6c686b7dcb8c0cba1cbb841793e62525",
+    "semantic_hash": ""
+  },
+  "evals/cases/approval/update_many_requires_approval.yaml": {
+    "mtime": 1782318019.3799367,
+    "ast_hash": "f6d7baa2ec155edfc08028a9f8be9e47",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/action_allow_list_enforced.yaml": {
+    "mtime": 1782542069.6996934,
+    "ast_hash": "c92a67e5c4ff86d50ef6bb01874d4963",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/action_not_in_allow_list.yaml": {
+    "mtime": 1782317958.3978105,
+    "ast_hash": "aede33ce8e36bdd7f878d6e99f2dfdf5",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/customer_read_allowed.yaml": {
+    "mtime": 1782317943.7807875,
+    "ast_hash": "6a7bed6c620d4af42454fda3c7ae8669",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/payroll_denied.yaml": {
+    "mtime": 1782317948.1915953,
+    "ast_hash": "ffc6f0018ad9eb5678c3c99dd0ba3c28",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/unknown_agent_denied.yaml": {
+    "mtime": 1782317953.0526407,
+    "ast_hash": "870ec1e7116da7904bc930ae106c88fc",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/aggregate_mask_leak_blocked.yaml": {
+    "mtime": 1782372640.5163233,
+    "ast_hash": "7286b60a98a08e206325221fbf63f604",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/dotted_path_mask.yaml": {
+    "mtime": 1782541753.636931,
+    "ast_hash": "1e913be1a751cd096e38298d035e861e",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/email_masked.yaml": {
+    "mtime": 1782317964.6260827,
+    "ast_hash": "c19c1b43c3a415a5c9c793543faf9537",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/fields_allow_projection.yaml": {
+    "mtime": 1782541742.2602646,
+    "ast_hash": "226b414ea4bed9f584d8dc5aca720ef0",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/nested_masking.yaml": {
+    "mtime": 1782317983.1902723,
+    "ast_hash": "4622e35eca0130229a38dd98d84b4fd4",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/no_mask_fields.yaml": {
+    "mtime": 1782317988.1125453,
+    "ast_hash": "aa87680f90b21815d2b76d49edc0c8b8",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/per_collection_mask.yaml": {
+    "mtime": 1782541747.4098763,
+    "ast_hash": "33e9907bd77fcbef3624c7f33f5580b3",
+    "semantic_hash": ""
+  },
+  "evals/cases/pagination/skip_limit.yaml": {
+    "mtime": 1782318054.3242316,
+    "ast_hash": "d7ade843e454b5cf9b742fffed0dd0b4",
+    "semantic_hash": ""
+  },
+  "evals/cases/readonly/delete_blocked.yaml": {
+    "mtime": 1782318002.0283022,
+    "ast_hash": "26261692938b59395fa7d494fd13e501",
+    "semantic_hash": ""
+  },
+  "evals/cases/readonly/find_allowed_in_readonly.yaml": {
+    "mtime": 1782318007.628532,
+    "ast_hash": "a73d6207944a83dd54519ac2f0686e8c",
+    "semantic_hash": ""
+  },
+  "evals/cases/readonly/update_blocked.yaml": {
+    "mtime": 1782317996.3975563,
+    "ast_hash": "404e7be8dde18a724f7e382b9c61e8b8",
+    "semantic_hash": ""
+  },
+  "evals/cases/security/aggregate_unionwith_blocked.yaml": {
+    "mtime": 1782542064.833079,
+    "ast_hash": "d81df0136eca2b4246ac35fdfc31375c",
+    "semantic_hash": ""
+  },
+  "evals/cases/security/collection_deny_bypass.yaml": {
+    "mtime": 1782318037.5344455,
+    "ast_hash": "3ef5b81d78b22cfccd1862bcf237cea8",
+    "semantic_hash": ""
+  },
+  "evals/cases/security/explicit_action_deny.yaml": {
+    "mtime": 1782318043.5753636,
+    "ast_hash": "61066901af7991351022282e5f490931",
+    "semantic_hash": ""
+  },
+  "evals/cases/security/graphlookup_bypass.yaml": {
+    "mtime": 1782372635.8784845,
+    "ast_hash": "c021337a5d986a3b8157035b9ce19321",
+    "semantic_hash": ""
+  },
+  "evals/cases/security/lookup_collection_bypass.yaml": {
+    "mtime": 1782372629.7525642,
+    "ast_hash": "94a370ffdb889ac4c69e5ead75d3309e",
+    "semantic_hash": ""
+  },
+  "policies/example.yaml": {
+    "mtime": 1782548290.662513,
+    "ast_hash": "d0cdfd150b6127d71af3587990b533cf",
+    "semantic_hash": ""
+  },
+  "policies/test_stdio.yaml": {
+    "mtime": 1782364327.735756,
+    "ast_hash": "12dc3677a1692947e2271467ce652603",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/marshal.py": {
+    "mtime": 1782559097.766083,
+    "ast_hash": "a142cc74d2e66668ebe73db09ecc7a2c",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_marshal.py": {
+    "mtime": 1782558777.0504863,
+    "ast_hash": "f59b0cdd0d70cc2e2adf00618e14f703",
+    "semantic_hash": ""
+  },
+  "evals/cases/marshalling/no_over_reject_string_field.yaml": {
+    "mtime": 1782546063.3799305,
+    "ast_hash": "b99ff210fc1c26cfc434347bc3b63b09",
+    "semantic_hash": ""
+  },
+  "evals/cases/marshalling/type_mismatch_objectid.yaml": {
+    "mtime": 1782546054.213484,
+    "ast_hash": "39f447b1de657b718d48e731de52ee37",
+    "semantic_hash": ""
+  },
+  "tests/integration/test_adversarial_behavior.py": {
+    "mtime": 1782558777.1283362,
+    "ast_hash": "965753ad05e54d87b620275a108a7e29",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/deny_beats_wildcard.yaml": {
+    "mtime": 1782547767.1626825,
+    "ast_hash": "ed1faa37fbdb28af5f748e643f12e3c5",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/empty_allow_semantics.yaml": {
+    "mtime": 1782547775.171265,
+    "ast_hash": "d4678b921c572409f81016fb3e49846f",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/repeated_denial_stable_code.yaml": {
+    "mtime": 1782547325.3725986,
+    "ast_hash": "192bd2acfd24607c1300b385905d4720",
+    "semantic_hash": ""
+  },
+  "evals/cases/authorization/wildcard_allow.yaml": {
+    "mtime": 1782547764.791144,
+    "ast_hash": "1f3e2c6dba29987f431b6582f39c1ae6",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/aggregate_addfields_mask_leak.yaml": {
+    "mtime": 1782547321.4879615,
+    "ast_hash": "0485145575a6ab1c6c2a154681b785f3",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/aggregate_group_mask_leak.yaml": {
+    "mtime": 1782547318.7009442,
+    "ast_hash": "f1ffdedde1e26d0967daa84bc2bbfc7d",
+    "semantic_hash": ""
+  },
+  "evals/cases/masking/projection_cannot_unmask.yaml": {
+    "mtime": 1782547295.1045034,
+    "ast_hash": "2ab007a3665e653e6f2d300fb79a28af",
+    "semantic_hash": ""
+  },
+  "evals/cases/readonly/drop_index_blocked.yaml": {
+    "mtime": 1782547303.478424,
+    "ast_hash": "50f3db0843aef960dd65efffbd5e8cd8",
+    "semantic_hash": ""
+  },
+  "evals/cases/readonly/index_ops_blocked.yaml": {
+    "mtime": 1782547301.6113074,
+    "ast_hash": "be472da2b47bb0885dd69bc119eca23a",
+    "semantic_hash": ""
+  },
+  "evals/cases/readonly/insert_blocked.yaml": {
+    "mtime": 1782547299.7196565,
+    "ast_hash": "b2b6d04510b2146a088a4a9b6129c65e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/paths.py": {
+    "mtime": 1782558777.0471807,
+    "ast_hash": "3834398e28892cdcf203c3ed65defcd3",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_paths.py": {
+    "mtime": 1782558777.1278841,
+    "ast_hash": "51da758b6fabb644296a1a402829ddd8",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/policy/explain.py": {
+    "mtime": 1782559101.852915,
+    "ast_hash": "f62baa5f7ca9801c7d58c7512c2cd9f8",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/policy/trace.py": {
+    "mtime": 1782558777.053647,
+    "ast_hash": "3ccc8f4a39f25e0abda1d78fdc6cd250",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_explain_policy.py": {
+    "mtime": 1782558776.9152458,
+    "ast_hash": "efc4b23b9f52083297e5ae79c52cd363",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_policy_trace.py": {
+    "mtime": 1782558777.1290472,
+    "ast_hash": "acdc1496ecd64c204dbfdca5ba906d71",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_simulate_policy.py": {
+    "mtime": 1782558777.1307158,
+    "ast_hash": "68e17474358f6c01b7f440f1e8da4b37",
+    "semantic_hash": ""
+  },
+  "FEATURES.md": {
+    "mtime": 1782557864.529189,
+    "ast_hash": "aa8d4f521469f8976ee3414504ecc73d",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/interfaces/cost.py": {
+    "mtime": 1782558777.0491936,
+    "ast_hash": "df6df52165cf7249e1d0f9059e7b29f4",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/cost.py": {
+    "mtime": 1782557383.2117267,
+    "ast_hash": "03026a8bf1d50d25acdf9b30a9774df1",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/sql/cost.py": {
+    "mtime": 1782557424.4624624,
+    "ast_hash": "437e8704b84e7e212779bd958f28ac0d",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_cost_estimate.py": {
+    "mtime": 1782558777.2071457,
+    "ast_hash": "dfa5a2ff325d457f9480a55f1aa4c2ad",
+    "semantic_hash": ""
+  },
+  ".pre-commit-config.yaml": {
+    "mtime": 1782561355.011418,
+    "ast_hash": "a938e396a1e5c639a1c94f7fcab6933f",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/neutral.py": {
+    "mtime": 1782563354.0991817,
+    "ast_hash": "1994fcccc0243308467ae433d2dd859e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/_serialize.py": {
+    "mtime": 1782565700.1339834,
+    "ast_hash": "09977644bf57828efb7cae4fb6addf9c",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/mongodb/schema_cache.py": {
+    "mtime": 1782565718.9102068,
+    "ast_hash": "7a35e96f55b50c95a7966275a378deb7",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/plugins/sql/validate_base.py": {
+    "mtime": 1782565344.8331654,
+    "ast_hash": "6516d1490ea9f8b31b92829fac63a3ef",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/meta/__init__.py": {
+    "mtime": 1782565629.7737916,
+    "ast_hash": "e25c1a694ccedb175427f3ef9adb3d9e",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/meta/capabilities.py": {
+    "mtime": 1782565575.16236,
+    "ast_hash": "a256899d3b13c5aa9d4f7a90d39a097d",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/meta/explain.py": {
+    "mtime": 1782565620.9294965,
+    "ast_hash": "f30ece756d6305e306ab4f3b954d9c17",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/meta/plan.py": {
+    "mtime": 1782565598.1722317,
+    "ast_hash": "327bf0116a285eb7efa7b891ed8be0fa",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/meta/setup.py": {
+    "mtime": 1782565559.6859176,
+    "ast_hash": "13d8b5f3b73fa33e16e3326db49c1259",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/server/tools/meta/status.py": {
+    "mtime": 1782565536.5129294,
+    "ast_hash": "90da9f4e17af40bbfbfa725f40abc871",
+    "semantic_hash": ""
+  }
+}

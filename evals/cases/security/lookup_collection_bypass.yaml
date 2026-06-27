@@ -1,0 +1,26 @@
+name: lookup_to_denied_collection_blocked
+description: "C1: $lookup into a denied collection is rejected"
+tags: [security, authorization, aggregation]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [orders]
+    deny: [payroll]
+
+request:
+  agent: test-agent
+  collection: orders
+  action: aggregate
+  params:
+    pipeline:
+      - $lookup:
+          from: payroll
+          localField: employeeId
+          foreignField: _id
+          as: salary
+
+expected:
+  decision: deny
+  reason_contains: "payroll"

@@ -1,0 +1,22 @@
+name: explicit_action_deny_enforced
+description: "actions.deny blocks action even if not in readonly mode"
+tags: [security, authorization]
+
+policy:
+  agent: test-agent
+  mode: readwrite
+  collections:
+    allow: [customers]
+  actions:
+    deny: [delete_many, drop]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: delete_many
+  params:
+    filter: {}
+
+expected:
+  decision: deny
+  reason_contains: "delete_many"

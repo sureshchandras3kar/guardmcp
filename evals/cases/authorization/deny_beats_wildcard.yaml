@@ -1,0 +1,30 @@
+name: deny_beats_wildcard
+description: >
+  AD-1: a collection listed in BOTH allow ["*"] and deny is DENIED. Deny always
+  wins, even over the explicit "all collections" wildcard.
+tags: [authorization, wildcard, deny, security]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: ["*"]
+    deny: [payroll]
+
+fixtures:
+  - collection: payroll
+    documents:
+      - {employee: Alice, salary: 99999}
+
+request:
+  agent: test-agent
+  collection: payroll
+  action: find
+  params:
+    filter: {}
+    limit: 5
+
+expected:
+  decision: deny
+  status: denied
+  reason_contains: "payroll"

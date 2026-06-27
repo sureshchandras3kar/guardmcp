@@ -1,0 +1,33 @@
+name: projection_cannot_unmask
+description: >
+  SEC-5: an agent requesting projection={ssn:1} on a collection where ssn is a
+  masked field gets the field back MASKED, not in clear text. Masking is applied
+  server-side on the RESULT after the query runs, so a projection cannot be used
+  to bypass it. Locks the secure behavior.
+tags: [masking, projection, security]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+  mask_fields: [ssn]
+
+fixtures:
+  - collection: customers
+    documents:
+      - {name: Alice, ssn: "111-22-3333"}
+
+request:
+  agent: test-agent
+  collection: customers
+  action: find
+  params:
+    filter: {}
+    projection: {ssn: 1}
+    limit: 5
+
+expected:
+  status: success
+  data_count: 1
+  masked_fields: [ssn]

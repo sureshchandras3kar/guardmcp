@@ -1,0 +1,60 @@
+# GuardMCP policy — one policy per agent.
+# GUARDMCP_AGENT env var must match the `agent` field below.
+
+agent: support-bot
+
+mode: readonly   # readonly | readwrite
+
+collections:
+  # Only these collections are accessible (deny-by-default). Empty/omitted
+  # `allow` means DENY-ALL — use `allow: ["*"]` to permit every collection.
+  allow:
+    - customers
+    - orders
+  # deny takes precedence over allow — always blocked regardless of allow list
+  deny:
+    - payroll
+    - employees
+    - internal_audit
+
+actions:
+  # Permitted actions. Remove `allow` entirely to permit all actions in this mode.
+  allow:
+    # Read
+    - find
+    - count
+    - aggregate
+    # Discovery / introspection (safe — recommended to always allow)
+    - list_databases
+    - db_stats
+    - collection_schema
+    - collection_indexes
+    - explain
+    # Write ops (only reachable in readwrite mode)
+    # - insert_one
+    # - insert_many
+    # - update_one
+    # - update_many
+    # - delete_one
+    # - delete_many
+    # DDL (highest risk — uncomment only if needed)
+    # - create_index
+    # - drop_index
+    # - drop
+
+# Fields stripped from every result before returning to the AI client.
+# Applied recursively — nested fields (e.g. contact.email) are also masked.
+mask_fields:
+  - email
+  - password
+  - phone
+  - ssn
+  - credit_card
+  - api_key
+  - secret
+
+# Human approval gates — only relevant in readwrite mode.
+# In-band: Claude Desktop shows a dialog. Out-of-band: call the REST API.
+approval:
+  high: true       # update_one, update_many, delete_one, drop_index
+  critical: true   # delete_many, drop

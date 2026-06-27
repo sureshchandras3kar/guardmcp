@@ -1,0 +1,28 @@
+name: aggregate_group_mask_leak_blocked
+description: >
+  SEC-2: an aggregation with $group{_id:"$ssn"} groups by a masked field. The
+  grouped value would surface under _id (a non-masked key), bypassing key-based
+  masking — so the pipeline is DENIED by the masked-field-reference guard.
+tags: [security, masking, aggregation]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+  mask_fields: [ssn]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: aggregate
+  params:
+    pipeline:
+      - $group:
+          _id: $ssn
+          count:
+            $sum: 1
+
+expected:
+  decision: deny
+  reason_contains: "ssn"

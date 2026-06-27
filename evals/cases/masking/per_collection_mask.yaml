@@ -1,0 +1,33 @@
+name: per_collection_mask
+description: >
+  mask_fields as a dict: users -> [ssn], "*" -> [password]. A find on users
+  masks BOTH the per-collection ssn and the global password bucket.
+tags: [masking, per-collection]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [users]
+  mask_fields:
+    users: [ssn]
+    "*": [password]
+
+fixtures:
+  - collection: users
+    documents:
+      - {name: Alice, ssn: "111-22-3333", password: hunter2, age: 30}
+
+request:
+  agent: test-agent
+  collection: users
+  action: find
+  params:
+    filter: {}
+    limit: 10
+
+expected:
+  status: success
+  data_count: 1
+  masked_fields: [ssn, password]
+  unmasked_fields: [name, age]

@@ -1,0 +1,35 @@
+name: marshaller_does_not_over_reject
+description: >
+  Conservatism guard (S-7 false-positive fix): a 24-hex string on a STRING-typed
+  field must NOT be coerced to an ObjectId and must NOT raise TYPE_MISMATCH — it
+  is a legitimate string value and must match its document. Proves the marshaller
+  is schema-driven, not blind, and never over-rejects a correctly-typed value.
+tags: [marshalling, conservatism]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [commit]
+  actions:
+    allow: [find]
+
+fixtures:
+  - collection: commit
+    documents:
+      - {sha: "507f1f77bcf86cd799439011", msg: "first"}
+      - {sha: "aaaaaaaaaaaaaaaaaaaaaaaa", msg: "second"}
+
+request:
+  agent: test-agent
+  collection: commit
+  action: find
+  params:
+    filter:
+      sha: "507f1f77bcf86cd799439011"
+
+expected:
+  status: success
+  data_count: 1
+  data_contains:
+    - {msg: "first"}

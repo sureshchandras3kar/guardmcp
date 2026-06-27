@@ -1,0 +1,30 @@
+name: wildcard_allow_permits_access
+description: >
+  AD-1: collections.allow == ["*"] is the explicit "all collections" wildcard
+  and permits access. Deny still wins over the wildcard (see deny_beats_wildcard).
+tags: [authorization, wildcard, deny-by-default, security]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: ["*"]
+    deny: []
+
+fixtures:
+  - collection: customers
+    documents:
+      - {name: Alice}
+
+request:
+  agent: test-agent
+  collection: customers
+  action: find
+  params:
+    filter: {}
+    limit: 5
+
+expected:
+  decision: allow
+  status: success
+  data_count: 1

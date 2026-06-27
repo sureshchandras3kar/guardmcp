@@ -1,0 +1,27 @@
+name: graphlookup_to_denied_collection_blocked
+description: "C1: $graphLookup into a denied collection is rejected"
+tags: [security, authorization, aggregation]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [orders]
+    deny: [payroll]
+
+request:
+  agent: test-agent
+  collection: orders
+  action: aggregate
+  params:
+    pipeline:
+      - $graphLookup:
+          from: payroll
+          startWith: $employeeId
+          connectFromField: managerId
+          connectToField: _id
+          as: chain
+
+expected:
+  decision: deny
+  reason_contains: "payroll"

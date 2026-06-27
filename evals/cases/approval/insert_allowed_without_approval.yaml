@@ -1,0 +1,23 @@
+name: insert_one_no_approval_needed
+description: "insert_one is MEDIUM risk — no approval gate required"
+tags: [approval, write]
+
+policy:
+  agent: test-agent
+  mode: readwrite
+  collections:
+    allow: [customers]
+  approval:
+    high: true
+    critical: true
+
+request:
+  agent: test-agent
+  collection: customers
+  action: insert_one
+  params:
+    document: {name: Alice}
+
+expected:
+  decision: allow
+  approval_required: false

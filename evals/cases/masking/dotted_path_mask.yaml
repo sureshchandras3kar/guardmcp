@@ -1,0 +1,36 @@
+name: dotted_path_mask
+description: >
+  mask_fields with a dotted path "contact.email" masks the nested
+  contact.email but leaves a same-named top-level "email" untouched.
+tags: [masking, nested, dotted-path]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [people]
+  mask_fields: ["contact.email"]
+
+fixtures:
+  - collection: people
+    documents:
+      - name: Alice
+        email: public@example.com
+        contact:
+          email: private@example.com
+          phone: "555-0100"
+
+request:
+  agent: test-agent
+  collection: people
+  action: find
+  params:
+    filter: {}
+    limit: 5
+
+expected:
+  status: success
+  data_count: 1
+  masked_fields: ["contact.email"]
+  # Top-level email is NOT covered by the dotted path → must remain visible.
+  unmasked_fields: [name, email, "contact.phone"]

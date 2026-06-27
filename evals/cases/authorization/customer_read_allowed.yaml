@@ -1,0 +1,30 @@
+name: customer_read_allowed
+description: "find on allowed collection returns success"
+tags: [authorization, read]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers, orders]
+    deny: [payroll]
+  mask_fields: [email, password]
+
+fixtures:
+  - collection: customers
+    documents:
+      - {name: Alice, email: alice@example.com, age: 30}
+      - {name: Bob, email: bob@example.com, age: 25}
+
+request:
+  agent: test-agent
+  collection: customers
+  action: find
+  params:
+    filter: {}
+    limit: 10
+
+expected:
+  decision: allow
+  status: success
+  data_count: 2

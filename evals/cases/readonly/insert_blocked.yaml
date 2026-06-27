@@ -1,0 +1,21 @@
+name: readonly_insert_one_blocked
+description: "insert_one is blocked in readonly mode with code READONLY"
+tags: [readonly, write]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: insert_one
+  params:
+    document: {name: Alice}
+
+expected:
+  decision: deny
+  status: denied
+  reason_contains: "readonly"

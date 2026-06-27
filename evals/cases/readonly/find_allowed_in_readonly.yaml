@@ -1,0 +1,26 @@
+name: find_allowed_in_readonly
+description: "find is always allowed in readonly mode"
+tags: [readonly, read]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+
+fixtures:
+  - collection: customers
+    documents:
+      - {name: Alice}
+
+request:
+  agent: test-agent
+  collection: customers
+  action: find
+  params:
+    filter: {}
+    limit: 5
+
+expected:
+  decision: allow
+  status: success

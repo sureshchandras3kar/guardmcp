@@ -1,0 +1,34 @@
+name: type_mismatch_objectid_fails_loud
+description: >
+  A non-coercible value on a known BSON-typed field must FAIL LOUD with a
+  TYPE_MISMATCH error, never a silently empty result. Here _id is an ObjectId
+  (mongomock auto-assigns one), so filtering it with a non-hex string cannot be
+  coerced — the marshaller raises and the pipeline returns status=error with the
+  TYPE_MISMATCH code instead of [] documents.
+tags: [marshalling, type_mismatch, fail_loud]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [user]
+  actions:
+    allow: [find]
+
+fixtures:
+  - collection: user
+    documents:
+      - {name: Alice, status: active}
+      - {name: Bob, status: inactive}
+
+request:
+  agent: test-agent
+  collection: user
+  action: find
+  params:
+    filter:
+      _id: "not-a-valid-objectid"
+
+expected:
+  status: error
+  error_contains: "ObjectId"

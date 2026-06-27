@@ -1,0 +1,21 @@
+name: payroll_access_denied
+description: "find on denied collection returns deny"
+tags: [authorization, deny]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+    deny: [payroll]
+
+request:
+  agent: test-agent
+  collection: payroll
+  action: find
+  params: {}
+
+expected:
+  decision: deny
+  status: denied
+  reason_contains: "payroll"

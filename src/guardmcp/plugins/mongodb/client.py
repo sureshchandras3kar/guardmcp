@@ -1,0 +1,43 @@
+from typing import Any
+
+from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
+
+
+class MongoClient:
+    def __init__(
+        self,
+        uri: str,
+        database: str,
+        min_pool_size: int = 0,
+        max_pool_size: int = 100,
+    ) -> None:
+        self._client: AsyncIOMotorClient = AsyncIOMotorClient(
+            uri,
+            minPoolSize=min_pool_size,
+            maxPoolSize=max_pool_size,
+            # S-8: server-side at-most-once retry for writes. The client-side
+            # retry loop deliberately does NOT re-issue writes; durable write
+            # retry is delegated to the driver. Can be overridden in the URI.
+            retryWrites=True,
+        )
+        self._db: AsyncIOMotorDatabase = self._client[database]
+
+    def get_collection(self, name: str):
+        return self._db[name]
+
+    async def list_collection_names(self) -> list[str]:
+        return await self._db.list_collection_names()
+
+    def get_db(self):
+        return self._db
+
+    async def list_databases(self) -> list[dict]:
+        result: Any = await self._client.list_databases()
+        return [{"name": db["name"], "sizeOnDisk": db.get("sizeOnDisk", 0)} for db in result]
+
+    async def ping(self) -> bool:
+        await self._client.admin.command("ping")
+        return True
+
+    def close(self) -> None:
+        self._client.close()

@@ -1,0 +1,28 @@
+name: no_mask_fields_configured
+description: "when mask_fields is empty, no fields are masked"
+tags: [masking]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+  mask_fields: []
+
+fixtures:
+  - collection: customers
+    documents:
+      - {name: Alice, email: alice@example.com}
+
+request:
+  agent: test-agent
+  collection: customers
+  action: find
+  params:
+    filter: {}
+    limit: 5
+
+expected:
+  status: success
+  unmasked_fields: [email, name]
+  data_count: 1

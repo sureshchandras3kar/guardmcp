@@ -1,0 +1,29 @@
+name: email_field_masked
+description: "email in mask_fields is replaced with ***masked***"
+tags: [masking, fields]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+  mask_fields: [email, password]
+
+fixtures:
+  - collection: customers
+    documents:
+      - {name: Alice, email: alice@example.com, password: secret123, age: 30}
+
+request:
+  agent: test-agent
+  collection: customers
+  action: find
+  params:
+    filter: {}
+    limit: 10
+
+expected:
+  status: success
+  masked_fields: [email, password]
+  unmasked_fields: [name, age]
+  data_count: 1

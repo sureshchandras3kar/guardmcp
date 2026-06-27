@@ -1,0 +1,33 @@
+name: empty_allow_means_deny_all
+description: >
+  AD-1 (FIXED): a policy with collections.allow == [] (empty) now DENIES every
+  collection. GuardMCP is deny-by-default: you must list collections explicitly
+  (or use ["*"] for all). This locks the secure-by-default semantics so a
+  regression to the old wide-open behavior is caught.
+tags: [authorization, empty-allow, deny-by-default, security]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: []
+    deny: []
+
+fixtures:
+  - collection: payroll
+    documents:
+      - {employee: Alice, salary: 99999}
+
+request:
+  agent: test-agent
+  collection: payroll
+  action: find
+  params:
+    filter: {}
+    limit: 5
+
+expected:
+  # SECURE behavior: empty allow = deny-all → the read is DENIED.
+  decision: deny
+  status: denied
+  reason_contains: "payroll"

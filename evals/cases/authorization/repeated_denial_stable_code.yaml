@@ -1,0 +1,26 @@
+name: repeated_denial_stable_code
+description: >
+  ADV-1: a denied operation returns a STABLE machine-readable code. An adversary
+  rephrasing/retrying the same denied delete gets the same deterministic denial
+  (READONLY here), not an eventual allow. The eval framework re-evaluates the
+  policy deterministically; this locks that a blocked write stays blocked with a
+  consistent reason. (Retry-COUNT is not eval-expressible; see report ADV-1.)
+tags: [authorization, adversarial, readonly]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: delete_one
+  params:
+    filter: {}
+
+expected:
+  decision: deny
+  status: denied
+  reason_contains: "readonly"

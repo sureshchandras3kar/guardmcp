@@ -1,0 +1,31 @@
+name: find_pagination_skip_limit
+description: "find with skip+limit returns correct page"
+tags: [pagination, read]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [items]
+
+fixtures:
+  - collection: items
+    documents:
+      - {n: 1}
+      - {n: 2}
+      - {n: 3}
+      - {n: 4}
+      - {n: 5}
+
+request:
+  agent: test-agent
+  collection: items
+  action: find
+  params:
+    filter: {}
+    limit: 2
+    skip: 2
+
+expected:
+  status: success
+  data_count: 2

@@ -1,0 +1,25 @@
+name: aggregate_masked_field_reference_blocked
+description: "C2: aggregation referencing a masked field path is rejected"
+tags: [security, masking, aggregation]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+  mask_fields: [email]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: aggregate
+  params:
+    pipeline:
+      - $group:
+          _id: $email
+          count:
+            $sum: 1
+
+expected:
+  decision: deny
+  reason_contains: "email"

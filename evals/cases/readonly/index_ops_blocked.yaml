@@ -1,0 +1,21 @@
+name: readonly_create_index_blocked
+description: "create_index is blocked in readonly mode (it is a WRITE_ACTION)"
+tags: [readonly, write, ddl]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+
+request:
+  agent: test-agent
+  collection: customers
+  action: create_index
+  params:
+    keys: [[name, 1]]
+
+expected:
+  decision: deny
+  status: denied
+  reason_contains: "readonly"

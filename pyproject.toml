@@ -1,0 +1,97 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "guardmcp"
+version = "0.1.0"
+description = "Policy-enforced MongoDB MCP server — AI proposes, GuardMCP decides"
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp>=1.27.0",
+    "fastapi>=0.116.0",
+    "uvicorn[standard]>=0.32.0",
+    "motor>=3.7.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "pyyaml>=6.0.2",
+    "aiofiles>=24.1.0",
+]
+
+[project.optional-dependencies]
+postgres = ["asyncpg>=0.30.0"]
+mysql = ["aiomysql>=0.2.0"]
+# Live-backend integration tests (spin real DBs via Docker). These tests SKIP
+# cleanly when testcontainers/Docker are unavailable — see
+# tests/integration/test_live_backends.py.
+test-live = ["testcontainers>=4.0"]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-mock>=3.14.0",
+    "mongomock-motor>=0.0.34",
+    "httpx>=0.28.0",
+    "ruff>=0.8.0",
+    "mypy>=1.13.0",
+    "pre-commit>=4.0.0",
+]
+
+[project.scripts]
+guardmcp = "guardmcp.__main__:main"
+guardmcp-eval = "guardmcp.eval.cli:main"
+
+[project.entry-points."guardmcp.plugins"]
+mongodb = "guardmcp.plugins.mongodb.plugin:MongoPlugin"
+postgres = "guardmcp.plugins.postgres.plugin:PostgresPlugin"
+mysql = "guardmcp.plugins.mysql.plugin:MySQLPlugin"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/guardmcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "integration: live-backend tests that spin real databases via testcontainers/Docker (skip cleanly when unavailable)",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src"]
+
+[tool.ruff.lint]
+# Pragmatic ruleset for a security-sensitive codebase:
+#   E/W  pycodestyle errors + warnings
+#   F    pyflakes (catches the unused imports/vars that slipped through)
+#   I    import sorting        UP   pyupgrade (modern 3.12 syntax)
+#   B    flake8-bugbear        SIM  flake8-simplify
+select = ["E", "F", "I", "UP", "B", "SIM", "W"]
+# UP042: the domain/interface enums are deliberately `(str, Enum)` mixins so members
+# JSON-serialize and compare as their string value. Migrating to `enum.StrEnum` would
+# change `str(member)` / f-string rendering semantics — a behavior change we won't make.
+ignore = ["UP042"]
+
+[tool.ruff.lint.per-file-ignores]
+# Tests favor explicit, repetitive setup over the "simpler" idioms.
+"tests/**" = ["SIM", "B"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["guardmcp"]
+
+[tool.ruff.format]
+# Ruff formatter defaults (double quotes, etc.) — intentionally unconfigured.
+
+[tool.mypy]
+python_version = "3.12"
+mypy_path = "src"
+packages = ["guardmcp"]
+# Untyped third-party deps (motor, mcp, mongomock_motor, asyncpg, aiomysql, bson,
+# pymongo, yaml, aiofiles) ship no stubs — silence missing-import noise globally.
+ignore_missing_imports = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+check_untyped_defs = true

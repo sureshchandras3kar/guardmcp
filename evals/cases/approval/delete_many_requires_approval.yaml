@@ -1,0 +1,23 @@
+name: delete_many_requires_approval
+description: "delete_many is CRITICAL risk and requires approval when approval.critical=true"
+tags: [approval, critical]
+
+policy:
+  agent: test-agent
+  mode: readwrite
+  collections:
+    allow: [customers]
+  approval:
+    high: true
+    critical: true
+
+request:
+  agent: test-agent
+  collection: customers
+  action: delete_many
+  params:
+    filter: {}
+
+expected:
+  decision: approval_required
+  approval_required: true

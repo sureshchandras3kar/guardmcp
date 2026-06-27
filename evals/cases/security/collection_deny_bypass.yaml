@@ -1,0 +1,20 @@
+name: collection_deny_list_enforced
+description: "deny list blocks access even when not in allow list"
+tags: [security, authorization]
+
+policy:
+  agent: test-agent
+  mode: readonly
+  collections:
+    allow: [customers]
+    deny: [payroll]
+
+request:
+  agent: test-agent
+  collection: payroll
+  action: find
+  params: {}
+
+expected:
+  decision: deny
+  reason_contains: "payroll"
