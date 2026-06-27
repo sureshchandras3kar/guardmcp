@@ -192,7 +192,12 @@
       "Bash(git mv *)",
       "Bash(python -m pytest -q tests/unit/test_mcp_tooling.py)",
       "Bash(python -m pytest -q tests/unit/test_mongo_plugin.py tests/unit/test_marshal.py tests/unit/test_objectid_coercion.py tests/unit/test_schema.py tests/integration/test_new_features.py)",
-      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'refactor\\(cleanup\\): care tier — de-dupe, helpers, module splits *)"
+      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'refactor\\(cleanup\\): care tier — de-dupe, helpers, module splits *)",
+      "Bash(git symbolic-ref *)",
+      "Bash(echo \"default: $\\(git symbolic-ref --short HEAD\\)\")",
+      "Bash(python -c \"import guardmcp; print\\('ok'\\)\")",
+      "Bash(GUARDMCP_TRANSPORT=streamable-http GUARDMCP_APPROVAL_API_TOKEN=\"\" python -m guardmcp)",
+      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'docs: QUICKSTART + INSTALL; fix docker-compose H1 token requirement *)"
     ]
   }
 }

@@ -24,6 +24,11 @@ services:
       GUARDMCP_HOST: 0.0.0.0
       GUARDMCP_PORT: "8000"
       GUARDMCP_APPROVAL_PORT: "8001"
+      # Networked transports (sse/streamable-http) expose the approval REST API,
+      # so GuardMCP REFUSES to start without a token. CHANGE THIS before real use
+      # (and set GUARDMCP_AUDIT_HMAC_SECRET for a tamper-evident audit chain).
+      GUARDMCP_APPROVAL_API_TOKEN: change-me-in-production
+      GUARDMCP_AUDIT_LOG_PATH: /app/logs/audit.jsonl
     ports:
       - "8000:8000"   # MCP endpoint
       - "8001:8001"   # Approval REST API
