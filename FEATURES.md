@@ -117,7 +117,7 @@ MongoDB (live) + PostgreSQL + MySQL plugins, exposed through a discoverable MCP 
 
 ## Quality & Tooling
 
-- **509 tests** (unit + integration + adversarial / red-team), 2 xfailed (mongomock limits)
+- **546 tests** (unit + integration + adversarial / red-team), 2 xfailed (mongomock limits)
 - **Eval framework** — 38 declarative YAML cases across authorization / readonly / masking / approval / security / marshalling / pagination; console / JSON / JUnit reporters; `guardmcp eval` CLI
 - **Live integration tests** — testcontainers (PostgreSQL / MySQL / MongoDB), skip-if-no-docker
 - Plugin conformance suite

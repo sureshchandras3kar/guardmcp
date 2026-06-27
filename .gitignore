@@ -10,3 +10,4 @@ venv/
 build/
 dist/
 graphify-out/cache/
+.claude/settings.local.json
