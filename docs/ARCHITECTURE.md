@@ -1,5 +1,9 @@
 # GuardMCP Architecture
 
+**Legend:** Risk #N references are numbered findings from security and architecture reviews
+conducted during development. They document known limitations or design seams (e.g. distributed
+audit, principal identity resolution) that are correctly handled today but deferred to v2.
+
 ## Backend interfaces: public vs internal (Risk #9)
 
 GuardMCP has two backend-facing interfaces with distinct roles. Implement only

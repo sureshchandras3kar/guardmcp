@@ -202,7 +202,11 @@
       "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'chore: remove real data from the repo *)",
       "Bash(python -c \"import guardmcp; print\\('version check ok'\\)\")",
       "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'release: v0.0.1-alpha *)",
-      "Bash(git tag *)"
+      "Bash(git tag *)",
+      "Bash(grep -E \"^/Users/suresh/guardmcp/[^/]*\\\\.md$|^/Users/suresh/guardmcp/docs/.*\\\\.md$\")",
+      "Bash(sed -i '' 's/the bundled\\\\n//' CHANGELOG.md)",
+      "Bash(python -)",
+      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'docs: consolidate doc set \\(10->8\\), fix review blockers *)"
     ]
   }
 }

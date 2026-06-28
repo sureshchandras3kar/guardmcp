@@ -36,6 +36,42 @@ secondary resources.
 | `validate_request(req) -> None` | sync | Raise `GuardValidationError` if the request is unsafe for this backend. |
 | `cross_resource_refs(req) -> set[str]` | sync | Every *secondary* resource the request can reach (JOINs, `$lookup`, etc.). |
 
+### CapabilityRequest shape
+
+Every `execute()` call receives a `CapabilityRequest` with these fields:
+
+```json
+{
+  "capability": "READ",
+  "resource": "users",
+  "filter": {"age": {">": 18}},
+  "projection": ["name", "email"],
+  "sort": [["created_at", "desc"]],
+  "limit": 10,
+  "skip": 0,
+  "documents": null,
+  "update": null,
+  "pipeline": null,
+  "options": {},
+  "returning": ["id", "email"],
+  "tx_id": "txn-abc123",
+  "predicate": null,
+  "action": "find"
+}
+```
+
+**Core fields:**
+- `capability`: the `Capability` enum value (READ, WRITE_ONE, WRITE_MANY, DELETE_ONE, DELETE_MANY, COUNT, AGGREGATE, SCHEMA, INDEXES, EXPLAIN, LIST_RESOURCES, LIST_DATABASES, STATS, etc.)
+- `resource`: the primary table/collection name
+- `filter`: query predicate (dict for MongoDB, dict-to-SQL for SQL backends)
+- `documents`: document(s) to insert/replace (WRITE_ONE/WRITE_MANY)
+- `update`: update spec (UPDATE_ONE/UPDATE_MANY)
+- `pipeline`: aggregation pipeline (MongoDB; SQL backends return UNSUPPORTED_CAPABILITY)
+- `projection`, `sort`, `limit`, `skip`: query options
+- `returning`: post-write fields to return (SQL RETURNING; MongoDB supported for INSERT)
+- `action`: the original MCP tool name (e.g., "find", "insert_many")
+- All fields present; unused ones are `None` or empty.
+
 ### CapabilityResult mapping
 
 `CapabilityResult` has four fields: `rows`, `affected`, `scalar`, `meta`. Map each
@@ -52,6 +88,87 @@ capability to the right field so core (and the MCP tool layer) can interpret it.
 | `STATS`, `LIST_DATABASES`, `LIST_RESOURCES` | `rows` (or `meta`) | Introspection output. |
 | `EXPLAIN` | `rows` or `meta` | The query plan. |
 | `DDL_CREATE`, `DDL_DESTROY` | `affected`/`meta` | DDL outcome. Only declare in `supported` if you truly implement them. |
+
+### CapabilityResult examples
+
+**READ** (find 3 users):
+
+```json
+{
+  "rows": [
+    {"id": 1, "name": "Alice", "email": "alice@example.com"},
+    {"id": 2, "name": "Bob", "email": "bob@example.com"},
+    {"id": 3, "name": "Charlie", "email": "charlie@example.com"}
+  ],
+  "affected": null,
+  "scalar": null,
+  "meta": {}
+}
+```
+
+**COUNT** (5 matching records):
+
+```json
+{
+  "rows": [{"count": 5}],
+  "affected": null,
+  "scalar": 5,
+  "meta": {}
+}
+```
+
+**WRITE_ONE** (insert, return new id):
+
+```json
+{
+  "rows": [{"id": 42}],
+  "affected": 1,
+  "scalar": null,
+  "meta": {"lastrowid": 42}
+}
+```
+
+**DELETE_MANY** (deleted 10 records):
+
+```json
+{
+  "rows": null,
+  "affected": 10,
+  "scalar": null,
+  "meta": {}
+}
+```
+
+### Error handling
+
+In `validate_request()`, raise `GuardValidationError` for unsafe input (injection, banned operators, invalid resource names):
+
+```python
+from guardmcp.core.interfaces import GuardValidationError
+
+async def validate_request(self, req: CapabilityRequest) -> None:
+    if "DROP TABLE" in req.filter.get("_sql", ""):
+        raise GuardValidationError("raw SQL not permitted")
+    if not self._is_valid_identifier(req.resource):
+        raise GuardValidationError(f"invalid resource name: {req.resource}")
+```
+
+In `execute()`, raise `GuardExecutionError` for backend failures (connection down, syntax error, etc.):
+
+```python
+from guardmcp.core.interfaces import GuardExecutionError
+
+async def execute(self, req: CapabilityRequest) -> CapabilityResult:
+    try:
+        result = await self._run_query(req)
+        return result
+    except ConnectionError as e:
+        raise GuardExecutionError(f"backend unreachable: {e}") from e
+    except SyntaxError as e:
+        raise GuardExecutionError(f"query syntax error: {e}") from e
+```
+
+**Never** leak raw driver errors, DSNs, or stack traces to the client.
 
 ## Security requirements (critical)
 

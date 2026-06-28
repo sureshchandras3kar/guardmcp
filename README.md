@@ -19,13 +19,22 @@ backend without touching core — see [docs/PLUGIN_AUTHORS.md](docs/PLUGIN_AUTHO
 
 ---
 
+## Why GuardMCP?
+
+Without GuardMCP, any AI agent with database credentials can read, write, or drop anything.
+GuardMCP sits between the agent and your database to **prevent exfiltration** (PII masking),
+**block dangerous operations** (mass-delete/drop requires approval), and **enforce access control**
+(deny-by-default, per-agent policies). Every decision is **audited** with tamper-evident logs.
+Think of it as the security layer a database should have built in.
+
+---
+
 ## Quick links
 
 | | |
 |--|--|
 | **5-minute setup** (Claude Desktop) | [QUICKSTART.md](QUICKSTART.md) |
 | **Install / Docker / backends / config reference** | [INSTALL.md](INSTALL.md) |
-| **Full feature inventory** | [FEATURES.md](FEATURES.md) |
 | **Architecture (public vs internal interfaces)** | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) |
 | **Write a backend plugin** | [docs/PLUGIN_AUTHORS.md](docs/PLUGIN_AUTHORS.md) |
 | **Security policy** | [SECURITY.md](SECURITY.md) |
@@ -52,8 +61,6 @@ backend without touching core — see [docs/PLUGIN_AUTHORS.md](docs/PLUGIN_AUTHO
 **Security:** `$where`/`$function`/`$out`/`$merge` blocked · pipeline stage allow-list ·
 `$lookup`/`$graphLookup`/`$unionWith` cross-collection authorization · injection-safe SQL by
 construction · constant-time approval token · SSE/HTTP refuse to start unauthenticated.
-
-Full detail in [FEATURES.md](FEATURES.md).
 
 ---
 
@@ -120,7 +127,7 @@ approval:                  # readwrite gates
 Also supported: `extends` (role inheritance), `not_before`/`not_after` (temporal),
 `fields_allow` (result projection allow-list), `connections_allow` (gate `switch_connection`).
 Multiple policies in one file under `agents:`, or a **directory** of policy files
-(hot-reloaded). See [FEATURES.md](FEATURES.md) + `policies/example.yaml`.
+(hot-reloaded). See `policies/example.yaml` for details.
 
 ---
 
@@ -129,6 +136,9 @@ Multiple policies in one file under `agents:`, or a **directory** of policy file
 Capability-neutral **`db_*`** names are primary; **`mongodb_*`** aliases are kept for
 backward compatibility. Uniform `{ok, data, error, meta}` envelope; destructive tools
 carry MCP annotations.
+
+*Note:* Throughout these tools, **resource** is the backend-neutral term for a MongoDB
+collection or SQL table. Tool parameters use `collection` for MongoDB compatibility.
 
 | Group | Tools |
 |-------|-------|
@@ -188,6 +198,22 @@ export GUARDMCP_CONNECTIONS='{"analytics":{"type":"postgres","dsn":"postgresql:/
 The same governance (policy/risk/approval/audit/masking) applies to every backend. A
 backend rejects unsupported capabilities (e.g. `aggregate` on SQL) with
 `UNSUPPORTED_CAPABILITY`. See [INSTALL.md#backends](INSTALL.md#backends).
+
+---
+
+## Troubleshooting
+
+**Python path resolution fails:** Use the **absolute** path to the Python interpreter in Claude Desktop config (e.g. `/usr/local/bin/python3`), not a shim or `python3` from PATH.
+
+**`GUARDMCP_AGENT` mismatch:** The env var must exactly match the policy `agent:` field.
+
+**Networked transports (SSE/HTTP) fail to start:** Set `GUARDMCP_APPROVAL_API_TOKEN` to a non-empty token before starting the server.
+
+**Audit log won't write:** Check that the audit directory is writable. Default is a platform state dir (`~/Library/Logs/guardmcp` on macOS); set `GUARDMCP_AUDIT_LOG_PATH` to an absolute path if needed.
+
+**Policy denies everything:** Empty `collections.allow` means deny-all. Set `allow: ["*"]` to permit all collections, or list specific collections explicitly.
+
+For detailed troubleshooting: see [QUICKSTART.md](QUICKSTART.md) and [INSTALL.md](INSTALL.md).
 
 ---
 

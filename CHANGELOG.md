@@ -7,11 +7,41 @@ All notable changes to GuardMCP are documented here. This project adheres to
 
 ## [0.0.1-alpha] — 2026-06-27
 
-First public alpha. Policy-enforced multi-backend MCP server (MongoDB live;
-PostgreSQL/MySQL plugins). Governance core (policy/risk/approval/masking/audit/
-rate-limit), 44 MCP tools (`db_*` + `mongodb_*` aliases + 6 `guardmcp_*` meta),
-query cost estimation, policy explain/simulator, type marshalling. Full notes:
-[RELEASE_NOTES.md](RELEASE_NOTES.md). 546 tests, 38 evals.
+First public alpha. Policy-enforced, multi-backend MCP server that governs AI-agent
+database access. MongoDB backend is well-tested (546 unit/integration tests,
+38 policy/security evals); PostgreSQL and MySQL plugins are functional and live-tested
+but newer. APIs may change before 1.0.
+
+### Added
+
+**Governance Core** (database-agnostic):
+- Per-agent policy engine with collection/action allow-deny lists; **deny-by-default**
+- Role inheritance (`extends`), temporal validity (`not_before`/`not_after`), `apiVersion` schema versioning
+- Risk engine: LOW→CRITICAL classification with scope escalation (empty-filter mass-mutation → CRITICAL)
+- Human approval workflow with in-band `ctx.elicit()` and REST API; TOCTOU re-check, timeout→deny
+- Field masking: recursive, per-collection, dotted-path, field allow-list, depth-limit fail-safe
+- Audit logging: async group-commit JSONL, optional HMAC-SHA256 chain, fail-closed mode, W3C trace correlation
+- Rate limiting: token bucket per agent
+- Type marshalling: fail-loud `TYPE_MISMATCH` on filter type errors (no silent empty results)
+
+**Plugin Architecture**:
+- Unified `DatabasePlugin` contract + `Capability` model for database-neutral operations
+- MongoDB (native, Motor) · PostgreSQL (asyncpg, optional) · MySQL (aiomysql, optional)
+- Query cost estimation: normalized `CostEstimate` per backend (explain never exposed)
+- Entry-point discovery via `guardmcp.plugins` group; conformance kit for third-party authors
+
+**MCP Interface** (44 tools):
+- **19 capability-neutral `db_*` tools** (primary): find, count, aggregate, explain, schema, indexes, list_collections, list_databases, stats, insert_one/many, update_one/many, delete_one/many, create_index, drop_index, list_connections, switch_connection
+- **19 `mongodb_*` aliases** for backward compatibility
+- **6 `guardmcp_*` meta tools**: status (connection/DB stats/version), setup (policy wizard), capabilities (permitted actions), plan (dry-run with cost), explain_policy (decision trace), simulate_policy (what-if with impact rating)
+- Uniform `{ok, data, error, meta}` envelope; MCP ToolAnnotations; frozen `ErrorCode` taxonomy
+
+**Security Controls**:
+- `$where`/`$function`/`$accumulator`/`$out`/`$merge` blocked; aggregation pipeline stage allow-list
+- Cross-collection authorization for `$lookup`/`$graphLookup`/`$unionWith`
+- Injection-safe SQL by construction (identifier allow-list + parameterized values)
+- Constant-time approval-token comparison; SSE/HTTP refuse to start unauthenticated
+- YAML-injection-proof setup; sanitized errors (no DSN/stack leak)
 
 ### Changed
 
@@ -53,8 +83,7 @@ tool. New semantics (`collection_permitted`, enforced in `PolicyEngine`):
 
 Migration: to permit every collection, set `collections.allow: ["*"]`
 explicitly. `guardmcp_setup` now writes `allow: ["*"]` when you answer `*`.
-Existing policies with explicit allow lists (incl. the bundled
-`example.yaml` / `test_stdio.yaml`) are unaffected.
+Existing policies with explicit allow lists (incl. the bundled `example.yaml`) are unaffected.
 
 #### Masking depth-limit leak fixed (EC-3, HIGH)
 
@@ -99,4 +128,14 @@ with pluggable backends:
 - **R-1/2** — Registry robustness: version-incompatibility and bad-plugin
   rejection.
 
-[Unreleased]: https://github.com/your-org/guardmcp/compare/v0.1.0...HEAD
+### Known Limitations
+
+- **PostgreSQL/MySQL plugins** are unit + live-tested but newer; connection lifecycle established lazily.
+- **Distributed deployments**: approval store, rate limiter, and HMAC audit chain are per-process single-writer. Seams exist for distributed backends (Redis/Kafka) but no impls ship yet.
+- **Agent identity** (`X-GuardMCP-Agent` header) is trusted only behind an authenticating gateway; pluggable `PrincipalResolver` seam exists but no JWT/mTLS impl ships.
+- **Aggregation field masking** enforced by denial — pipelines referencing masked fields are blocked, preventing rename/alias bypasses but also some legitimate pipelines.
+- **`$match` on masked fields** can leak existence/ordering via result counts; masking hides display values, not predicates.
+- **Rate limiting** is in-memory per-process; does not coordinate across multiple instances.
+- For complete details, see [SECURITY.md](SECURITY.md#known-limitations).
+
+[Unreleased]: <repo-url>/compare/v0.0.1-alpha...HEAD
