@@ -182,6 +182,35 @@ with an actionable message (not a traceback).
 
 ---
 
+## CLI / operations
+
+The `guardmcp` entry point is also an operator/CI CLI. Bare `guardmcp` and any
+`--transport …` flag still start the server (back-compat); the subcommands below are
+additive. Each has its own `--help` (e.g. `guardmcp policy lint --help`).
+
+| Command | Args | Exit codes |
+| --- | --- | --- |
+| `guardmcp version` | — | always `0`. Reads installed package metadata (stale? `pip install -e .`). |
+| `guardmcp doctor` | — | `0` PASS / `1` FAIL. DB unreachable → WARN, still `0`. |
+| `guardmcp config validate` | — | `0` PASS / `1` FAIL (H1, audit path). No DB call. |
+| `guardmcp policy lint <path>` | `[--strict]` | `0` clean (warnings allowed) / `1` on schema error, or any warning under `--strict`. |
+| `guardmcp audit verify <log>` | `--secret <s>` (or `GUARDMCP_AUDIT_HMAC_SECRET`) | `0` verified · `1` chain broken (prints first bad line) · `2` read error · `3` not verifiable (no `_hmac`/no secret). |
+| `guardmcp capability inspect <type>` | `[--format text\|json]` | `0` / `1` if the type is unknown. |
+
+```bash
+guardmcp doctor
+guardmcp policy lint policies/ --strict
+guardmcp audit verify "$GUARDMCP_AUDIT_LOG_PATH" --secret "$GUARDMCP_AUDIT_HMAC_SECRET"
+```
+
+**Health endpoints (networked transports):** on `sse`/`streamable-http`, the approval API
+serves `/healthz` (liveness, always 200) and `/readyz` (200 when policy is loaded and the
+default backend is reachable, else 503) on the approval port (`GUARDMCP_APPROVAL_PORT`,
+default 8001). Wire these to Kubernetes liveness/readiness probes. `/health` and `/ready`
+are kept as aliases.
+
+---
+
 ## Checklist before production
 
 - [ ] Explicit `collections.allow` in every policy (never rely on empty = all — it's deny-all, but be explicit)

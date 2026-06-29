@@ -43,6 +43,8 @@ CI runs via GitHub Actions (`.github/workflows/ci.yml`) on every push and pull r
 The workflow runs ruff (lint + format), mypy (type-check), pytest (unit + integration tests),
 and the policy evaluation suite. Logs are visible on the PR.
 
+CI can also gate on the operator CLI: `guardmcp policy lint policies/` (add `--strict` to fail on warnings) and `guardmcp audit verify <log> --secret <s>` both exit nonzero on failure.
+
 ## Running the gates
 
 All three must pass before a PR is merged.

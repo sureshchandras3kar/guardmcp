@@ -39,7 +39,8 @@ dev = [
 ]
 
 [project.scripts]
-guardmcp = "guardmcp.__main__:main"
+guardmcp = "guardmcp.cli:main"
+# Back-compat alias: `guardmcp-eval` still works (also reachable as `guardmcp eval`).
 guardmcp-eval = "guardmcp.eval.cli:main"
 
 [project.entry-points."guardmcp.plugins"]

@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   "src/guardmcp/__main__.py": {
-    "mtime": 1782559138.67922,
-    "ast_hash": "26db319db9f4477fa8f4fd2446bc858f",
+    "mtime": 1782723898.0785508,
+    "ast_hash": "92915a9d37f929ce7d8b429e6c5ea7a6",
     "semantic_hash": ""
   },
   "src/guardmcp/api/__init__.py": {
@@ -20,8 +20,8 @@
     "semantic_hash": ""
   },
   "src/guardmcp/api/approval.py": {
-    "mtime": 1782398123.683082,
-    "ast_hash": "2a3f5b8d405920c5e2670aa888543a5b",
+    "mtime": 1782723898.079017,
+    "ast_hash": "e7e8b122dc3d7e2f7bfb79a5346aa17f",
     "semantic_hash": ""
   },
   "src/guardmcp/config.py": {
@@ -65,8 +65,8 @@
     "semantic_hash": ""
   },
   "src/guardmcp/core/audit/logger.py": {
-    "mtime": 1782559321.8434134,
-    "ast_hash": "107da9de84b021f4d5d9c9c2f526e71d",
+    "mtime": 1782723898.080156,
+    "ast_hash": "289368cd1cdda68273c4ef87747a4fa0",
     "semantic_hash": ""
   },
   "src/guardmcp/core/interfaces/__init__.py": {
@@ -640,38 +640,38 @@
     "semantic_hash": ""
   },
   "CHANGELOG.md": {
-    "mtime": 1782554339.047407,
-    "ast_hash": "ec7bd79ba2e3c100a71c218872c2b28b",
+    "mtime": 1782719087.0005653,
+    "ast_hash": "84fbea0d8111f068a70ceec126871acc",
     "semantic_hash": ""
   },
   "CONTRIBUTING.md": {
-    "mtime": 1782561370.3377535,
-    "ast_hash": "5bc54006d7f30c7e407c77c02383f1a1",
+    "mtime": 1782724099.447331,
+    "ast_hash": "155c9a32d10bf63a8a4dbc9d9ae21f12",
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1782557877.1526046,
-    "ast_hash": "895b804f80dbd24aac3416d1892b5a45",
+    "mtime": 1782724074.4661515,
+    "ast_hash": "6e8718e5e23379761a84382e2913b63b",
     "semantic_hash": ""
   },
   "SECURITY.md": {
-    "mtime": 1782372625.324149,
-    "ast_hash": "2f86fc417b4885921146e7c9054d15a1",
+    "mtime": 1782719087.0062892,
+    "ast_hash": "208d01494f248cb4f2af1e2c33575eae",
     "semantic_hash": ""
   },
   "docker-compose.yml": {
-    "mtime": 1782236999.9160748,
-    "ast_hash": "eda4fd586b9e563491061757247c4756",
+    "mtime": 1782575652.400646,
+    "ast_hash": "4d10a92abb560e48ac757b5bcacafb7d",
     "semantic_hash": ""
   },
   "docs/ARCHITECTURE.md": {
-    "mtime": 1782451013.0652444,
-    "ast_hash": "a348b31138bfa478f8f10b50bfe22a38",
+    "mtime": 1782719087.006825,
+    "ast_hash": "33775e91c69caef1f35c7a6ca22b4a0e",
     "semantic_hash": ""
   },
   "docs/PLUGIN_AUTHORS.md": {
-    "mtime": 1782452129.2959237,
-    "ast_hash": "f50332026f827673433ce25b34c3fb0a",
+    "mtime": 1782719087.0080953,
+    "ast_hash": "ba2d81ed0031f847d57a5e2633886ee0",
     "semantic_hash": ""
   },
   "docs/superpowers/plans/2026-06-23-guardmcp-v0.1.md": {
@@ -929,11 +929,6 @@
     "ast_hash": "68e17474358f6c01b7f440f1e8da4b37",
     "semantic_hash": ""
   },
-  "FEATURES.md": {
-    "mtime": 1782557864.529189,
-    "ast_hash": "aa8d4f521469f8976ee3414504ecc73d",
-    "semantic_hash": ""
-  },
   "src/guardmcp/core/interfaces/cost.py": {
     "mtime": 1782558777.0491936,
     "ast_hash": "df6df52165cf7249e1d0f9059e7b29f4",
@@ -1007,6 +1002,51 @@
   "src/guardmcp/server/tools/meta/status.py": {
     "mtime": 1782565536.5129294,
     "ast_hash": "90da9f4e17af40bbfbfa725f40abc871",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/cli.py": {
+    "mtime": 1782723952.3592324,
+    "ast_hash": "e1e6bd84b487d03f9618897d38b1a543",
+    "semantic_hash": ""
+  },
+  "src/guardmcp/core/audit/verify.py": {
+    "mtime": 1782722641.9276955,
+    "ast_hash": "aaca833adf7feb4dcb2bd02492abd9aa",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_audit_verify.py": {
+    "mtime": 1782722681.808636,
+    "ast_hash": "b9a7be906a1aabf4d497ea66926db8d8",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_cli_dispatch.py": {
+    "mtime": 1782723877.414524,
+    "ast_hash": "b4436d2070409be0b105706b5d8d0397",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_doctor.py": {
+    "mtime": 1782723774.2160232,
+    "ast_hash": "fc309903ab9655c290d7f2e95e7f4092",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_health_endpoints.py": {
+    "mtime": 1782723857.6635063,
+    "ast_hash": "94117eb526b60e5be95078650b67c70b",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_policy_lint.py": {
+    "mtime": 1782723404.4855304,
+    "ast_hash": "467f830eee93394f6fc43de1f4f44a80",
+    "semantic_hash": ""
+  },
+  "INSTALL.md": {
+    "mtime": 1782724090.8069553,
+    "ast_hash": "17e8720a0df50c4c2adba288f194f3bd",
+    "semantic_hash": ""
+  },
+  "QUICKSTART.md": {
+    "mtime": 1782719087.0021048,
+    "ast_hash": "b0f737ef1ca86a19b340db9a294e3055",
     "semantic_hash": ""
   }
 }

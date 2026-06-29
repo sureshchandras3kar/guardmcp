@@ -188,6 +188,30 @@ stderr (JSON), not the audit file.
 
 ---
 
+## CLI / operations
+
+The same `guardmcp` entry point doubles as an operator/CI CLI. Run `guardmcp --help`
+for the full list; bare `guardmcp` (or `python -m guardmcp`) and any `--transport …`
+flag still start the server (back-compat).
+
+| Command | What it does |
+| --- | --- |
+| `guardmcp version` | Print version + policy/core API + plugin manifest versions. |
+| `guardmcp doctor` | Readiness report (config, policy, audit path, DB). DB unreachable → WARN, not failure. |
+| `guardmcp config validate` | Validate settings/H1/paths only (no DB call). |
+| `guardmcp policy lint <path> [--strict]` | Load + danger-check policies; `--strict` makes warnings fail. |
+| `guardmcp audit verify <log> --secret <s>` | Verify the audit HMAC chain; reports the first broken line. |
+| `guardmcp capability inspect <type>` | Print one backend's manifest (no connection). |
+
+**CI usage:** `policy lint` and `audit verify` exit nonzero on failure, so they drop
+straight into a pipeline (e.g. fail the build on a dangerous policy under `--strict`, or
+on a tampered audit log).
+
+> `guardmcp version` reads installed package metadata — if it shows a stale version,
+> re-run `pip install -e .`.
+
+---
+
 ## Multi-backend (PostgreSQL / MySQL)
 
 ```bash
@@ -222,7 +246,7 @@ For detailed troubleshooting: see [QUICKSTART.md](QUICKSTART.md) and [INSTALL.md
 ```bash
 pip install -e ".[dev]"
 pre-commit install
-python -m pytest -q                   # 546 passed (no real DB — mongomock)
+python -m pytest -q                   # 591 passed (no real DB — mongomock)
 python -m guardmcp.eval evals/cases/  # 38/38 policy/security evals
 ruff check src/ tests/ && python -m mypy src/guardmcp
 ```
