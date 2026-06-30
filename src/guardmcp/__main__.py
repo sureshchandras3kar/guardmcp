@@ -269,10 +269,16 @@ def build(settings: Settings) -> tuple[FastMCP, object, AppContext]:
             return False, f"default backend unreachable: {type(exc).__name__}"
         return True, "ready"
 
+    # DNS-rebinding protection: default the Host allow-list to the configured
+    # host + loopback when the operator didn't set one. A 0.0.0.0 bind (Docker)
+    # still allows localhost/127.0.0.1; add the external hostname via
+    # GUARDMCP_ALLOWED_HOSTS. ["*"] disables (trusted-proxy only).
+    allowed_hosts = settings.allowed_hosts or [settings.host, "localhost", "127.0.0.1"]
     rest_app = build_approval_app(
         approval_store,
         api_token=settings.approval_api_token,
         readiness=_readiness,
+        allowed_hosts=allowed_hosts,
     )
     return mcp, rest_app, ctx
 

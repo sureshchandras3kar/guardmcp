@@ -10,8 +10,8 @@
     "semantic_hash": ""
   },
   "src/guardmcp/__main__.py": {
-    "mtime": 1782723898.0785508,
-    "ast_hash": "92915a9d37f929ce7d8b429e6c5ea7a6",
+    "mtime": 1782809394.8791263,
+    "ast_hash": "0eeb189caffbaf01e53c4fb4d999ace4",
     "semantic_hash": ""
   },
   "src/guardmcp/api/__init__.py": {
@@ -20,13 +20,13 @@
     "semantic_hash": ""
   },
   "src/guardmcp/api/approval.py": {
-    "mtime": 1782723898.079017,
-    "ast_hash": "e7e8b122dc3d7e2f7bfb79a5346aa17f",
+    "mtime": 1782809350.839388,
+    "ast_hash": "1ecaae9ad024d28c0154f2dac9ef5043",
     "semantic_hash": ""
   },
   "src/guardmcp/config.py": {
-    "mtime": 1782558777.0449636,
-    "ast_hash": "c7077461e3d1b22da8ec1b3205ccebb4",
+    "mtime": 1782809365.0450242,
+    "ast_hash": "4811e6c2eb4c7bff68cd6ed4bc2cb5b3",
     "semantic_hash": ""
   },
   "src/guardmcp/conformance/__init__.py": {
@@ -1040,13 +1040,18 @@
     "semantic_hash": ""
   },
   "INSTALL.md": {
-    "mtime": 1782724090.8069553,
-    "ast_hash": "17e8720a0df50c4c2adba288f194f3bd",
+    "mtime": 1782809474.682987,
+    "ast_hash": "39a885facc8f48bd1094dca3d223ca8f",
     "semantic_hash": ""
   },
   "QUICKSTART.md": {
     "mtime": 1782719087.0021048,
     "ast_hash": "b0f737ef1ca86a19b340db9a294e3055",
+    "semantic_hash": ""
+  },
+  "tests/unit/test_dns_rebinding.py": {
+    "mtime": 1782809464.4475958,
+    "ast_hash": "ba5b64aa968d2c15e75c18b8968b1eb9",
     "semantic_hash": ""
   }
 }

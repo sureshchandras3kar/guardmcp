@@ -21,6 +21,7 @@ def build_approval_app(
     store: ApprovalStore,
     api_token: str = "",
     readiness: ReadinessProbe | None = None,
+    allowed_hosts: list[str] | None = None,
 ) -> FastAPI:
     """
     Build the approval REST API.
@@ -36,6 +37,17 @@ def build_approval_app(
     reachable. Probes must be best-effort (never raise) and must not leak secrets.
     """
     app = FastAPI(title="GuardMCP Approval API", version="0.1.0")
+
+    # DNS-rebinding protection: reject requests whose Host header isn't on the
+    # allow-list. Without this, a malicious web page can make the user's browser
+    # resolve an attacker domain to 127.0.0.1 and POST to the approval API
+    # (which approves CRITICAL writes). Starlette's TrustedHostMiddleware strips
+    # the port and matches the host part. `["*"]` (or empty) disables it — only
+    # for trusted reverse-proxy/ingress deployments that rewrite Host.
+    if allowed_hosts and "*" not in allowed_hosts:
+        from starlette.middleware.trustedhost import TrustedHostMiddleware
+
+        app.add_middleware(TrustedHostMiddleware, allowed_hosts=list(allowed_hosts))
 
     # Health endpoints — no auth required (used by k8s liveness/readiness probes).
     # /healthz + /readyz are the canonical names; /health + /ready are kept as

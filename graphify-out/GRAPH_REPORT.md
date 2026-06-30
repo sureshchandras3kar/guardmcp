@@ -1,16 +1,16 @@
 # Graph Report - guardmcp  (2026-06-30)
 
 ## Corpus Check
-- 166 files · ~86,148 words
+- 167 files · ~86,495 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2084 nodes · 4436 edges · 141 communities (126 shown, 15 thin omitted)
-- Extraction: 82% EXTRACTED · 18% INFERRED · 0% AMBIGUOUS · INFERRED: 816 edges (avg confidence: 0.63)
+- 2093 nodes · 4451 edges · 134 communities (121 shown, 13 thin omitted)
+- Extraction: 82% EXTRACTED · 18% INFERRED · 0% AMBIGUOUS · INFERRED: 818 edges (avg confidence: 0.63)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4a444b8b`
+- Built from commit: `906d5c26`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -108,21 +108,14 @@
 - [[_COMMUNITY_Community 113|Community 113]]
 - [[_COMMUNITY_Community 114|Community 114]]
 - [[_COMMUNITY_Community 115|Community 115]]
-- [[_COMMUNITY_Community 116|Community 116]]
 - [[_COMMUNITY_Community 117|Community 117]]
-- [[_COMMUNITY_Community 118|Community 118]]
 - [[_COMMUNITY_Community 119|Community 119]]
 - [[_COMMUNITY_Community 120|Community 120]]
 - [[_COMMUNITY_Community 121|Community 121]]
-- [[_COMMUNITY_Community 122|Community 122]]
 - [[_COMMUNITY_Community 123|Community 123]]
 - [[_COMMUNITY_Community 124|Community 124]]
-- [[_COMMUNITY_Community 125|Community 125]]
-- [[_COMMUNITY_Community 126|Community 126]]
 - [[_COMMUNITY_Community 127|Community 127]]
 - [[_COMMUNITY_Community 128|Community 128]]
-- [[_COMMUNITY_Community 129|Community 129]]
-- [[_COMMUNITY_Community 130|Community 130]]
 - [[_COMMUNITY_Community 131|Community 131]]
 - [[_COMMUNITY_Community 132|Community 132]]
 - [[_COMMUNITY_Community 133|Community 133]]
@@ -149,14 +142,14 @@
 ## Surprising Connections (you probably didn't know these)
 - `audit_logger()` --calls--> `AuditLogger`  [INFERRED]
   tests/conftest.py → src/guardmcp/core/audit/logger.py
+- `test_fail_closed_raises_on_write_failure()` --calls--> `AuditLogger`  [INFERRED]
+  tests/unit/test_audit_logger.py → src/guardmcp/core/audit/logger.py
+- `test_fail_open_does_not_raise()` --calls--> `AuditLogger`  [INFERRED]
+  tests/unit/test_audit_logger.py → src/guardmcp/core/audit/logger.py
 - `test_rate_limiter_satisfies_protocol()` --calls--> `RateLimiter`  [INFERRED]
   tests/unit/test_seams.py → src/guardmcp/core/ratelimit/limiter.py
 - `test_adapter_estimate_delegates_to_plugin()` --calls--> `CapabilityExecutorAdapter`  [INFERRED]
   tests/unit/test_cost_estimate.py → src/guardmcp/core/registry/adapter.py
-- `test_mongo_ixscan_normalizes_to_low()` --calls--> `normalize_mongo_explain()`  [INFERRED]
-  tests/unit/test_cost_estimate.py → src/guardmcp/plugins/mongodb/cost.py
-- `test_mongo_plugin_estimate_failure_is_unknown()` --calls--> `MongoPlugin`  [INFERRED]
-  tests/unit/test_cost_estimate.py → src/guardmcp/plugins/mongodb/plugin.py
 
 ## Import Cycles
 - 1-file cycle: `src/guardmcp/api/approval.py -> src/guardmcp/api/approval.py`
@@ -164,35 +157,35 @@
 - 1-file cycle: `src/guardmcp/server/tools/__init__.py -> src/guardmcp/server/tools/__init__.py`
 - 1-file cycle: `src/guardmcp/server/tools/meta/__init__.py -> src/guardmcp/server/tools/meta/__init__.py`
 
-## Communities (141 total, 15 thin omitted)
+## Communities (134 total, 13 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.12
-Nodes (20): AuditLogger, _Loader, Action, DecisionStatus, RiskLevel, PolicyEngine, Action, GuardPipeline (+12 more)
+Cohesion: 0.07
+Nodes (23): PolicyLoader, Sorted list of *.yaml/*.yml files when _path is a directory.          Sorting ma, Apply the SAME doc shape parsing (list / {agents:[...]} / single)., Max mtime to watch. For a directory: the dir's own mtime (catches         add/re, Load (or reload) policies from disk. Called at startup and by hot-reload., Start background asyncio task that polls for policy file changes., Cancel the background watcher task., Policy (+15 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.06
-Nodes (37): ApprovalStoreProtocol, AuditSinkProtocol, EvalResult, GuardPipeline, Return executor for the active connection (or default)., Run policy + risk check. Does NOT execute or audit.          `trace` (optional):, #1 seam: capability-native entry point.          Maps a Capability → a represent, Deny if the policy has a temporal window and now is outside it. (+29 more)
+Cohesion: 0.07
+Nodes (30): ApprovalStoreProtocol, AuditSinkProtocol, EvalResult, GuardPipeline, Return executor for the active connection (or default)., Run policy + risk check. Does NOT execute or audit.          `trace` (optional):, #1 seam: capability-native entry point.          Maps a Capability → a represent, Deny if the policy has a temporal window and now is outside it. (+22 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.13
-Nodes (25): Context, MongoDB-specific validation / guard logic.  Moved out of core/validation.py in P, Action, FastMCP, ToolContext, FastMCP, FastMCP, ToolContext (+17 more)
+Cohesion: 0.06
+Nodes (57): Context, _coerce_none_sentinels(), _parse_json_or_pass(), Database-agnostic grounding/security helpers.  MongoDB-specific validation (oper, Coerce a JSON-encoded string to dict/list. Non-strings pass through., Map '', 'null', 'none', 'undefined' → None for optional dict params., register(), GuardMCP meta tools (single-named, no db_/mongodb_ alias).  The former monolithi (+49 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.13
-Nodes (21): guardmcp_capabilities — backend + per-collection permitted-action discovery.  Pe, register(), GuardMCP meta tools (single-named, no db_/mongodb_ alias).  The former monolithi, _estimate_cost(), guardmcp_plan — dry-run preview of authorization/risk/affected docs + cost., Best-effort normalized cost estimate for an operation. NEVER raises:     returns, guardmcp_status — connection status, statistics, version, policy summary., register() (+13 more)
+Cohesion: 0.18
+Nodes (5): AuditRecord, #8 + #9 tests: structured logging, trace-id correlation, explicit error codes., TestAuditTraceId, TestLogEvent, TestTraceId
 
 ### Community 5 - "Community 5"
 Cohesion: 0.11
-Nodes (22): EC-3 fail-safe: a masked field nested far beyond _MAX_DEPTH must NOT be     retu, test_ec3_beyond_bound_redacts_not_raw(), FieldMasker, #10: split mask entries into bare names (match a key at ANY depth, the     histo, Recursively mask sensitive fields. Bare names match a key at any         depth;, H3: single-pass field allow-list + masking. Replaces two separate full     trave, ResultTransformer, _split_mask_entries() (+14 more)
+Nodes (15): FieldMasker, #10: split mask entries into bare names (match a key at ANY depth, the     histo, Recursively mask sensitive fields. Bare names match a key at any         depth;, H3: single-pass field allow-list + masking. Replaces two separate full     trave, ResultTransformer, _split_mask_entries(), Effective mask fields for a collection. Flat list → global (same list         fo, Cached single-pass field-allow + mask transformer (H3/M1). (+7 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.08
 Nodes (33): CapabilityExecutorAdapter, Delegate cost estimation to the plugin through the same Backend         boundary, Generic safe error message — never leaks backend internals., Presents a DatabasePlugin behind the legacy Backend interface the     pipeline c, Action, Any, Capability, CapabilityRequest (+25 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.11
-Nodes (19): ErrorCode, err(), from_pipeline_result(), _infer_denied_code(), ok(), Standard MCP tool response envelope + error taxonomy.  Every GuardMCP tool retur, Success envelope. `data` carries the payload; `meta` is optional context., Error envelope with a stable machine-readable `code`. (+11 more)
+Cohesion: 0.14
+Nodes (12): from_pipeline_result(), ok(), Success envelope. `data` carries the payload; `meta` is optional context., Map a GuardPipeline result dict to the standard envelope.      Pipeline shapes:, Any, test_from_pipeline_result_denied_collection(), test_from_pipeline_result_denied_readonly(), test_from_pipeline_result_error_backend() (+4 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.05
@@ -203,8 +196,8 @@ Cohesion: 0.17
 Nodes (18): ApprovalStore, EvalCase, EvalCaseResult, InlinePolicy, _build_mock_client(), _build_policy(), _EvalApprovalStore, _InlineLoader (+10 more)
 
 ### Community 10 - "Community 10"
-Cohesion: 0.15
-Nodes (14): current_traceparent(), _format(), get_trace_id(), log_event(), new_span_id(), Dependency-free structured logging + trace-id correlation.  Replaces ad-hoc `pri, Emit ONE structured log line to stderr if `level` meets the threshold., Mint a fresh 16-hex (8-byte) span id. (+6 more)
+Cohesion: 0.18
+Nodes (15): Tamper-evident audit log (per-process HMAC chain).  Risk #5 — multi-writer attri, register(), current_traceparent(), _format(), get_trace_id(), log_event(), new_span_id(), Dependency-free structured logging + trace-id correlation.  Replaces ad-hoc `pri (+7 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.17
@@ -215,20 +208,20 @@ Cohesion: 0.21
 Nodes (9): _ArgCounter, Issues placeholders (dialect-specific) and accumulates the bound values., Build a parameterized WHERE clause (without the WHERE keyword).          Returns, Single-row insert from documents[0], or UPDATE if filter+update present., Translate a CapabilityRequest into parameterized SQL + positional args., Result of a pure translation: parameterized SQL plus positional args., Translated, Any (+1 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.14
-Nodes (19): BaseModel, PolicyExplanation, PolicySimulation, Public contract for guardmcp_explain_policy., Public contract for guardmcp_simulate_policy., Policy, True if this is a base-only role (agent starts with 'role:')., PolicyTrace (+11 more)
+Cohesion: 0.09
+Nodes (40): BaseModel, Policy-introspection tools: guardmcp_explain_policy + guardmcp_simulate_policy., register(), build_explanation(), build_policy_from_input(), classify_impact(), diff_policies(), _effective_mask_map() (+32 more)
 
 ### Community 14 - "Community 14"
-Cohesion: 0.17
-Nodes (12): test_approval_required_then_approved(), Request, ActionPolicy, ApprovalPolicy, _policy(), #9: every DENIED decision carries the canonical ErrorCode value., _request(), TestActionPermissions (+4 more)
+Cohesion: 0.05
+Nodes (57): Integration tests — full pipeline with mongomock-motor (no real MongoDB)., test_approval_required_then_approved(), _merge(), _merge_mask_fields(), Order-preserving union of two string lists (base first, child appended)., Merge mask_fields. If either is a dict, merge per-collection (union per     key), Merge `base` under `child` (child overrides). Scalars: child wins when set     t, _union() (+49 more)
 
 ### Community 15 - "Community 15"
 Cohesion: 0.12
 Nodes (8): MongoExecutor, True if at least one filter field has an index (or _id is filtered)., Raise ValueError if enforce_index_usage is True and filter has no index., Schema-driven type-marshal a filter at the Mongo boundary.          Fetches the, Return max_time_ms kwarg when configured., Canonical BSON type map for the filter marshaller (cached).          Delegates t, Action, Any
 
 ### Community 16 - "Community 16"
-Cohesion: 0.10
-Nodes (18): classify_cost(), Map normalized signals → a single coarse CostLevel.      Rules (in order):, _FakeMongoExecutor, _mongo_explain(), Feature 1 — Query Cost Estimation unit tests.  Covers the frozen CostEstimate mo, Returns a canned explain(executionStats) dict for find., test_adapter_estimate_delegates_to_plugin(), test_classify_collection_scan_is_high() (+10 more)
+Cohesion: 0.18
+Nodes (7): _mongo_explain(), Feature 1 — Query Cost Estimation unit tests.  Covers the frozen CostEstimate mo, test_adapter_estimate_delegates_to_plugin(), test_mongo_collscan_normalizes_to_high(), test_mongo_does_not_leak_raw_plan(), test_mongo_plugin_estimate_collscan(), test_mongo_plugin_estimate_failure_is_unknown()
 
 ### Community 17 - "Community 17"
 Cohesion: 0.16
@@ -236,43 +229,43 @@ Nodes (9): _affected_from_status(), Estimate a READ/COUNT via ``EXPLAIN (FORMAT 
 
 ### Community 18 - "Community 18"
 Cohesion: 0.11
-Nodes (17): MongoPlugin, Backend safety validation. Re-raises tool-layer ToolError as         GuardValida, Estimate the cost of a find/aggregate via explain(executionStats),         norma, CostEstimate, Action, CapabilityRequest, CapabilityResult, CostEstimate (+9 more)
+Nodes (18): MongoPlugin, Backend safety validation. Re-raises tool-layer ToolError as         GuardValida, Estimate the cost of a find/aggregate via explain(executionStats),         norma, CostEstimate, Action, CapabilityRequest, CapabilityResult, CostEstimate (+10 more)
 
 ### Community 20 - "Community 20"
-Cohesion: 0.09
-Nodes (24): ABC, Capability, CapabilityRequest, CapabilityResult, GuardError, GuardExecutionError, Backend execution failed., Base class for all GuardMCP errors. (+16 more)
+Cohesion: 0.08
+Nodes (33): ABC, Reusable conformance checks for GuardMCP DatabasePlugin implementations.  Third-, Capability, CapabilityRequest, CapabilityResult, CostEstimate, CostLevel, Query cost estimation — the FROZEN, backend-neutral public contract.  A plugin e (+25 more)
 
 ### Community 21 - "Community 21"
-Cohesion: 0.15
-Nodes (15): AuditLogger, Drain the queue, stop the flusher, flush+close the handle (R-2)., Single writer: batch all queued records into one write + one fsync., Return the _hmac of the last record on disk, or genesis if none., AuditRecord, Path, _expected_hmac(), Tests for the tamper-evident audit log (HMAC chain, restart seeding, fail-closed (+7 more)
+Cohesion: 0.13
+Nodes (12): AuditLogger, Drain the queue, stop the flusher, flush+close the handle (R-2)., Single writer: batch all queued records into one write + one fsync., Return the _hmac of the last record on disk, or genesis if none., AuditRecord, Path, Path, Seam conformance tests (Risks #4, #5, #7, #8).  These assert the shipped single- (+4 more)
 
 ### Community 22 - "Community 22"
-Cohesion: 0.13
-Nodes (14): PluginError, PluginVersionError, A filter value could not be coerced to a field's known BSON type.      Unlike a, Plugin registration/loading/version error., _check_version(), PluginRegistry, Raise PluginVersionError if the plugin's api_version major != CORE_API_MAJOR., Registry of DatabasePlugin classes keyed by their declared ``name``. (+6 more)
+Cohesion: 0.24
+Nodes (9): PluginError, PluginVersionError, A filter value could not be coerced to a field's known BSON type.      Unlike a, Plugin registration/loading/version error., _check_version(), Raise PluginVersionError if the plugin's api_version major != CORE_API_MAJOR., Register a plugin class after validating its API version., Instantiate a registered plugin by name. (+1 more)
 
 ### Community 23 - "Community 23"
 Cohesion: 0.14
-Nodes (17): GuardMCP plugin conformance kit.  Reusable contract checks that any :class:`~gua, assert_plugin_conformant(), check_plugin_conformance(), _pick_probe_capability(), Reusable conformance checks for GuardMCP DatabasePlugin implementations.  Third-, Strict variant: raise AssertionError listing all conformance failures.      Empt, Return a list of conformance failure strings (empty == conformant).      Args:, Conformance tests for the three builtin GuardMCP plugins.  These prove both (a) (+9 more)
+Nodes (16): GuardMCP plugin conformance kit.  Reusable contract checks that any :class:`~gua, assert_plugin_conformant(), check_plugin_conformance(), _pick_probe_capability(), Strict variant: raise AssertionError listing all conformance failures.      Empt, Return a list of conformance failure strings (empty == conformant).      Args:, Conformance tests for the three builtin GuardMCP plugins.  These prove both (a), SQL-style plugins must reject an injection-style resource identifier. (+8 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.14
-Nodes (29): _build_parser(), _builtin_registry(), _check_h1(), _cmd_audit_verify(), _cmd_capability_inspect(), _cmd_config_validate(), _cmd_doctor(), _cmd_plugin_list() (+21 more)
+Cohesion: 0.16
+Nodes (26): _builtin_registry(), _check_h1(), _cmd_audit_verify(), _cmd_capability_inspect(), _cmd_config_validate(), _cmd_doctor(), _cmd_plugin_list(), _cmd_plugin_validate() (+18 more)
 
 ### Community 25 - "Community 25"
 Cohesion: 0.13
 Nodes (14): Audit log, CLI / operations, Configuration, Development, Features (overview), GuardMCP, License, MCP tools (44) (+6 more)
 
 ### Community 26 - "Community 26"
-Cohesion: 0.12
-Nodes (30): _build_pipeline(), _descend(), _mock_client(), _nest(), Adversarial / user-centric behavior tests (scenarios that the YAML eval framewor, Control: a masked field within the depth limit IS masked., EC-3 FIXED: a masked field nested at depth 12 (was > old _MAX_DEPTH==10)     is, EC-3 FIXED: same, via the ResultTransformer (find/aggregate path). (+22 more)
+Cohesion: 0.10
+Nodes (34): _build_pipeline(), _descend(), _mock_client(), _nest(), Adversarial / user-centric behavior tests (scenarios that the YAML eval framewor, Control: a masked field within the depth limit IS masked., EC-3 FIXED: a masked field nested at depth 12 (was > old _MAX_DEPTH==10)     is, EC-3 FIXED: same, via the ResultTransformer (find/aggregate path). (+26 more)
 
 ### Community 28 - "Community 28"
-Cohesion: 0.13
-Nodes (12): PrincipalResolver, Principal (agent identity) resolution seam (Risk #7).  The runtime currently obt, Resolve the authenticated agent id for a request.      `transport_hint` carries, Default resolver: always returns the operator-configured agent id.      Preserve, StaticPrincipalResolver, Path, Seam conformance tests (Risks #4, #5, #7, #8).  These assert the shipped single-, test_audit_logger_satisfies_protocol() (+4 more)
+Cohesion: 0.20
+Nodes (6): PrincipalResolver, Principal (agent identity) resolution seam (Risk #7).  The runtime currently obt, Resolve the authenticated agent id for a request.      `transport_hint` carries, Default resolver: always returns the operator-configured agent id.      Preserve, StaticPrincipalResolver, test_static_principal_resolver_returns_configured_agent()
 
 ### Community 29 - "Community 29"
-Cohesion: 0.14
-Nodes (21): apply_mask(), build_type_map(), MongoSchemaCache — collaborator owning the schema-cache + type-map group.  Extra, _canonical_bson_type(), infer_schema(), Schema inference from sampled MongoDB documents. Returns a simplified type map:, Replace type of masked fields with 'masked' so AI knows the field exists but can, Map a RAW bson/python value to a canonical BSON type token.      Tokens: objectI (+13 more)
+Cohesion: 0.12
+Nodes (12): MongoClient, apply_mask(), build_type_map(), MongoSchemaCache — collaborator owning the schema-cache + type-map group.  Extra, _canonical_bson_type(), Schema inference from sampled MongoDB documents. Returns a simplified type map:, Replace type of masked fields with 'masked' so AI knows the field exists but can, Map a RAW bson/python value to a canonical BSON type token.      Tokens: objectI (+4 more)
 
 ### Community 30 - "Community 30"
 Cohesion: 0.14
@@ -283,8 +276,8 @@ Cohesion: 0.12
 Nodes (5): _MinimalPlugin, Tests for the additive data-model fields and seams (Risks #1, #2, #10)., Concrete plugin overriding only the abstract methods — exercises the     default, test_database_plugin_begin_returns_none_by_default(), test_database_plugin_default_transaction_seam()
 
 ### Community 32 - "Community 32"
-Cohesion: 0.20
-Nodes (13): ConnectionRegistry, _factory(), _FakeClient, Backend-agnostic stub satisfying the ClosableClient protocol., _reg(), test_close_all_closes_clients(), test_default_active_is_default(), test_get_returns_entry() (+5 more)
+Cohesion: 0.27
+Nodes (10): infer_schema(), Infer field types from a sample of documents.     Returns {field: type} or {fiel, test_apply_mask_empty_list(), test_apply_mask_hides_type(), test_infer_basic_types(), test_infer_empty_docs(), test_infer_merges_fields_across_docs(), test_infer_mixed_types() (+2 more)
 
 ### Community 33 - "Community 33"
 Cohesion: 0.17
@@ -295,12 +288,12 @@ Cohesion: 0.11
 Nodes (18): `api_version` and `CORE_API_MAJOR`, Architecture in one paragraph, CapabilityRequest shape, CapabilityResult examples, CapabilityResult mapping, Deprecation policy, Error handling, Internal — may change without notice (+10 more)
 
 ### Community 36 - "Community 36"
-Cohesion: 0.13
-Nodes (9): ApprovalStoreProtocol, AuditSinkProtocol, Durable surface for approval-request lifecycle.      A distributed impl (e.g. Re, Durable-write surface for the audit trail.      The shipped AuditLogger writes a, Protocol, ClosableClient, Minimal contract a connection client must satisfy., Any (+1 more)
+Cohesion: 0.10
+Nodes (11): ApprovalStoreProtocol, AuditSinkProtocol, RateLimiterProtocol, Durable surface for approval-request lifecycle.      A distributed impl (e.g. Re, Per-agent admission control.      A distributed impl (shared token bucket in Red, Durable-write surface for the audit trail.      The shipped AuditLogger writes a, Protocol, ClosableClient (+3 more)
 
 ### Community 37 - "Community 37"
-Cohesion: 0.17
-Nodes (16): _asyncpg_dsn(), mongo_container(), mysql_container(), _mysql_plugin(), pg_container(), _pg_plugin(), Live-backend integration tests (testcontainers).  These tests prove the real dri, Build a real GuardPipeline over the live PG plugin via     CapabilityExecutorAda (+8 more)
+Cohesion: 0.07
+Nodes (34): ClientFactory, _asyncpg_dsn(), mongo_container(), mysql_container(), _mysql_plugin(), pg_container(), _pg_plugin(), Live-backend integration tests (testcontainers).  These tests prove the real dri (+26 more)
 
 ### Community 38 - "Community 38"
 Cohesion: 0.22
@@ -311,32 +304,36 @@ Cohesion: 0.22
 Nodes (4): Fix 7: reject pipelines containing write or JS-execution stages.     Fix 8: erro, validate_pipeline_stages(), TestValidatePipelineStages, TestValidatePipelineStages
 
 ### Community 40 - "Community 40"
-Cohesion: 0.41
-Nodes (16): CollectionPolicy, Policy, _call(), _client(), _pipeline(), _pol_dict(), Tests for guardmcp_simulate_policy (Feature 3). Verifies decision flips, the hum, test_current_defaults_to_loaded_policy() (+8 more)
+Cohesion: 0.22
+Nodes (5): PluginRegistry, Registry of DatabasePlugin classes keyed by their declared ``name``., Discover plugins advertised via the ``guardmcp.plugins`` entry-point group., #7: return a registered plugin's manifest from its CLASS, WITHOUT         instan, #7: manifests for every registered plugin, keyed by name. Read from         clas
 
 ### Community 41 - "Community 41"
 Cohesion: 0.16
 Nodes (8): _CountingCollection, _FakeClient, S-8: writes get a single attempt; reads get retried on transient errors., Minimal collection that raises AutoReconnect, counting each attempt., Same property, but isolated at the _execute_once boundary., test_execute_once_call_counts_via_monkeypatch(), test_read_action_retries_max_retries_plus_one(), test_write_action_attempted_exactly_once()
 
+### Community 42 - "Community 42"
+Cohesion: 0.33
+Nodes (9): _expected_hmac(), Tests for the tamper-evident audit log (HMAC chain, restart seeding, fail-closed, _read_records(), test_chain_seeds_across_restart(), test_chain_verifies(), test_fail_closed_raises_on_write_failure(), test_fail_open_does_not_raise(), test_hmac_absent_when_no_secret() (+1 more)
+
 ### Community 43 - "Community 43"
-Cohesion: 0.14
-Nodes (21): Policy-introspection tools: guardmcp_explain_policy + guardmcp_simulate_policy., register(), build_explanation(), build_policy_from_input(), classify_impact(), diff_policies(), _effective_mask_map(), MatchedRule (+13 more)
+Cohesion: 0.22
+Nodes (7): ErrorCode, _infer_denied_code(), Map a pipeline 'denied' reason string to a specific ErrorCode., _FakeManager, _register_into_fake(), test_annotations_applied_or_skipped(), test_both_db_and_mongodb_names_registered()
 
 ### Community 44 - "Community 44"
 Cohesion: 0.13
-Nodes (8): DatabasePlugin, CapabilityRequest, CapabilityResult, _FakePlugin, test_capability_request_roundtrip(), test_capability_result_roundtrip(), test_concrete_plugin_instantiates(), test_database_plugin_is_abstract()
+Nodes (7): DatabasePlugin, CapabilityRequest, _FakePlugin, test_capability_request_roundtrip(), test_capability_result_roundtrip(), test_concrete_plugin_instantiates(), test_database_plugin_is_abstract()
 
 ### Community 45 - "Community 45"
-Cohesion: 0.13
-Nodes (23): Outcome of verifying an audit-log file., 0 only when the whole chain verifies; distinct codes otherwise., A single human-readable summary line (success OR failure).          Used by ``gu, Recompute the HMAC chain from genesis and verify each record's ``_hmac``.      R, verify_chain(), VerifyResult, Path, Tests for ``guardmcp audit verify`` + the underlying ``verify_chain``.  Builds a (+15 more)
+Cohesion: 0.11
+Nodes (26): Offline verification of the tamper-evident audit HMAC chain.  This shares ONE im, HMAC-SHA256 of ``prev_hash + base_line`` → hex digest.      Identical math to ``, Outcome of verifying an audit-log file., 0 only when the whole chain verifies; distinct codes otherwise., A single human-readable summary line (success OR failure).          Used by ``gu, Recompute the HMAC chain from genesis and verify each record's ``_hmac``.      R, sign_record(), verify_chain() (+18 more)
 
 ### Community 46 - "Community 46"
-Cohesion: 0.16
-Nodes (22): _call(), _FakeManager, _get_tool(), _make_client(), Tests for the MCP tool-design overhaul: dual names, envelopes, plan, capabilitie, Register real tools into a FastMCP and fetch the callable for `name`., A readonly policy exposes only read actions (engine-derived)., Engine-consistency: a temporally-expired policy → evaluate() DENIES every     ac (+14 more)
+Cohesion: 0.22
+Nodes (19): _call(), _get_tool(), _make_client(), Tests for the MCP tool-design overhaul: dual names, envelopes, plan, capabilitie, Register real tools into a FastMCP and fetch the callable for `name`., A readonly policy exposes only read actions (engine-derived)., Engine-consistency: a temporally-expired policy → evaluate() DENIES every     ac, No-policy branch: top-level keys present, mode null, collections empty. (+11 more)
 
 ### Community 47 - "Community 47"
-Cohesion: 0.20
-Nodes (6): Backend Protocol — INTERNAL execution interface consumed by GuardPipeline.  NOT, RateLimiterProtocol, Governance-state seams (Risk #4).  These are the seams for distributed backends, Per-agent admission control.      A distributed impl (shared token bucket in Red, Decision, Single-source-of-truth evaluation trace.  A `PolicyTrace` is an OPTIONAL recorde
+Cohesion: 0.13
+Nodes (26): AuditLogger, Enum, ExpectedDecision, _Loader, Backend, Backend Protocol — INTERNAL execution interface consumed by GuardPipeline.  NOT, Formal interface for GuardMCP database backends., Return all collection/table names in the active database. (+18 more)
 
 ### Community 48 - "Community 48"
 Cohesion: 0.24
@@ -347,12 +344,12 @@ Cohesion: 0.20
 Nodes (7): True for transient network/connection errors worth retrying., Backend-specific error sanitization (delegated to by core pipeline)., Fix 6: return a generic, actionable message instead of raw MongoDB internals., sanitize_mongo_error(), Exception, Exception, TestSanitizeMongoError
 
 ### Community 50 - "Community 50"
-Cohesion: 0.24
-Nodes (7): A backend whose supported set excludes AGGREGATE makes _capability_check     ret, test_ag5_unsupported_capability_returns_envelope(), test_unsupported_capability_helper(), #7: capability manifests read from plugin CLASSES without instantiation or conne, _registry(), test_registry_manifest_single(), test_registry_manifests_no_instantiation()
+Cohesion: 0.32
+Nodes (5): test_unsupported_capability_helper(), #7: capability manifests read from plugin CLASSES without instantiation or conne, _registry(), test_registry_manifest_single(), test_registry_manifests_no_instantiation()
 
 ### Community 51 - "Community 51"
-Cohesion: 0.16
-Nodes (10): Backend, Formal interface for GuardMCP database backends., Execute an action against the backend. Raises ValueError for unsupported actions, Return all collection/table names in the active database., Infer field types from a sample of documents. Masked fields shown as 'masked'., Return index metadata for the collection., Return database names and sizes., Raise ValueError if filter has no covering index and enforcement is enabled. (+2 more)
+Cohesion: 0.17
+Nodes (7): Execute an action against the backend. Raises ValueError for unsupported actions, Infer field types from a sample of documents. Masked fields shown as 'masked'., Return index metadata for the collection., Return database names and sizes., Raise ValueError if filter has no covering index and enforcement is enabled., Action, Any
 
 ### Community 52 - "Community 52"
 Cohesion: 0.31
@@ -367,8 +364,8 @@ Cohesion: 0.18
 Nodes (10): _FakeConn, _FakePool, test_ddl_create_via_execute_path_rejected(), test_execute_count_sets_scalar(), test_execute_insert_reports_affected(), test_execute_read_returns_rows(), test_execute_validates_before_touching_pool(), test_health_true_on_success() (+2 more)
 
 ### Community 56 - "Community 56"
-Cohesion: 0.33
-Nodes (7): _build_pipeline(), Minimal registry: every switch to a known name succeeds., _read_audit(), _StubRegistry, test_empty_allowlist_permits_all(), test_switch_allowed_when_in_allowlist(), test_switch_denied_when_not_in_allowlist()
+Cohesion: 0.39
+Nodes (8): _doc(), #10: first-class dotted mask paths — "contact.email" is path-specific while a ba, test_bare_name_masks_any_depth_backcompat(), test_dotted_path_is_specific(), test_mixed_bare_and_dotted(), test_per_collection_dict_with_dotted(), test_transformer_bare_backcompat(), test_transformer_dotted_path_specific()
 
 ### Community 57 - "Community 57"
 Cohesion: 0.23
@@ -404,7 +401,7 @@ Nodes (3): audit_logger(), mock_mongo_client(), Mongomock-based client — no re
 
 ### Community 65 - "Community 65"
 Cohesion: 0.21
-Nodes (15): _mysql_first_table(), normalize_mysql_explain(), normalize_postgres_explain(), _pg_top_plan(), Shared SQL cost normalization for the relational plugins.  Postgres (``EXPLAIN (, Locate the primary table node in a MySQL EXPLAIN query_block.      MySQL nests t, Normalize a Postgres ``EXPLAIN (FORMAT JSON)`` payload → CostEstimate.      The, Normalize a MySQL ``EXPLAIN FORMAT=JSON`` payload → CostEstimate.      Reads ``q (+7 more)
+Nodes (14): _mysql_first_table(), normalize_mysql_explain(), normalize_postgres_explain(), _pg_top_plan(), Locate the primary table node in a MySQL EXPLAIN query_block.      MySQL nests t, Normalize a Postgres ``EXPLAIN (FORMAT JSON)`` payload → CostEstimate.      The, Normalize a MySQL ``EXPLAIN FORMAT=JSON`` payload → CostEstimate.      Reads ``q, _scan_warning() (+6 more)
 
 ### Community 66 - "Community 66"
 Cohesion: 0.25
@@ -455,8 +452,8 @@ Cohesion: 0.23
 Nodes (19): build(), _patch_mongo_factory(), _pipeline_with_registry(), Multi-backend CONNECTION lifecycle / use-case coverage.  These tests exercise EV, Replace MongoClient (used by build()'s _mongo_client_factory) with a     mongomo, _read_audit(), _settings(), _StubRegistry (+11 more)
 
 ### Community 106 - "Community 106"
-Cohesion: 0.19
-Nodes (5): ClientFactory, ConnectionEntry, ConnectionRegistry, Switch active connection. Returns False if name not registered., test_active_connection_isolated_across_contexts()
+Cohesion: 0.25
+Nodes (8): classify_cost(), Map normalized signals → a single coarse CostLevel.      Rules (in order):, test_classify_collection_scan_is_high(), test_classify_collection_scan_large_is_critical(), test_classify_indexed_large_is_high(), test_classify_indexed_medium_volume(), test_classify_indexed_small_is_low(), test_classify_no_signal_is_unknown()
 
 ### Community 107 - "Community 107"
 Cohesion: 0.22
@@ -467,8 +464,8 @@ Cohesion: 0.24
 Nodes (7): Shared SQL translation core for relational plugins (PostgreSQL, MySQL, ...).  Th, Dialect, Dialect-parameterized, PURE translation: CapabilityRequest -> (sql, args).  This, Validate a (possibly schema-qualified) identifier; return its parts.      Each d, Captures the per-backend deltas the shared translator needs.      ``name`` is us, validate_ident(), test_validate_ident_returns_parts()
 
 ### Community 109 - "Community 109"
-Cohesion: 0.15
-Nodes (19): Enum, ExpectedDecision, CostEstimate, CostLevel, Query cost estimation — the FROZEN, backend-neutral public contract.  A plugin e, Normalized, backend-neutral cost estimate.      FROZEN public contract: this is, ErrorCode, Canonical machine-readable error codes.      This is a CORE concept: policy/pipe (+11 more)
+Cohesion: 0.31
+Nodes (9): _execution_stats(), normalize_mongo_explain(), _plan_stages(), Return the winningPlan, tolerating both find and aggregate shapes., Flatten the (possibly nested) winningPlan into its stage names., Normalize a raw Mongo explain(executionStats) dict → CostEstimate.      Extracts, _winning_plan(), Any (+1 more)
 
 ### Community 111 - "Community 111"
 Cohesion: 0.19
@@ -486,17 +483,9 @@ Nodes (9): Deterministic assertion engine for GuardMCP evals.  Checks actual pip
 Cohesion: 0.26
 Nodes (11): new_trace_id(), parse_traceparent(), Parse a W3C `traceparent` header and return its 32-hex trace-id, or None     if, Set the current trace id and return it.      #9: when a valid inbound W3C `trace, #9: W3C traceparent parsing, continuation, and round-trip., test_current_traceparent_round_trips(), test_new_trace_id_continues_incoming(), test_new_trace_id_mints_fresh_on_bad_incoming() (+3 more)
 
-### Community 116 - "Community 116"
-Cohesion: 0.33
-Nodes (3): Effective mask fields for a collection. Flat list → global (same list         fo, Cached single-pass field-allow + mask transformer (H3/M1)., Cached mask-only masker for audit-param scrubbing + explain (M1).
-
 ### Community 117 - "Community 117"
 Cohesion: 0.13
 Nodes (12): MySQLPlugin, Map cursor rows to dicts.          aiomysql's default cursor returns tuples; we, EXPLAIN FORMAT=JSON returns one row with the JSON plan in its single         col, Any, test_aggregate_and_ddl_not_supported(), test_cross_resource_refs_default_empty(), test_cross_resource_refs_from_joins_option(), test_health_false_without_pool() (+4 more)
-
-### Community 118 - "Community 118"
-Cohesion: 0.14
-Nodes (12): _coerce_none_sentinels(), _parse_json_or_pass(), Database-agnostic grounding/security helpers.  MongoDB-specific validation (oper, Coerce a JSON-encoded string to dict/list. Non-strings pass through., Map '', 'null', 'none', 'undefined' → None for optional dict params., guardmcp_setup — interactive policy setup wizard (survey + YAML writer)., register(), Any (+4 more)
 
 ### Community 119 - "Community 119"
 Cohesion: 0.43
@@ -510,25 +499,13 @@ Nodes (14): ConnectionConfig, _build_plugin_registry(), Composition layer: regis
 Cohesion: 0.13
 Nodes (14): A. pip (local / stdio — Claude Desktop, Cursor, …), Audit & logging, B. Docker (server mode — SSE / streamable-http), C. Backends (PostgreSQL / MySQL) {#backends}, Checklist before production, CLI / operations, Configuration {#configuration}, Core (+6 more)
 
-### Community 122 - "Community 122"
-Cohesion: 0.12
-Nodes (15): _merge(), _merge_mask_fields(), PolicyLoader, Sorted list of *.yaml/*.yml files when _path is a directory.          Sorting ma, Apply the SAME doc shape parsing (list / {agents:[...]} / single)., Order-preserving union of two string lists (base first, child appended)., Max mtime to watch. For a directory: the dir's own mtime (catches         add/re, Load (or reload) policies from disk. Called at startup and by hot-reload. (+7 more)
-
 ### Community 123 - "Community 123"
 Cohesion: 0.21
 Nodes (10): Tests for the top-level CLI dispatcher in ``guardmcp.cli``.  Verifies the routin, _run(), test_audit_verify_routes_to_handler(), test_capability_inspect_mongodb(), test_capability_inspect_unknown_type_errors(), test_doctor_routes_to_handler(), test_missing_required_subcommand_errors(), test_policy_lint_routes_to_handler() (+2 more)
 
 ### Community 124 - "Community 124"
-Cohesion: 0.21
-Nodes (13): ArgumentParser, BaseSettings, Settings, AppContext, Start the GuardMCP server (the original entry-point behavior).      This is the, _run_with_approval_api(), serve_main(), Settings (+5 more)
-
-### Community 125 - "Community 125"
-Cohesion: 0.31
-Nodes (16): GuardPipeline, Path, Policy, _base(), _call(), _client(), _pipeline(), Tests for guardmcp_explain_policy (Feature 2). Drives the REAL tool through a Fa (+8 more)
-
-### Community 126 - "Community 126"
-Cohesion: 0.45
-Nodes (12): PolicyTrace, _matched(), _policy(), Tests for the single-source-of-truth evaluation trace.  Verifies the engine reco, Same Decision with and without a trace, across every rule outcome., _request(), test_action_deny_records_step(), test_allowed_records_default_allow() (+4 more)
+Cohesion: 0.18
+Nodes (16): ArgumentParser, BaseSettings, _build_parser(), main(), Dispatch a subcommand, or fall through to the server.      Backward compat: only, Settings, AppContext, Start the GuardMCP server (the original entry-point behavior).      This is the (+8 more)
 
 ### Community 127 - "Community 127"
 Cohesion: 0.27
@@ -537,10 +514,6 @@ Nodes (4): Estimate a READ/COUNT via ``EXPLAIN FORMAT=JSON <sql>`` (plan only �
 ### Community 128 - "Community 128"
 Cohesion: 0.24
 Nodes (10): _FakePool, test_ddl_create_via_execute_path_rejected(), test_execute_count_sets_scalar(), test_execute_insert_reports_affected_and_lastrowid(), test_execute_maps_tuple_rows_via_description(), test_execute_read_returns_rows(), test_execute_validates_before_touching_pool(), test_health_true_on_success() (+2 more)
-
-### Community 129 - "Community 129"
-Cohesion: 0.22
-Nodes (6): ApprovalStore, Remove resolved approvals older than max_age_seconds. Returns count pruned., Deny all pending approvals immediately and signal their events.         Call on, ApprovalRequest, GuardPipeline, Path
 
 ### Community 131 - "Community 131"
 Cohesion: 0.53
@@ -551,12 +524,12 @@ Cohesion: 0.31
 Nodes (9): clean_env(), Tests for ``guardmcp doctor`` and ``guardmcp config validate``.  A valid config, Drop any GUARDMCP_* env the host set; give a writable audit path + policy., _run(), test_config_validate_h1_satisfied_by_token(), test_config_validate_h1_violation_fails(), test_config_validate_valid_exit_0(), test_doctor_h1_violation_fails() (+1 more)
 
 ### Community 133 - "Community 133"
-Cohesion: 0.13
-Nodes (19): build_approval_app(), DecisionPayload, Build the approval REST API.      When api_token is set, all requests must inclu, ApprovalRequest, FastAPI, ReadinessProbe, ApprovalStore, Any (+11 more)
+Cohesion: 0.06
+Nodes (47): build_approval_app(), DecisionPayload, Build the approval REST API.      When api_token is set, all requests must inclu, ApprovalRequest, ApprovalStore, Remove resolved approvals older than max_age_seconds. Returns count pruned., Deny all pending approvals immediately and signal their events.         Call on, ApprovalRequest (+39 more)
 
 ### Community 134 - "Community 134"
-Cohesion: 0.12
-Nodes (12): AuditWriteError, Tamper-evident audit log (per-process HMAC chain).  Risk #5 — multi-writer attri, P-1: open the append handle once and reuse it across log() calls., Sign (ordered), write all lines, ONE flush, then resolve futures.         Chain, Raised when an audit record cannot be persisted and fail_closed is set., HMAC-SHA256 of (prev_hash + line). Returns hex digest.          Delegates to the, Offline verification of the tamper-evident audit HMAC chain.  This shares ONE im, HMAC-SHA256 of ``prev_hash + base_line`` → hex digest.      Identical math to `` (+4 more)
+Cohesion: 0.22
+Nodes (6): AuditWriteError, P-1: open the append handle once and reuse it across log() calls., Sign (ordered), write all lines, ONE flush, then resolve futures.         Chain, Raised when an audit record cannot be persisted and fail_closed is set., HMAC-SHA256 of (prev_hash + line). Returns hex digest.          Delegates to the, Exception
 
 ### Community 135 - "Community 135"
 Cohesion: 0.50
@@ -575,23 +548,23 @@ Cohesion: 0.67
 Nodes (3): register(), FastMCP, ToolContext
 
 ### Community 141 - "Community 141"
-Cohesion: 0.33
-Nodes (5): Each test starts and ends on the default active connection so a switch in     on, _reset_active_connection(), Connection registry for switch-connection support. Each named connection maps to, Reset the active connection for the CURRENT context back to the default.      On, reset_active()
+Cohesion: 0.50
+Nodes (4): Each test starts and ends on the default active connection so a switch in     on, _reset_active_connection(), Reset the active connection for the CURRENT context back to the default.      On, reset_active()
 
 ## Knowledge Gaps
 - **152 isolated node(s):** `ApprovalStore`, `ReadinessProbe`, `Any`, `Capability`, `Path` (+147 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **15 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **13 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `MongoExecutor` connect `Community 15` to `Community 0`, `Community 129`, `Community 9`, `Community 18`, `Community 20`, `Community 26`, `Community 29`, `Community 40`, `Community 41`, `Community 42`, `Community 46`, `Community 49`, `Community 63`, `Community 67`, `Community 68`, `Community 105`, `Community 107`, `Community 109`, `Community 124`, `Community 125`?**
-  _High betweenness centrality (0.078) - this node is a cross-community bridge._
-- **Why does `AuditLogger` connect `Community 21` to `Community 0`, `Community 64`, `Community 129`, `Community 131`, `Community 37`, `Community 134`, `Community 6`, `Community 40`, `Community 9`, `Community 105`, `Community 7`, `Community 10`, `Community 28`, `Community 46`, `Community 56`, `Community 26`, `Community 124`, `Community 125`?**
-  _High betweenness centrality (0.074) - this node is a cross-community bridge._
-- **Why does `CapabilityRequest` connect `Community 20` to `Community 128`, `Community 4`, `Community 6`, `Community 11`, `Community 108`, `Community 13`, `Community 109`, `Community 47`, `Community 44`, `Community 112`, `Community 16`, `Community 140`, `Community 80`, `Community 53`, `Community 55`, `Community 23`, `Community 54`, `Community 31`?**
-  _High betweenness centrality (0.066) - this node is a cross-community bridge._
+- **Why does `AuditLogger` connect `Community 21` to `Community 0`, `Community 131`, `Community 4`, `Community 133`, `Community 134`, `Community 6`, `Community 7`, `Community 9`, `Community 10`, `Community 14`, `Community 26`, `Community 37`, `Community 42`, `Community 43`, `Community 46`, `Community 47`, `Community 64`, `Community 105`, `Community 124`?**
+  _High betweenness centrality (0.083) - this node is a cross-community bridge._
+- **Why does `MongoExecutor` connect `Community 15` to `Community 67`, `Community 68`, `Community 133`, `Community 9`, `Community 105`, `Community 107`, `Community 43`, `Community 41`, `Community 14`, `Community 47`, `Community 49`, `Community 18`, `Community 20`, `Community 26`, `Community 124`, `Community 29`, `Community 63`?**
+  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+- **Why does `CapabilityRequest` connect `Community 20` to `Community 128`, `Community 3`, `Community 6`, `Community 11`, `Community 108`, `Community 13`, `Community 44`, `Community 47`, `Community 112`, `Community 110`, `Community 18`, `Community 140`, `Community 80`, `Community 53`, `Community 55`, `Community 23`, `Community 54`, `Community 31`?**
+  _High betweenness centrality (0.064) - this node is a cross-community bridge._
 - **Are the 24 inferred relationships involving `MongoExecutor` (e.g. with `AuditLogger` and `_Loader`) actually correct?**
   _`MongoExecutor` has 24 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 48 inferred relationships involving `AuditLogger` (e.g. with `AuditLogger` and `_Loader`) actually correct?**

@@ -65,6 +65,12 @@ class Settings(BaseSettings):
     # REFUSES to start in those transports unless a token is set OR this flag is
     # explicitly True. stdio is unaffected (no port is opened).
 
+    # DNS-rebinding protection: Host-header allow-list for the networked approval
+    # API. Empty (default) → __main__ derives a safe default (configured host +
+    # loopback). Set GUARDMCP_ALLOWED_HOSTS (JSON list) to add proxy/ingress
+    # hostnames. ["*"] disables the check (only behind a trusted proxy).
+    allowed_hosts: list[str] = []
+
     # Extra named connections: GUARDMCP_EXTRA_CONNECTIONS__staging=mongodb://stg:27017/db
     extra_connections: dict[str, str] = {}
 

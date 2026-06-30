@@ -107,7 +107,7 @@
       "label": "_run_with_approval_api()",
       "file_type": "code",
       "source_file": "src/guardmcp/__main__.py",
-      "source_location": "L280",
+      "source_location": "L286",
       "_origin": "ast",
       "id": "guardmcp_main_run_with_approval_api",
       "community": 124,
@@ -117,7 +117,7 @@
       "label": "serve_main()",
       "file_type": "code",
       "source_file": "src/guardmcp/__main__.py",
-      "source_location": "L304",
+      "source_location": "L310",
       "_origin": "ast",
       "id": "guardmcp_main_serve_main",
       "community": 124,
@@ -147,9 +147,9 @@
       "label": "Start the GuardMCP server (the original entry-point behavior).      This is the",
       "file_type": "rationale",
       "source_file": "src/guardmcp/__main__.py",
-      "source_location": "L305",
+      "source_location": "L311",
       "_origin": "ast",
-      "id": "guardmcp_main_rationale_305",
+      "id": "guardmcp_main_rationale_311",
       "community": 124,
       "norm_label": "start the guardmcp server (the original entry-point behavior).      this is the"
     },
@@ -237,9 +237,9 @@
       "label": "Build the approval REST API.      When api_token is set, all requests must inclu",
       "file_type": "rationale",
       "source_file": "src/guardmcp/api/approval.py",
-      "source_location": "L25",
+      "source_location": "L26",
       "_origin": "ast",
-      "id": "api_approval_rationale_25",
+      "id": "api_approval_rationale_26",
       "community": 133,
       "norm_label": "build the approval rest api.      when api_token is set, all requests must inclu"
     },
@@ -420,7 +420,7 @@
       "source_location": "L488",
       "_origin": "ast",
       "id": "guardmcp_cli_build_parser",
-      "community": 24,
+      "community": 124,
       "norm_label": "_build_parser()"
     },
     {
@@ -450,7 +450,7 @@
       "source_location": "L593",
       "_origin": "ast",
       "id": "guardmcp_cli_main",
-      "community": 24,
+      "community": 124,
       "norm_label": "main()"
     },
     {
@@ -520,7 +520,7 @@
       "source_location": "L594",
       "_origin": "ast",
       "id": "guardmcp_cli_rationale_594",
-      "community": 24,
+      "community": 124,
       "norm_label": "dispatch a subcommand, or fall through to the server.      backward compat: only"
     },
     {
@@ -590,7 +590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "conformance_plugin_conformance",
-      "community": 23,
+      "community": 20,
       "norm_label": "plugin_conformance.py"
     },
     {
@@ -660,7 +660,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "conformance_plugin_conformance_rationale_1",
-      "community": 23,
+      "community": 20,
       "norm_label": "reusable conformance checks for guardmcp databaseplugin implementations.  third-"
     },
     {
@@ -740,7 +740,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "approval_store_approvalstore",
-      "community": 129,
+      "community": 133,
       "norm_label": "approvalstore"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "approval_store_approvalstore_init",
-      "community": 129,
+      "community": 133,
       "norm_label": ".__init__()"
     },
     {
@@ -790,7 +790,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "approvalrequest",
-      "community": 129,
+      "community": 133,
       "norm_label": "approvalrequest"
     },
     {
@@ -800,7 +800,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "approval_store_approvalstore_get",
-      "community": 129,
+      "community": 133,
       "norm_label": ".get()"
     },
     {
@@ -810,7 +810,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "approval_store_approvalstore_list_pending",
-      "community": 129,
+      "community": 133,
       "norm_label": ".list_pending()"
     },
     {
@@ -820,7 +820,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "approval_store_approvalstore_resolve",
-      "community": 129,
+      "community": 133,
       "norm_label": ".resolve()"
     },
     {
@@ -830,7 +830,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "approval_store_approvalstore_prune",
-      "community": 129,
+      "community": 133,
       "norm_label": ".prune()"
     },
     {
@@ -840,7 +840,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "approval_store_approvalstore_shutdown",
-      "community": 129,
+      "community": 133,
       "norm_label": ".shutdown()"
     },
     {
@@ -850,7 +850,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "approval_store_approvalstore_wait_for_decision",
-      "community": 129,
+      "community": 133,
       "norm_label": ".wait_for_decision()"
     },
     {
@@ -860,7 +860,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "approval_store_rationale_57",
-      "community": 129,
+      "community": 133,
       "norm_label": "remove resolved approvals older than max_age_seconds. returns count pruned."
     },
     {
@@ -870,7 +870,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "approval_store_rationale_72",
-      "community": 129,
+      "community": 133,
       "norm_label": "deny all pending approvals immediately and signal their events.         call on"
     },
     {
@@ -890,7 +890,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "audit_logger",
-      "community": 134,
+      "community": 10,
       "norm_label": "logger.py"
     },
     {
@@ -1050,7 +1050,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "audit_logger_rationale_1",
-      "community": 134,
+      "community": 10,
       "norm_label": "tamper-evident audit log (per-process hmac chain).  risk #5 \u2014 multi-writer attri"
     },
     {
@@ -1130,7 +1130,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "audit_verify",
-      "community": 134,
+      "community": 45,
       "norm_label": "verify.py"
     },
     {
@@ -1140,7 +1140,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "audit_verify_sign_record",
-      "community": 134,
+      "community": 45,
       "norm_label": "sign_record()"
     },
     {
@@ -1200,7 +1200,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "audit_verify_rationale_1",
-      "community": 134,
+      "community": 45,
       "norm_label": "offline verification of the tamper-evident audit hmac chain.  this shares one im"
     },
     {
@@ -1210,7 +1210,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "audit_verify_rationale_24",
-      "community": 134,
+      "community": 45,
       "norm_label": "hmac-sha256 of ``prev_hash + base_line`` \u2192 hex digest.      identical math to ``"
     },
     {
@@ -1280,7 +1280,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "interfaces_backend_backend",
-      "community": 51,
+      "community": 47,
       "norm_label": "backend"
     },
     {
@@ -1330,7 +1330,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "interfaces_backend_backend_list_collections",
-      "community": 51,
+      "community": 47,
       "norm_label": ".list_collections()"
     },
     {
@@ -1390,7 +1390,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "interfaces_backend_rationale_21",
-      "community": 51,
+      "community": 47,
       "norm_label": "formal interface for guardmcp database backends."
     },
     {
@@ -1410,7 +1410,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "interfaces_backend_rationale_28",
-      "community": 51,
+      "community": 47,
       "norm_label": "return all collection/table names in the active database."
     },
     {
@@ -1480,7 +1480,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "str",
-      "community": 109,
+      "community": 47,
       "norm_label": "str"
     },
     {
@@ -1490,7 +1490,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "enum",
-      "community": 109,
+      "community": 47,
       "norm_label": "enum"
     },
     {
@@ -1550,7 +1550,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "interfaces_cost",
-      "community": 109,
+      "community": 20,
       "norm_label": "cost.py"
     },
     {
@@ -1560,7 +1560,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "interfaces_cost_costlevel",
-      "community": 109,
+      "community": 20,
       "norm_label": "costlevel"
     },
     {
@@ -1570,7 +1570,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "interfaces_cost_costestimate",
-      "community": 109,
+      "community": 20,
       "norm_label": "costestimate"
     },
     {
@@ -1580,7 +1580,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "interfaces_cost_classify_cost",
-      "community": 16,
+      "community": 106,
       "norm_label": "classify_cost()"
     },
     {
@@ -1590,7 +1590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "interfaces_cost_rationale_1",
-      "community": 109,
+      "community": 20,
       "norm_label": "query cost estimation \u2014 the frozen, backend-neutral public contract.  a plugin e"
     },
     {
@@ -1600,7 +1600,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "interfaces_cost_rationale_33",
-      "community": 109,
+      "community": 20,
       "norm_label": "normalized, backend-neutral cost estimate.      frozen public contract: this is"
     },
     {
@@ -1610,7 +1610,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "interfaces_cost_rationale_67",
-      "community": 16,
+      "community": 106,
       "norm_label": "map normalized signals \u2192 a single coarse costlevel.      rules (in order):"
     },
     {
@@ -1690,7 +1690,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "interfaces_errors_errorcode",
-      "community": 109,
+      "community": 47,
       "norm_label": "errorcode"
     },
     {
@@ -1750,7 +1750,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "interfaces_errors_rationale_40",
-      "community": 109,
+      "community": 47,
       "norm_label": "canonical machine-readable error codes.      this is a core concept: policy/pipe"
     },
     {
@@ -2020,7 +2020,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_commit",
-      "community": 110,
+      "community": 20,
       "norm_label": ".commit()"
     },
     {
@@ -2080,7 +2080,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "interfaces_plugin_rationale_88",
-      "community": 110,
+      "community": 20,
       "norm_label": "commit the transaction identified by tx_id. no-op by default."
     },
     {
@@ -2210,7 +2210,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "interfaces_stores_ratelimiterprotocol",
-      "community": 47,
+      "community": 36,
       "norm_label": "ratelimiterprotocol"
     },
     {
@@ -2220,7 +2220,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "interfaces_stores_ratelimiterprotocol_enabled",
-      "community": 47,
+      "community": 36,
       "norm_label": ".enabled()"
     },
     {
@@ -2230,7 +2230,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "interfaces_stores_ratelimiterprotocol_check",
-      "community": 47,
+      "community": 36,
       "norm_label": ".check()"
     },
     {
@@ -2300,7 +2300,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "interfaces_stores_rationale_57",
-      "community": 47,
+      "community": 36,
       "norm_label": "per-agent admission control.      a distributed impl (shared token bucket in red"
     },
     {
@@ -2500,7 +2500,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "models_domain_action",
-      "community": 0,
+      "community": 47,
       "norm_label": "action"
     },
     {
@@ -2510,7 +2510,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "models_domain_risklevel",
-      "community": 0,
+      "community": 47,
       "norm_label": "risklevel"
     },
     {
@@ -2520,7 +2520,7 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "models_domain_decisionstatus",
-      "community": 0,
+      "community": 47,
       "norm_label": "decisionstatus"
     },
     {
@@ -2530,7 +2530,7 @@
       "source_location": "L90",
       "_origin": "ast",
       "id": "models_domain_request",
-      "community": 14,
+      "community": 47,
       "norm_label": "request"
     },
     {
@@ -2550,7 +2550,7 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "models_domain_auditrecord",
-      "community": 134,
+      "community": 4,
       "norm_label": "auditrecord"
     },
     {
@@ -3360,7 +3360,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "policy_engine_policyengine",
-      "community": 0,
+      "community": 47,
       "norm_label": "policyengine"
     },
     {
@@ -3430,7 +3430,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "policy_explain",
-      "community": 43,
+      "community": 13,
       "norm_label": "explain.py"
     },
     {
@@ -3440,7 +3440,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "policy_explain_matchedrule",
-      "community": 43,
+      "community": 13,
       "norm_label": "matchedrule"
     },
     {
@@ -3460,7 +3460,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "policy_explain_simulationimpact",
-      "community": 43,
+      "community": 13,
       "norm_label": "simulationimpact"
     },
     {
@@ -3480,7 +3480,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "policy_explain_build_explanation",
-      "community": 43,
+      "community": 13,
       "norm_label": "build_explanation()"
     },
     {
@@ -3500,7 +3500,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "policy_explain_build_policy_from_input",
-      "community": 43,
+      "community": 13,
       "norm_label": "build_policy_from_input()"
     },
     {
@@ -3520,7 +3520,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "src_guardmcp_core_policy_explain_py_policy",
-      "community": 43,
+      "community": 13,
       "norm_label": "policy"
     },
     {
@@ -3530,7 +3530,7 @@
       "source_location": "L135",
       "_origin": "ast",
       "id": "policy_explain_sorted",
-      "community": 43,
+      "community": 13,
       "norm_label": "_sorted()"
     },
     {
@@ -3540,7 +3540,7 @@
       "source_location": "L139",
       "_origin": "ast",
       "id": "policy_explain_diff_policies",
-      "community": 43,
+      "community": 13,
       "norm_label": "diff_policies()"
     },
     {
@@ -3550,7 +3550,7 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "policy_explain_effective_mask_map",
-      "community": 43,
+      "community": 13,
       "norm_label": "_effective_mask_map()"
     },
     {
@@ -3560,7 +3560,7 @@
       "source_location": "L233",
       "_origin": "ast",
       "id": "policy_explain_classify_impact",
-      "community": 43,
+      "community": 13,
       "norm_label": "classify_impact()"
     },
     {
@@ -3570,7 +3570,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "policy_explain_rationale_1",
-      "community": 43,
+      "community": 13,
       "norm_label": "public, frozen output models + helpers for the policy explain and simulate mcp t"
     },
     {
@@ -3600,7 +3600,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "policy_explain_rationale_71",
-      "community": 43,
+      "community": 13,
       "norm_label": "build a policyexplanation from a decision + the trace the engine filled.      pu"
     },
     {
@@ -3610,7 +3610,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "policy_explain_rationale_96",
-      "community": 43,
+      "community": 13,
       "norm_label": "build a fully-resolved policy from a dict or yaml string.      reuses the loader"
     },
     {
@@ -3620,7 +3620,7 @@
       "source_location": "L140",
       "_origin": "ast",
       "id": "policy_explain_rationale_140",
-      "community": 43,
+      "community": 13,
       "norm_label": "human-readable diffs between two policy objects (no decision logic)."
     },
     {
@@ -3630,7 +3630,7 @@
       "source_location": "L210",
       "_origin": "ast",
       "id": "policy_explain_rationale_210",
-      "community": 43,
+      "community": 13,
       "norm_label": "normalize mask_fields to a {collection: [fields]} map. flat list -> {\"*\": ...}."
     },
     {
@@ -3640,7 +3640,7 @@
       "source_location": "L234",
       "_origin": "ast",
       "id": "policy_explain_rationale_234",
-      "community": 43,
+      "community": 13,
       "norm_label": "heuristic security rating from the human-readable diffs.      high if any change"
     },
     {
@@ -3650,7 +3650,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "policy_loader",
-      "community": 122,
+      "community": 14,
       "norm_label": "loader.py"
     },
     {
@@ -3660,7 +3660,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "policy_loader_union",
-      "community": 122,
+      "community": 14,
       "norm_label": "_union()"
     },
     {
@@ -3670,7 +3670,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "policy_loader_merge_mask_fields",
-      "community": 122,
+      "community": 14,
       "norm_label": "_merge_mask_fields()"
     },
     {
@@ -3680,7 +3680,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "policy_loader_merge",
-      "community": 122,
+      "community": 14,
       "norm_label": "_merge()"
     },
     {
@@ -3690,7 +3690,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "src_guardmcp_core_policy_loader_py_policy",
-      "community": 122,
+      "community": 14,
       "norm_label": "policy"
     },
     {
@@ -3700,7 +3700,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "policy_loader_resolve_inheritance",
-      "community": 43,
+      "community": 13,
       "norm_label": "_resolve_inheritance()"
     },
     {
@@ -3710,7 +3710,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "policy_loader_policyloader",
-      "community": 122,
+      "community": 0,
       "norm_label": "policyloader"
     },
     {
@@ -3720,7 +3720,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "policy_loader_policyloader_init",
-      "community": 122,
+      "community": 14,
       "norm_label": ".__init__()"
     },
     {
@@ -3730,7 +3730,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "src_guardmcp_core_policy_loader_py_path",
-      "community": 122,
+      "community": 14,
       "norm_label": "path"
     },
     {
@@ -3740,7 +3740,7 @@
       "source_location": "L109",
       "_origin": "ast",
       "id": "policy_loader_policyloader_policy_files",
-      "community": 122,
+      "community": 0,
       "norm_label": "._policy_files()"
     },
     {
@@ -3750,7 +3750,7 @@
       "source_location": "L117",
       "_origin": "ast",
       "id": "policy_loader_policyloader_parse_items",
-      "community": 122,
+      "community": 0,
       "norm_label": "._parse_items()"
     },
     {
@@ -3760,7 +3760,7 @@
       "source_location": "L125",
       "_origin": "ast",
       "id": "policy_loader_policyloader_current_mtime",
-      "community": 122,
+      "community": 0,
       "norm_label": "._current_mtime()"
     },
     {
@@ -3770,7 +3770,7 @@
       "source_location": "L134",
       "_origin": "ast",
       "id": "policy_loader_policyloader_load",
-      "community": 122,
+      "community": 0,
       "norm_label": ".load()"
     },
     {
@@ -3780,7 +3780,7 @@
       "source_location": "L197",
       "_origin": "ast",
       "id": "policy_loader_policyloader_get",
-      "community": 122,
+      "community": 14,
       "norm_label": ".get()"
     },
     {
@@ -3790,7 +3790,7 @@
       "source_location": "L200",
       "_origin": "ast",
       "id": "policy_loader_policyloader_all",
-      "community": 122,
+      "community": 14,
       "norm_label": ".all()"
     },
     {
@@ -3800,7 +3800,7 @@
       "source_location": "L203",
       "_origin": "ast",
       "id": "policy_loader_policyloader_start_hot_reload",
-      "community": 122,
+      "community": 0,
       "norm_label": ".start_hot_reload()"
     },
     {
@@ -3810,7 +3810,7 @@
       "source_location": "L208",
       "_origin": "ast",
       "id": "policy_loader_policyloader_stop_hot_reload",
-      "community": 122,
+      "community": 0,
       "norm_label": ".stop_hot_reload()"
     },
     {
@@ -3820,7 +3820,7 @@
       "source_location": "L213",
       "_origin": "ast",
       "id": "policy_loader_policyloader_watch",
-      "community": 122,
+      "community": 0,
       "norm_label": "._watch()"
     },
     {
@@ -3830,7 +3830,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "policy_loader_rationale_12",
-      "community": 122,
+      "community": 14,
       "norm_label": "order-preserving union of two string lists (base first, child appended)."
     },
     {
@@ -3840,7 +3840,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "policy_loader_rationale_25",
-      "community": 122,
+      "community": 14,
       "norm_label": "merge mask_fields. if either is a dict, merge per-collection (union per     key)"
     },
     {
@@ -3850,7 +3850,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "policy_loader_rationale_38",
-      "community": 122,
+      "community": 14,
       "norm_label": "merge `base` under `child` (child overrides). scalars: child wins when set     t"
     },
     {
@@ -3860,7 +3860,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "policy_loader_rationale_74",
-      "community": 43,
+      "community": 13,
       "norm_label": "resolve `extends` chains into fully-merged policies. detects cycles and     miss"
     },
     {
@@ -3870,7 +3870,7 @@
       "source_location": "L110",
       "_origin": "ast",
       "id": "policy_loader_rationale_110",
-      "community": 122,
+      "community": 0,
       "norm_label": "sorted list of *.yaml/*.yml files when _path is a directory.          sorting ma"
     },
     {
@@ -3880,7 +3880,7 @@
       "source_location": "L118",
       "_origin": "ast",
       "id": "policy_loader_rationale_118",
-      "community": 122,
+      "community": 0,
       "norm_label": "apply the same doc shape parsing (list / {agents:[...]} / single)."
     },
     {
@@ -3890,7 +3890,7 @@
       "source_location": "L126",
       "_origin": "ast",
       "id": "policy_loader_rationale_126",
-      "community": 122,
+      "community": 0,
       "norm_label": "max mtime to watch. for a directory: the dir's own mtime (catches         add/re"
     },
     {
@@ -3900,7 +3900,7 @@
       "source_location": "L135",
       "_origin": "ast",
       "id": "policy_loader_rationale_135",
-      "community": 122,
+      "community": 0,
       "norm_label": "load (or reload) policies from disk. called at startup and by hot-reload."
     },
     {
@@ -3910,7 +3910,7 @@
       "source_location": "L204",
       "_origin": "ast",
       "id": "policy_loader_rationale_204",
-      "community": 122,
+      "community": 0,
       "norm_label": "start background asyncio task that polls for policy file changes."
     },
     {
@@ -3920,7 +3920,7 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "policy_loader_rationale_209",
-      "community": 122,
+      "community": 0,
       "norm_label": "cancel the background watcher task."
     },
     {
@@ -3930,7 +3930,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "policy_models",
-      "community": 47,
+      "community": 5,
       "norm_label": "models.py"
     },
     {
@@ -3940,7 +3940,7 @@
       "source_location": "L17",
       "_origin": "ast",
       "id": "policy_models_collectionpolicy",
-      "community": 40,
+      "community": 14,
       "norm_label": "collectionpolicy"
     },
     {
@@ -3950,7 +3950,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "policy_models_collectionpolicy_no_overlap",
-      "community": 40,
+      "community": 14,
       "norm_label": ".no_overlap()"
     },
     {
@@ -4020,7 +4020,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "policy_models_policy_mask_fields_for",
-      "community": 116,
+      "community": 5,
       "norm_label": ".mask_fields_for()"
     },
     {
@@ -4030,7 +4030,7 @@
       "source_location": "L135",
       "_origin": "ast",
       "id": "policy_models_policy_result_transformer",
-      "community": 116,
+      "community": 5,
       "norm_label": ".result_transformer()"
     },
     {
@@ -4040,7 +4040,7 @@
       "source_location": "L145",
       "_origin": "ast",
       "id": "policy_models_policy_audit_masker",
-      "community": 116,
+      "community": 5,
       "norm_label": ".audit_masker()"
     },
     {
@@ -4060,7 +4060,7 @@
       "source_location": "L120",
       "_origin": "ast",
       "id": "policy_models_rationale_120",
-      "community": 116,
+      "community": 5,
       "norm_label": "effective mask fields for a collection. flat list \u2192 global (same list         fo"
     },
     {
@@ -4070,7 +4070,7 @@
       "source_location": "L136",
       "_origin": "ast",
       "id": "policy_models_rationale_136",
-      "community": 116,
+      "community": 5,
       "norm_label": "cached single-pass field-allow + mask transformer (h3/m1)."
     },
     {
@@ -4080,7 +4080,7 @@
       "source_location": "L146",
       "_origin": "ast",
       "id": "policy_models_rationale_146",
-      "community": 116,
+      "community": 5,
       "norm_label": "cached mask-only masker for audit-param scrubbing + explain (m1)."
     },
     {
@@ -4520,7 +4520,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "registry_connections",
-      "community": 141,
+      "community": 47,
       "norm_label": "connections.py"
     },
     {
@@ -4540,7 +4540,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "registry_connections_closableclient_close",
-      "community": 106,
+      "community": 36,
       "norm_label": ".close()"
     },
     {
@@ -4560,7 +4560,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "registry_connections_connectionentry",
-      "community": 106,
+      "community": 37,
       "norm_label": "connectionentry"
     },
     {
@@ -4570,7 +4570,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry",
-      "community": 106,
+      "community": 37,
       "norm_label": "connectionregistry"
     },
     {
@@ -4580,7 +4580,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_init",
-      "community": 106,
+      "community": 37,
       "norm_label": ".__init__()"
     },
     {
@@ -4590,7 +4590,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "clientfactory",
-      "community": 106,
+      "community": 37,
       "norm_label": "clientfactory"
     },
     {
@@ -4600,7 +4600,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_register",
-      "community": 106,
+      "community": 37,
       "norm_label": ".register()"
     },
     {
@@ -4610,7 +4610,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_get_active",
-      "community": 106,
+      "community": 37,
       "norm_label": ".get_active()"
     },
     {
@@ -4620,7 +4620,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_get",
-      "community": 106,
+      "community": 37,
       "norm_label": ".get()"
     },
     {
@@ -4630,7 +4630,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_switch",
-      "community": 106,
+      "community": 37,
       "norm_label": ".switch()"
     },
     {
@@ -4640,7 +4640,7 @@
       "source_location": "L109",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_active_name",
-      "community": 106,
+      "community": 37,
       "norm_label": ".active_name()"
     },
     {
@@ -4650,7 +4650,7 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_list_names",
-      "community": 106,
+      "community": 37,
       "norm_label": ".list_names()"
     },
     {
@@ -4660,7 +4660,7 @@
       "source_location": "L115",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_close_all",
-      "community": 106,
+      "community": 36,
       "norm_label": ".close_all()"
     },
     {
@@ -4670,7 +4670,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "registry_connections_rationale_1",
-      "community": 141,
+      "community": 47,
       "norm_label": "connection registry for switch-connection support. each named connection maps to"
     },
     {
@@ -4700,7 +4700,7 @@
       "source_location": "L103",
       "_origin": "ast",
       "id": "registry_connections_rationale_103",
-      "community": 106,
+      "community": 37,
       "norm_label": "switch active connection. returns false if name not registered."
     },
     {
@@ -4740,7 +4740,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "registry_registry_pluginregistry",
-      "community": 22,
+      "community": 40,
       "norm_label": "pluginregistry"
     },
     {
@@ -4750,7 +4750,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "registry_registry_pluginregistry_init",
-      "community": 22,
+      "community": 40,
       "norm_label": ".__init__()"
     },
     {
@@ -4770,7 +4770,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "registry_registry_pluginregistry_discover",
-      "community": 22,
+      "community": 40,
       "norm_label": ".discover()"
     },
     {
@@ -4790,7 +4790,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "registry_registry_pluginregistry_names",
-      "community": 22,
+      "community": 40,
       "norm_label": ".names()"
     },
     {
@@ -4800,7 +4800,7 @@
       "source_location": "L60",
       "_origin": "ast",
       "id": "registry_registry_pluginregistry_manifest",
-      "community": 22,
+      "community": 40,
       "norm_label": ".manifest()"
     },
     {
@@ -4810,7 +4810,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "registry_registry_pluginregistry_manifests",
-      "community": 22,
+      "community": 40,
       "norm_label": ".manifests()"
     },
     {
@@ -4830,7 +4830,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "registry_registry_rationale_28",
-      "community": 22,
+      "community": 40,
       "norm_label": "registry of databaseplugin classes keyed by their declared ``name``."
     },
     {
@@ -4850,7 +4850,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "registry_registry_rationale_44",
-      "community": 22,
+      "community": 40,
       "norm_label": "discover plugins advertised via the ``guardmcp.plugins`` entry-point group."
     },
     {
@@ -4870,7 +4870,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "registry_registry_rationale_61",
-      "community": 22,
+      "community": 40,
       "norm_label": "#7: return a registered plugin's manifest from its class, without         instan"
     },
     {
@@ -4880,7 +4880,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "registry_registry_rationale_71",
-      "community": 22,
+      "community": 40,
       "norm_label": "#7: manifests for every registered plugin, keyed by name. read from         clas"
     },
     {
@@ -4900,7 +4900,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "risk_engine",
-      "community": 109,
+      "community": 47,
       "norm_label": "engine.py"
     },
     {
@@ -5020,7 +5020,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_validation",
-      "community": 118,
+      "community": 3,
       "norm_label": "validation.py"
     },
     {
@@ -5030,7 +5030,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "core_validation_parse_json_or_pass",
-      "community": 118,
+      "community": 3,
       "norm_label": "_parse_json_or_pass()"
     },
     {
@@ -5040,7 +5040,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "core_validation_coerce_none_sentinels",
-      "community": 118,
+      "community": 3,
       "norm_label": "_coerce_none_sentinels()"
     },
     {
@@ -5070,7 +5070,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_validation_rationale_1",
-      "community": 118,
+      "community": 3,
       "norm_label": "database-agnostic grounding/security helpers.  mongodb-specific validation (oper"
     },
     {
@@ -5080,7 +5080,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "core_validation_rationale_23",
-      "community": 118,
+      "community": 3,
       "norm_label": "coerce a json-encoded string to dict/list. non-strings pass through."
     },
     {
@@ -5090,7 +5090,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "core_validation_rationale_33",
-      "community": 118,
+      "community": 3,
       "norm_label": "map '', 'null', 'none', 'undefined' \u2192 none for optional dict params."
     },
     {
@@ -5510,7 +5510,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "eval_models_expecteddecision",
-      "community": 109,
+      "community": 47,
       "norm_label": "expecteddecision"
     },
     {
@@ -6050,7 +6050,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "mongodb_client_mongoclient",
-      "community": 42,
+      "community": 29,
       "norm_label": "mongoclient"
     },
     {
@@ -6060,7 +6060,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "mongodb_client_mongoclient_init",
-      "community": 42,
+      "community": 29,
       "norm_label": ".__init__()"
     },
     {
@@ -6070,7 +6070,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "mongodb_client_mongoclient_get_collection",
-      "community": 42,
+      "community": 29,
       "norm_label": ".get_collection()"
     },
     {
@@ -6080,7 +6080,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "mongodb_client_mongoclient_list_collection_names",
-      "community": 42,
+      "community": 29,
       "norm_label": ".list_collection_names()"
     },
     {
@@ -6090,7 +6090,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "mongodb_client_mongoclient_get_db",
-      "community": 42,
+      "community": 29,
       "norm_label": ".get_db()"
     },
     {
@@ -6100,7 +6100,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "mongodb_client_mongoclient_list_databases",
-      "community": 42,
+      "community": 29,
       "norm_label": ".list_databases()"
     },
     {
@@ -6110,7 +6110,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "mongodb_client_mongoclient_ping",
-      "community": 42,
+      "community": 29,
       "norm_label": ".ping()"
     },
     {
@@ -6120,7 +6120,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "mongodb_client_mongoclient_close",
-      "community": 42,
+      "community": 29,
       "norm_label": ".close()"
     },
     {
@@ -6130,7 +6130,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mongodb_cost",
-      "community": 109,
+      "community": 20,
       "norm_label": "cost.py"
     },
     {
@@ -6200,7 +6200,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mongodb_cost_rationale_1",
-      "community": 109,
+      "community": 20,
       "norm_label": "mongodb-specific cost normalization.  pure functions that turn a raw mongodb ``e"
     },
     {
@@ -7120,7 +7120,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mongodb_plugin",
-      "community": 109,
+      "community": 20,
       "norm_label": "plugin.py"
     },
     {
@@ -7190,7 +7190,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "mongodb_plugin_mongoplugin_health",
-      "community": 42,
+      "community": 29,
       "norm_label": ".health()"
     },
     {
@@ -7340,7 +7340,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mongodb_plugin_rationale_1",
-      "community": 109,
+      "community": 20,
       "norm_label": "formal mongodb databaseplugin.  owns mongodb-specific guard knowledge (aggregati"
     },
     {
@@ -7420,7 +7420,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "mongodb_schema_infer_schema",
-      "community": 29,
+      "community": 32,
       "norm_label": "infer_schema()"
     },
     {
@@ -7470,7 +7470,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "mongodb_schema_rationale_88",
-      "community": 29,
+      "community": 32,
       "norm_label": "infer field types from a sample of documents.     returns {field: type} or {fiel"
     },
     {
@@ -8550,7 +8550,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "sql_cost",
-      "community": 65,
+      "community": 20,
       "norm_label": "cost.py"
     },
     {
@@ -8630,7 +8630,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "sql_cost_rationale_1",
-      "community": 65,
+      "community": 20,
       "norm_label": "shared sql cost normalization for the relational plugins.  postgres (``explain ("
     },
     {
@@ -9160,7 +9160,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_responses",
-      "community": 7,
+      "community": 3,
       "norm_label": "responses.py"
     },
     {
@@ -9190,7 +9190,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "server_responses_err",
-      "community": 7,
+      "community": 3,
       "norm_label": "err()"
     },
     {
@@ -9200,7 +9200,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "errorcode",
-      "community": 7,
+      "community": 43,
       "norm_label": "errorcode"
     },
     {
@@ -9210,7 +9210,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "server_responses_infer_denied_code",
-      "community": 7,
+      "community": 43,
       "norm_label": "_infer_denied_code()"
     },
     {
@@ -9230,7 +9230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "server_responses_rationale_1",
-      "community": 7,
+      "community": 3,
       "norm_label": "standard mcp tool response envelope + error taxonomy.  every guardmcp tool retur"
     },
     {
@@ -9250,7 +9250,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "server_responses_rationale_41",
-      "community": 7,
+      "community": 3,
       "norm_label": "error envelope with a stable machine-readable `code`."
     },
     {
@@ -9260,7 +9260,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "server_responses_rationale_63",
-      "community": 7,
+      "community": 43,
       "norm_label": "map a pipeline 'denied' reason string to a specific errorcode."
     },
     {
@@ -9330,7 +9330,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_common",
-      "community": 4,
+      "community": 3,
       "norm_label": "_common.py"
     },
     {
@@ -9370,7 +9370,7 @@
       "source_location": "L124",
       "_origin": "ast",
       "id": "tools_common_annot",
-      "community": 118,
+      "community": 3,
       "norm_label": "_annot()"
     },
     {
@@ -9380,7 +9380,7 @@
       "source_location": "L124",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_common_py_any",
-      "community": 118,
+      "community": 3,
       "norm_label": "any"
     },
     {
@@ -9410,7 +9410,7 @@
       "source_location": "L150",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_common_py_guardpipeline",
-      "community": 4,
+      "community": 3,
       "norm_label": "guardpipeline"
     },
     {
@@ -9430,7 +9430,7 @@
       "source_location": "L182",
       "_origin": "ast",
       "id": "tools_common_active_plugin",
-      "community": 4,
+      "community": 3,
       "norm_label": "_active_plugin()"
     },
     {
@@ -9440,7 +9440,7 @@
       "source_location": "L200",
       "_origin": "ast",
       "id": "tools_common_active_supported_caps",
-      "community": 4,
+      "community": 3,
       "norm_label": "_active_supported_caps()"
     },
     {
@@ -9450,7 +9450,7 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "tools_common_active_backend_info",
-      "community": 4,
+      "community": 3,
       "norm_label": "_active_backend_info()"
     },
     {
@@ -9480,7 +9480,7 @@
       "source_location": "L283",
       "_origin": "ast",
       "id": "tools_common_toolcontext_post_init",
-      "community": 118,
+      "community": 3,
       "norm_label": ".__post_init__()"
     },
     {
@@ -9490,7 +9490,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_common_rationale_1",
-      "community": 4,
+      "community": 3,
       "norm_label": "shared building blocks for the guardmcp tool modules.  everything the per-area t"
     },
     {
@@ -9510,7 +9510,7 @@
       "source_location": "L125",
       "_origin": "ast",
       "id": "tools_common_rationale_125",
-      "community": 118,
+      "community": 3,
       "norm_label": "build a toolannotations if the sdk supports it, else none (skip gracefully)."
     },
     {
@@ -9540,7 +9540,7 @@
       "source_location": "L183",
       "_origin": "ast",
       "id": "tools_common_rationale_183",
-      "community": 4,
+      "community": 3,
       "norm_label": "return the active connection's databaseplugin, or none.      single source of th"
     },
     {
@@ -9550,7 +9550,7 @@
       "source_location": "L201",
       "_origin": "ast",
       "id": "tools_common_rationale_201",
-      "community": 4,
+      "community": 3,
       "norm_label": "capabilities supported by the active connection's plugin (fallback: all)."
     },
     {
@@ -9560,7 +9560,7 @@
       "source_location": "L210",
       "_origin": "ast",
       "id": "tools_common_rationale_210",
-      "community": 4,
+      "community": 3,
       "norm_label": "return (backend_name, supported_capability_count) for the active connection."
     },
     {
@@ -9630,7 +9630,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_init",
-      "community": 4,
+      "community": 3,
       "norm_label": "__init__.py"
     },
     {
@@ -9670,7 +9670,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_init_rationale_1",
-      "community": 4,
+      "community": 3,
       "norm_label": "guardmcp meta tools (single-named, no db_/mongodb_ alias).  the former monolithi"
     },
     {
@@ -9690,7 +9690,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_capabilities",
-      "community": 4,
+      "community": 47,
       "norm_label": "capabilities.py"
     },
     {
@@ -9700,7 +9700,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "meta_capabilities_register",
-      "community": 4,
+      "community": 3,
       "norm_label": "register()"
     },
     {
@@ -9710,7 +9710,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_capabilities_py_fastmcp",
-      "community": 4,
+      "community": 3,
       "norm_label": "fastmcp"
     },
     {
@@ -9720,7 +9720,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_capabilities_py_toolcontext",
-      "community": 4,
+      "community": 3,
       "norm_label": "toolcontext"
     },
     {
@@ -9730,7 +9730,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_capabilities_rationale_1",
-      "community": 4,
+      "community": 47,
       "norm_label": "guardmcp_capabilities \u2014 backend + per-collection permitted-action discovery.  pe"
     },
     {
@@ -9740,7 +9740,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_explain",
-      "community": 43,
+      "community": 13,
       "norm_label": "explain.py"
     },
     {
@@ -9750,7 +9750,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "meta_explain_register",
-      "community": 43,
+      "community": 13,
       "norm_label": "register()"
     },
     {
@@ -9760,7 +9760,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_explain_py_fastmcp",
-      "community": 43,
+      "community": 13,
       "norm_label": "fastmcp"
     },
     {
@@ -9770,7 +9770,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_explain_py_toolcontext",
-      "community": 43,
+      "community": 13,
       "norm_label": "toolcontext"
     },
     {
@@ -9780,7 +9780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_explain_rationale_1",
-      "community": 43,
+      "community": 13,
       "norm_label": "policy-introspection tools: guardmcp_explain_policy + guardmcp_simulate_policy."
     },
     {
@@ -9790,7 +9790,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_plan",
-      "community": 4,
+      "community": 3,
       "norm_label": "plan.py"
     },
     {
@@ -9800,7 +9800,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "meta_plan_estimate_cost",
-      "community": 4,
+      "community": 3,
       "norm_label": "_estimate_cost()"
     },
     {
@@ -9810,7 +9810,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_plan_py_action",
-      "community": 4,
+      "community": 3,
       "norm_label": "action"
     },
     {
@@ -9850,7 +9850,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_plan_rationale_1",
-      "community": 4,
+      "community": 3,
       "norm_label": "guardmcp_plan \u2014 dry-run preview of authorization/risk/affected docs + cost."
     },
     {
@@ -9860,7 +9860,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "meta_plan_rationale_31",
-      "community": 4,
+      "community": 3,
       "norm_label": "best-effort normalized cost estimate for an operation. never raises:     returns"
     },
     {
@@ -9870,7 +9870,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_setup",
-      "community": 118,
+      "community": 3,
       "norm_label": "setup.py"
     },
     {
@@ -9880,7 +9880,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "meta_setup_register",
-      "community": 118,
+      "community": 10,
       "norm_label": "register()"
     },
     {
@@ -9890,7 +9890,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_setup_py_fastmcp",
-      "community": 118,
+      "community": 10,
       "norm_label": "fastmcp"
     },
     {
@@ -9900,7 +9900,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_setup_py_toolcontext",
-      "community": 118,
+      "community": 10,
       "norm_label": "toolcontext"
     },
     {
@@ -9910,7 +9910,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_setup_rationale_1",
-      "community": 118,
+      "community": 3,
       "norm_label": "guardmcp_setup \u2014 interactive policy setup wizard (survey + yaml writer)."
     },
     {
@@ -9920,7 +9920,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_status",
-      "community": 4,
+      "community": 3,
       "norm_label": "status.py"
     },
     {
@@ -9930,7 +9930,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "meta_status_register",
-      "community": 4,
+      "community": 3,
       "norm_label": "register()"
     },
     {
@@ -9940,7 +9940,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_status_py_fastmcp",
-      "community": 4,
+      "community": 3,
       "norm_label": "fastmcp"
     },
     {
@@ -9950,7 +9950,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_status_py_toolcontext",
-      "community": 4,
+      "community": 3,
       "norm_label": "toolcontext"
     },
     {
@@ -9960,7 +9960,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_status_rationale_1",
-      "community": 4,
+      "community": 3,
       "norm_label": "guardmcp_status \u2014 connection status, statistics, version, policy summary."
     },
     {
@@ -10280,7 +10280,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_loader",
-      "community": 0,
+      "community": 47,
       "norm_label": "_loader"
     },
     {
@@ -10290,7 +10290,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_loader_init",
-      "community": 0,
+      "community": 26,
       "norm_label": ".__init__()"
     },
     {
@@ -10310,7 +10310,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_loader_get",
-      "community": 0,
+      "community": 47,
       "norm_label": ".get()"
     },
     {
@@ -10360,7 +10360,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "auditlogger",
-      "community": 0,
+      "community": 47,
       "norm_label": "auditlogger"
     },
     {
@@ -10430,7 +10430,7 @@
       "source_location": "L142",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_test_ec3_beyond_bound_redacts_not_raw",
-      "community": 5,
+      "community": 26,
       "norm_label": "test_ec3_beyond_bound_redacts_not_raw()"
     },
     {
@@ -10500,7 +10500,7 @@
       "source_location": "L297",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_test_ag5_unsupported_capability_returns_envelope",
-      "community": 50,
+      "community": 26,
       "norm_label": "test_ag5_unsupported_capability_returns_envelope()"
     },
     {
@@ -10620,7 +10620,7 @@
       "source_location": "L143",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_rationale_143",
-      "community": 5,
+      "community": 26,
       "norm_label": "ec-3 fail-safe: a masked field nested far beyond _max_depth must not be     retu"
     },
     {
@@ -10660,7 +10660,7 @@
       "source_location": "L298",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_rationale_298",
-      "community": 50,
+      "community": 26,
       "norm_label": "a backend whose supported set excludes aggregate makes _capability_check     ret"
     },
     {
@@ -11300,7 +11300,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_test_pipeline",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_pipeline.py"
     },
     {
@@ -11310,7 +11310,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "integration_test_pipeline_test_find_allowed_and_masks_fields",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_find_allowed_and_masks_fields()"
     },
     {
@@ -11320,7 +11320,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "integration_test_pipeline_test_denied_collection_rejected",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_denied_collection_rejected()"
     },
     {
@@ -11330,7 +11330,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "integration_test_pipeline_test_unknown_agent_denied",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_unknown_agent_denied()"
     },
     {
@@ -11340,7 +11340,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "integration_test_pipeline_test_write_blocked_in_readonly",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_write_blocked_in_readonly()"
     },
     {
@@ -11350,7 +11350,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "integration_test_pipeline_test_count_returns_number",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_count_returns_number()"
     },
     {
@@ -11360,7 +11360,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "integration_test_pipeline_test_discover_collections_filters_by_policy",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_discover_collections_filters_by_policy()"
     },
     {
@@ -11370,7 +11370,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "integration_test_pipeline_test_describe_collection_hides_masked_fields",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_describe_collection_hides_masked_fields()"
     },
     {
@@ -11380,7 +11380,7 @@
       "source_location": "L87",
       "_origin": "ast",
       "id": "integration_test_pipeline_test_describe_blocked_collection_returns_none",
-      "community": 130,
+      "community": 14,
       "norm_label": "test_describe_blocked_collection_returns_none()"
     },
     {
@@ -11400,7 +11400,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "integration_test_pipeline_rationale_1",
-      "community": 130,
+      "community": 14,
       "norm_label": "integration tests \u2014 full pipeline with mongomock-motor (no real mongodb)."
     },
     {
@@ -11790,7 +11790,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_audit_logger",
-      "community": 21,
+      "community": 42,
       "norm_label": "test_audit_logger.py"
     },
     {
@@ -11800,7 +11800,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "unit_test_audit_logger_read_records",
-      "community": 21,
+      "community": 42,
       "norm_label": "_read_records()"
     },
     {
@@ -11810,7 +11810,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "unit_test_audit_logger_expected_hmac",
-      "community": 21,
+      "community": 42,
       "norm_label": "_expected_hmac()"
     },
     {
@@ -11820,7 +11820,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "unit_test_audit_logger_test_hmac_present_when_secret_set",
-      "community": 21,
+      "community": 42,
       "norm_label": "test_hmac_present_when_secret_set()"
     },
     {
@@ -11830,7 +11830,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "unit_test_audit_logger_test_hmac_absent_when_no_secret",
-      "community": 21,
+      "community": 42,
       "norm_label": "test_hmac_absent_when_no_secret()"
     },
     {
@@ -11840,7 +11840,7 @@
       "source_location": "L48",
       "_origin": "ast",
       "id": "unit_test_audit_logger_test_chain_verifies",
-      "community": 21,
+      "community": 42,
       "norm_label": "test_chain_verifies()"
     },
     {
@@ -11850,7 +11850,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "unit_test_audit_logger_test_chain_seeds_across_restart",
-      "community": 21,
+      "community": 42,
       "norm_label": "test_chain_seeds_across_restart()"
     },
     {
@@ -11860,7 +11860,7 @@
       "source_location": "L89",
       "_origin": "ast",
       "id": "unit_test_audit_logger_test_fail_closed_raises_on_write_failure",
-      "community": 21,
+      "community": 42,
       "norm_label": "test_fail_closed_raises_on_write_failure()"
     },
     {
@@ -11870,7 +11870,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "unit_test_audit_logger_test_fail_open_does_not_raise",
-      "community": 21,
+      "community": 42,
       "norm_label": "test_fail_open_does_not_raise()"
     },
     {
@@ -11880,7 +11880,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_audit_logger_rationale_1",
-      "community": 21,
+      "community": 42,
       "norm_label": "tests for the tamper-evident audit log (hmac chain, restart seeding, fail-closed"
     },
     {
@@ -12750,7 +12750,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_connections",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_connections.py"
     },
     {
@@ -12760,7 +12760,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "unit_test_connections_fakeclient",
-      "community": 32,
+      "community": 37,
       "norm_label": "_fakeclient"
     },
     {
@@ -12770,7 +12770,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "unit_test_connections_fakeclient_init",
-      "community": 32,
+      "community": 37,
       "norm_label": ".__init__()"
     },
     {
@@ -12780,7 +12780,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "unit_test_connections_fakeclient_close",
-      "community": 32,
+      "community": 37,
       "norm_label": ".close()"
     },
     {
@@ -12790,7 +12790,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "unit_test_connections_factory",
-      "community": 32,
+      "community": 37,
       "norm_label": "_factory()"
     },
     {
@@ -12800,7 +12800,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "unit_test_connections_reg",
-      "community": 32,
+      "community": 37,
       "norm_label": "_reg()"
     },
     {
@@ -12810,7 +12810,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "tests_unit_test_connections_py_connectionregistry",
-      "community": 32,
+      "community": 37,
       "norm_label": "connectionregistry"
     },
     {
@@ -12820,7 +12820,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "unit_test_connections_test_register_and_list",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_register_and_list()"
     },
     {
@@ -12830,7 +12830,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "unit_test_connections_test_default_active_is_default",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_default_active_is_default()"
     },
     {
@@ -12840,7 +12840,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "unit_test_connections_test_switch_to_registered",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_switch_to_registered()"
     },
     {
@@ -12850,7 +12850,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "unit_test_connections_test_switch_to_unknown_returns_false",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_switch_to_unknown_returns_false()"
     },
     {
@@ -12860,7 +12860,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "unit_test_connections_test_get_returns_entry",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_get_returns_entry()"
     },
     {
@@ -12870,7 +12870,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "unit_test_connections_test_get_unknown_returns_none",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_get_unknown_returns_none()"
     },
     {
@@ -12880,7 +12880,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "unit_test_connections_test_register_without_factory_raises",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_register_without_factory_raises()"
     },
     {
@@ -12890,7 +12890,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "unit_test_connections_test_close_all_closes_clients",
-      "community": 32,
+      "community": 37,
       "norm_label": "test_close_all_closes_clients()"
     },
     {
@@ -12900,7 +12900,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "unit_test_connections_rationale_7",
-      "community": 32,
+      "community": 37,
       "norm_label": "backend-agnostic stub satisfying the closableclient protocol."
     },
     {
@@ -12990,7 +12990,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_test_classify_no_signal_is_unknown",
-      "community": 16,
+      "community": 106,
       "norm_label": "test_classify_no_signal_is_unknown()"
     },
     {
@@ -13000,7 +13000,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_test_classify_collection_scan_is_high",
-      "community": 16,
+      "community": 106,
       "norm_label": "test_classify_collection_scan_is_high()"
     },
     {
@@ -13010,7 +13010,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_test_classify_collection_scan_large_is_critical",
-      "community": 16,
+      "community": 106,
       "norm_label": "test_classify_collection_scan_large_is_critical()"
     },
     {
@@ -13020,7 +13020,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_test_classify_indexed_small_is_low",
-      "community": 16,
+      "community": 106,
       "norm_label": "test_classify_indexed_small_is_low()"
     },
     {
@@ -13030,7 +13030,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_test_classify_indexed_large_is_high",
-      "community": 16,
+      "community": 106,
       "norm_label": "test_classify_indexed_large_is_high()"
     },
     {
@@ -13040,7 +13040,7 @@
       "source_location": "L85",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_test_classify_indexed_medium_volume",
-      "community": 16,
+      "community": 106,
       "norm_label": "test_classify_indexed_medium_volume()"
     },
     {
@@ -13160,7 +13160,7 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_test_mongo_ixscan_normalizes_to_low",
-      "community": 16,
+      "community": 109,
       "norm_label": "test_mongo_ixscan_normalizes_to_low()"
     },
     {
@@ -13260,7 +13260,7 @@
       "source_location": "L248",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_fakemongoexecutor",
-      "community": 16,
+      "community": 110,
       "norm_label": "_fakemongoexecutor"
     },
     {
@@ -13270,7 +13270,7 @@
       "source_location": "L251",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_fakemongoexecutor_init",
-      "community": 16,
+      "community": 110,
       "norm_label": ".__init__()"
     },
     {
@@ -13280,7 +13280,7 @@
       "source_location": "L255",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_fakemongoexecutor_explain_find_stats",
-      "community": 16,
+      "community": 110,
       "norm_label": ".explain_find_stats()"
     },
     {
@@ -13290,7 +13290,7 @@
       "source_location": "L259",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_fakemongoexecutor_explain_aggregate_stats",
-      "community": 16,
+      "community": 110,
       "norm_label": ".explain_aggregate_stats()"
     },
     {
@@ -13340,8 +13340,98 @@
       "source_location": "L249",
       "_origin": "ast",
       "id": "unit_test_cost_estimate_rationale_249",
-      "community": 16,
+      "community": 110,
       "norm_label": "returns a canned explain(executionstats) dict for find."
+    },
+    {
+      "label": "test_dns_rebinding.py",
+      "file_type": "code",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding",
+      "community": 133,
+      "norm_label": "test_dns_rebinding.py"
+    },
+    {
+      "label": "_client()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L9",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding_client",
+      "community": 133,
+      "norm_label": "_client()"
+    },
+    {
+      "label": "test_allowed_host_passes()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L13",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding_test_allowed_host_passes",
+      "community": 133,
+      "norm_label": "test_allowed_host_passes()"
+    },
+    {
+      "label": "test_port_is_stripped_before_matching()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding_test_port_is_stripped_before_matching",
+      "community": 133,
+      "norm_label": "test_port_is_stripped_before_matching()"
+    },
+    {
+      "label": "test_unknown_host_rejected()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L23",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding_test_unknown_host_rejected",
+      "community": 133,
+      "norm_label": "test_unknown_host_rejected()"
+    },
+    {
+      "label": "test_unknown_host_rejected_on_approvals_route()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding_test_unknown_host_rejected_on_approvals_route",
+      "community": 133,
+      "norm_label": "test_unknown_host_rejected_on_approvals_route()"
+    },
+    {
+      "label": "test_wildcard_disables_protection()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L36",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding_test_wildcard_disables_protection",
+      "community": 133,
+      "norm_label": "test_wildcard_disables_protection()"
+    },
+    {
+      "label": "test_none_disables_protection_backcompat()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L41",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding_test_none_disables_protection_backcompat",
+      "community": 133,
+      "norm_label": "test_none_disables_protection_backcompat()"
+    },
+    {
+      "label": "DNS-rebinding / Host-header validation on the approval API.",
+      "file_type": "rationale",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "unit_test_dns_rebinding_rationale_1",
+      "community": 133,
+      "norm_label": "dns-rebinding / host-header validation on the approval api."
     },
     {
       "label": "test_doctor.py",
@@ -13450,7 +13540,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_dotted_mask",
-      "community": 5,
+      "community": 56,
       "norm_label": "test_dotted_mask.py"
     },
     {
@@ -13460,7 +13550,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_doc",
-      "community": 5,
+      "community": 56,
       "norm_label": "_doc()"
     },
     {
@@ -13470,7 +13560,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_dotted_path_is_specific",
-      "community": 5,
+      "community": 56,
       "norm_label": "test_dotted_path_is_specific()"
     },
     {
@@ -13480,7 +13570,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_bare_name_masks_any_depth_backcompat",
-      "community": 5,
+      "community": 56,
       "norm_label": "test_bare_name_masks_any_depth_backcompat()"
     },
     {
@@ -13490,7 +13580,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_mixed_bare_and_dotted",
-      "community": 5,
+      "community": 56,
       "norm_label": "test_mixed_bare_and_dotted()"
     },
     {
@@ -13500,7 +13590,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_transformer_dotted_path_specific",
-      "community": 5,
+      "community": 56,
       "norm_label": "test_transformer_dotted_path_specific()"
     },
     {
@@ -13510,7 +13600,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_transformer_bare_backcompat",
-      "community": 5,
+      "community": 56,
       "norm_label": "test_transformer_bare_backcompat()"
     },
     {
@@ -13520,7 +13610,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_per_collection_dict_with_dotted",
-      "community": 5,
+      "community": 56,
       "norm_label": "test_per_collection_dict_with_dotted()"
     },
     {
@@ -13530,7 +13620,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_rationale_1",
-      "community": 5,
+      "community": 56,
       "norm_label": "#10: first-class dotted mask paths \u2014 \"contact.email\" is path-specific while a ba"
     },
     {
@@ -13680,7 +13770,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_explain_policy",
-      "community": 125,
+      "community": 133,
       "norm_label": "test_explain_policy.py"
     },
     {
@@ -13690,7 +13780,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "unit_test_explain_policy_client",
-      "community": 125,
+      "community": 133,
       "norm_label": "_client()"
     },
     {
@@ -13700,7 +13790,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "unit_test_explain_policy_pipeline",
-      "community": 125,
+      "community": 133,
       "norm_label": "_pipeline()"
     },
     {
@@ -13710,7 +13800,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "tests_unit_test_explain_policy_py_policy",
-      "community": 125,
+      "community": 133,
       "norm_label": "policy"
     },
     {
@@ -13720,7 +13810,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "tests_unit_test_explain_policy_py_path",
-      "community": 125,
+      "community": 133,
       "norm_label": "path"
     },
     {
@@ -13730,7 +13820,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "tests_unit_test_explain_policy_py_guardpipeline",
-      "community": 125,
+      "community": 133,
       "norm_label": "guardpipeline"
     },
     {
@@ -13740,7 +13830,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "unit_test_explain_policy_tool",
-      "community": 125,
+      "community": 133,
       "norm_label": "_tool()"
     },
     {
@@ -13750,7 +13840,7 @@
       "source_location": "L69",
       "_origin": "ast",
       "id": "unit_test_explain_policy_call",
-      "community": 125,
+      "community": 133,
       "norm_label": "_call()"
     },
     {
@@ -13760,7 +13850,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "unit_test_explain_policy_base",
-      "community": 125,
+      "community": 133,
       "norm_label": "_base()"
     },
     {
@@ -13770,7 +13860,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "unit_test_explain_policy_test_explain_allowed",
-      "community": 125,
+      "community": 133,
       "norm_label": "test_explain_allowed()"
     },
     {
@@ -13780,7 +13870,7 @@
       "source_location": "L97",
       "_origin": "ast",
       "id": "unit_test_explain_policy_test_explain_denied_collection",
-      "community": 125,
+      "community": 133,
       "norm_label": "test_explain_denied_collection()"
     },
     {
@@ -13790,7 +13880,7 @@
       "source_location": "L109",
       "_origin": "ast",
       "id": "unit_test_explain_policy_test_explain_approval_required",
-      "community": 125,
+      "community": 133,
       "norm_label": "test_explain_approval_required()"
     },
     {
@@ -13800,7 +13890,7 @@
       "source_location": "L123",
       "_origin": "ast",
       "id": "unit_test_explain_policy_test_explain_temporal_expired",
-      "community": 125,
+      "community": 133,
       "norm_label": "test_explain_temporal_expired()"
     },
     {
@@ -13810,7 +13900,7 @@
       "source_location": "L135",
       "_origin": "ast",
       "id": "unit_test_explain_policy_test_explain_unknown_action",
-      "community": 125,
+      "community": 133,
       "norm_label": "test_explain_unknown_action()"
     },
     {
@@ -13820,7 +13910,7 @@
       "source_location": "L143",
       "_origin": "ast",
       "id": "unit_test_explain_policy_test_explain_role_inherited",
-      "community": 125,
+      "community": 133,
       "norm_label": "test_explain_role_inherited()"
     },
     {
@@ -13830,7 +13920,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_explain_policy_rationale_1",
-      "community": 125,
+      "community": 133,
       "norm_label": "tests for guardmcp_explain_policy (feature 2). drives the real tool through a fa"
     },
     {
@@ -13840,7 +13930,7 @@
       "source_location": "L144",
       "_origin": "ast",
       "id": "unit_test_explain_policy_rationale_144",
-      "community": 125,
+      "community": 133,
       "norm_label": "a merged (inherited) policy is what gets evaluated; trace reflects it."
     },
     {
@@ -13850,7 +13940,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration",
-      "community": 1,
+      "community": 14,
       "norm_label": "test_field_allow_integration.py"
     },
     {
@@ -13860,7 +13950,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_stubloader",
-      "community": 1,
+      "community": 14,
       "norm_label": "_stubloader"
     },
     {
@@ -13870,7 +13960,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_stubloader_init",
-      "community": 1,
+      "community": 14,
       "norm_label": ".__init__()"
     },
     {
@@ -13880,7 +13970,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_stubloader_get",
-      "community": 1,
+      "community": 14,
       "norm_label": ".get()"
     },
     {
@@ -13890,7 +13980,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_make_policy",
-      "community": 1,
+      "community": 14,
       "norm_label": "_make_policy()"
     },
     {
@@ -13900,7 +13990,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_pipeline_with",
-      "community": 1,
+      "community": 14,
       "norm_label": "pipeline_with()"
     },
     {
@@ -13910,7 +14000,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_test_field_allow_drops_disallowed_fields",
-      "community": 1,
+      "community": 14,
       "norm_label": "test_field_allow_drops_disallowed_fields()"
     },
     {
@@ -13920,7 +14010,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_test_field_allow_with_masking",
-      "community": 1,
+      "community": 14,
       "norm_label": "test_field_allow_with_masking()"
     },
     {
@@ -13930,7 +14020,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_rationale_1",
-      "community": 1,
+      "community": 14,
       "norm_label": "s-3: field allow-list enforced end-to-end through guardpipeline.run (find)."
     },
     {
@@ -13940,7 +14030,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_rationale_13",
-      "community": 1,
+      "community": 14,
       "norm_label": "minimal policy loader exposing the single .get(agent) used by pipeline."
     },
     {
@@ -14240,7 +14330,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "tests_unit_test_interfaces_py_capabilityresult",
-      "community": 44,
+      "community": 20,
       "norm_label": "capabilityresult"
     },
     {
@@ -14570,7 +14660,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_fakemanager",
-      "community": 46,
+      "community": 43,
       "norm_label": "_fakemanager"
     },
     {
@@ -14580,7 +14670,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_fakemanager_init",
-      "community": 46,
+      "community": 43,
       "norm_label": ".__init__()"
     },
     {
@@ -14590,7 +14680,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_fakemanager_tool",
-      "community": 46,
+      "community": 43,
       "norm_label": ".tool()"
     },
     {
@@ -14600,7 +14690,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_register_into_fake",
-      "community": 46,
+      "community": 43,
       "norm_label": "_register_into_fake()"
     },
     {
@@ -14650,7 +14740,7 @@
       "source_location": "L133",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_test_both_db_and_mongodb_names_registered",
-      "community": 46,
+      "community": 43,
       "norm_label": "test_both_db_and_mongodb_names_registered()"
     },
     {
@@ -14660,7 +14750,7 @@
       "source_location": "L153",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_test_annotations_applied_or_skipped",
-      "community": 46,
+      "community": 43,
       "norm_label": "test_annotations_applied_or_skipped()"
     },
     {
@@ -14680,7 +14770,7 @@
       "source_location": "L175",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_test_err_envelope_shape",
-      "community": 7,
+      "community": 46,
       "norm_label": "test_err_envelope_shape()"
     },
     {
@@ -14970,7 +15060,7 @@
       "source_location": "L75",
       "_origin": "ast",
       "id": "tests_unit_test_mongo_plugin_py_mongoexecutor",
-      "community": 20,
+      "community": 18,
       "norm_label": "mongoexecutor"
     },
     {
@@ -15840,7 +15930,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes",
-      "community": 10,
+      "community": 4,
       "norm_label": "test_observability_and_codes.py"
     },
     {
@@ -15850,7 +15940,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testlogevent",
-      "community": 10,
+      "community": 4,
       "norm_label": "testlogevent"
     },
     {
@@ -15860,7 +15950,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testlogevent_test_emits_parseable_json_with_trace_id",
-      "community": 10,
+      "community": 4,
       "norm_label": ".test_emits_parseable_json_with_trace_id()"
     },
     {
@@ -15870,7 +15960,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testlogevent_test_level_threshold_suppresses_below",
-      "community": 10,
+      "community": 4,
       "norm_label": ".test_level_threshold_suppresses_below()"
     },
     {
@@ -15880,7 +15970,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testlogevent_test_text_format_human_line",
-      "community": 10,
+      "community": 4,
       "norm_label": ".test_text_format_human_line()"
     },
     {
@@ -15890,7 +15980,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testtraceid",
-      "community": 10,
+      "community": 4,
       "norm_label": "testtraceid"
     },
     {
@@ -15900,7 +15990,7 @@
       "source_location": "L51",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testtraceid_test_new_and_get_roundtrip",
-      "community": 10,
+      "community": 4,
       "norm_label": ".test_new_and_get_roundtrip()"
     },
     {
@@ -15910,7 +16000,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testtraceid_test_new_trace_id_changes",
-      "community": 10,
+      "community": 4,
       "norm_label": ".test_new_trace_id_changes()"
     },
     {
@@ -15920,7 +16010,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testaudittraceid",
-      "community": 134,
+      "community": 4,
       "norm_label": "testaudittraceid"
     },
     {
@@ -15930,7 +16020,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testaudittraceid_test_audit_record_carries_field",
-      "community": 134,
+      "community": 4,
       "norm_label": ".test_audit_record_carries_field()"
     },
     {
@@ -15940,7 +16030,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testaudittraceid_test_build_stamps_current_trace_id",
-      "community": 134,
+      "community": 4,
       "norm_label": ".test_build_stamps_current_trace_id()"
     },
     {
@@ -16020,7 +16110,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_rationale_1",
-      "community": 10,
+      "community": 4,
       "norm_label": "#8 + #9 tests: structured logging, trace-id correlation, explicit error codes."
     },
     {
@@ -16330,7 +16420,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "tests_unit_test_policy_engine_py_action",
-      "community": 0,
+      "community": 47,
       "norm_label": "action"
     },
     {
@@ -16660,7 +16750,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "tests_unit_test_policy_evolution_py_path",
-      "community": 0,
+      "community": 47,
       "norm_label": "path"
     },
     {
@@ -16760,7 +16850,7 @@
       "source_location": "L131",
       "_origin": "ast",
       "id": "tests_unit_test_policy_evolution_py_guardpipeline",
-      "community": 0,
+      "community": 47,
       "norm_label": "guardpipeline"
     },
     {
@@ -16880,7 +16970,7 @@
       "source_location": "L246",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testbackwardcompat",
-      "community": 0,
+      "community": 47,
       "norm_label": "testbackwardcompat"
     },
     {
@@ -16890,7 +16980,7 @@
       "source_location": "L247",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testbackwardcompat_test_example_policy_loads",
-      "community": 0,
+      "community": 47,
       "norm_label": ".test_example_policy_loads()"
     },
     {
@@ -17040,7 +17130,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_policy_trace",
-      "community": 126,
+      "community": 14,
       "norm_label": "test_policy_trace.py"
     },
     {
@@ -17050,7 +17140,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "unit_test_policy_trace_policy",
-      "community": 126,
+      "community": 14,
       "norm_label": "_policy()"
     },
     {
@@ -17060,7 +17150,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "unit_test_policy_trace_request",
-      "community": 126,
+      "community": 14,
       "norm_label": "_request()"
     },
     {
@@ -17070,7 +17160,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "tests_unit_test_policy_trace_py_action",
-      "community": 0,
+      "community": 47,
       "norm_label": "action"
     },
     {
@@ -17080,7 +17170,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "unit_test_policy_trace_matched",
-      "community": 126,
+      "community": 14,
       "norm_label": "_matched()"
     },
     {
@@ -17090,7 +17180,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "tests_unit_test_policy_trace_py_policytrace",
-      "community": 126,
+      "community": 14,
       "norm_label": "policytrace"
     },
     {
@@ -17100,7 +17190,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "unit_test_policy_trace_test_readonly_deny_records_step",
-      "community": 126,
+      "community": 14,
       "norm_label": "test_readonly_deny_records_step()"
     },
     {
@@ -17110,7 +17200,7 @@
       "source_location": "L58",
       "_origin": "ast",
       "id": "unit_test_policy_trace_test_collection_deny_records_step",
-      "community": 126,
+      "community": 14,
       "norm_label": "test_collection_deny_records_step()"
     },
     {
@@ -17120,7 +17210,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "unit_test_policy_trace_test_action_deny_records_step",
-      "community": 126,
+      "community": 14,
       "norm_label": "test_action_deny_records_step()"
     },
     {
@@ -17130,7 +17220,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "unit_test_policy_trace_test_allowed_records_default_allow",
-      "community": 126,
+      "community": 14,
       "norm_label": "test_allowed_records_default_allow()"
     },
     {
@@ -17140,7 +17230,7 @@
       "source_location": "L88",
       "_origin": "ast",
       "id": "unit_test_policy_trace_test_approval_required_records_step",
-      "community": 126,
+      "community": 14,
       "norm_label": "test_approval_required_records_step()"
     },
     {
@@ -17150,7 +17240,7 @@
       "source_location": "L99",
       "_origin": "ast",
       "id": "unit_test_policy_trace_test_trace_none_decision_identical",
-      "community": 126,
+      "community": 14,
       "norm_label": "test_trace_none_decision_identical()"
     },
     {
@@ -17160,7 +17250,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_policy_trace_rationale_1",
-      "community": 126,
+      "community": 14,
       "norm_label": "tests for the single-source-of-truth evaluation trace.  verifies the engine reco"
     },
     {
@@ -17170,7 +17260,7 @@
       "source_location": "L100",
       "_origin": "ast",
       "id": "unit_test_policy_trace_rationale_100",
-      "community": 126,
+      "community": 14,
       "norm_label": "same decision with and without a trace, across every rule outcome."
     },
     {
@@ -18050,7 +18140,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_schema",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_schema.py"
     },
     {
@@ -18060,7 +18150,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "unit_test_schema_test_infer_basic_types",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_infer_basic_types()"
     },
     {
@@ -18070,7 +18160,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "unit_test_schema_test_infer_objectid",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_infer_objectid()"
     },
     {
@@ -18080,7 +18170,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "unit_test_schema_test_infer_mixed_types",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_infer_mixed_types()"
     },
     {
@@ -18090,7 +18180,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "unit_test_schema_test_infer_null_field",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_infer_null_field()"
     },
     {
@@ -18100,7 +18190,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "unit_test_schema_test_infer_merges_fields_across_docs",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_infer_merges_fields_across_docs()"
     },
     {
@@ -18110,7 +18200,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "unit_test_schema_test_apply_mask_hides_type",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_apply_mask_hides_type()"
     },
     {
@@ -18120,7 +18210,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "unit_test_schema_test_apply_mask_empty_list",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_apply_mask_empty_list()"
     },
     {
@@ -18130,7 +18220,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "unit_test_schema_test_infer_empty_docs",
-      "community": 29,
+      "community": 32,
       "norm_label": "test_infer_empty_docs()"
     },
     {
@@ -18140,7 +18230,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_seams",
-      "community": 28,
+      "community": 21,
       "norm_label": "test_seams.py"
     },
     {
@@ -18150,7 +18240,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "unit_test_seams_test_approval_store_satisfies_protocol",
-      "community": 28,
+      "community": 21,
       "norm_label": "test_approval_store_satisfies_protocol()"
     },
     {
@@ -18160,7 +18250,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "unit_test_seams_test_rate_limiter_satisfies_protocol",
-      "community": 28,
+      "community": 21,
       "norm_label": "test_rate_limiter_satisfies_protocol()"
     },
     {
@@ -18170,7 +18260,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "unit_test_seams_test_audit_logger_satisfies_protocol",
-      "community": 28,
+      "community": 21,
       "norm_label": "test_audit_logger_satisfies_protocol()"
     },
     {
@@ -18180,7 +18270,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "tests_unit_test_seams_py_path",
-      "community": 28,
+      "community": 21,
       "norm_label": "path"
     },
     {
@@ -18200,7 +18290,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "unit_test_seams_test_audit_record_carries_node_id",
-      "community": 28,
+      "community": 21,
       "norm_label": "test_audit_record_carries_node_id()"
     },
     {
@@ -18210,7 +18300,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "unit_test_seams_test_audit_record_node_id_defaults_empty",
-      "community": 28,
+      "community": 21,
       "norm_label": "test_audit_record_node_id_defaults_empty()"
     },
     {
@@ -18220,7 +18310,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "unit_test_seams_test_active_connection_isolated_across_contexts",
-      "community": 106,
+      "community": 37,
       "norm_label": "test_active_connection_isolated_across_contexts()"
     },
     {
@@ -18230,7 +18320,7 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "unit_test_seams_test_reset_active_only_affects_current_context",
-      "community": 28,
+      "community": 21,
       "norm_label": "test_reset_active_only_affects_current_context()"
     },
     {
@@ -18240,7 +18330,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_seams_rationale_1",
-      "community": 28,
+      "community": 21,
       "norm_label": "seam conformance tests (risks #4, #5, #7, #8).  these assert the shipped single-"
     },
     {
@@ -18250,7 +18340,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_simulate_policy",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_simulate_policy.py"
     },
     {
@@ -18260,7 +18350,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_client",
-      "community": 40,
+      "community": 14,
       "norm_label": "_client()"
     },
     {
@@ -18270,7 +18360,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_pipeline",
-      "community": 40,
+      "community": 14,
       "norm_label": "_pipeline()"
     },
     {
@@ -18280,7 +18370,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "tests_unit_test_simulate_policy_py_policy",
-      "community": 40,
+      "community": 14,
       "norm_label": "policy"
     },
     {
@@ -18290,7 +18380,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "tests_unit_test_simulate_policy_py_path",
-      "community": 129,
+      "community": 14,
       "norm_label": "path"
     },
     {
@@ -18300,7 +18390,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "tests_unit_test_simulate_policy_py_guardpipeline",
-      "community": 129,
+      "community": 14,
       "norm_label": "guardpipeline"
     },
     {
@@ -18310,7 +18400,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_tool",
-      "community": 40,
+      "community": 14,
       "norm_label": "_tool()"
     },
     {
@@ -18320,7 +18410,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_call",
-      "community": 40,
+      "community": 14,
       "norm_label": "_call()"
     },
     {
@@ -18330,7 +18420,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_pol_dict",
-      "community": 40,
+      "community": 14,
       "norm_label": "_pol_dict()"
     },
     {
@@ -18340,7 +18430,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_test_readonly_to_readwrite_flips_decision",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_readonly_to_readwrite_flips_decision()"
     },
     {
@@ -18350,7 +18440,7 @@
       "source_location": "L106",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_test_identical_policies_no_change",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_identical_policies_no_change()"
     },
     {
@@ -18360,7 +18450,7 @@
       "source_location": "L126",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_test_widening_collections_is_high",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_widening_collections_is_high()"
     },
     {
@@ -18370,7 +18460,7 @@
       "source_location": "L147",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_test_narrowing_is_low",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_narrowing_is_low()"
     },
     {
@@ -18380,7 +18470,7 @@
       "source_location": "L166",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_test_yaml_string_policy_and_mask_diff",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_yaml_string_policy_and_mask_diff()"
     },
     {
@@ -18390,7 +18480,7 @@
       "source_location": "L186",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_test_current_defaults_to_loaded_policy",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_current_defaults_to_loaded_policy()"
     },
     {
@@ -18400,7 +18490,7 @@
       "source_location": "L205",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_test_invalid_proposed_policy",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_invalid_proposed_policy()"
     },
     {
@@ -18410,7 +18500,7 @@
       "source_location": "L218",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_test_unknown_action",
-      "community": 40,
+      "community": 14,
       "norm_label": "test_unknown_action()"
     },
     {
@@ -18420,7 +18510,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_simulate_policy_rationale_1",
-      "community": 40,
+      "community": 14,
       "norm_label": "tests for guardmcp_simulate_policy (feature 3). verifies decision flips, the hum"
     },
     {
@@ -18600,7 +18690,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy",
-      "community": 56,
+      "community": 0,
       "norm_label": "test_switch_connection_policy.py"
     },
     {
@@ -18610,7 +18700,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_stubregistry",
-      "community": 56,
+      "community": 0,
       "norm_label": "_stubregistry"
     },
     {
@@ -18620,7 +18710,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_stubregistry_init",
-      "community": 56,
+      "community": 0,
       "norm_label": ".__init__()"
     },
     {
@@ -18630,7 +18720,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_stubregistry_switch",
-      "community": 56,
+      "community": 0,
       "norm_label": ".switch()"
     },
     {
@@ -18640,7 +18730,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_stubregistry_get_active",
-      "community": 56,
+      "community": 0,
       "norm_label": ".get_active()"
     },
     {
@@ -18650,7 +18740,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_build_pipeline",
-      "community": 56,
+      "community": 0,
       "norm_label": "_build_pipeline()"
     },
     {
@@ -18660,7 +18750,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_read_audit",
-      "community": 56,
+      "community": 0,
       "norm_label": "_read_audit()"
     },
     {
@@ -18670,7 +18760,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_test_switch_allowed_when_in_allowlist",
-      "community": 56,
+      "community": 0,
       "norm_label": "test_switch_allowed_when_in_allowlist()"
     },
     {
@@ -18680,7 +18770,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_test_switch_denied_when_not_in_allowlist",
-      "community": 56,
+      "community": 0,
       "norm_label": "test_switch_denied_when_not_in_allowlist()"
     },
     {
@@ -18690,7 +18780,7 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_test_empty_allowlist_permits_all",
-      "community": 56,
+      "community": 0,
       "norm_label": "test_empty_allowlist_permits_all()"
     },
     {
@@ -18700,7 +18790,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "unit_test_switch_connection_policy_rationale_14",
-      "community": 56,
+      "community": 0,
       "norm_label": "minimal registry: every switch to a known name succeeds."
     },
     {
@@ -19797,7 +19887,7 @@
       "label": "Audit & logging",
       "file_type": "document",
       "source_file": "INSTALL.md",
-      "source_location": "L145",
+      "source_location": "L146",
       "_origin": "ast",
       "id": "install_audit_logging",
       "community": 121,
@@ -19807,7 +19897,7 @@
       "label": "Multi-backend / tuning",
       "file_type": "document",
       "source_file": "INSTALL.md",
-      "source_location": "L154",
+      "source_location": "L155",
       "_origin": "ast",
       "id": "install_multi_backend_tuning",
       "community": 121,
@@ -19817,7 +19907,7 @@
       "label": "Verifying a healthy install",
       "file_type": "document",
       "source_file": "INSTALL.md",
-      "source_location": "L165",
+      "source_location": "L166",
       "_origin": "ast",
       "id": "install_verifying_a_healthy_install",
       "community": 121,
@@ -19827,7 +19917,7 @@
       "label": "CLI / operations",
       "file_type": "document",
       "source_file": "INSTALL.md",
-      "source_location": "L185",
+      "source_location": "L186",
       "_origin": "ast",
       "id": "install_cli_operations",
       "community": 121,
@@ -19837,7 +19927,7 @@
       "label": "Checklist before production",
       "file_type": "document",
       "source_file": "INSTALL.md",
-      "source_location": "L214",
+      "source_location": "L215",
       "_origin": "ast",
       "id": "install_checklist_before_production",
       "community": 121,
@@ -22090,11 +22180,11 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/guardmcp/__main__.py",
-      "source_location": "L305",
+      "source_location": "L311",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "guardmcp_main_rationale_305",
-      "target": "guardmcp_main_serve_main"
+      "source": "guardmcp_main_rationale_311",
+      "target": "guardmcp_main_serve_main",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -22510,10 +22600,32 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/guardmcp/api/approval.py",
-      "source_location": "L25",
+      "source_location": "L26",
       "weight": 1.0,
-      "confidence_score": 1.0,
-      "source": "api_approval_rationale_25",
+      "source": "api_approval_rationale_26",
+      "target": "api_approval_build_approval_app",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding_client",
+      "target": "api_approval_build_approval_app"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L43",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding_test_none_disables_protection_backcompat",
       "target": "api_approval_build_approval_app"
     },
     {
@@ -26389,9 +26501,9 @@
       "source_file": "src/guardmcp/server/tools/meta/capabilities.py",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "meta_capabilities",
-      "target": "interfaces_capability_capability",
-      "confidence_score": 1.0
+      "target": "interfaces_capability_capability"
     },
     {
       "relation": "imports",
@@ -31713,9 +31825,9 @@
       "source_file": "src/guardmcp/server/tools/meta/capabilities.py",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "meta_capabilities",
-      "target": "models_domain_decisionstatus",
-      "confidence_score": 1.0
+      "target": "models_domain_decisionstatus"
     },
     {
       "relation": "imports",
@@ -57022,6 +57134,141 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding",
+      "target": "unit_test_dns_rebinding_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding",
+      "target": "unit_test_dns_rebinding_test_allowed_host_passes",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding",
+      "target": "unit_test_dns_rebinding_test_none_disables_protection_backcompat",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding",
+      "target": "unit_test_dns_rebinding_test_port_is_stripped_before_matching",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L23",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding",
+      "target": "unit_test_dns_rebinding_test_unknown_host_rejected",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding",
+      "target": "unit_test_dns_rebinding_test_unknown_host_rejected_on_approvals_route",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L36",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding",
+      "target": "unit_test_dns_rebinding_test_wildcard_disables_protection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding_rationale_1",
+      "target": "unit_test_dns_rebinding",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding_test_allowed_host_passes",
+      "target": "unit_test_dns_rebinding_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding_test_port_is_stripped_before_matching",
+      "target": "unit_test_dns_rebinding_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding_test_unknown_host_rejected",
+      "target": "unit_test_dns_rebinding_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding_test_unknown_host_rejected_on_approvals_route",
+      "target": "unit_test_dns_rebinding_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_dns_rebinding.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "source": "unit_test_dns_rebinding_test_wildcard_disables_protection",
+      "target": "unit_test_dns_rebinding_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L22",
       "weight": 1.0,
@@ -58837,9 +59084,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L366",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling",
-      "target": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy"
     },
     {
       "relation": "contains",
@@ -58847,9 +59094,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L400",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling",
-      "target": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_test_capabilities_no_policy_branch"
     },
     {
       "relation": "contains",
@@ -58857,9 +59104,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L327",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling",
-      "target": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions"
     },
     {
       "relation": "contains",
@@ -59082,9 +59329,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L382",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
-      "target": "unit_test_mcp_tooling_make_client",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_make_client"
     },
     {
       "relation": "calls",
@@ -59093,9 +59340,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L402",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
-      "target": "unit_test_mcp_tooling_make_client",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_make_client"
     },
     {
       "relation": "calls",
@@ -59104,9 +59351,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L344",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
-      "target": "unit_test_mcp_tooling_make_client",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_make_client"
     },
     {
       "relation": "rationale_for",
@@ -59125,9 +59372,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L392",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
-      "target": "unit_test_mcp_tooling_get_tool",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_get_tool"
     },
     {
       "relation": "calls",
@@ -59136,9 +59383,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L413",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
-      "target": "unit_test_mcp_tooling_get_tool",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_get_tool"
     },
     {
       "relation": "calls",
@@ -59147,9 +59394,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L354",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
-      "target": "unit_test_mcp_tooling_get_tool",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_get_tool"
     },
     {
       "relation": "calls",
@@ -59224,9 +59471,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L393",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
-      "target": "unit_test_mcp_tooling_call",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_call"
     },
     {
       "relation": "calls",
@@ -59235,9 +59482,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L414",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
-      "target": "unit_test_mcp_tooling_call",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_call"
     },
     {
       "relation": "calls",
@@ -59246,9 +59493,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L355",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
-      "target": "unit_test_mcp_tooling_call",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_call"
     },
     {
       "relation": "calls",
@@ -59322,9 +59569,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L328",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_rationale_328",
-      "target": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions"
     },
     {
       "relation": "rationale_for",
@@ -59332,9 +59579,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L367",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_rationale_367",
-      "target": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy"
     },
     {
       "relation": "rationale_for",
@@ -59342,9 +59589,9 @@
       "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L401",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_rationale_401",
-      "target": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
-      "confidence_score": 1.0
+      "target": "unit_test_mcp_tooling_test_capabilities_no_policy_branch"
     },
     {
       "relation": "calls",
@@ -67353,5 +67600,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4a444b8b9ba2a9d5d59432ebbb1f29f9823a0b30"
+  "built_at_commit": "906d5c26b452c72e53d18f731f4a9410b5f04d67"
 }

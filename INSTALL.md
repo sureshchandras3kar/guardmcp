@@ -139,6 +139,7 @@ All settings are environment variables, prefix `GUARDMCP_`.
 |-----|---------|-------|
 | `GUARDMCP_APPROVAL_API_TOKEN` | `""` | **required** for `sse`/`streamable-http` (else server refuses to start) |
 | `GUARDMCP_APPROVAL_ALLOW_INSECURE` | `false` | local-only override of the above (NOT for prod) |
+| `GUARDMCP_ALLOWED_HOSTS` | host + loopback | DNS-rebinding protection: Host-header allow-list for the approval API (JSON list). Default = configured host + `localhost`/`127.0.0.1`. Add proxy/ingress hostnames; `["*"]` disables (trusted-proxy only). Unknown Host → 400. |
 | `GUARDMCP_AUDIT_HMAC_SECRET` | `""` | set → tamper-evident HMAC audit chain |
 | `GUARDMCP_AUDIT_FAIL_CLOSED` | `false` | true → abort an op if its audit record can't be written |
 
