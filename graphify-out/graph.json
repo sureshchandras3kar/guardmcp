@@ -20,7 +20,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "guardmcp_main",
-      "community": 47,
+      "community": 124,
       "norm_label": "__main__.py"
     },
     {
@@ -170,7 +170,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "api_approval",
-      "community": 115,
+      "community": 133,
       "norm_label": "approval.py"
     },
     {
@@ -180,7 +180,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "api_approval_decisionpayload",
-      "community": 115,
+      "community": 133,
       "norm_label": "decisionpayload"
     },
     {
@@ -200,7 +200,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "api_approval_build_approval_app",
-      "community": 115,
+      "community": 133,
       "norm_label": "build_approval_app()"
     },
     {
@@ -210,7 +210,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "src_guardmcp_api_approval_py_approvalstore",
-      "community": 115,
+      "community": 133,
       "norm_label": "approvalstore"
     },
     {
@@ -220,7 +220,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "readinessprobe",
-      "community": 115,
+      "community": 133,
       "norm_label": "readinessprobe"
     },
     {
@@ -230,7 +230,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "fastapi",
-      "community": 115,
+      "community": 133,
       "norm_label": "fastapi"
     },
     {
@@ -240,7 +240,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "api_approval_rationale_25",
-      "community": 115,
+      "community": 133,
       "norm_label": "build the approval rest api.      when api_token is set, all requests must inclu"
     },
     {
@@ -430,7 +430,7 @@
       "source_location": "L488",
       "_origin": "ast",
       "id": "argumentparser",
-      "community": 24,
+      "community": 124,
       "norm_label": "argumentparser"
     },
     {
@@ -590,7 +590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "conformance_plugin_conformance",
-      "community": 20,
+      "community": 23,
       "norm_label": "plugin_conformance.py"
     },
     {
@@ -660,7 +660,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "conformance_plugin_conformance_rationale_1",
-      "community": 20,
+      "community": 23,
       "norm_label": "reusable conformance checks for guardmcp databaseplugin implementations.  third-"
     },
     {
@@ -710,7 +710,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "approval_models",
-      "community": 47,
+      "community": 133,
       "norm_label": "models.py"
     },
     {
@@ -720,7 +720,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "approval_models_approvalrequest",
-      "community": 129,
+      "community": 133,
       "norm_label": "approvalrequest"
     },
     {
@@ -730,7 +730,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "approval_store",
-      "community": 47,
+      "community": 133,
       "norm_label": "store.py"
     },
     {
@@ -740,7 +740,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "approval_store_approvalstore",
-      "community": 43,
+      "community": 129,
       "norm_label": "approvalstore"
     },
     {
@@ -750,7 +750,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "approval_store_approvalstore_init",
-      "community": 43,
+      "community": 129,
       "norm_label": ".__init__()"
     },
     {
@@ -760,7 +760,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "approval_store_approvalstore_create",
-      "community": 129,
+      "community": 133,
       "norm_label": ".create()"
     },
     {
@@ -770,7 +770,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_guardmcp_core_approval_store_py_risklevel",
-      "community": 129,
+      "community": 133,
       "norm_label": "risklevel"
     },
     {
@@ -780,7 +780,7 @@
       "source_location": "L16",
       "_origin": "ast",
       "id": "src_guardmcp_core_approval_store_py_any",
-      "community": 129,
+      "community": 133,
       "norm_label": "any"
     },
     {
@@ -830,7 +830,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "approval_store_approvalstore_prune",
-      "community": 43,
+      "community": 129,
       "norm_label": ".prune()"
     },
     {
@@ -860,7 +860,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "approval_store_rationale_57",
-      "community": 43,
+      "community": 129,
       "norm_label": "remove resolved approvals older than max_age_seconds. returns count pruned."
     },
     {
@@ -890,7 +890,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "audit_logger",
-      "community": 47,
+      "community": 134,
       "norm_label": "logger.py"
     },
     {
@@ -1050,7 +1050,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "audit_logger_rationale_1",
-      "community": 47,
+      "community": 134,
       "norm_label": "tamper-evident audit log (per-process hmac chain).  risk #5 \u2014 multi-writer attri"
     },
     {
@@ -1130,7 +1130,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "audit_verify",
-      "community": 45,
+      "community": 134,
       "norm_label": "verify.py"
     },
     {
@@ -1140,7 +1140,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "audit_verify_sign_record",
-      "community": 45,
+      "community": 134,
       "norm_label": "sign_record()"
     },
     {
@@ -1200,7 +1200,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "audit_verify_rationale_1",
-      "community": 45,
+      "community": 134,
       "norm_label": "offline verification of the tamper-evident audit hmac chain.  this shares one im"
     },
     {
@@ -1210,7 +1210,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "audit_verify_rationale_24",
-      "community": 45,
+      "community": 134,
       "norm_label": "hmac-sha256 of ``prev_hash + base_line`` \u2192 hex digest.      identical math to ``"
     },
     {
@@ -1270,7 +1270,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "interfaces_backend",
-      "community": 51,
+      "community": 47,
       "norm_label": "backend.py"
     },
     {
@@ -1290,7 +1290,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "protocol",
-      "community": 119,
+      "community": 36,
       "norm_label": "protocol"
     },
     {
@@ -1380,7 +1380,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "interfaces_backend_rationale_1",
-      "community": 51,
+      "community": 47,
       "norm_label": "backend protocol \u2014 internal execution interface consumed by guardpipeline.  not"
     },
     {
@@ -1480,7 +1480,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "str",
-      "community": 47,
+      "community": 109,
       "norm_label": "str"
     },
     {
@@ -1490,7 +1490,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "enum",
-      "community": 20,
+      "community": 109,
       "norm_label": "enum"
     },
     {
@@ -1550,7 +1550,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "interfaces_cost",
-      "community": 20,
+      "community": 109,
       "norm_label": "cost.py"
     },
     {
@@ -1560,7 +1560,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "interfaces_cost_costlevel",
-      "community": 20,
+      "community": 109,
       "norm_label": "costlevel"
     },
     {
@@ -1590,7 +1590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "interfaces_cost_rationale_1",
-      "community": 20,
+      "community": 109,
       "norm_label": "query cost estimation \u2014 the frozen, backend-neutral public contract.  a plugin e"
     },
     {
@@ -1690,7 +1690,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "interfaces_errors_errorcode",
-      "community": 47,
+      "community": 109,
       "norm_label": "errorcode"
     },
     {
@@ -1750,7 +1750,7 @@
       "source_location": "L40",
       "_origin": "ast",
       "id": "interfaces_errors_rationale_40",
-      "community": 47,
+      "community": 109,
       "norm_label": "canonical machine-readable error codes.      this is a core concept: policy/pipe"
     },
     {
@@ -1860,7 +1860,7 @@
       "source_location": "L19",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin",
-      "community": 110,
+      "community": 20,
       "norm_label": "databaseplugin"
     },
     {
@@ -1870,7 +1870,7 @@
       "source_location": "",
       "_origin": "ast",
       "id": "abc",
-      "community": 110,
+      "community": 20,
       "norm_label": "abc"
     },
     {
@@ -1880,7 +1880,7 @@
       "source_location": "L41",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_manifest",
-      "community": 110,
+      "community": 20,
       "norm_label": ".manifest()"
     },
     {
@@ -1890,7 +1890,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_connect",
-      "community": 110,
+      "community": 20,
       "norm_label": ".connect()"
     },
     {
@@ -1900,7 +1900,7 @@
       "source_location": "L55",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_health",
-      "community": 110,
+      "community": 20,
       "norm_label": ".health()"
     },
     {
@@ -1910,7 +1910,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_close",
-      "community": 110,
+      "community": 20,
       "norm_label": ".close()"
     },
     {
@@ -1920,7 +1920,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_execute",
-      "community": 110,
+      "community": 20,
       "norm_label": ".execute()"
     },
     {
@@ -1930,7 +1930,7 @@
       "source_location": "L59",
       "_origin": "ast",
       "id": "src_guardmcp_core_interfaces_plugin_py_capabilityrequest",
-      "community": 110,
+      "community": 20,
       "norm_label": "capabilityrequest"
     },
     {
@@ -1950,7 +1950,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_schema",
-      "community": 110,
+      "community": 20,
       "norm_label": ".schema()"
     },
     {
@@ -1960,7 +1960,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_list_resources",
-      "community": 110,
+      "community": 20,
       "norm_label": ".list_resources()"
     },
     {
@@ -1970,7 +1970,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_validate_request",
-      "community": 110,
+      "community": 20,
       "norm_label": ".validate_request()"
     },
     {
@@ -1980,7 +1980,7 @@
       "source_location": "L67",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_cross_resource_refs",
-      "community": 110,
+      "community": 20,
       "norm_label": ".cross_resource_refs()"
     },
     {
@@ -1990,7 +1990,7 @@
       "source_location": "L76",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_estimate",
-      "community": 110,
+      "community": 20,
       "norm_label": ".estimate()"
     },
     {
@@ -2010,7 +2010,7 @@
       "source_location": "L83",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_begin",
-      "community": 110,
+      "community": 20,
       "norm_label": ".begin()"
     },
     {
@@ -2030,7 +2030,7 @@
       "source_location": "L91",
       "_origin": "ast",
       "id": "interfaces_plugin_databaseplugin_rollback",
-      "community": 110,
+      "community": 20,
       "norm_label": ".rollback()"
     },
     {
@@ -2050,7 +2050,7 @@
       "source_location": "L20",
       "_origin": "ast",
       "id": "interfaces_plugin_rationale_20",
-      "community": 110,
+      "community": 20,
       "norm_label": "public, capability-based contract for a database backend plugin."
     },
     {
@@ -2060,7 +2060,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "interfaces_plugin_rationale_42",
-      "community": 110,
+      "community": 20,
       "norm_label": "return {name, api_version, supported, dialect_features} from class         attrs"
     },
     {
@@ -2070,7 +2070,7 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "interfaces_plugin_rationale_84",
-      "community": 110,
+      "community": 20,
       "norm_label": "begin a transaction and return its tx_id, or none if unsupported."
     },
     {
@@ -2090,7 +2090,7 @@
       "source_location": "L92",
       "_origin": "ast",
       "id": "interfaces_plugin_rationale_92",
-      "community": 110,
+      "community": 20,
       "norm_label": "roll back the transaction identified by tx_id. no-op by default."
     },
     {
@@ -2210,7 +2210,7 @@
       "source_location": "L56",
       "_origin": "ast",
       "id": "interfaces_stores_ratelimiterprotocol",
-      "community": 119,
+      "community": 47,
       "norm_label": "ratelimiterprotocol"
     },
     {
@@ -2220,7 +2220,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "interfaces_stores_ratelimiterprotocol_enabled",
-      "community": 119,
+      "community": 47,
       "norm_label": ".enabled()"
     },
     {
@@ -2230,7 +2230,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "interfaces_stores_ratelimiterprotocol_check",
-      "community": 119,
+      "community": 47,
       "norm_label": ".check()"
     },
     {
@@ -2300,7 +2300,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "interfaces_stores_rationale_57",
-      "community": 119,
+      "community": 47,
       "norm_label": "per-agent admission control.      a distributed impl (shared token bucket in red"
     },
     {
@@ -2500,7 +2500,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "models_domain_action",
-      "community": 47,
+      "community": 0,
       "norm_label": "action"
     },
     {
@@ -2510,7 +2510,7 @@
       "source_location": "L77",
       "_origin": "ast",
       "id": "models_domain_risklevel",
-      "community": 47,
+      "community": 0,
       "norm_label": "risklevel"
     },
     {
@@ -2520,7 +2520,7 @@
       "source_location": "L84",
       "_origin": "ast",
       "id": "models_domain_decisionstatus",
-      "community": 14,
+      "community": 0,
       "norm_label": "decisionstatus"
     },
     {
@@ -2550,7 +2550,7 @@
       "source_location": "L108",
       "_origin": "ast",
       "id": "models_domain_auditrecord",
-      "community": 47,
+      "community": 134,
       "norm_label": "auditrecord"
     },
     {
@@ -2570,7 +2570,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "core_neutral_neutralize",
-      "community": 1,
+      "community": 111,
       "norm_label": "neutralize()"
     },
     {
@@ -2580,7 +2580,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_guardmcp_core_neutral_py_action",
-      "community": 1,
+      "community": 111,
       "norm_label": "action"
     },
     {
@@ -2590,7 +2590,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_guardmcp_core_neutral_py_any",
-      "community": 1,
+      "community": 111,
       "norm_label": "any"
     },
     {
@@ -2600,7 +2600,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "core_neutral_rationale_7",
-      "community": 1,
+      "community": 111,
       "norm_label": "#6: backend-neutral success accessors.      map a backend-native success `data`"
     },
     {
@@ -2630,7 +2630,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "observability_log_parse_traceparent",
-      "community": 10,
+      "community": 115,
       "norm_label": "parse_traceparent()"
     },
     {
@@ -2640,7 +2640,7 @@
       "source_location": "L61",
       "_origin": "ast",
       "id": "observability_log_new_trace_id",
-      "community": 10,
+      "community": 115,
       "norm_label": "new_trace_id()"
     },
     {
@@ -2720,7 +2720,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "observability_log_rationale_37",
-      "community": 10,
+      "community": 115,
       "norm_label": "parse a w3c `traceparent` header and return its 32-hex trace-id, or none     if"
     },
     {
@@ -2730,7 +2730,7 @@
       "source_location": "L62",
       "_origin": "ast",
       "id": "observability_log_rationale_62",
-      "community": 10,
+      "community": 115,
       "norm_label": "set the current trace id and return it.      #9: when a valid inbound w3c `trace"
     },
     {
@@ -2890,7 +2890,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "core_pipeline_guardpipeline",
-      "community": 43,
+      "community": 1,
       "norm_label": "guardpipeline"
     },
     {
@@ -2900,7 +2900,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "core_pipeline_guardpipeline_init",
-      "community": 138,
+      "community": 1,
       "norm_label": ".__init__()"
     },
     {
@@ -2910,7 +2910,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "src_guardmcp_core_pipeline_py_policyloader",
-      "community": 138,
+      "community": 1,
       "norm_label": "policyloader"
     },
     {
@@ -2920,7 +2920,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "policyengine",
-      "community": 138,
+      "community": 1,
       "norm_label": "policyengine"
     },
     {
@@ -2930,7 +2930,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "riskengine",
-      "community": 138,
+      "community": 1,
       "norm_label": "riskengine"
     },
     {
@@ -2940,7 +2940,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "auditsinkprotocol",
-      "community": 138,
+      "community": 1,
       "norm_label": "auditsinkprotocol"
     },
     {
@@ -2950,7 +2950,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "approvalstoreprotocol",
-      "community": 138,
+      "community": 1,
       "norm_label": "approvalstoreprotocol"
     },
     {
@@ -3130,7 +3130,7 @@
       "source_location": "L559",
       "_origin": "ast",
       "id": "core_pipeline_guardpipeline_switch_connection_audited",
-      "community": 43,
+      "community": 1,
       "norm_label": ".switch_connection_audited()"
     },
     {
@@ -3140,7 +3140,7 @@
       "source_location": "L591",
       "_origin": "ast",
       "id": "core_pipeline_guardpipeline_switch_connection",
-      "community": 43,
+      "community": 1,
       "norm_label": ".switch_connection()"
     },
     {
@@ -3150,7 +3150,7 @@
       "source_location": "L596",
       "_origin": "ast",
       "id": "core_pipeline_guardpipeline_list_connections",
-      "community": 43,
+      "community": 1,
       "norm_label": ".list_connections()"
     },
     {
@@ -3160,7 +3160,7 @@
       "source_location": "L601",
       "_origin": "ast",
       "id": "core_pipeline_guardpipeline_active_connection",
-      "community": 43,
+      "community": 1,
       "norm_label": ".active_connection()"
     },
     {
@@ -3320,7 +3320,7 @@
       "source_location": "L560",
       "_origin": "ast",
       "id": "core_pipeline_rationale_560",
-      "community": 43,
+      "community": 1,
       "norm_label": "cr-2: switching the active connection is a security-relevant control         act"
     },
     {
@@ -3360,7 +3360,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "policy_engine_policyengine",
-      "community": 43,
+      "community": 0,
       "norm_label": "policyengine"
     },
     {
@@ -3430,7 +3430,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "policy_explain",
-      "community": 13,
+      "community": 43,
       "norm_label": "explain.py"
     },
     {
@@ -3440,7 +3440,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "policy_explain_matchedrule",
-      "community": 13,
+      "community": 43,
       "norm_label": "matchedrule"
     },
     {
@@ -3460,7 +3460,7 @@
       "source_location": "L46",
       "_origin": "ast",
       "id": "policy_explain_simulationimpact",
-      "community": 13,
+      "community": 43,
       "norm_label": "simulationimpact"
     },
     {
@@ -3480,7 +3480,7 @@
       "source_location": "L70",
       "_origin": "ast",
       "id": "policy_explain_build_explanation",
-      "community": 13,
+      "community": 43,
       "norm_label": "build_explanation()"
     },
     {
@@ -3500,7 +3500,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "policy_explain_build_policy_from_input",
-      "community": 13,
+      "community": 43,
       "norm_label": "build_policy_from_input()"
     },
     {
@@ -3520,7 +3520,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "src_guardmcp_core_policy_explain_py_policy",
-      "community": 13,
+      "community": 43,
       "norm_label": "policy"
     },
     {
@@ -3530,7 +3530,7 @@
       "source_location": "L135",
       "_origin": "ast",
       "id": "policy_explain_sorted",
-      "community": 13,
+      "community": 43,
       "norm_label": "_sorted()"
     },
     {
@@ -3540,7 +3540,7 @@
       "source_location": "L139",
       "_origin": "ast",
       "id": "policy_explain_diff_policies",
-      "community": 13,
+      "community": 43,
       "norm_label": "diff_policies()"
     },
     {
@@ -3550,7 +3550,7 @@
       "source_location": "L209",
       "_origin": "ast",
       "id": "policy_explain_effective_mask_map",
-      "community": 13,
+      "community": 43,
       "norm_label": "_effective_mask_map()"
     },
     {
@@ -3560,7 +3560,7 @@
       "source_location": "L233",
       "_origin": "ast",
       "id": "policy_explain_classify_impact",
-      "community": 13,
+      "community": 43,
       "norm_label": "classify_impact()"
     },
     {
@@ -3570,7 +3570,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "policy_explain_rationale_1",
-      "community": 13,
+      "community": 43,
       "norm_label": "public, frozen output models + helpers for the policy explain and simulate mcp t"
     },
     {
@@ -3600,7 +3600,7 @@
       "source_location": "L71",
       "_origin": "ast",
       "id": "policy_explain_rationale_71",
-      "community": 13,
+      "community": 43,
       "norm_label": "build a policyexplanation from a decision + the trace the engine filled.      pu"
     },
     {
@@ -3610,7 +3610,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "policy_explain_rationale_96",
-      "community": 13,
+      "community": 43,
       "norm_label": "build a fully-resolved policy from a dict or yaml string.      reuses the loader"
     },
     {
@@ -3620,7 +3620,7 @@
       "source_location": "L140",
       "_origin": "ast",
       "id": "policy_explain_rationale_140",
-      "community": 13,
+      "community": 43,
       "norm_label": "human-readable diffs between two policy objects (no decision logic)."
     },
     {
@@ -3630,7 +3630,7 @@
       "source_location": "L210",
       "_origin": "ast",
       "id": "policy_explain_rationale_210",
-      "community": 13,
+      "community": 43,
       "norm_label": "normalize mask_fields to a {collection: [fields]} map. flat list -> {\"*\": ...}."
     },
     {
@@ -3640,7 +3640,7 @@
       "source_location": "L234",
       "_origin": "ast",
       "id": "policy_explain_rationale_234",
-      "community": 13,
+      "community": 43,
       "norm_label": "heuristic security rating from the human-readable diffs.      high if any change"
     },
     {
@@ -3650,7 +3650,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "policy_loader",
-      "community": 47,
+      "community": 122,
       "norm_label": "loader.py"
     },
     {
@@ -3660,7 +3660,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "policy_loader_union",
-      "community": 135,
+      "community": 122,
       "norm_label": "_union()"
     },
     {
@@ -3670,7 +3670,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "policy_loader_merge_mask_fields",
-      "community": 135,
+      "community": 122,
       "norm_label": "_merge_mask_fields()"
     },
     {
@@ -3680,7 +3680,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "policy_loader_merge",
-      "community": 135,
+      "community": 122,
       "norm_label": "_merge()"
     },
     {
@@ -3690,7 +3690,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "src_guardmcp_core_policy_loader_py_policy",
-      "community": 135,
+      "community": 122,
       "norm_label": "policy"
     },
     {
@@ -3700,7 +3700,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "policy_loader_resolve_inheritance",
-      "community": 13,
+      "community": 43,
       "norm_label": "_resolve_inheritance()"
     },
     {
@@ -3730,7 +3730,7 @@
       "source_location": "L102",
       "_origin": "ast",
       "id": "src_guardmcp_core_policy_loader_py_path",
-      "community": 14,
+      "community": 122,
       "norm_label": "path"
     },
     {
@@ -3780,7 +3780,7 @@
       "source_location": "L197",
       "_origin": "ast",
       "id": "policy_loader_policyloader_get",
-      "community": 135,
+      "community": 122,
       "norm_label": ".get()"
     },
     {
@@ -3790,7 +3790,7 @@
       "source_location": "L200",
       "_origin": "ast",
       "id": "policy_loader_policyloader_all",
-      "community": 135,
+      "community": 122,
       "norm_label": ".all()"
     },
     {
@@ -3830,7 +3830,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "policy_loader_rationale_12",
-      "community": 135,
+      "community": 122,
       "norm_label": "order-preserving union of two string lists (base first, child appended)."
     },
     {
@@ -3840,7 +3840,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "policy_loader_rationale_25",
-      "community": 135,
+      "community": 122,
       "norm_label": "merge mask_fields. if either is a dict, merge per-collection (union per     key)"
     },
     {
@@ -3850,7 +3850,7 @@
       "source_location": "L38",
       "_origin": "ast",
       "id": "policy_loader_rationale_38",
-      "community": 135,
+      "community": 122,
       "norm_label": "merge `base` under `child` (child overrides). scalars: child wins when set     t"
     },
     {
@@ -3860,7 +3860,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "policy_loader_rationale_74",
-      "community": 13,
+      "community": 43,
       "norm_label": "resolve `extends` chains into fully-merged policies. detects cycles and     miss"
     },
     {
@@ -4520,7 +4520,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "registry_connections",
-      "community": 51,
+      "community": 141,
       "norm_label": "connections.py"
     },
     {
@@ -4530,7 +4530,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "registry_connections_closableclient",
-      "community": 119,
+      "community": 36,
       "norm_label": "closableclient"
     },
     {
@@ -4540,7 +4540,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "registry_connections_closableclient_close",
-      "community": 119,
+      "community": 106,
       "norm_label": ".close()"
     },
     {
@@ -4660,7 +4660,7 @@
       "source_location": "L115",
       "_origin": "ast",
       "id": "registry_connections_connectionregistry_close_all",
-      "community": 119,
+      "community": 106,
       "norm_label": ".close_all()"
     },
     {
@@ -4670,7 +4670,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "registry_connections_rationale_1",
-      "community": 51,
+      "community": 141,
       "norm_label": "connection registry for switch-connection support. each named connection maps to"
     },
     {
@@ -4680,7 +4680,7 @@
       "source_location": "L26",
       "_origin": "ast",
       "id": "registry_connections_rationale_26",
-      "community": 119,
+      "community": 36,
       "norm_label": "minimal contract a connection client must satisfy."
     },
     {
@@ -4900,7 +4900,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "risk_engine",
-      "community": 47,
+      "community": 109,
       "norm_label": "engine.py"
     },
     {
@@ -4930,7 +4930,7 @@
       "source_location": "L65",
       "_origin": "ast",
       "id": "risk_engine_riskengine",
-      "community": 47,
+      "community": 70,
       "norm_label": "riskengine"
     },
     {
@@ -5020,7 +5020,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_validation",
-      "community": 139,
+      "community": 118,
       "norm_label": "validation.py"
     },
     {
@@ -5030,7 +5030,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "core_validation_parse_json_or_pass",
-      "community": 139,
+      "community": 118,
       "norm_label": "_parse_json_or_pass()"
     },
     {
@@ -5040,7 +5040,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "core_validation_coerce_none_sentinels",
-      "community": 139,
+      "community": 118,
       "norm_label": "_coerce_none_sentinels()"
     },
     {
@@ -5070,7 +5070,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "core_validation_rationale_1",
-      "community": 139,
+      "community": 118,
       "norm_label": "database-agnostic grounding/security helpers.  mongodb-specific validation (oper"
     },
     {
@@ -5080,7 +5080,7 @@
       "source_location": "L23",
       "_origin": "ast",
       "id": "core_validation_rationale_23",
-      "community": 139,
+      "community": 118,
       "norm_label": "coerce a json-encoded string to dict/list. non-strings pass through."
     },
     {
@@ -5090,7 +5090,7 @@
       "source_location": "L33",
       "_origin": "ast",
       "id": "core_validation_rationale_33",
-      "community": 139,
+      "community": 118,
       "norm_label": "map '', 'null', 'none', 'undefined' \u2192 none for optional dict params."
     },
     {
@@ -5130,7 +5130,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_main",
-      "community": 9,
+      "community": 73,
       "norm_label": "__main__.py"
     },
     {
@@ -5150,7 +5150,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "assertions_engine",
-      "community": 9,
+      "community": 114,
       "norm_label": "engine.py"
     },
     {
@@ -5330,7 +5330,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "assertions_engine_rationale_1",
-      "community": 9,
+      "community": 114,
       "norm_label": "deterministic assertion engine for guardmcp evals.  checks actual pipeline outpu"
     },
     {
@@ -5350,7 +5350,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_cli",
-      "community": 9,
+      "community": 73,
       "norm_label": "cli.py"
     },
     {
@@ -5360,7 +5360,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "eval_cli_main",
-      "community": 9,
+      "community": 73,
       "norm_label": "main()"
     },
     {
@@ -5370,7 +5370,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_cli_rationale_1",
-      "community": 9,
+      "community": 73,
       "norm_label": "guardmcp eval \u2014 cli entry point.  usage:     python -m guardmcp.eval evals/cases"
     },
     {
@@ -5380,7 +5380,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_fixture",
-      "community": 9,
+      "community": 114,
       "norm_label": "fixture.py"
     },
     {
@@ -5390,7 +5390,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "eval_fixture_seed",
-      "community": 9,
+      "community": 114,
       "norm_label": "seed()"
     },
     {
@@ -5400,7 +5400,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_guardmcp_eval_fixture_py_asyncmongomockclient",
-      "community": 9,
+      "community": 114,
       "norm_label": "asyncmongomockclient"
     },
     {
@@ -5410,7 +5410,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "fixturedoc",
-      "community": 9,
+      "community": 114,
       "norm_label": "fixturedoc"
     },
     {
@@ -5420,7 +5420,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_fixture_rationale_1",
-      "community": 9,
+      "community": 114,
       "norm_label": "seed mongomock-motor databases from fixture declarations."
     },
     {
@@ -5430,7 +5430,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_loader",
-      "community": 9,
+      "community": 119,
       "norm_label": "loader.py"
     },
     {
@@ -5440,7 +5440,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "eval_loader_discover",
-      "community": 9,
+      "community": 119,
       "norm_label": "discover()"
     },
     {
@@ -5450,7 +5450,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_guardmcp_eval_loader_py_path",
-      "community": 9,
+      "community": 119,
       "norm_label": "path"
     },
     {
@@ -5460,7 +5460,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "src_guardmcp_eval_loader_py_evalcase",
-      "community": 9,
+      "community": 119,
       "norm_label": "evalcase"
     },
     {
@@ -5470,7 +5470,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "eval_loader_load_file",
-      "community": 9,
+      "community": 119,
       "norm_label": "_load_file()"
     },
     {
@@ -5480,7 +5480,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_loader_rationale_1",
-      "community": 9,
+      "community": 119,
       "norm_label": "discover and load yaml eval case files."
     },
     {
@@ -5490,7 +5490,7 @@
       "source_location": "L11",
       "_origin": "ast",
       "id": "eval_loader_rationale_11",
-      "community": 9,
+      "community": 119,
       "norm_label": "recursively find .yaml eval files and parse them into evalcase objects."
     },
     {
@@ -5500,7 +5500,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_models",
-      "community": 9,
+      "community": 114,
       "norm_label": "models.py"
     },
     {
@@ -5510,7 +5510,7 @@
       "source_location": "L9",
       "_origin": "ast",
       "id": "eval_models_expecteddecision",
-      "community": 9,
+      "community": 109,
       "norm_label": "expecteddecision"
     },
     {
@@ -5520,7 +5520,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "eval_models_evalrequest",
-      "community": 9,
+      "community": 114,
       "norm_label": "evalrequest"
     },
     {
@@ -5530,7 +5530,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "eval_models_fixturedoc",
-      "community": 9,
+      "community": 114,
       "norm_label": "fixturedoc"
     },
     {
@@ -5550,7 +5550,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "eval_models_expectedresult",
-      "community": 9,
+      "community": 114,
       "norm_label": "expectedresult"
     },
     {
@@ -5580,7 +5580,7 @@
       "source_location": "L95",
       "_origin": "ast",
       "id": "eval_models_evalreport",
-      "community": 9,
+      "community": 73,
       "norm_label": "evalreport"
     },
     {
@@ -5590,7 +5590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_models_rationale_1",
-      "community": 9,
+      "community": 114,
       "norm_label": "domain models for the guardmcp eval framework."
     },
     {
@@ -5610,7 +5610,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_console",
-      "community": 9,
+      "community": 73,
       "norm_label": "console.py"
     },
     {
@@ -5620,7 +5620,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "reports_console_render",
-      "community": 9,
+      "community": 73,
       "norm_label": "render()"
     },
     {
@@ -5630,7 +5630,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "src_guardmcp_eval_reports_console_py_evalreport",
-      "community": 9,
+      "community": 73,
       "norm_label": "evalreport"
     },
     {
@@ -5640,7 +5640,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_console_rationale_1",
-      "community": 9,
+      "community": 73,
       "norm_label": "console report renderer."
     },
     {
@@ -5650,7 +5650,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_json_report",
-      "community": 9,
+      "community": 73,
       "norm_label": "json_report.py"
     },
     {
@@ -5660,7 +5660,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "reports_json_report_render",
-      "community": 9,
+      "community": 73,
       "norm_label": "render()"
     },
     {
@@ -5670,7 +5670,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_guardmcp_eval_reports_json_report_py_evalreport",
-      "community": 9,
+      "community": 73,
       "norm_label": "evalreport"
     },
     {
@@ -5680,7 +5680,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_json_report_rationale_1",
-      "community": 9,
+      "community": 73,
       "norm_label": "json report renderer."
     },
     {
@@ -5690,7 +5690,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_junit",
-      "community": 9,
+      "community": 73,
       "norm_label": "junit.py"
     },
     {
@@ -5700,7 +5700,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "reports_junit_render",
-      "community": 9,
+      "community": 73,
       "norm_label": "render()"
     },
     {
@@ -5710,7 +5710,7 @@
       "source_location": "L8",
       "_origin": "ast",
       "id": "src_guardmcp_eval_reports_junit_py_evalreport",
-      "community": 9,
+      "community": 73,
       "norm_label": "evalreport"
     },
     {
@@ -5720,7 +5720,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "reports_junit_rationale_1",
-      "community": 9,
+      "community": 73,
       "norm_label": "junit xml report renderer \u2014 compatible with github actions and ci systems."
     },
     {
@@ -5730,7 +5730,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_runner",
-      "community": 47,
+      "community": 9,
       "norm_label": "runner.py"
     },
     {
@@ -5930,7 +5930,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "eval_runner_rationale_1",
-      "community": 47,
+      "community": 9,
       "norm_label": "eval runner: builds an isolated guardpipeline per eval case and runs it.  uses m"
     },
     {
@@ -6190,7 +6190,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "src_guardmcp_plugins_mongodb_cost_py_costestimate",
-      "community": 109,
+      "community": 18,
       "norm_label": "costestimate"
     },
     {
@@ -6740,7 +6740,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mongodb_guard",
-      "community": 69,
+      "community": 3,
       "norm_label": "guard.py"
     },
     {
@@ -6830,7 +6830,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mongodb_guard_rationale_1",
-      "community": 69,
+      "community": 3,
       "norm_label": "mongodb-specific validation / guard logic.  moved out of core/validation.py in p"
     },
     {
@@ -6930,7 +6930,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "datetime",
-      "community": 47,
+      "community": 62,
       "norm_label": "datetime"
     },
     {
@@ -7120,7 +7120,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mongodb_plugin",
-      "community": 20,
+      "community": 109,
       "norm_label": "plugin.py"
     },
     {
@@ -7150,7 +7150,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "mongodb_plugin_mongoplugin_init",
-      "community": 42,
+      "community": 18,
       "norm_label": ".__init__()"
     },
     {
@@ -7160,7 +7160,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "src_guardmcp_plugins_mongodb_plugin_py_mongoexecutor",
-      "community": 42,
+      "community": 18,
       "norm_label": "mongoexecutor"
     },
     {
@@ -7170,7 +7170,7 @@
       "source_location": "L57",
       "_origin": "ast",
       "id": "src_guardmcp_plugins_mongodb_plugin_py_mongoclient",
-      "community": 42,
+      "community": 18,
       "norm_label": "mongoclient"
     },
     {
@@ -7340,7 +7340,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "mongodb_plugin_rationale_1",
-      "community": 20,
+      "community": 109,
       "norm_label": "formal mongodb databaseplugin.  owns mongodb-specific guard knowledge (aggregati"
     },
     {
@@ -9280,7 +9280,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_init",
-      "community": 4,
+      "community": 3,
       "norm_label": "__init__.py"
     },
     {
@@ -9310,7 +9310,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_init_rationale_1",
-      "community": 4,
+      "community": 3,
       "norm_label": "mcp tool definitions \u2014 capability-neutral db_* tools with mongodb_* aliases.  de"
     },
     {
@@ -9390,7 +9390,7 @@
       "source_location": "L131",
       "_origin": "ast",
       "id": "tools_common_validation_guard",
-      "community": 4,
+      "community": 3,
       "norm_label": "_validation_guard()"
     },
     {
@@ -9400,7 +9400,7 @@
       "source_location": "L150",
       "_origin": "ast",
       "id": "tools_common_capability_check",
-      "community": 4,
+      "community": 3,
       "norm_label": "_capability_check()"
     },
     {
@@ -9470,7 +9470,7 @@
       "source_location": "L276",
       "_origin": "ast",
       "id": "tools_common_toolcontext",
-      "community": 118,
+      "community": 3,
       "norm_label": "toolcontext"
     },
     {
@@ -9520,7 +9520,7 @@
       "source_location": "L132",
       "_origin": "ast",
       "id": "tools_common_rationale_132",
-      "community": 4,
+      "community": 3,
       "norm_label": "wrap an async tool handler so validation errors return a uniform validation"
     },
     {
@@ -9530,7 +9530,7 @@
       "source_location": "L151",
       "_origin": "ast",
       "id": "tools_common_rationale_151",
-      "community": 4,
+      "community": 3,
       "norm_label": "point 9: if the active connection has a plugin, verify it supports the     capab"
     },
     {
@@ -9570,7 +9570,7 @@
       "source_location": "L277",
       "_origin": "ast",
       "id": "tools_common_rationale_277",
-      "community": 118,
+      "community": 3,
       "norm_label": "bundles getters + prebuilt annotations shared by all tool modules."
     },
     {
@@ -9630,7 +9630,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_init",
-      "community": 118,
+      "community": 4,
       "norm_label": "__init__.py"
     },
     {
@@ -9640,7 +9640,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "meta_init_register",
-      "community": 118,
+      "community": 135,
       "norm_label": "register()"
     },
     {
@@ -9650,7 +9650,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_init_py_fastmcp",
-      "community": 118,
+      "community": 135,
       "norm_label": "fastmcp"
     },
     {
@@ -9660,7 +9660,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_init_py_toolcontext",
-      "community": 118,
+      "community": 135,
       "norm_label": "toolcontext"
     },
     {
@@ -9670,7 +9670,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_init_rationale_1",
-      "community": 118,
+      "community": 4,
       "norm_label": "guardmcp meta tools (single-named, no db_/mongodb_ alias).  the former monolithi"
     },
     {
@@ -9680,7 +9680,7 @@
       "source_location": "L25",
       "_origin": "ast",
       "id": "meta_init_rationale_25",
-      "community": 118,
+      "community": 135,
       "norm_label": "register all meta tools onto ``mcp``."
     },
     {
@@ -9697,7 +9697,7 @@
       "label": "register()",
       "file_type": "code",
       "source_file": "src/guardmcp/server/tools/meta/capabilities.py",
-      "source_location": "L18",
+      "source_location": "L50",
       "_origin": "ast",
       "id": "meta_capabilities_register",
       "community": 4,
@@ -9707,7 +9707,7 @@
       "label": "FastMCP",
       "file_type": "code",
       "source_file": "src/guardmcp/server/tools/meta/capabilities.py",
-      "source_location": "L18",
+      "source_location": "L50",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_capabilities_py_fastmcp",
       "community": 4,
@@ -9717,21 +9717,21 @@
       "label": "ToolContext",
       "file_type": "code",
       "source_file": "src/guardmcp/server/tools/meta/capabilities.py",
-      "source_location": "L18",
+      "source_location": "L50",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_capabilities_py_toolcontext",
       "community": 4,
       "norm_label": "toolcontext"
     },
     {
-      "label": "guardmcp_capabilities \u2014 backend + per-collection permitted-action discovery.",
+      "label": "guardmcp_capabilities \u2014 backend + per-collection permitted-action discovery.  Pe",
       "file_type": "rationale",
       "source_file": "src/guardmcp/server/tools/meta/capabilities.py",
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_capabilities_rationale_1",
       "community": 4,
-      "norm_label": "guardmcp_capabilities \u2014 backend + per-collection permitted-action discovery."
+      "norm_label": "guardmcp_capabilities \u2014 backend + per-collection permitted-action discovery.  pe"
     },
     {
       "label": "explain.py",
@@ -9740,7 +9740,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_explain",
-      "community": 13,
+      "community": 43,
       "norm_label": "explain.py"
     },
     {
@@ -9750,7 +9750,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "meta_explain_register",
-      "community": 13,
+      "community": 43,
       "norm_label": "register()"
     },
     {
@@ -9760,7 +9760,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_explain_py_fastmcp",
-      "community": 13,
+      "community": 43,
       "norm_label": "fastmcp"
     },
     {
@@ -9770,7 +9770,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_explain_py_toolcontext",
-      "community": 13,
+      "community": 43,
       "norm_label": "toolcontext"
     },
     {
@@ -9780,7 +9780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_explain_rationale_1",
-      "community": 13,
+      "community": 43,
       "norm_label": "policy-introspection tools: guardmcp_explain_policy + guardmcp_simulate_policy."
     },
     {
@@ -9790,7 +9790,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_plan",
-      "community": 109,
+      "community": 4,
       "norm_label": "plan.py"
     },
     {
@@ -9800,7 +9800,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "meta_plan_estimate_cost",
-      "community": 109,
+      "community": 4,
       "norm_label": "_estimate_cost()"
     },
     {
@@ -9810,7 +9810,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_plan_py_action",
-      "community": 109,
+      "community": 4,
       "norm_label": "action"
     },
     {
@@ -9820,7 +9820,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "meta_plan_register",
-      "community": 109,
+      "community": 138,
       "norm_label": "register()"
     },
     {
@@ -9830,7 +9830,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_plan_py_fastmcp",
-      "community": 109,
+      "community": 138,
       "norm_label": "fastmcp"
     },
     {
@@ -9840,7 +9840,7 @@
       "source_location": "L74",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_plan_py_toolcontext",
-      "community": 109,
+      "community": 138,
       "norm_label": "toolcontext"
     },
     {
@@ -9850,7 +9850,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_plan_rationale_1",
-      "community": 109,
+      "community": 4,
       "norm_label": "guardmcp_plan \u2014 dry-run preview of authorization/risk/affected docs + cost."
     },
     {
@@ -9860,7 +9860,7 @@
       "source_location": "L31",
       "_origin": "ast",
       "id": "meta_plan_rationale_31",
-      "community": 109,
+      "community": 4,
       "norm_label": "best-effort normalized cost estimate for an operation. never raises:     returns"
     },
     {
@@ -9920,7 +9920,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_status",
-      "community": 118,
+      "community": 4,
       "norm_label": "status.py"
     },
     {
@@ -9930,7 +9930,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "meta_status_register",
-      "community": 118,
+      "community": 4,
       "norm_label": "register()"
     },
     {
@@ -9940,7 +9940,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_status_py_fastmcp",
-      "community": 118,
+      "community": 4,
       "norm_label": "fastmcp"
     },
     {
@@ -9950,7 +9950,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_meta_status_py_toolcontext",
-      "community": 118,
+      "community": 4,
       "norm_label": "toolcontext"
     },
     {
@@ -9960,7 +9960,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "meta_status_rationale_1",
-      "community": 118,
+      "community": 4,
       "norm_label": "guardmcp_status \u2014 connection status, statistics, version, policy summary."
     },
     {
@@ -9970,7 +9970,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_read",
-      "community": 4,
+      "community": 3,
       "norm_label": "read.py"
     },
     {
@@ -9980,7 +9980,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "tools_read_register",
-      "community": 118,
+      "community": 3,
       "norm_label": "register()"
     },
     {
@@ -9990,7 +9990,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_read_py_fastmcp",
-      "community": 118,
+      "community": 3,
       "norm_label": "fastmcp"
     },
     {
@@ -10000,7 +10000,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "src_guardmcp_server_tools_read_py_toolcontext",
-      "community": 118,
+      "community": 3,
       "norm_label": "toolcontext"
     },
     {
@@ -10010,7 +10010,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "tools_read_rationale_1",
-      "community": 4,
+      "community": 3,
       "norm_label": "read / introspection tools: find, count, aggregate, explain, schema, indexes, li"
     },
     {
@@ -10280,7 +10280,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_loader",
-      "community": 43,
+      "community": 0,
       "norm_label": "_loader"
     },
     {
@@ -10290,7 +10290,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_loader_init",
-      "community": 26,
+      "community": 0,
       "norm_label": ".__init__()"
     },
     {
@@ -10310,7 +10310,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_loader_get",
-      "community": 43,
+      "community": 0,
       "norm_label": ".get()"
     },
     {
@@ -10360,7 +10360,7 @@
       "source_location": "L86",
       "_origin": "ast",
       "id": "auditlogger",
-      "community": 43,
+      "community": 0,
       "norm_label": "auditlogger"
     },
     {
@@ -10370,7 +10370,7 @@
       "source_location": "L93",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_nest",
-      "community": 73,
+      "community": 26,
       "norm_label": "_nest()"
     },
     {
@@ -10380,7 +10380,7 @@
       "source_location": "L101",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_descend",
-      "community": 73,
+      "community": 26,
       "norm_label": "_descend()"
     },
     {
@@ -10390,7 +10390,7 @@
       "source_location": "L111",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_test_ec3_shallow_masked_field_is_masked",
-      "community": 73,
+      "community": 26,
       "norm_label": "test_ec3_shallow_masked_field_is_masked()"
     },
     {
@@ -10400,7 +10400,7 @@
       "source_location": "L118",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_test_ec3_deep_masked_field_is_masked_fieldmasker",
-      "community": 73,
+      "community": 26,
       "norm_label": "test_ec3_deep_masked_field_is_masked_fieldmasker()"
     },
     {
@@ -10410,7 +10410,7 @@
       "source_location": "L126",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_test_ec3_deep_masked_field_is_masked_transformer",
-      "community": 73,
+      "community": 26,
       "norm_label": "test_ec3_deep_masked_field_is_masked_transformer()"
     },
     {
@@ -10420,7 +10420,7 @@
       "source_location": "L133",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_test_ec3_secure_no_cleartext_at_depth_12",
-      "community": 73,
+      "community": 26,
       "norm_label": "test_ec3_secure_no_cleartext_at_depth_12()"
     },
     {
@@ -10570,7 +10570,7 @@
       "source_location": "L94",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_rationale_94",
-      "community": 73,
+      "community": 26,
       "norm_label": "return a doc with `leaf` wrapped `depth` levels deep under key 'lvl'."
     },
     {
@@ -10580,7 +10580,7 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_rationale_112",
-      "community": 73,
+      "community": 26,
       "norm_label": "control: a masked field within the depth limit is masked."
     },
     {
@@ -10590,7 +10590,7 @@
       "source_location": "L119",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_rationale_119",
-      "community": 73,
+      "community": 26,
       "norm_label": "ec-3 fixed: a masked field nested at depth 12 (was > old _max_depth==10)     is"
     },
     {
@@ -10600,7 +10600,7 @@
       "source_location": "L127",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_rationale_127",
-      "community": 73,
+      "community": 26,
       "norm_label": "ec-3 fixed: same, via the resulttransformer (find/aggregate path)."
     },
     {
@@ -10610,7 +10610,7 @@
       "source_location": "L134",
       "_origin": "ast",
       "id": "integration_test_adversarial_behavior_rationale_134",
-      "community": 73,
+      "community": 26,
       "norm_label": "ec-3 evidence (now secure): the deep ssn never comes back in clear-text."
     },
     {
@@ -10780,7 +10780,7 @@
       "source_location": "L218",
       "_origin": "ast",
       "id": "integration_test_connection_usecases_stubregistry",
-      "community": 43,
+      "community": 105,
       "norm_label": "_stubregistry"
     },
     {
@@ -10790,7 +10790,7 @@
       "source_location": "L219",
       "_origin": "ast",
       "id": "integration_test_connection_usecases_stubregistry_init",
-      "community": 43,
+      "community": 105,
       "norm_label": ".__init__()"
     },
     {
@@ -10800,7 +10800,7 @@
       "source_location": "L223",
       "_origin": "ast",
       "id": "integration_test_connection_usecases_stubregistry_switch",
-      "community": 43,
+      "community": 105,
       "norm_label": ".switch()"
     },
     {
@@ -10810,7 +10810,7 @@
       "source_location": "L229",
       "_origin": "ast",
       "id": "integration_test_connection_usecases_stubregistry_get_active",
-      "community": 43,
+      "community": 105,
       "norm_label": ".get_active()"
     },
     {
@@ -11890,7 +11890,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_audit_persistent_handle",
-      "community": 21,
+      "community": 131,
       "norm_label": "test_audit_persistent_handle.py"
     },
     {
@@ -11900,7 +11900,7 @@
       "source_location": "L6",
       "_origin": "ast",
       "id": "unit_test_audit_persistent_handle_record",
-      "community": 21,
+      "community": 131,
       "norm_label": "_record()"
     },
     {
@@ -11910,7 +11910,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "unit_test_audit_persistent_handle_test_handle_reused_across_log_calls",
-      "community": 21,
+      "community": 131,
       "norm_label": "test_handle_reused_across_log_calls()"
     },
     {
@@ -11920,7 +11920,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "unit_test_audit_persistent_handle_test_aclose_resets_handle_to_none",
-      "community": 21,
+      "community": 131,
       "norm_label": "test_aclose_resets_handle_to_none()"
     },
     {
@@ -11930,7 +11930,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "unit_test_audit_persistent_handle_test_log_after_aclose_reopens_and_appends",
-      "community": 21,
+      "community": 131,
       "norm_label": "test_log_after_aclose_reopens_and_appends()"
     },
     {
@@ -11940,7 +11940,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_audit_persistent_handle_rationale_1",
-      "community": 21,
+      "community": 131,
       "norm_label": "p-1/r-2: auditlogger reuses one persistent append handle; aclose resets it."
     },
     {
@@ -13450,7 +13450,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_dotted_mask",
-      "community": 114,
+      "community": 5,
       "norm_label": "test_dotted_mask.py"
     },
     {
@@ -13460,7 +13460,7 @@
       "source_location": "L7",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_doc",
-      "community": 114,
+      "community": 5,
       "norm_label": "_doc()"
     },
     {
@@ -13470,7 +13470,7 @@
       "source_location": "L14",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_dotted_path_is_specific",
-      "community": 114,
+      "community": 5,
       "norm_label": "test_dotted_path_is_specific()"
     },
     {
@@ -13480,7 +13480,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_bare_name_masks_any_depth_backcompat",
-      "community": 114,
+      "community": 5,
       "norm_label": "test_bare_name_masks_any_depth_backcompat()"
     },
     {
@@ -13490,7 +13490,7 @@
       "source_location": "L28",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_mixed_bare_and_dotted",
-      "community": 114,
+      "community": 5,
       "norm_label": "test_mixed_bare_and_dotted()"
     },
     {
@@ -13500,7 +13500,7 @@
       "source_location": "L35",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_transformer_dotted_path_specific",
-      "community": 114,
+      "community": 5,
       "norm_label": "test_transformer_dotted_path_specific()"
     },
     {
@@ -13510,7 +13510,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_transformer_bare_backcompat",
-      "community": 114,
+      "community": 5,
       "norm_label": "test_transformer_bare_backcompat()"
     },
     {
@@ -13520,7 +13520,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_test_per_collection_dict_with_dotted",
-      "community": 114,
+      "community": 5,
       "norm_label": "test_per_collection_dict_with_dotted()"
     },
     {
@@ -13530,7 +13530,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_dotted_mask_rationale_1",
-      "community": 114,
+      "community": 5,
       "norm_label": "#10: first-class dotted mask paths \u2014 \"contact.email\" is path-specific while a ba"
     },
     {
@@ -13710,7 +13710,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "tests_unit_test_explain_policy_py_policy",
-      "community": 43,
+      "community": 125,
       "norm_label": "policy"
     },
     {
@@ -13720,7 +13720,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "tests_unit_test_explain_policy_py_path",
-      "community": 43,
+      "community": 125,
       "norm_label": "path"
     },
     {
@@ -13730,7 +13730,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "tests_unit_test_explain_policy_py_guardpipeline",
-      "community": 43,
+      "community": 125,
       "norm_label": "guardpipeline"
     },
     {
@@ -13850,7 +13850,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration",
-      "community": 111,
+      "community": 1,
       "norm_label": "test_field_allow_integration.py"
     },
     {
@@ -13860,7 +13860,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_stubloader",
-      "community": 142,
+      "community": 1,
       "norm_label": "_stubloader"
     },
     {
@@ -13870,7 +13870,7 @@
       "source_location": "L15",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_stubloader_init",
-      "community": 142,
+      "community": 1,
       "norm_label": ".__init__()"
     },
     {
@@ -13880,7 +13880,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_stubloader_get",
-      "community": 142,
+      "community": 1,
       "norm_label": ".get()"
     },
     {
@@ -13890,7 +13890,7 @@
       "source_location": "L22",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_make_policy",
-      "community": 111,
+      "community": 1,
       "norm_label": "_make_policy()"
     },
     {
@@ -13900,7 +13900,7 @@
       "source_location": "L36",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_pipeline_with",
-      "community": 111,
+      "community": 1,
       "norm_label": "pipeline_with()"
     },
     {
@@ -13910,7 +13910,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_test_field_allow_drops_disallowed_fields",
-      "community": 111,
+      "community": 1,
       "norm_label": "test_field_allow_drops_disallowed_fields()"
     },
     {
@@ -13920,7 +13920,7 @@
       "source_location": "L66",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_test_field_allow_with_masking",
-      "community": 111,
+      "community": 1,
       "norm_label": "test_field_allow_with_masking()"
     },
     {
@@ -13930,7 +13930,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_rationale_1",
-      "community": 111,
+      "community": 1,
       "norm_label": "s-3: field allow-list enforced end-to-end through guardpipeline.run (find)."
     },
     {
@@ -13940,7 +13940,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "unit_test_field_allow_integration_rationale_13",
-      "community": 142,
+      "community": 1,
       "norm_label": "minimal policy loader exposing the single .get(agent) used by pipeline."
     },
     {
@@ -14100,7 +14100,7 @@
       "source_location": "L73",
       "_origin": "ast",
       "id": "unit_test_health_endpoints_test_health_endpoints_need_no_auth",
-      "community": 115,
+      "community": 133,
       "norm_label": "test_health_endpoints_need_no_auth()"
     },
     {
@@ -14570,7 +14570,7 @@
       "source_location": "L29",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_fakemanager",
-      "community": 43,
+      "community": 46,
       "norm_label": "_fakemanager"
     },
     {
@@ -14580,7 +14580,7 @@
       "source_location": "L30",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_fakemanager_init",
-      "community": 43,
+      "community": 46,
       "norm_label": ".__init__()"
     },
     {
@@ -14590,7 +14590,7 @@
       "source_location": "L34",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_fakemanager_tool",
-      "community": 43,
+      "community": 46,
       "norm_label": ".tool()"
     },
     {
@@ -14774,10 +14774,40 @@
       "norm_label": "test_capabilities_returns_backend_and_collections()"
     },
     {
+      "label": "test_capabilities_readonly_shows_only_read_actions()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L327",
+      "_origin": "ast",
+      "id": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
+      "community": 46,
+      "norm_label": "test_capabilities_readonly_shows_only_read_actions()"
+    },
+    {
+      "label": "test_capabilities_engine_consistency_expired_policy()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L366",
+      "_origin": "ast",
+      "id": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
+      "community": 46,
+      "norm_label": "test_capabilities_engine_consistency_expired_policy()"
+    },
+    {
+      "label": "test_capabilities_no_policy_branch()",
+      "file_type": "code",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L400",
+      "_origin": "ast",
+      "id": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
+      "community": 46,
+      "norm_label": "test_capabilities_no_policy_branch()"
+    },
+    {
       "label": "test_unsupported_capability_helper()",
       "file_type": "code",
       "source_file": "tests/unit/test_mcp_tooling.py",
-      "source_location": "L298",
+      "source_location": "L429",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_test_unsupported_capability_helper",
       "community": 50,
@@ -14787,7 +14817,7 @@
       "label": "test_db_aggregate_unsupported_capability()",
       "file_type": "code",
       "source_file": "tests/unit/test_mcp_tooling.py",
-      "source_location": "L325",
+      "source_location": "L456",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_test_db_aggregate_unsupported_capability",
       "community": 46,
@@ -14797,7 +14827,7 @@
       "label": "test_status_includes_version_and_backend()",
       "file_type": "code",
       "source_file": "tests/unit/test_mcp_tooling.py",
-      "source_location": "L353",
+      "source_location": "L484",
       "_origin": "ast",
       "id": "unit_test_mcp_tooling_test_status_includes_version_and_backend",
       "community": 46,
@@ -14822,6 +14852,36 @@
       "id": "unit_test_mcp_tooling_rationale_120",
       "community": 46,
       "norm_label": "register real tools into a fastmcp and fetch the callable for `name`."
+    },
+    {
+      "label": "A readonly policy exposes only read actions (engine-derived).",
+      "file_type": "rationale",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L328",
+      "_origin": "ast",
+      "id": "unit_test_mcp_tooling_rationale_328",
+      "community": 46,
+      "norm_label": "a readonly policy exposes only read actions (engine-derived)."
+    },
+    {
+      "label": "Engine-consistency: a temporally-expired policy \u2192 evaluate() DENIES every     ac",
+      "file_type": "rationale",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L367",
+      "_origin": "ast",
+      "id": "unit_test_mcp_tooling_rationale_367",
+      "community": 46,
+      "norm_label": "engine-consistency: a temporally-expired policy \u2192 evaluate() denies every     ac"
+    },
+    {
+      "label": "No-policy branch: top-level keys present, mode null, collections empty.",
+      "file_type": "rationale",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L401",
+      "_origin": "ast",
+      "id": "unit_test_mcp_tooling_rationale_401",
+      "community": 46,
+      "norm_label": "no-policy branch: top-level keys present, mode null, collections empty."
     },
     {
       "label": "test_mongo_plugin.py",
@@ -15570,7 +15630,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_neutral_envelope.py"
     },
     {
@@ -15580,7 +15640,7 @@
       "source_location": "L13",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_neutralize_find",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_neutralize_find()"
     },
     {
@@ -15590,7 +15650,7 @@
       "source_location": "L21",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_neutralize_count",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_neutralize_count()"
     },
     {
@@ -15600,7 +15660,7 @@
       "source_location": "L27",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_neutralize_insert_one",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_neutralize_insert_one()"
     },
     {
@@ -15610,7 +15670,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_neutralize_insert_many",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_neutralize_insert_many()"
     },
     {
@@ -15620,7 +15680,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_neutralize_update",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_neutralize_update()"
     },
     {
@@ -15630,7 +15690,7 @@
       "source_location": "L42",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_neutralize_delete",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_neutralize_delete()"
     },
     {
@@ -15640,7 +15700,7 @@
       "source_location": "L47",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_neutralize_aggregate",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_neutralize_aggregate()"
     },
     {
@@ -15650,7 +15710,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_mongo_find_result_exposes_neutral",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_mongo_find_result_exposes_neutral()"
     },
     {
@@ -15660,7 +15720,7 @@
       "source_location": "L72",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_test_mongo_count_result_exposes_scalar",
-      "community": 1,
+      "community": 111,
       "norm_label": "test_mongo_count_result_exposes_scalar()"
     },
     {
@@ -15670,7 +15730,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_neutral_envelope_rationale_1",
-      "community": 1,
+      "community": 111,
       "norm_label": "#6: backend-neutral success envelope \u2014 mongo native results also expose rows/aff"
     },
     {
@@ -15860,7 +15920,7 @@
       "source_location": "L63",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testaudittraceid",
-      "community": 10,
+      "community": 134,
       "norm_label": "testaudittraceid"
     },
     {
@@ -15870,7 +15930,7 @@
       "source_location": "L64",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testaudittraceid_test_audit_record_carries_field",
-      "community": 10,
+      "community": 134,
       "norm_label": ".test_audit_record_carries_field()"
     },
     {
@@ -15880,7 +15940,7 @@
       "source_location": "L78",
       "_origin": "ast",
       "id": "unit_test_observability_and_codes_testaudittraceid_test_build_stamps_current_trace_id",
-      "community": 10,
+      "community": 134,
       "norm_label": ".test_build_stamps_current_trace_id()"
     },
     {
@@ -16270,7 +16330,7 @@
       "source_location": "L24",
       "_origin": "ast",
       "id": "tests_unit_test_policy_engine_py_action",
-      "community": 14,
+      "community": 0,
       "norm_label": "action"
     },
     {
@@ -16530,7 +16590,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_policy_evolution",
-      "community": 131,
+      "community": 0,
       "norm_label": "test_policy_evolution.py"
     },
     {
@@ -16590,7 +16650,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_write",
-      "community": 131,
+      "community": 0,
       "norm_label": "_write()"
     },
     {
@@ -16600,7 +16660,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "tests_unit_test_policy_evolution_py_path",
-      "community": 43,
+      "community": 0,
       "norm_label": "path"
     },
     {
@@ -16610,7 +16670,7 @@
       "source_location": "L44",
       "_origin": "ast",
       "id": "tests_unit_test_policy_evolution_py_policyloader",
-      "community": 131,
+      "community": 0,
       "norm_label": "policyloader"
     },
     {
@@ -16620,7 +16680,7 @@
       "source_location": "L52",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testextends",
-      "community": 131,
+      "community": 0,
       "norm_label": "testextends"
     },
     {
@@ -16630,7 +16690,7 @@
       "source_location": "L53",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testextends_test_union_of_collections",
-      "community": 131,
+      "community": 0,
       "norm_label": ".test_union_of_collections()"
     },
     {
@@ -16640,7 +16700,7 @@
       "source_location": "L68",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testextends_test_child_mode_overrides_base",
-      "community": 131,
+      "community": 0,
       "norm_label": ".test_child_mode_overrides_base()"
     },
     {
@@ -16650,7 +16710,7 @@
       "source_location": "L82",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testextends_test_approval_merge",
-      "community": 131,
+      "community": 0,
       "norm_label": ".test_approval_merge()"
     },
     {
@@ -16660,7 +16720,7 @@
       "source_location": "L96",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testextends_test_cycle_raises",
-      "community": 131,
+      "community": 0,
       "norm_label": ".test_cycle_raises()"
     },
     {
@@ -16670,7 +16730,7 @@
       "source_location": "L112",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testextends_test_missing_base_raises",
-      "community": 131,
+      "community": 0,
       "norm_label": ".test_missing_base_raises()"
     },
     {
@@ -16700,7 +16760,7 @@
       "source_location": "L131",
       "_origin": "ast",
       "id": "tests_unit_test_policy_evolution_py_guardpipeline",
-      "community": 43,
+      "community": 0,
       "norm_label": "guardpipeline"
     },
     {
@@ -16820,7 +16880,7 @@
       "source_location": "L246",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testbackwardcompat",
-      "community": 43,
+      "community": 0,
       "norm_label": "testbackwardcompat"
     },
     {
@@ -16830,7 +16890,7 @@
       "source_location": "L247",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_testbackwardcompat_test_example_policy_loads",
-      "community": 43,
+      "community": 0,
       "norm_label": ".test_example_policy_loads()"
     },
     {
@@ -16840,7 +16900,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_policy_evolution_rationale_1",
-      "community": 131,
+      "community": 0,
       "norm_label": "tests for the evolved (non-flat) policy model: apiversion, role inheritance (ext"
     },
     {
@@ -17010,7 +17070,7 @@
       "source_location": "L39",
       "_origin": "ast",
       "id": "tests_unit_test_policy_trace_py_action",
-      "community": 47,
+      "community": 0,
       "norm_label": "action"
     },
     {
@@ -18230,7 +18290,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "tests_unit_test_simulate_policy_py_path",
-      "community": 43,
+      "community": 129,
       "norm_label": "path"
     },
     {
@@ -18240,7 +18300,7 @@
       "source_location": "L50",
       "_origin": "ast",
       "id": "tests_unit_test_simulate_policy_py_guardpipeline",
-      "community": 43,
+      "community": 129,
       "norm_label": "guardpipeline"
     },
     {
@@ -18650,7 +18710,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_traceparent",
-      "community": 10,
+      "community": 115,
       "norm_label": "test_traceparent.py"
     },
     {
@@ -18660,7 +18720,7 @@
       "source_location": "L12",
       "_origin": "ast",
       "id": "unit_test_traceparent_test_parse_valid_traceparent",
-      "community": 10,
+      "community": 115,
       "norm_label": "test_parse_valid_traceparent()"
     },
     {
@@ -18670,7 +18730,7 @@
       "source_location": "L18",
       "_origin": "ast",
       "id": "unit_test_traceparent_test_parse_invalid_returns_none",
-      "community": 10,
+      "community": 115,
       "norm_label": "test_parse_invalid_returns_none()"
     },
     {
@@ -18680,7 +18740,7 @@
       "source_location": "L32",
       "_origin": "ast",
       "id": "unit_test_traceparent_test_new_trace_id_continues_incoming",
-      "community": 10,
+      "community": 115,
       "norm_label": "test_new_trace_id_continues_incoming()"
     },
     {
@@ -18690,7 +18750,7 @@
       "source_location": "L37",
       "_origin": "ast",
       "id": "unit_test_traceparent_test_new_trace_id_mints_fresh_when_no_incoming",
-      "community": 10,
+      "community": 115,
       "norm_label": "test_new_trace_id_mints_fresh_when_no_incoming()"
     },
     {
@@ -18700,7 +18760,7 @@
       "source_location": "L43",
       "_origin": "ast",
       "id": "unit_test_traceparent_test_new_trace_id_mints_fresh_on_bad_incoming",
-      "community": 10,
+      "community": 115,
       "norm_label": "test_new_trace_id_mints_fresh_on_bad_incoming()"
     },
     {
@@ -18710,7 +18770,7 @@
       "source_location": "L49",
       "_origin": "ast",
       "id": "unit_test_traceparent_test_current_traceparent_round_trips",
-      "community": 10,
+      "community": 115,
       "norm_label": "test_current_traceparent_round_trips()"
     },
     {
@@ -18720,7 +18780,7 @@
       "source_location": "L1",
       "_origin": "ast",
       "id": "unit_test_traceparent_rationale_1",
-      "community": 10,
+      "community": 115,
       "norm_label": "#9: w3c traceparent parsing, continuation, and round-trip."
     },
     {
@@ -20902,9 +20962,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L363",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main",
-      "target": "guardmcp_cli",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli"
     },
     {
       "relation": "imports",
@@ -20913,9 +20973,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L363",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main",
-      "target": "guardmcp_cli_main",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_main"
     },
     {
       "relation": "imports_from",
@@ -20995,9 +21055,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L304",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main",
-      "target": "guardmcp_main_serve_main",
-      "confidence_score": 1.0
+      "target": "guardmcp_main_serve_main"
     },
     {
       "relation": "imports_from",
@@ -21346,9 +21406,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L312",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_main_build_plugin_registry",
-      "confidence_score": 1.0
+      "target": "guardmcp_main_build_plugin_registry"
     },
     {
       "relation": "calls",
@@ -21357,9 +21417,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L314",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_builtin_registry",
-      "target": "guardmcp_main_build_plugin_registry",
-      "confidence_score": 1.0
+      "target": "guardmcp_main_build_plugin_registry"
     },
     {
       "relation": "calls",
@@ -21859,9 +21919,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L352",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main_serve_main",
-      "target": "guardmcp_main_build",
-      "confidence_score": 1.0
+      "target": "guardmcp_main_build"
     },
     {
       "relation": "calls",
@@ -21958,9 +22018,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L329",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main_serve_main",
-      "target": "settings",
-      "confidence_score": 1.0
+      "target": "settings"
     },
     {
       "relation": "uses",
@@ -22000,9 +22060,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L353",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main_serve_main",
-      "target": "guardmcp_main_run_with_approval_api",
-      "confidence_score": 1.0
+      "target": "guardmcp_main_run_with_approval_api"
     },
     {
       "relation": "imports",
@@ -22011,9 +22071,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L613",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_main_serve_main",
-      "confidence_score": 1.0
+      "target": "guardmcp_main_serve_main"
     },
     {
       "relation": "calls",
@@ -22022,9 +22082,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L615",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_main",
-      "target": "guardmcp_main_serve_main",
-      "confidence_score": 1.0
+      "target": "guardmcp_main_serve_main"
     },
     {
       "relation": "rationale_for",
@@ -22032,9 +22092,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L305",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main_rationale_305",
-      "target": "guardmcp_main_serve_main",
-      "confidence_score": 1.0
+      "target": "guardmcp_main_serve_main"
     },
     {
       "relation": "calls",
@@ -22043,9 +22103,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L329",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main_serve_main",
-      "target": "guardmcp_config_settings",
-      "confidence_score": 1.0
+      "target": "guardmcp_config_settings"
     },
     {
       "relation": "calls",
@@ -22054,9 +22114,9 @@
       "source_file": "src/guardmcp/__main__.py",
       "source_location": "L335",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_main_serve_main",
-      "target": "observability_log_log_event",
-      "confidence_score": 1.0
+      "target": "observability_log_log_event"
     },
     {
       "relation": "contains",
@@ -22431,9 +22491,9 @@
       "source_file": "src/guardmcp/api/approval.py",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_approval_build_approval_app",
-      "target": "readinessprobe",
-      "confidence_score": 1.0
+      "target": "readinessprobe"
     },
     {
       "relation": "references",
@@ -22452,9 +22512,9 @@
       "source_file": "src/guardmcp/api/approval.py",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "api_approval_rationale_25",
-      "target": "api_approval_build_approval_app",
-      "confidence_score": 1.0
+      "target": "api_approval_build_approval_app"
     },
     {
       "relation": "calls",
@@ -22485,9 +22545,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "audit_verify_verify_chain",
-      "confidence_score": 1.0
+      "target": "audit_verify_verify_chain"
     },
     {
       "relation": "imports",
@@ -22496,9 +22556,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L333",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "conformance_plugin_conformance_check_plugin_conformance",
-      "confidence_score": 1.0
+      "target": "conformance_plugin_conformance_check_plugin_conformance"
     },
     {
       "relation": "imports",
@@ -22507,9 +22567,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L199",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "core_paths_resolve_audit_path",
-      "confidence_score": 1.0
+      "target": "core_paths_resolve_audit_path"
     },
     {
       "relation": "imports",
@@ -22518,9 +22578,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L386",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "core_pipeline_guardpipeline",
-      "confidence_score": 1.0
+      "target": "core_pipeline_guardpipeline"
     },
     {
       "relation": "imports",
@@ -22529,9 +22589,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L629",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "eval_cli_main",
-      "confidence_score": 1.0
+      "target": "eval_cli_main"
     },
     {
       "relation": "contains",
@@ -22539,9 +22599,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L488",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_build_parser",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_build_parser"
     },
     {
       "relation": "contains",
@@ -22549,9 +22609,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L310",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_builtin_registry",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_builtin_registry"
     },
     {
       "relation": "contains",
@@ -22559,9 +22619,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L182",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_check_h1",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_check_h1"
     },
     {
       "relation": "contains",
@@ -22569,9 +22629,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_audit_verify",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_audit_verify"
     },
     {
       "relation": "contains",
@@ -22579,9 +22639,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L356",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_capability_inspect",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_capability_inspect"
     },
     {
       "relation": "contains",
@@ -22589,9 +22649,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L221",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_config_validate",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_config_validate"
     },
     {
       "relation": "contains",
@@ -22599,9 +22659,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L241",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_doctor",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_doctor"
     },
     {
       "relation": "contains",
@@ -22609,9 +22669,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L317",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_plugin_list",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_plugin_list"
     },
     {
       "relation": "contains",
@@ -22619,9 +22679,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L332",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_plugin_validate",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_plugin_validate"
     },
     {
       "relation": "contains",
@@ -22629,9 +22689,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L129",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_policy_lint",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_policy_lint"
     },
     {
       "relation": "contains",
@@ -22639,9 +22699,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L453",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_tools",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_tools"
     },
     {
       "relation": "contains",
@@ -22649,9 +22709,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L465",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_cmd_version",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_version"
     },
     {
       "relation": "contains",
@@ -22659,9 +22719,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L568",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_dispatch",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_dispatch"
     },
     {
       "relation": "contains",
@@ -22669,9 +22729,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L197",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_doctor_settings_section",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_doctor_settings_section"
     },
     {
       "relation": "contains",
@@ -22679,9 +22739,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L378",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_introspect_tools",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_introspect_tools"
     },
     {
       "relation": "contains",
@@ -22689,9 +22749,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L78",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_lint_one",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_lint_one"
     },
     {
       "relation": "contains",
@@ -22699,9 +22759,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L593",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_main",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_main"
     },
     {
       "relation": "contains",
@@ -22709,9 +22769,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L429",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_cli_render_tools_md",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_render_tools_md"
     },
     {
       "relation": "imports",
@@ -22720,9 +22780,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L222",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "guardmcp_config_settings",
-      "confidence_score": 1.0
+      "target": "guardmcp_config_settings"
     },
     {
       "relation": "imports",
@@ -22731,9 +22791,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L357",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "interfaces_errors_pluginerror",
-      "confidence_score": 1.0
+      "target": "interfaces_errors_pluginerror"
     },
     {
       "relation": "imports",
@@ -22742,9 +22802,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L281",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "mongodb_client_mongoclient",
-      "confidence_score": 1.0
+      "target": "mongodb_client_mongoclient"
     },
     {
       "relation": "imports",
@@ -22753,9 +22813,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L130",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "policy_loader_policyloader",
-      "confidence_score": 1.0
+      "target": "policy_loader_policyloader"
     },
     {
       "relation": "imports",
@@ -22764,9 +22824,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L387",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli",
-      "target": "tools_init_register_tools",
-      "confidence_score": 1.0
+      "target": "tools_init_register_tools"
     },
     {
       "relation": "rationale_for",
@@ -22774,9 +22834,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_rationale_1",
-      "target": "guardmcp_cli",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli"
     },
     {
       "relation": "calls",
@@ -22785,9 +22845,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_audit_verify",
-      "target": "audit_verify_verify_chain",
-      "confidence_score": 1.0
+      "target": "audit_verify_verify_chain"
     },
     {
       "relation": "references",
@@ -22796,9 +22856,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L50",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_audit_verify",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "calls",
@@ -22807,9 +22867,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L577",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_audit_verify",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_audit_verify"
     },
     {
       "relation": "references",
@@ -22818,9 +22878,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L356",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_capability_inspect",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "references",
@@ -22829,9 +22889,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L221",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_config_validate",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "references",
@@ -22840,9 +22900,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L241",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_doctor",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "references",
@@ -22851,9 +22911,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L317",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_plugin_list",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "references",
@@ -22862,9 +22922,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L332",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_plugin_validate",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "references",
@@ -22873,9 +22933,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L129",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_policy_lint",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "references",
@@ -22884,9 +22944,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L453",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_tools",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "references",
@@ -22895,9 +22955,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L465",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_version",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "references",
@@ -22906,9 +22966,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L568",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "namespace",
-      "confidence_score": 1.0
+      "target": "namespace"
     },
     {
       "relation": "uses",
@@ -22916,9 +22976,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L242",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "namespace",
-      "target": "guardmcp_config_settings",
-      "confidence_score": 0.5
+      "target": "guardmcp_config_settings"
     },
     {
       "relation": "calls",
@@ -22927,9 +22987,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L154",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_policy_lint",
-      "target": "guardmcp_cli_lint_one",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_lint_one"
     },
     {
       "relation": "rationale_for",
@@ -22937,9 +22997,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_rationale_79",
-      "target": "guardmcp_cli_lint_one",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_lint_one"
     },
     {
       "relation": "calls",
@@ -22948,9 +23008,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L133",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_policy_lint",
-      "target": "policy_loader_policyloader",
-      "confidence_score": 1.0
+      "target": "policy_loader_policyloader"
     },
     {
       "relation": "calls",
@@ -22959,9 +23019,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L579",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_policy_lint",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_policy_lint"
     },
     {
       "relation": "calls",
@@ -22970,9 +23030,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L204",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_doctor_settings_section",
-      "target": "guardmcp_cli_check_h1",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_check_h1"
     },
     {
       "relation": "rationale_for",
@@ -22980,9 +23040,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L183",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_rationale_183",
-      "target": "guardmcp_cli_check_h1",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_check_h1"
     },
     {
       "relation": "calls",
@@ -22991,9 +23051,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L230",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_config_validate",
-      "target": "guardmcp_cli_doctor_settings_section",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_doctor_settings_section"
     },
     {
       "relation": "calls",
@@ -23002,9 +23062,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L259",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_doctor",
-      "target": "guardmcp_cli_doctor_settings_section",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_doctor_settings_section"
     },
     {
       "relation": "calls",
@@ -23013,9 +23073,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L208",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_doctor_settings_section",
-      "target": "core_paths_resolve_audit_path",
-      "confidence_score": 1.0
+      "target": "core_paths_resolve_audit_path"
     },
     {
       "relation": "rationale_for",
@@ -23023,9 +23083,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L198",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_rationale_198",
-      "target": "guardmcp_cli_doctor_settings_section",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_doctor_settings_section"
     },
     {
       "relation": "calls",
@@ -23034,9 +23094,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L225",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_config_validate",
-      "target": "guardmcp_config_settings",
-      "confidence_score": 1.0
+      "target": "guardmcp_config_settings"
     },
     {
       "relation": "calls",
@@ -23045,9 +23105,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L575",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_config_validate",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_config_validate"
     },
     {
       "relation": "calls",
@@ -23056,9 +23116,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L251",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_doctor",
-      "target": "guardmcp_config_settings",
-      "confidence_score": 1.0
+      "target": "guardmcp_config_settings"
     },
     {
       "relation": "calls",
@@ -23067,9 +23127,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L284",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_doctor",
-      "target": "mongodb_client_mongoclient",
-      "confidence_score": 1.0
+      "target": "mongodb_client_mongoclient"
     },
     {
       "relation": "calls",
@@ -23078,9 +23138,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L263",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_doctor",
-      "target": "policy_loader_policyloader",
-      "confidence_score": 1.0
+      "target": "policy_loader_policyloader"
     },
     {
       "relation": "calls",
@@ -23089,9 +23149,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L573",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_doctor",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_doctor"
     },
     {
       "relation": "calls",
@@ -23100,9 +23160,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L359",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_capability_inspect",
-      "target": "guardmcp_cli_builtin_registry",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_builtin_registry"
     },
     {
       "relation": "calls",
@@ -23111,9 +23171,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L318",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_plugin_list",
-      "target": "guardmcp_cli_builtin_registry",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_builtin_registry"
     },
     {
       "relation": "calls",
@@ -23122,9 +23182,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L335",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_plugin_validate",
-      "target": "guardmcp_cli_builtin_registry",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_builtin_registry"
     },
     {
       "relation": "calls",
@@ -23133,9 +23193,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L478",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_version",
-      "target": "guardmcp_cli_builtin_registry",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_builtin_registry"
     },
     {
       "relation": "rationale_for",
@@ -23143,9 +23203,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L311",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_rationale_311",
-      "target": "guardmcp_cli_builtin_registry",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_builtin_registry"
     },
     {
       "relation": "calls",
@@ -23154,9 +23214,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L581",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_plugin_list",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_plugin_list"
     },
     {
       "relation": "calls",
@@ -23165,9 +23225,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L345",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_plugin_validate",
-      "target": "conformance_plugin_conformance_check_plugin_conformance",
-      "confidence_score": 1.0
+      "target": "conformance_plugin_conformance_check_plugin_conformance"
     },
     {
       "relation": "calls",
@@ -23176,9 +23236,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L583",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_plugin_validate",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_plugin_validate"
     },
     {
       "relation": "calls",
@@ -23187,9 +23247,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L585",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_capability_inspect",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_capability_inspect"
     },
     {
       "relation": "calls",
@@ -23198,9 +23258,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L454",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_tools",
-      "target": "guardmcp_cli_introspect_tools",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_introspect_tools"
     },
     {
       "relation": "calls",
@@ -23209,9 +23269,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L392",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_introspect_tools",
-      "target": "tools_init_register_tools",
-      "confidence_score": 1.0
+      "target": "tools_init_register_tools"
     },
     {
       "relation": "rationale_for",
@@ -23219,9 +23279,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L379",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_rationale_379",
-      "target": "guardmcp_cli_introspect_tools",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_introspect_tools"
     },
     {
       "relation": "calls",
@@ -23230,9 +23290,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L458",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_cmd_tools",
-      "target": "guardmcp_cli_render_tools_md",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_render_tools_md"
     },
     {
       "relation": "calls",
@@ -23241,9 +23301,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L587",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_tools",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_tools"
     },
     {
       "relation": "calls",
@@ -23252,9 +23312,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L571",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_dispatch",
-      "target": "guardmcp_cli_cmd_version",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_cmd_version"
     },
     {
       "relation": "references",
@@ -23263,9 +23323,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L488",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_build_parser",
-      "target": "argumentparser",
-      "confidence_score": 1.0
+      "target": "argumentparser"
     },
     {
       "relation": "calls",
@@ -23274,9 +23334,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L608",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_main",
-      "target": "guardmcp_cli_build_parser",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_build_parser"
     },
     {
       "relation": "uses",
@@ -23284,9 +23344,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L242",
       "weight": 0.8,
+      "confidence_score": 0.5,
       "source": "argumentparser",
-      "target": "guardmcp_config_settings",
-      "confidence_score": 0.5
+      "target": "guardmcp_config_settings"
     },
     {
       "relation": "calls",
@@ -23295,9 +23355,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L636",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_main",
-      "target": "guardmcp_cli_dispatch",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_dispatch"
     },
     {
       "relation": "calls",
@@ -23306,9 +23366,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L632",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_main",
-      "target": "eval_cli_main",
-      "confidence_score": 1.0
+      "target": "eval_cli_main"
     },
     {
       "relation": "rationale_for",
@@ -23316,9 +23376,9 @@
       "source_file": "src/guardmcp/cli.py",
       "source_location": "L594",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "guardmcp_cli_rationale_594",
-      "target": "guardmcp_cli_main",
-      "confidence_score": 1.0
+      "target": "guardmcp_cli_main"
     },
     {
       "relation": "imports_from",
@@ -24483,9 +24543,9 @@
       "source_file": "src/guardmcp/core/audit/logger.py",
       "source_location": "L95",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_logger",
-      "target": "audit_verify_sign_record",
-      "confidence_score": 1.0
+      "target": "audit_verify_sign_record"
     },
     {
       "relation": "imports_from",
@@ -24559,9 +24619,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify",
-      "target": "audit_logger",
-      "confidence_score": 1.0
+      "target": "audit_logger"
     },
     {
       "relation": "imports_from",
@@ -24601,9 +24661,9 @@
       "source_file": "src/guardmcp/core/audit/logger.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_logger_rationale_34",
-      "target": "audit_logger_auditwriteerror",
-      "confidence_score": 1.0
+      "target": "audit_logger_auditwriteerror"
     },
     {
       "relation": "inherits",
@@ -25287,9 +25347,9 @@
       "source_file": "src/guardmcp/core/audit/logger.py",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_logger_rationale_70",
-      "target": "audit_logger_auditlogger_load_last_hash",
-      "confidence_score": 1.0
+      "target": "audit_logger_auditlogger_load_last_hash"
     },
     {
       "relation": "calls",
@@ -25319,9 +25379,9 @@
       "source_file": "src/guardmcp/core/audit/logger.py",
       "source_location": "L89",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_logger_rationale_89",
-      "target": "audit_logger_auditlogger_sign",
-      "confidence_score": 1.0
+      "target": "audit_logger_auditlogger_sign"
     },
     {
       "relation": "calls",
@@ -25340,9 +25400,9 @@
       "source_file": "src/guardmcp/core/audit/logger.py",
       "source_location": "L100",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_logger_rationale_100",
-      "target": "audit_logger_auditlogger_get_handle",
-      "confidence_score": 1.0
+      "target": "audit_logger_auditlogger_get_handle"
     },
     {
       "relation": "calls",
@@ -25372,9 +25432,9 @@
       "source_file": "src/guardmcp/core/audit/logger.py",
       "source_location": "L110",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_logger_rationale_110",
-      "target": "audit_logger_auditlogger_aclose",
-      "confidence_score": 1.0
+      "target": "audit_logger_auditlogger_aclose"
     },
     {
       "relation": "calls",
@@ -25393,9 +25453,9 @@
       "source_file": "src/guardmcp/core/audit/logger.py",
       "source_location": "L125",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_logger_rationale_125",
-      "target": "audit_logger_auditlogger_flusher",
-      "confidence_score": 1.0
+      "target": "audit_logger_auditlogger_flusher"
     },
     {
       "relation": "calls",
@@ -25414,9 +25474,9 @@
       "source_file": "src/guardmcp/core/audit/logger.py",
       "source_location": "L151",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_logger_rationale_151",
-      "target": "audit_logger_auditlogger_write_batch",
-      "confidence_score": 1.0
+      "target": "audit_logger_auditlogger_write_batch"
     },
     {
       "relation": "references",
@@ -25457,9 +25517,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify",
-      "target": "audit_verify_sign_record",
-      "confidence_score": 1.0
+      "target": "audit_verify_sign_record"
     },
     {
       "relation": "contains",
@@ -25467,9 +25527,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify",
-      "target": "audit_verify_verify_chain",
-      "confidence_score": 1.0
+      "target": "audit_verify_verify_chain"
     },
     {
       "relation": "contains",
@@ -25477,9 +25537,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L33",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify",
-      "target": "audit_verify_verifyresult",
-      "confidence_score": 1.0
+      "target": "audit_verify_verifyresult"
     },
     {
       "relation": "rationale_for",
@@ -25487,9 +25547,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_rationale_1",
-      "target": "audit_verify",
-      "confidence_score": 1.0
+      "target": "audit_verify"
     },
     {
       "relation": "rationale_for",
@@ -25497,9 +25557,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_rationale_24",
-      "target": "audit_verify_sign_record",
-      "confidence_score": 1.0
+      "target": "audit_verify_sign_record"
     },
     {
       "relation": "calls",
@@ -25508,9 +25568,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L138",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_verify_chain",
-      "target": "audit_verify_sign_record",
-      "confidence_score": 1.0
+      "target": "audit_verify_sign_record"
     },
     {
       "relation": "rationale_for",
@@ -25518,9 +25578,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_rationale_34",
-      "target": "audit_verify_verifyresult",
-      "confidence_score": 1.0
+      "target": "audit_verify_verifyresult"
     },
     {
       "relation": "references",
@@ -25529,9 +25589,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_verify_chain",
-      "target": "audit_verify_verifyresult",
-      "confidence_score": 1.0
+      "target": "audit_verify_verifyresult"
     },
     {
       "relation": "method",
@@ -25539,9 +25599,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_verifyresult",
-      "target": "audit_verify_verifyresult_exit_code",
-      "confidence_score": 1.0
+      "target": "audit_verify_verifyresult_exit_code"
     },
     {
       "relation": "method",
@@ -25549,9 +25609,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_verifyresult",
-      "target": "audit_verify_verifyresult_render",
-      "confidence_score": 1.0
+      "target": "audit_verify_verifyresult_render"
     },
     {
       "relation": "calls",
@@ -25570,9 +25630,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_rationale_48",
-      "target": "audit_verify_verifyresult_exit_code",
-      "confidence_score": 1.0
+      "target": "audit_verify_verifyresult_exit_code"
     },
     {
       "relation": "rationale_for",
@@ -25580,9 +25640,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_rationale_58",
-      "target": "audit_verify_verifyresult_render",
-      "confidence_score": 1.0
+      "target": "audit_verify_verifyresult_render"
     },
     {
       "relation": "rationale_for",
@@ -25590,9 +25650,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_rationale_87",
-      "target": "audit_verify_verify_chain",
-      "confidence_score": 1.0
+      "target": "audit_verify_verify_chain"
     },
     {
       "relation": "references",
@@ -25601,9 +25661,9 @@
       "source_file": "src/guardmcp/core/audit/verify.py",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "audit_verify_verify_chain",
-      "target": "src_guardmcp_core_audit_verify_py_path",
-      "confidence_score": 1.0
+      "target": "src_guardmcp_core_audit_verify_py_path"
     },
     {
       "relation": "calls",
@@ -26321,6 +26381,17 @@
       "confidence_score": 0.5,
       "source": "interfaces_plugin_databaseplugin",
       "target": "interfaces_capability_capability"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/guardmcp/server/tools/meta/capabilities.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "meta_capabilities",
+      "target": "interfaces_capability_capability",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -31634,6 +31705,17 @@
       "confidence_score": 0.5,
       "source": "integration_test_adversarial_behavior_loader",
       "target": "models_domain_decisionstatus"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/guardmcp/server/tools/meta/capabilities.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "meta_capabilities",
+      "target": "models_domain_decisionstatus",
+      "confidence_score": 1.0
     },
     {
       "relation": "imports",
@@ -54897,9 +54979,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L45",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_run_cli",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_run_cli"
     },
     {
       "relation": "contains",
@@ -54907,9 +54989,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L57",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_clean_chain_verifies",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_clean_chain_verifies"
     },
     {
       "relation": "contains",
@@ -54917,9 +54999,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L149",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_cli_verify_no_secret_not_verifiable",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_cli_verify_no_secret_not_verifiable"
     },
     {
       "relation": "contains",
@@ -54927,9 +55009,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L123",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_cli_verify_ok_exit_0",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_cli_verify_ok_exit_0"
     },
     {
       "relation": "contains",
@@ -54937,9 +55019,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L132",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_cli_verify_tamper_prints_bad_line_to_stdout",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_cli_verify_tamper_prints_bad_line_to_stdout"
     },
     {
       "relation": "contains",
@@ -54947,9 +55029,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L158",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_cli_verify_uses_env_secret",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_cli_verify_uses_env_secret"
     },
     {
       "relation": "contains",
@@ -54957,9 +55039,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L104",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_empty_file",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_empty_file"
     },
     {
       "relation": "contains",
@@ -54967,9 +55049,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L113",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_missing_file",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_missing_file"
     },
     {
       "relation": "contains",
@@ -54977,9 +55059,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_no_hmac_log_not_verifiable",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_no_hmac_log_not_verifiable"
     },
     {
       "relation": "contains",
@@ -54987,9 +55069,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L95",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_no_secret_not_verifiable",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_no_secret_not_verifiable"
     },
     {
       "relation": "contains",
@@ -54997,9 +55079,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L168",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_render_never_empty",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_render_never_empty"
     },
     {
       "relation": "contains",
@@ -55007,9 +55089,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_test_tamper_reports_first_bad_line",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_test_tamper_reports_first_bad_line"
     },
     {
       "relation": "contains",
@@ -55017,9 +55099,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "rationale_for",
@@ -55027,9 +55109,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_rationale_1",
-      "target": "unit_test_audit_verify",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify"
     },
     {
       "relation": "rationale_for",
@@ -55037,9 +55119,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L25",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_rationale_25",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "calls",
@@ -55048,9 +55130,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L59",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_clean_chain_verifies",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "calls",
@@ -55059,9 +55141,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L151",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_cli_verify_no_secret_not_verifiable",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "calls",
@@ -55070,9 +55152,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L125",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_cli_verify_ok_exit_0",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "calls",
@@ -55081,9 +55163,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L134",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_cli_verify_tamper_prints_bad_line_to_stdout",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "calls",
@@ -55092,9 +55174,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L160",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_cli_verify_uses_env_secret",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "calls",
@@ -55103,9 +55185,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_no_hmac_log_not_verifiable",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "calls",
@@ -55114,9 +55196,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L97",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_no_secret_not_verifiable",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "calls",
@@ -55125,9 +55207,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L69",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_tamper_reports_first_bad_line",
-      "target": "unit_test_audit_verify_write_signed_chain",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_write_signed_chain"
     },
     {
       "relation": "rationale_for",
@@ -55135,9 +55217,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_rationale_46",
-      "target": "unit_test_audit_verify_run_cli",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_run_cli"
     },
     {
       "relation": "calls",
@@ -55146,9 +55228,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L152",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_cli_verify_no_secret_not_verifiable",
-      "target": "unit_test_audit_verify_run_cli",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_run_cli"
     },
     {
       "relation": "calls",
@@ -55157,9 +55239,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L126",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_cli_verify_ok_exit_0",
-      "target": "unit_test_audit_verify_run_cli",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_run_cli"
     },
     {
       "relation": "calls",
@@ -55168,9 +55250,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L141",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_cli_verify_tamper_prints_bad_line_to_stdout",
-      "target": "unit_test_audit_verify_run_cli",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_run_cli"
     },
     {
       "relation": "calls",
@@ -55179,9 +55261,9 @@
       "source_file": "tests/unit/test_audit_verify.py",
       "source_location": "L162",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_audit_verify_test_cli_verify_uses_env_secret",
-      "target": "unit_test_audit_verify_run_cli",
-      "confidence_score": 1.0
+      "target": "unit_test_audit_verify_run_cli"
     },
     {
       "relation": "contains",
@@ -55990,9 +56072,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "contains",
@@ -56000,9 +56082,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L80",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_audit_verify_routes_to_handler",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_audit_verify_routes_to_handler"
     },
     {
       "relation": "contains",
@@ -56010,9 +56092,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_bare_invocation_routes_to_serve",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_bare_invocation_routes_to_serve"
     },
     {
       "relation": "contains",
@@ -56020,9 +56102,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L135",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_capability_inspect_mongodb",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_capability_inspect_mongodb"
     },
     {
       "relation": "contains",
@@ -56030,9 +56112,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L144",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_capability_inspect_unknown_type_errors",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_capability_inspect_unknown_type_errors"
     },
     {
       "relation": "contains",
@@ -56040,9 +56122,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L53",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_doctor_routes_to_handler",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_doctor_routes_to_handler"
     },
     {
       "relation": "contains",
@@ -56050,9 +56132,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L106",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_missing_required_subcommand_errors",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_missing_required_subcommand_errors"
     },
     {
       "relation": "contains",
@@ -56060,9 +56142,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_policy_lint_routes_to_handler",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_policy_lint_routes_to_handler"
     },
     {
       "relation": "contains",
@@ -56070,9 +56152,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_serve_subcommand_strips_token",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_serve_subcommand_strips_token"
     },
     {
       "relation": "contains",
@@ -56080,9 +56162,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L112",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_top_level_help_lists_subcommands",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_top_level_help_lists_subcommands"
     },
     {
       "relation": "contains",
@@ -56090,9 +56172,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_transport_flag_routes_to_serve",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_transport_flag_routes_to_serve"
     },
     {
       "relation": "contains",
@@ -56100,9 +56182,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L96",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_unknown_subcommand_is_not_treated_as_subcommand",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_unknown_subcommand_is_not_treated_as_subcommand"
     },
     {
       "relation": "contains",
@@ -56110,9 +56192,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L125",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch",
-      "target": "unit_test_cli_dispatch_test_version_prints_expected_fields",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_test_version_prints_expected_fields"
     },
     {
       "relation": "rationale_for",
@@ -56120,9 +56202,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_rationale_1",
-      "target": "unit_test_cli_dispatch",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch"
     },
     {
       "relation": "calls",
@@ -56131,9 +56213,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L88",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_test_audit_verify_routes_to_handler",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "calls",
@@ -56142,9 +56224,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L136",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_test_capability_inspect_mongodb",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "calls",
@@ -56153,9 +56235,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L145",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_test_capability_inspect_unknown_type_errors",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "calls",
@@ -56164,9 +56246,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L61",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_test_doctor_routes_to_handler",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "calls",
@@ -56175,9 +56257,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L108",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_test_missing_required_subcommand_errors",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "calls",
@@ -56186,9 +56268,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L75",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_test_policy_lint_routes_to_handler",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "calls",
@@ -56197,9 +56279,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L113",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_test_top_level_help_lists_subcommands",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "calls",
@@ -56208,9 +56290,9 @@
       "source_file": "tests/unit/test_cli_dispatch.py",
       "source_location": "L126",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_cli_dispatch_test_version_prints_expected_fields",
-      "target": "unit_test_cli_dispatch_run",
-      "confidence_score": 1.0
+      "target": "unit_test_cli_dispatch_run"
     },
     {
       "relation": "contains",
@@ -56943,9 +57025,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor",
-      "target": "unit_test_doctor_clean_env",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_clean_env"
     },
     {
       "relation": "contains",
@@ -56953,9 +57035,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor",
-      "target": "unit_test_doctor_run",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_run"
     },
     {
       "relation": "contains",
@@ -56963,9 +57045,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L64",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor",
-      "target": "unit_test_doctor_test_config_validate_h1_satisfied_by_token",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_test_config_validate_h1_satisfied_by_token"
     },
     {
       "relation": "contains",
@@ -56973,9 +57055,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L53",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor",
-      "target": "unit_test_doctor_test_config_validate_h1_violation_fails",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_test_config_validate_h1_violation_fails"
     },
     {
       "relation": "contains",
@@ -56983,9 +57065,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor",
-      "target": "unit_test_doctor_test_config_validate_valid_exit_0",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_test_config_validate_valid_exit_0"
     },
     {
       "relation": "contains",
@@ -56993,9 +57075,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L86",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor",
-      "target": "unit_test_doctor_test_doctor_h1_violation_fails",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_test_doctor_h1_violation_fails"
     },
     {
       "relation": "contains",
@@ -57003,9 +57085,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L75",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor",
-      "target": "unit_test_doctor_test_doctor_valid_db_unreachable_warns_exit_0",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_test_doctor_valid_db_unreachable_warns_exit_0"
     },
     {
       "relation": "rationale_for",
@@ -57013,9 +57095,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor_rationale_1",
-      "target": "unit_test_doctor",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor"
     },
     {
       "relation": "rationale_for",
@@ -57023,9 +57105,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor_rationale_23",
-      "target": "unit_test_doctor_clean_env",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_clean_env"
     },
     {
       "relation": "calls",
@@ -57034,9 +57116,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor_test_config_validate_h1_satisfied_by_token",
-      "target": "unit_test_doctor_run",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_run"
     },
     {
       "relation": "calls",
@@ -57045,9 +57127,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L58",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor_test_config_validate_h1_violation_fails",
-      "target": "unit_test_doctor_run",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_run"
     },
     {
       "relation": "calls",
@@ -57056,9 +57138,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L48",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor_test_config_validate_valid_exit_0",
-      "target": "unit_test_doctor_run",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_run"
     },
     {
       "relation": "calls",
@@ -57067,9 +57149,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L89",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor_test_doctor_h1_violation_fails",
-      "target": "unit_test_doctor_run",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_run"
     },
     {
       "relation": "calls",
@@ -57078,9 +57160,9 @@
       "source_file": "tests/unit/test_doctor.py",
       "source_location": "L77",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_doctor_test_doctor_valid_db_unreachable_warns_exit_0",
-      "target": "unit_test_doctor_run",
-      "confidence_score": 1.0
+      "target": "unit_test_doctor_run"
     },
     {
       "relation": "contains",
@@ -57999,9 +58081,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_client",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_client"
     },
     {
       "relation": "contains",
@@ -58009,9 +58091,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_test_health_alias_ok",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_test_health_alias_ok"
     },
     {
       "relation": "contains",
@@ -58019,9 +58101,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_test_health_endpoints_need_no_auth",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_test_health_endpoints_need_no_auth"
     },
     {
       "relation": "contains",
@@ -58029,9 +58111,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_test_healthz_ok",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_test_healthz_ok"
     },
     {
       "relation": "contains",
@@ -58039,9 +58121,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L66",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_test_ready_alias_reflects_probe",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_test_ready_alias_reflects_probe"
     },
     {
       "relation": "contains",
@@ -58049,9 +58131,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_test_readyz_no_probe_is_ready",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_test_readyz_no_probe_is_ready"
     },
     {
       "relation": "contains",
@@ -58059,9 +58141,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L47",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_test_readyz_probe_not_ready_returns_503_with_detail",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_test_readyz_probe_not_ready_returns_503_with_detail"
     },
     {
       "relation": "contains",
@@ -58069,9 +58151,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L38",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_test_readyz_probe_ready",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_test_readyz_probe_ready"
     },
     {
       "relation": "contains",
@@ -58079,9 +58161,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L56",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints",
-      "target": "unit_test_health_endpoints_test_readyz_probe_that_raises_does_not_crash",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_test_readyz_probe_that_raises_does_not_crash"
     },
     {
       "relation": "rationale_for",
@@ -58089,9 +58171,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints_rationale_1",
-      "target": "unit_test_health_endpoints",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints"
     },
     {
       "relation": "calls",
@@ -58100,9 +58182,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L29",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints_test_health_alias_ok",
-      "target": "unit_test_health_endpoints_client",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_client"
     },
     {
       "relation": "calls",
@@ -58111,9 +58193,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L23",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints_test_healthz_ok",
-      "target": "unit_test_health_endpoints_client",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_client"
     },
     {
       "relation": "calls",
@@ -58122,9 +58204,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints_test_ready_alias_reflects_probe",
-      "target": "unit_test_health_endpoints_client",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_client"
     },
     {
       "relation": "calls",
@@ -58133,9 +58215,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L34",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints_test_readyz_no_probe_is_ready",
-      "target": "unit_test_health_endpoints_client",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_client"
     },
     {
       "relation": "calls",
@@ -58144,9 +58226,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints_test_readyz_probe_not_ready_returns_503_with_detail",
-      "target": "unit_test_health_endpoints_client",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_client"
     },
     {
       "relation": "calls",
@@ -58155,9 +58237,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L42",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints_test_readyz_probe_ready",
-      "target": "unit_test_health_endpoints_client",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_client"
     },
     {
       "relation": "calls",
@@ -58166,9 +58248,9 @@
       "source_file": "tests/unit/test_health_endpoints.py",
       "source_location": "L60",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_health_endpoints_test_readyz_probe_that_raises_does_not_crash",
-      "target": "unit_test_health_endpoints_client",
-      "confidence_score": 1.0
+      "target": "unit_test_health_endpoints_client"
     },
     {
       "relation": "contains",
@@ -58753,6 +58835,36 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L366",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling",
+      "target": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L400",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling",
+      "target": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L327",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling",
+      "target": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L240",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -58964,6 +59076,39 @@
       "target": "unit_test_mcp_tooling_make_client"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L382",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
+      "target": "unit_test_mcp_tooling_make_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L402",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
+      "target": "unit_test_mcp_tooling_make_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L344",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
+      "target": "unit_test_mcp_tooling_make_client",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "tests/unit/test_mcp_tooling.py",
@@ -58972,6 +59117,39 @@
       "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_rationale_120",
       "target": "unit_test_mcp_tooling_get_tool"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L392",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
+      "target": "unit_test_mcp_tooling_get_tool",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L413",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
+      "target": "unit_test_mcp_tooling_get_tool",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L354",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
+      "target": "unit_test_mcp_tooling_get_tool",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -59044,6 +59222,39 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L393",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
+      "target": "unit_test_mcp_tooling_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L414",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
+      "target": "unit_test_mcp_tooling_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L355",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
+      "target": "unit_test_mcp_tooling_call",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
       "source_location": "L243",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -59104,6 +59315,36 @@
       "confidence_score": 1.0,
       "source": "unit_test_mcp_tooling_test_status_includes_version_and_backend",
       "target": "unit_test_mcp_tooling_call"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L328",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_rationale_328",
+      "target": "unit_test_mcp_tooling_test_capabilities_readonly_shows_only_read_actions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L367",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_rationale_367",
+      "target": "unit_test_mcp_tooling_test_capabilities_engine_consistency_expired_policy",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "tests/unit/test_mcp_tooling.py",
+      "source_location": "L401",
+      "weight": 1.0,
+      "source": "unit_test_mcp_tooling_rationale_401",
+      "target": "unit_test_mcp_tooling_test_capabilities_no_policy_branch",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -61991,9 +62232,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint",
-      "target": "unit_test_policy_lint_run",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_run"
     },
     {
       "relation": "contains",
@@ -62001,9 +62242,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L84",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint",
-      "target": "unit_test_policy_lint_test_dangerous_policy_strict_fails",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_test_dangerous_policy_strict_fails"
     },
     {
       "relation": "contains",
@@ -62011,9 +62252,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint",
-      "target": "unit_test_policy_lint_test_dangerous_policy_warns_exit_0",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_test_dangerous_policy_warns_exit_0"
     },
     {
       "relation": "contains",
@@ -62021,9 +62262,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L54",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint",
-      "target": "unit_test_policy_lint_test_example_policy_clean_exit_0",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_test_example_policy_clean_exit_0"
     },
     {
       "relation": "contains",
@@ -62031,9 +62272,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L61",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint",
-      "target": "unit_test_policy_lint_test_invalid_schema_bad_mode_errors",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_test_invalid_schema_bad_mode_errors"
     },
     {
       "relation": "contains",
@@ -62041,9 +62282,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L93",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint",
-      "target": "unit_test_policy_lint_test_missing_path_errors",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_test_missing_path_errors"
     },
     {
       "relation": "rationale_for",
@@ -62051,9 +62292,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint_rationale_1",
-      "target": "unit_test_policy_lint",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint"
     },
     {
       "relation": "calls",
@@ -62062,9 +62303,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L87",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint_test_dangerous_policy_strict_fails",
-      "target": "unit_test_policy_lint_run",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_run"
     },
     {
       "relation": "calls",
@@ -62073,9 +62314,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L73",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint_test_dangerous_policy_warns_exit_0",
-      "target": "unit_test_policy_lint_run",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_run"
     },
     {
       "relation": "calls",
@@ -62084,9 +62325,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L55",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint_test_example_policy_clean_exit_0",
-      "target": "unit_test_policy_lint_run",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_run"
     },
     {
       "relation": "calls",
@@ -62095,9 +62336,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L64",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint_test_invalid_schema_bad_mode_errors",
-      "target": "unit_test_policy_lint_run",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_run"
     },
     {
       "relation": "calls",
@@ -62106,9 +62347,9 @@
       "source_file": "tests/unit/test_policy_lint.py",
       "source_location": "L94",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "unit_test_policy_lint_test_missing_path_errors",
-      "target": "unit_test_policy_lint_run",
-      "confidence_score": 1.0
+      "target": "unit_test_policy_lint_run"
     },
     {
       "relation": "contains",
@@ -65786,9 +66027,9 @@
       "source_file": "CHANGELOG.md",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "changelog_changelog",
-      "target": "changelog_0_0_1_alpha_2026_06_27",
-      "confidence_score": 1.0
+      "target": "changelog_0_0_1_alpha_2026_06_27"
     },
     {
       "relation": "contains",
@@ -65846,9 +66087,9 @@
       "source_file": "CHANGELOG.md",
       "source_location": "L15",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "changelog_0_0_1_alpha_2026_06_27",
-      "target": "changelog_added",
-      "confidence_score": 1.0
+      "target": "changelog_added"
     },
     {
       "relation": "contains",
@@ -65856,9 +66097,9 @@
       "source_file": "CHANGELOG.md",
       "source_location": "L46",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "changelog_0_0_1_alpha_2026_06_27",
-      "target": "changelog_changed",
-      "confidence_score": 1.0
+      "target": "changelog_changed"
     },
     {
       "relation": "contains",
@@ -65866,9 +66107,9 @@
       "source_file": "CHANGELOG.md",
       "source_location": "L131",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "changelog_0_0_1_alpha_2026_06_27",
-      "target": "changelog_known_limitations",
-      "confidence_score": 1.0
+      "target": "changelog_known_limitations"
     },
     {
       "relation": "contains",
@@ -65876,9 +66117,9 @@
       "source_file": "CHANGELOG.md",
       "source_location": "L98",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "changelog_0_0_1_alpha_2026_06_27",
-      "target": "changelog_plugin_architecture_refactor_p1_p6_s_4",
-      "confidence_score": 1.0
+      "target": "changelog_plugin_architecture_refactor_p1_p6_s_4"
     },
     {
       "relation": "contains",
@@ -65886,9 +66127,9 @@
       "source_file": "CHANGELOG.md",
       "source_location": "L70",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "changelog_0_0_1_alpha_2026_06_27",
-      "target": "changelog_security_fixes",
-      "confidence_score": 1.0
+      "target": "changelog_security_fixes"
     },
     {
       "relation": "contains",
@@ -65896,9 +66137,9 @@
       "source_file": "CHANGELOG.md",
       "source_location": "L120",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "changelog_0_0_1_alpha_2026_06_27",
-      "target": "changelog_security_hardening_cr_1_3_h1_3_s_1_2_3_5_8_p_1_r_1_2",
-      "confidence_score": 1.0
+      "target": "changelog_security_hardening_cr_1_3_h1_3_s_1_2_3_5_8_p_1_r_1_2"
     },
     {
       "relation": "contains",
@@ -65976,9 +66217,9 @@
       "source_file": "CONTRIBUTING.md",
       "source_location": "L40",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "contributing_contributing_to_guardmcp",
-      "target": "contributing_continuous_integration",
-      "confidence_score": 1.0
+      "target": "contributing_continuous_integration"
     },
     {
       "relation": "contains",
@@ -66036,9 +66277,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install",
-      "target": "install_guardmcp_installation",
-      "confidence_score": 1.0
+      "target": "install_guardmcp_installation"
     },
     {
       "relation": "contains",
@@ -66046,9 +66287,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_a_pip_local_stdio_claude_desktop_cursor",
-      "confidence_score": 1.0
+      "target": "install_a_pip_local_stdio_claude_desktop_cursor"
     },
     {
       "relation": "contains",
@@ -66056,9 +66297,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L51",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_b_docker_server_mode_sse_streamable_http",
-      "confidence_score": 1.0
+      "target": "install_b_docker_server_mode_sse_streamable_http"
     },
     {
       "relation": "contains",
@@ -66066,9 +66307,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L74",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_c_backends_postgresql_mysql_backends",
-      "confidence_score": 1.0
+      "target": "install_c_backends_postgresql_mysql_backends"
     },
     {
       "relation": "contains",
@@ -66076,9 +66317,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L214",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_checklist_before_production",
-      "confidence_score": 1.0
+      "target": "install_checklist_before_production"
     },
     {
       "relation": "contains",
@@ -66086,9 +66327,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L185",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_cli_operations",
-      "confidence_score": 1.0
+      "target": "install_cli_operations"
     },
     {
       "relation": "contains",
@@ -66096,9 +66337,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L122",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_configuration_configuration",
-      "confidence_score": 1.0
+      "target": "install_configuration_configuration"
     },
     {
       "relation": "contains",
@@ -66106,9 +66347,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L101",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_d_development",
-      "confidence_score": 1.0
+      "target": "install_d_development"
     },
     {
       "relation": "contains",
@@ -66116,9 +66357,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_requirements",
-      "confidence_score": 1.0
+      "target": "install_requirements"
     },
     {
       "relation": "contains",
@@ -66126,9 +66367,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L165",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_guardmcp_installation",
-      "target": "install_verifying_a_healthy_install",
-      "confidence_score": 1.0
+      "target": "install_verifying_a_healthy_install"
     },
     {
       "relation": "contains",
@@ -66136,9 +66377,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L145",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_configuration_configuration",
-      "target": "install_audit_logging",
-      "confidence_score": 1.0
+      "target": "install_audit_logging"
     },
     {
       "relation": "contains",
@@ -66146,9 +66387,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L126",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_configuration_configuration",
-      "target": "install_core",
-      "confidence_score": 1.0
+      "target": "install_core"
     },
     {
       "relation": "contains",
@@ -66156,9 +66397,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L154",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_configuration_configuration",
-      "target": "install_multi_backend_tuning",
-      "confidence_score": 1.0
+      "target": "install_multi_backend_tuning"
     },
     {
       "relation": "contains",
@@ -66166,9 +66407,9 @@
       "source_file": "INSTALL.md",
       "source_location": "L137",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "install_configuration_configuration",
-      "target": "install_security",
-      "confidence_score": 1.0
+      "target": "install_security"
     },
     {
       "relation": "contains",
@@ -66176,9 +66417,9 @@
       "source_file": "QUICKSTART.md",
       "source_location": "L1",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "quickstart",
-      "target": "quickstart_guardmcp_quickstart",
-      "confidence_score": 1.0
+      "target": "quickstart_guardmcp_quickstart"
     },
     {
       "relation": "contains",
@@ -66186,9 +66427,9 @@
       "source_file": "QUICKSTART.md",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "quickstart_guardmcp_quickstart",
-      "target": "quickstart_1_install",
-      "confidence_score": 1.0
+      "target": "quickstart_1_install"
     },
     {
       "relation": "contains",
@@ -66196,9 +66437,9 @@
       "source_file": "QUICKSTART.md",
       "source_location": "L35",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "quickstart_guardmcp_quickstart",
-      "target": "quickstart_2_create_a_policy",
-      "confidence_score": 1.0
+      "target": "quickstart_2_create_a_policy"
     },
     {
       "relation": "contains",
@@ -66206,9 +66447,9 @@
       "source_file": "QUICKSTART.md",
       "source_location": "L68",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "quickstart_guardmcp_quickstart",
-      "target": "quickstart_3_connect_claude_desktop_stdio",
-      "confidence_score": 1.0
+      "target": "quickstart_3_connect_claude_desktop_stdio"
     },
     {
       "relation": "contains",
@@ -66216,9 +66457,9 @@
       "source_file": "QUICKSTART.md",
       "source_location": "L106",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "quickstart_guardmcp_quickstart",
-      "target": "quickstart_4_try_it",
-      "confidence_score": 1.0
+      "target": "quickstart_4_try_it"
     },
     {
       "relation": "contains",
@@ -66226,9 +66467,9 @@
       "source_file": "QUICKSTART.md",
       "source_location": "L121",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "quickstart_guardmcp_quickstart",
-      "target": "quickstart_5_verify_the_install_optional",
-      "confidence_score": 1.0
+      "target": "quickstart_5_verify_the_install_optional"
     },
     {
       "relation": "contains",
@@ -66236,9 +66477,9 @@
       "source_file": "QUICKSTART.md",
       "source_location": "L131",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "quickstart_guardmcp_quickstart",
-      "target": "quickstart_next",
-      "confidence_score": 1.0
+      "target": "quickstart_next"
     },
     {
       "relation": "contains",
@@ -66246,9 +66487,9 @@
       "source_file": "QUICKSTART.md",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "quickstart_guardmcp_quickstart",
-      "target": "quickstart_prerequisites",
-      "confidence_score": 1.0
+      "target": "quickstart_prerequisites"
     },
     {
       "relation": "contains",
@@ -66276,9 +66517,9 @@
       "source_file": "README.md",
       "source_location": "L191",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_cli_operations",
-      "confidence_score": 1.0
+      "target": "readme_cli_operations"
     },
     {
       "relation": "contains",
@@ -66286,9 +66527,9 @@
       "source_file": "README.md",
       "source_location": "L155",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_configuration",
-      "confidence_score": 1.0
+      "target": "readme_configuration"
     },
     {
       "relation": "contains",
@@ -66306,9 +66547,9 @@
       "source_file": "README.md",
       "source_location": "L44",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_features_overview",
-      "confidence_score": 1.0
+      "target": "readme_features_overview"
     },
     {
       "relation": "contains",
@@ -66326,9 +66567,9 @@
       "source_file": "README.md",
       "source_location": "L134",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_mcp_tools_44",
-      "confidence_score": 1.0
+      "target": "readme_mcp_tools_44"
     },
     {
       "relation": "contains",
@@ -66336,9 +66577,9 @@
       "source_file": "README.md",
       "source_location": "L215",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_multi_backend_postgresql_mysql",
-      "confidence_score": 1.0
+      "target": "readme_multi_backend_postgresql_mysql"
     },
     {
       "relation": "contains",
@@ -66356,9 +66597,9 @@
       "source_file": "README.md",
       "source_location": "L32",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_quick_links",
-      "confidence_score": 1.0
+      "target": "readme_quick_links"
     },
     {
       "relation": "contains",
@@ -66366,9 +66607,9 @@
       "source_file": "README.md",
       "source_location": "L67",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_quickstart_stdio_claude_desktop",
-      "confidence_score": 1.0
+      "target": "readme_quickstart_stdio_claude_desktop"
     },
     {
       "relation": "contains",
@@ -66376,9 +66617,9 @@
       "source_file": "README.md",
       "source_location": "L228",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_troubleshooting",
-      "confidence_score": 1.0
+      "target": "readme_troubleshooting"
     },
     {
       "relation": "contains",
@@ -66386,9 +66627,9 @@
       "source_file": "README.md",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "readme_guardmcp",
-      "target": "readme_why_guardmcp",
-      "confidence_score": 1.0
+      "target": "readme_why_guardmcp"
     },
     {
       "relation": "contains",
@@ -66606,9 +66847,9 @@
       "source_file": "docs/PLUGIN_AUTHORS.md",
       "source_location": "L39",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_plugin_authors_the_databaseplugin_contract",
-      "target": "docs_plugin_authors_capabilityrequest_shape",
-      "confidence_score": 1.0
+      "target": "docs_plugin_authors_capabilityrequest_shape"
     },
     {
       "relation": "contains",
@@ -66616,9 +66857,9 @@
       "source_file": "docs/PLUGIN_AUTHORS.md",
       "source_location": "L92",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_plugin_authors_the_databaseplugin_contract",
-      "target": "docs_plugin_authors_capabilityresult_examples",
-      "confidence_score": 1.0
+      "target": "docs_plugin_authors_capabilityresult_examples"
     },
     {
       "relation": "contains",
@@ -66636,9 +66877,9 @@
       "source_file": "docs/PLUGIN_AUTHORS.md",
       "source_location": "L142",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "docs_plugin_authors_the_databaseplugin_contract",
-      "target": "docs_plugin_authors_error_handling",
-      "confidence_score": 1.0
+      "target": "docs_plugin_authors_error_handling"
     },
     {
       "relation": "contains",
@@ -67112,5 +67353,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "b0ce52e5451b8ce54da5abeff59ccb17dd34bde4"
+  "built_at_commit": "4a444b8b9ba2a9d5d59432ebbb1f29f9823a0b30"
 }

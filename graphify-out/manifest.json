@@ -520,8 +520,8 @@
     "semantic_hash": ""
   },
   "tests/unit/test_mcp_tooling.py": {
-    "mtime": 1782558777.1279457,
-    "ast_hash": "e17ad01397908f01beb1eeba869cc733",
+    "mtime": 1782795129.9914656,
+    "ast_hash": "b32caa0272333167f5b4edef34706696",
     "semantic_hash": ""
   },
   "tests/unit/test_mongo_plugin.py": {
@@ -980,8 +980,8 @@
     "semantic_hash": ""
   },
   "src/guardmcp/server/tools/meta/capabilities.py": {
-    "mtime": 1782565575.16236,
-    "ast_hash": "a256899d3b13c5aa9d4f7a90d39a097d",
+    "mtime": 1782795154.1627846,
+    "ast_hash": "0002c6d1a8b90e29df3d8fa6850f0d6f",
     "semantic_hash": ""
   },
   "src/guardmcp/server/tools/meta/explain.py": {

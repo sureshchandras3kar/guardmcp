@@ -236,7 +236,11 @@
       "Bash(sed -n '10,25p' src/guardmcp/core/approval/store.py)",
       "Bash(python -m pytest tests/unit/test_health_endpoints.py -q)",
       "Bash(python -c 'import sys,json *)",
-      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'feat: operator/CI CLI + HTTP health endpoints *)"
+      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'feat: operator/CI CLI + HTTP health endpoints *)",
+      "Bash(python -m pytest \"tests/unit/test_mcp_tooling.py::test_capabilities_readonly_shows_only_read_actions\" \"tests/unit/test_mcp_tooling.py::test_capabilities_engine_consistency_expired_policy\" -q)",
+      "Bash(GUARDMCP_AGENT=support-bot GUARDMCP_POLICY_PATH=policies/example.yaml python -c ' *)",
+      "Bash(python -c \"import sys, guardmcp.core.pipeline; assert not any\\(m.startswith\\('guardmcp.plugins'\\) for m in sys.modules\\), [m for m in sys.modules if m.startswith\\('guardmcp.plugins'\\)]; print\\('OK: core imports zero plugins'\\)\")",
+      "Bash(git -c user.name=GuardMCP -c user.email=dev@guardmcp.local commit -q -m 'feat\\(capabilities\\): per-action risk+approval, limits, per-collection masking, engine-derived *)"
     ]
   }
 }

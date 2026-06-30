@@ -282,13 +282,144 @@ async def test_capabilities_returns_backend_and_collections(rw_pipeline):
     data = payload["data"]
     assert data["backend"] == "mongodb"
     assert "read" in data["supported_capabilities"]
+    # unsupported_capabilities present and disjoint from supported.
+    assert "unsupported_capabilities" in data
+    assert not (set(data["supported_capabilities"]) & set(data["unsupported_capabilities"]))
     assert data["mode"] == "readwrite"
     assert "users" in data["collections"]
-    actions = {e["action"] for e in data["collections"]["users"]}
+
+    col = data["collections"]["users"]
+    # New per-collection object shape.
+    assert isinstance(col, dict)
+    assert "actions" in col and "masked_fields" in col and "fields_allow" in col
+    entries = {e["action"]: e for e in col["actions"]}
+    assert "find" in entries
+    assert "delete_many" in entries  # readwrite + allowed
+    assert "insert_one" not in entries  # not in actions.allow → engine denies
+
+    # Per-action entries carry decision + risk + approval_required.
+    for e in col["actions"]:
+        assert "decision" in e and "risk" in e and "approval_required" in e
+        assert "capability" in e
+
+    # approval.critical=true ⇒ delete_many is approval_required + CRITICAL.
+    dm = entries["delete_many"]
+    assert dm["approval_required"] is True
+    assert dm["decision"] == "approval_required"
+    assert dm["risk"] == "CRITICAL"
+
+    # find is an allowed read with no approval.
+    assert entries["find"]["decision"] == "allowed"
+    assert entries["find"]["approval_required"] is False
+
+    # Per-collection masking + fields_allow.
+    assert col["masked_fields"] == ["password"]
+    assert col["fields_allow"] == []
+
+    # limits block present with max_documents.
+    assert "limits" in data
+    assert data["limits"]["max_documents"] == 500
+    assert data["limits"]["max_time_ms"] == 30_000
+    assert data["limits"]["rate_limit"] is None  # rps disabled by default
+
+
+@pytest.mark.asyncio
+async def test_capabilities_readonly_shows_only_read_actions(tmp_path):
+    """A readonly policy exposes only read actions (engine-derived)."""
+    pol = tmp_path / "policy.yaml"
+    pol.write_text(
+        """
+agent: test-agent
+mode: readonly
+collections:
+  allow:
+    - users
+mask_fields:
+  users:
+    - ssn
+"""
+    )
+    loader = PolicyLoader(pol)
+    loader.load()
+    client, real = _make_client()
+    await real["testdb"]["users"].insert_one({"name": "a"})
+    pipeline = GuardPipeline(
+        policy_loader=loader,
+        policy_engine=PolicyEngine(),
+        risk_engine=RiskEngine(),
+        audit_logger=AuditLogger(tmp_path / "audit.jsonl"),
+        approval_store=ApprovalStore(timeout_seconds=1.0),
+        executor=MongoExecutor(client),
+    )
+    cap_tool = _get_tool(pipeline, "guardmcp_capabilities")
+    payload = await _call(cap_tool)
+    data = payload["data"]
+    actions = {e["action"] for e in data["collections"]["users"]["actions"]}
+    # No write actions appear in a readonly policy.
     assert "find" in actions
-    assert "delete_many" in actions  # readwrite + allowed
-    assert "insert_one" not in actions  # not in actions.allow
-    assert data["masked_fields"] == ["password"]
+    assert not (actions & {"delete_many", "update_many", "insert_one", "drop"})
+    # Per-collection masking reflects the collection-specific bucket.
+    assert data["collections"]["users"]["masked_fields"] == ["ssn"]
+
+
+@pytest.mark.asyncio
+async def test_capabilities_engine_consistency_expired_policy(tmp_path):
+    """Engine-consistency: a temporally-expired policy → evaluate() DENIES every
+    action, so NO actions appear in the allowed list."""
+    pol = tmp_path / "policy.yaml"
+    pol.write_text(
+        """
+agent: test-agent
+mode: readwrite
+not_after: "2000-01-01T00:00:00Z"
+collections:
+  allow:
+    - users
+"""
+    )
+    loader = PolicyLoader(pol)
+    loader.load()
+    client, real = _make_client()
+    await real["testdb"]["users"].insert_one({"name": "a"})
+    pipeline = GuardPipeline(
+        policy_loader=loader,
+        policy_engine=PolicyEngine(),
+        risk_engine=RiskEngine(),
+        audit_logger=AuditLogger(tmp_path / "audit.jsonl"),
+        approval_store=ApprovalStore(timeout_seconds=1.0),
+        executor=MongoExecutor(client),
+    )
+    cap_tool = _get_tool(pipeline, "guardmcp_capabilities")
+    payload = await _call(cap_tool)
+    data = payload["data"]
+    # Collection still listed, but every action is denied by the temporal guard.
+    assert data["collections"]["users"]["actions"] == []
+
+
+@pytest.mark.asyncio
+async def test_capabilities_no_policy_branch(tmp_path):
+    """No-policy branch: top-level keys present, mode null, collections empty."""
+    client, real = _make_client()
+    loader = PolicyLoader(tmp_path / "missing.yaml")
+    # No policy file written → loader returns None for any agent.
+    pipeline = GuardPipeline(
+        policy_loader=loader,
+        policy_engine=PolicyEngine(),
+        risk_engine=RiskEngine(),
+        audit_logger=AuditLogger(tmp_path / "audit.jsonl"),
+        approval_store=ApprovalStore(timeout_seconds=1.0),
+        executor=MongoExecutor(client),
+    )
+    cap_tool = _get_tool(pipeline, "guardmcp_capabilities")
+    payload = await _call(cap_tool)
+    data = payload["data"]
+    assert data["mode"] is None
+    assert data["collections"] == {}
+    assert "note" in data and "guardmcp_setup" in data["note"]
+    assert data["backend"] == "mongodb"
+    assert "supported_capabilities" in data
+    assert "unsupported_capabilities" in data
+    assert "limits" in data
 
 
 # ── 9. UNSUPPORTED_CAPABILITY ───────────────────────────────────────────────────
