@@ -17,8 +17,6 @@ node_id (GUARDMCP_NODE_ID) so records remain attributable to their writer.
 
 import asyncio
 import contextlib
-import hashlib
-import hmac
 import json
 from datetime import UTC, datetime
 from pathlib import Path
@@ -88,9 +86,15 @@ class AuditLogger:
             return _GENESIS
 
     def _sign(self, prev_hash: str, line: str) -> str:
-        """HMAC-SHA256 of (prev_hash + line). Returns hex digest."""
-        msg = (prev_hash + line).encode()
-        return hmac.new(self._secret, msg, hashlib.sha256).hexdigest()
+        """HMAC-SHA256 of (prev_hash + line). Returns hex digest.
+
+        Delegates to the shared ``verify.sign_record`` so the writer and the
+        offline verifier (``guardmcp audit verify``) use ONE definition of the
+        chain math — no second copy to drift out of sync.
+        """
+        from .verify import sign_record
+
+        return sign_record(self._secret, prev_hash, line)
 
     async def _get_handle(self):
         """P-1: open the append handle once and reuse it across log() calls."""

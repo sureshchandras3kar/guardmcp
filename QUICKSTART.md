@@ -133,5 +133,5 @@ python -m guardmcp.eval evals/cases/ # 38/38 passed
 - **Docker / server mode (SSE / streamable-http):** see [INSTALL.md](INSTALL.md)
 - **PostgreSQL / MySQL backends:** see [INSTALL.md](INSTALL.md#backends)
 - **All config / env vars:** see [INSTALL.md](INSTALL.md#configuration)
-- **Full feature list:** see [FEATURES.md](FEATURES.md)
+- **Feature inventory:** see [README.md](README.md#features-overview) and [CHANGELOG.md](CHANGELOG.md#added)
 - **Writing a plugin:** see [docs/PLUGIN_AUTHORS.md](docs/PLUGIN_AUTHORS.md)

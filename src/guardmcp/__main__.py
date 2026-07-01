@@ -253,7 +253,33 @@ def build(settings: Settings) -> tuple[FastMCP, object, AppContext]:
         get_settings=lambda: ctx.settings,
     )
 
-    rest_app = build_approval_app(approval_store, api_token=settings.approval_api_token)
+    async def _readiness() -> tuple[bool, str]:
+        # Ready when a policy is loaded AND the default backend answers a ping.
+        # Best-effort: a short timeout, and any error → not-ready (never raises).
+        if not policy_loader.all():
+            return False, "no policy loaded"
+        entry = registry.get("default")
+        client = getattr(entry, "client", None) if entry is not None else None
+        ping = getattr(client, "ping", None)
+        if ping is None:
+            return False, "default backend has no reachability probe"
+        try:
+            await asyncio.wait_for(ping(), timeout=2.0)
+        except Exception as exc:  # noqa: BLE001 - readiness must not raise
+            return False, f"default backend unreachable: {type(exc).__name__}"
+        return True, "ready"
+
+    # DNS-rebinding protection: default the Host allow-list to the configured
+    # host + loopback when the operator didn't set one. A 0.0.0.0 bind (Docker)
+    # still allows localhost/127.0.0.1; add the external hostname via
+    # GUARDMCP_ALLOWED_HOSTS. ["*"] disables (trusted-proxy only).
+    allowed_hosts = settings.allowed_hosts or [settings.host, "localhost", "127.0.0.1"]
+    rest_app = build_approval_app(
+        approval_store,
+        api_token=settings.approval_api_token,
+        readiness=_readiness,
+        allowed_hosts=allowed_hosts,
+    )
     return mcp, rest_app, ctx
 
 
@@ -281,13 +307,20 @@ async def _run_with_approval_api(mcp: FastMCP, rest_app, settings: Settings) -> 
             raise ValueError(f"unknown transport: {settings.transport}")
 
 
-def main() -> None:
+def serve_main(argv: list[str] | None = None) -> None:
+    """Start the GuardMCP server (the original entry-point behavior).
+
+    This is the SERVE path. ``main`` is kept as an alias so any direct importer
+    of ``guardmcp.__main__:main`` still starts the server. The subcommand
+    dispatcher lives in ``guardmcp.cli`` and falls through to here when no
+    subcommand is given (bare invocation or ``--transport/...`` flags).
+    """
     parser = argparse.ArgumentParser(description="GuardMCP — policy-enforced MongoDB MCP server")
     parser.add_argument("--transport", choices=["stdio", "sse", "streamable-http"], default=None)
     parser.add_argument("--host", default=None)
     parser.add_argument("--port", type=int, default=None)
     parser.add_argument("--approval-port", type=int, default=None)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     overrides: dict = {}
     if args.transport:
@@ -326,5 +359,13 @@ def main() -> None:
     asyncio.run(_run_with_approval_api(mcp, rest_app, settings))
 
 
+# Back-compat alias: importers of `guardmcp.__main__:main` still get the server.
+main = serve_main
+
+
 if __name__ == "__main__":
-    main()
+    # `python -m guardmcp [...]` routes through the subcommand dispatcher, which
+    # falls through to serve_main() when no subcommand is present.
+    from .cli import main as cli_main
+
+    cli_main()

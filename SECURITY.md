@@ -2,9 +2,11 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in GuardMCP, please report it
-**privately**. Email `security@example.com` (note: maintainer should replace
-this placeholder with a real, monitored address before publishing).
+If you discover a security vulnerability in GuardMCP, please report it **privately** via
+[**GitHub Private Vulnerability Reporting**](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability)
+(available in the repository **Security** tab under "Report a vulnerability").
+
+Alternatively: Email to `SECURITY_CONTACT` (maintainer to add).
 
 Please **do not open a public GitHub issue** for security vulnerabilities, as
 this may expose other users to risk before a fix is available.
@@ -21,21 +23,21 @@ What to expect:
 
 ## Supported Versions
 
-| Version | Supported          | Notes        |
-| ------- | ------------------ | ------------ |
-| 0.1.x   | :white_check_mark: | Alpha        |
+| Version | Supported | Notes |
+| --- | --- | --- |
+| 0.0.1-alpha | Yes | Current alpha release |
 
 ## Security Model
 
 GuardMCP is a **policy enforcement layer** that sits between an AI/MCP client
-and a MongoDB deployment. Every request is evaluated against an agent policy
-before it reaches the database, and responses are masked on the way back. Its
-security guarantees depend **entirely on correct policy configuration**: the
-layer can only enforce what the policy expresses. A permissive policy provides
-little protection — for example, leaving `collections.allow` empty means *all*
-collections are reachable, and omitting `mask_fields` means no values are
-redacted. Treat policy authoring as a security-critical task and review it
-accordingly.
+and a database (MongoDB, PostgreSQL, MySQL, or a custom plugin). Every request
+is evaluated against an agent policy before it reaches the backend, and responses
+are masked on the way back. Its security guarantees depend **entirely on correct
+policy configuration**: the layer can only enforce what the policy expresses.
+A permissive policy provides little protection — for example, leaving
+`collections.allow` empty means *all* collections are reachable, and omitting
+`mask_fields` means no values are redacted. Treat policy authoring as a
+security-critical task and review it accordingly.
 
 ## Known Limitations
 

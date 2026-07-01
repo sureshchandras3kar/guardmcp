@@ -139,6 +139,7 @@ All settings are environment variables, prefix `GUARDMCP_`.
 |-----|---------|-------|
 | `GUARDMCP_APPROVAL_API_TOKEN` | `""` | **required** for `sse`/`streamable-http` (else server refuses to start) |
 | `GUARDMCP_APPROVAL_ALLOW_INSECURE` | `false` | local-only override of the above (NOT for prod) |
+| `GUARDMCP_ALLOWED_HOSTS` | host + loopback | DNS-rebinding protection: Host-header allow-list for the approval API (JSON list). Default = configured host + `localhost`/`127.0.0.1`. Add proxy/ingress hostnames; `["*"]` disables (trusted-proxy only). Unknown Host → 400. |
 | `GUARDMCP_AUDIT_HMAC_SECRET` | `""` | set → tamper-evident HMAC audit chain |
 | `GUARDMCP_AUDIT_FAIL_CLOSED` | `false` | true → abort an op if its audit record can't be written |
 
@@ -179,6 +180,35 @@ python -m guardmcp.eval evals/cases/
 
 For a misconfigured policy or unwritable audit path, GuardMCP **fails loud at startup**
 with an actionable message (not a traceback).
+
+---
+
+## CLI / operations
+
+The `guardmcp` entry point is also an operator/CI CLI. Bare `guardmcp` and any
+`--transport …` flag still start the server (back-compat); the subcommands below are
+additive. Each has its own `--help` (e.g. `guardmcp policy lint --help`).
+
+| Command | Args | Exit codes |
+| --- | --- | --- |
+| `guardmcp version` | — | always `0`. Reads installed package metadata (stale? `pip install -e .`). |
+| `guardmcp doctor` | — | `0` PASS / `1` FAIL. DB unreachable → WARN, still `0`. |
+| `guardmcp config validate` | — | `0` PASS / `1` FAIL (H1, audit path). No DB call. |
+| `guardmcp policy lint <path>` | `[--strict]` | `0` clean (warnings allowed) / `1` on schema error, or any warning under `--strict`. |
+| `guardmcp audit verify <log>` | `--secret <s>` (or `GUARDMCP_AUDIT_HMAC_SECRET`) | `0` verified · `1` chain broken (prints first bad line) · `2` read error · `3` not verifiable (no `_hmac`/no secret). |
+| `guardmcp capability inspect <type>` | `[--format text\|json]` | `0` / `1` if the type is unknown. |
+
+```bash
+guardmcp doctor
+guardmcp policy lint policies/ --strict
+guardmcp audit verify "$GUARDMCP_AUDIT_LOG_PATH" --secret "$GUARDMCP_AUDIT_HMAC_SECRET"
+```
+
+**Health endpoints (networked transports):** on `sse`/`streamable-http`, the approval API
+serves `/healthz` (liveness, always 200) and `/readyz` (200 when policy is loaded and the
+default backend is reachable, else 503) on the approval port (`GUARDMCP_APPROVAL_PORT`,
+default 8001). Wire these to Kubernetes liveness/readiness probes. `/health` and `/ready`
+are kept as aliases.
 
 ---
 

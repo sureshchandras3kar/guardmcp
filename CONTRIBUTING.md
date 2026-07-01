@@ -37,18 +37,42 @@ pytest                          # tests
 All four are blocking in CI. The pre-commit hooks mirror them, so a clean
 `pre-commit run --all-files` means CI will pass.
 
+## Continuous Integration
+
+CI runs via GitHub Actions (`.github/workflows/ci.yml`) on every push and pull request.
+The workflow runs ruff (lint + format), mypy (type-check), pytest (unit + integration tests),
+and the policy evaluation suite. Logs are visible on the PR.
+
+CI can also gate on the operator CLI: `guardmcp policy lint policies/` (add `--strict` to fail on warnings) and `guardmcp audit verify <log> --secret <s>` both exit nonzero on failure.
+
 ## Running the gates
 
-All three must pass before a PR is merged:
+All three must pass before a PR is merged.
+
+**Full test suite** (unit + integration + conformance):
 
 ```bash
-# Unit + integration tests (includes conformance under tests/conformance/)
-python -m pytest
+python -m pytest              # run all tests
+python -m pytest -q           # quiet mode (summary only)
+python -m pytest --tb=short   # shorter traceback on failure
+```
 
-# Conformance kit only (the three builtins against the plugin contract)
-python -m pytest tests/conformance/
+**Run a single test**:
 
-# Evals — behavioural policy/governance cases
+```bash
+python -m pytest tests/unit/test_policy_engine.py::test_deny_by_default
+```
+
+**Integration tests only** (live PostgreSQL/MySQL/MongoDB via Docker; skip cleanly without it):
+
+```bash
+pip install -e ".[test-live,postgres,mysql]"
+python -m pytest -m integration
+```
+
+**Policy evaluation suite** (38 YAML cases across authorization, masking, approval, security):
+
+```bash
 python -m guardmcp.eval evals/cases/
 ```
 
