@@ -20,7 +20,7 @@ from ...core.interfaces.capability import (
 )
 from ...core.interfaces.cost import CostEstimate, CostLevel
 from ...core.interfaces.errors import GuardExecutionError, GuardValidationError
-from ...core.interfaces.plugin import DatabasePlugin
+from ...core.interfaces.plugin import AlternativeRequest, DatabasePlugin
 from ...core.models.domain import Action
 from .client import MongoClient
 from .cost import normalize_mongo_explain
@@ -153,6 +153,31 @@ class MongoPlugin(DatabasePlugin):
     def cross_resource_refs(self, req: CapabilityRequest) -> set[str]:
         return extract_pipeline_collections(req.pipeline or [])
 
+    # ── Alternative plan generation (dialect-specific; owned by the plugin) ──
+    def alternative_requests(self, req: CapabilityRequest) -> list[AlternativeRequest]:
+        """Turn a filtered read into its MongoDB aggregate-pipeline equivalent.
+
+        This is the Mongo dialect that USED to live in core/planning: a
+        [{$match: filter}, {$limit: n}] pipeline. Only produced when there is a
+        filter to push down; the aggregate form enables downstream
+        $group/$lookup stages the plain find cannot express."""
+        if not req.filter:
+            return []
+        limit = req.limit or 50
+        agg = CapabilityRequest(
+            capability=Capability.AGGREGATE,
+            resource=req.resource,
+            pipeline=[{"$match": req.filter}, {"$limit": limit}],
+        )
+        return [
+            AlternativeRequest(
+                request=agg,
+                strategy="aggregation",
+                complexity="medium",
+                tradeoff="pipeline form; enables downstream $group/$lookup",
+            )
+        ]
+
     # ── Cost estimation ──────────────────────────────────────────────────────
     async def estimate(self, req: CapabilityRequest) -> CostEstimate:
         """Estimate the cost of a find/aggregate via explain(executionStats),
@@ -193,3 +218,24 @@ class MongoPlugin(DatabasePlugin):
         if self._executor is None:
             return []
         return await self._executor.list_collections()
+
+    async def relationships(self, resources: list[str]) -> list[dict]:
+        """Infer relationships among `resources` from field names + indexes.
+        Best-effort: any per-resource introspection failure is skipped, never
+        raised, so planning degrades gracefully."""
+        from .relationships import infer_relationships
+
+        if self._executor is None:
+            return []
+        schemas: dict[str, dict] = {}
+        indexes: dict[str, list[dict]] = {}
+        for r in resources:
+            try:
+                schemas[r] = await self._executor.collection_schema(r, [], None)
+            except Exception:
+                schemas[r] = {}
+            try:
+                indexes[r] = await self._executor.collection_indexes(r)
+            except Exception:
+                indexes[r] = []
+        return infer_relationships(resources, schemas, indexes)

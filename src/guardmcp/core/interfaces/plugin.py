@@ -11,9 +11,33 @@ request/result flow.
 """
 
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 
 from .capability import Capability, CapabilityRequest, CapabilityResult
 from .cost import CostEstimate, CostLevel
+
+
+@dataclass(frozen=True)
+class AlternativeRequest:
+    """A dialect-specific alternative form of a base request, produced by a
+    plugin (see DatabasePlugin.alternative_requests).
+
+    The whole point of this type is to keep core/planning database-agnostic: the
+    planner asks the active plugin for alternatives and wraps whatever it returns
+    into an AlternativePlan WITHOUT knowing anything about the dialect. All
+    dialect tokens (a Mongo `$match`/`$limit` pipeline, a SQL sub-select, …) live
+    inside `request`, which the plugin builds; core never constructs them.
+
+    - request: the not-yet-executed CapabilityRequest for the alternative form.
+    - strategy: human-facing label for the plan (e.g. "aggregation").
+    - complexity: relative complexity bucket surfaced to the ranker.
+    - tradeoff: one-line explanation of what this form buys / costs.
+    """
+
+    request: CapabilityRequest
+    strategy: str
+    complexity: str = "medium"
+    tradeoff: str = ""
 
 
 class DatabasePlugin(ABC):
@@ -66,6 +90,25 @@ class DatabasePlugin(ABC):
 
     def cross_resource_refs(self, req: CapabilityRequest) -> set[str]:
         return set()
+
+    # ── Alternative plan generation (NOT abstract: safe default) ─────────────
+    # Given a base (not-yet-executed) request, return dialect-specific ALTERNATIVE
+    # forms of it (e.g. Mongo turns a filtered read into a $match/$limit aggregate
+    # pipeline). This keeps core/planning free of any dialect tokens: the planner
+    # asks the active plugin and wraps whatever comes back. Default `[]` so every
+    # existing / third-party plugin (and SQL backends that have no cheaper
+    # alternative form) stays valid unchanged.
+    def alternative_requests(self, req: CapabilityRequest) -> list[AlternativeRequest]:
+        return []
+
+    async def relationships(self, resources: list[str]) -> list[dict]:
+        """Return normalized relationship hints among `resources`.
+
+        Each dict: {from_resource, from_field, to_resource, to_field, kind,
+        confidence, evidence}. Safe default `[]` so backends that cannot infer
+        relationships (and all not-yet-updated plugins) stay valid unchanged.
+        """
+        return []
 
     # ── Cost estimation (NOT abstract: safe default) ─────────────────────────
     # A backend that can estimate an operation's cost via its native explain
