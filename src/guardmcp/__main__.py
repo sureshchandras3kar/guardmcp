@@ -2,6 +2,7 @@ import argparse
 import asyncio
 from contextlib import asynccontextmanager, suppress
 from dataclasses import dataclass
+from typing import Any
 
 import uvicorn
 from mcp.server.fastmcp import FastMCP
@@ -35,6 +36,14 @@ class AppContext:
     pipeline: GuardPipeline
     approval_store: ApprovalStore
     registry: ConnectionRegistry
+    # Process-level lifespan (zero-arg async context manager factory). Owns the
+    # start/stop of process-global resources — hot-reload, approval prune, audit
+    # handle, DB connections. Deliberately NOT wired into FastMCP's lifespan:
+    # under streamable-http/sse the low-level server enters the FastMCP lifespan
+    # once PER SESSION, so closing shared state there kills it for every other
+    # session (pymongo "Cannot use MongoClient after close"). Runs exactly once
+    # per process in _run_with_approval_api, spanning all transports.
+    app_lifespan: Any = None
 
 
 def _build_plugin_registry() -> PluginRegistry:
@@ -221,31 +230,46 @@ def build(settings: Settings) -> tuple[FastMCP, object, AppContext]:
                 approval_store.prune()
 
     @asynccontextmanager
-    async def lifespan(_: FastMCP):
+    async def app_lifespan():
+        # PROCESS-level lifespan: runs exactly once per process (see
+        # _run_with_approval_api), regardless of transport. This MUST NOT be
+        # wired into FastMCP — the low-level MCP server enters the FastMCP
+        # lifespan once per invocation, and under streamable-http/sse that is
+        # once PER CLIENT SESSION. Tearing down the shared Mongo client / policy
+        # loader / approval store on a per-session basis is what caused DB tools
+        # to fail with "Cannot use MongoClient after close" after the first
+        # session ended.
         import asyncio as _asyncio
         import contextlib
 
         policy_loader.start_hot_reload()
         prune_task = _asyncio.create_task(_prune_loop(), name="approval-prune")
-        yield ctx
-        # R-2: orderly shutdown — stop + AWAIT the hot-reload task (cancel is
-        # otherwise fire-and-forget), drain approvals, flush+close the audit
-        # handle so no in-flight record is lost, then close connections.
-        policy_loader.stop_hot_reload()
-        prune_task.cancel()
-        with contextlib.suppress(_asyncio.CancelledError):
-            await prune_task
-        task = getattr(policy_loader, "_task", None)
-        if task is not None:
+        try:
+            yield ctx
+        finally:
+            # R-2: orderly shutdown — stop + AWAIT the hot-reload task (cancel is
+            # otherwise fire-and-forget), drain approvals, flush+close the audit
+            # handle so no in-flight record is lost, then close connections.
+            policy_loader.stop_hot_reload()
+            prune_task.cancel()
             with contextlib.suppress(_asyncio.CancelledError):
-                await task
-        drained = approval_store.shutdown()
-        if drained:
-            log_event("info", "shutdown_drained_approvals", count=drained)
-        await audit_logger.aclose()
-        registry.close_all()
+                await prune_task
+            task = getattr(policy_loader, "_task", None)
+            if task is not None:
+                with contextlib.suppress(_asyncio.CancelledError):
+                    await task
+            drained = approval_store.shutdown()
+            if drained:
+                log_event("info", "shutdown_drained_approvals", count=drained)
+            await audit_logger.aclose()
+            registry.close_all()
 
-    mcp = FastMCP("GuardMCP", lifespan=lifespan)
+    ctx.app_lifespan = app_lifespan
+
+    # NOTE: no lifespan= is passed to FastMCP on purpose (see app_lifespan and
+    # AppContext.app_lifespan). FastMCP's per-session lifespan stays a no-op so a
+    # single client session ending never tears down process-global resources.
+    mcp = FastMCP("GuardMCP")
     register_tools(
         mcp,
         get_pipeline=lambda: ctx.pipeline,
@@ -283,28 +307,42 @@ def build(settings: Settings) -> tuple[FastMCP, object, AppContext]:
     return mcp, rest_app, ctx
 
 
-async def _run_with_approval_api(mcp: FastMCP, rest_app, settings: Settings) -> None:
-    match settings.transport:
-        case "stdio":
-            # stdio: no REST API — process is private to Claude Desktop.
-            # Approval via in-band ctx.elicit() only.
-            await mcp.run_stdio_async()
-        case "sse" | "streamable-http":
-            rest_config = uvicorn.Config(
-                rest_app,
-                host=settings.host,
-                port=settings.approval_port,
-                log_level="warning",
-            )
-            rest_server = uvicorn.Server(rest_config)
-            async with asyncio.TaskGroup() as tg:
-                tg.create_task(rest_server.serve())
-                if settings.transport == "sse":
-                    tg.create_task(mcp.run_sse_async())
-                else:
-                    tg.create_task(mcp.run_streamable_http_async())
-        case _:
-            raise ValueError(f"unknown transport: {settings.transport}")
+async def _run_with_approval_api(
+    mcp: FastMCP, rest_app, settings: Settings, ctx: AppContext | None = None
+) -> None:
+    # Enter the PROCESS-level lifespan exactly once, wrapping the serving loop for
+    # every transport. This is where process-global resources (DB connections,
+    # policy hot-reload, approval prune, audit handle) start and stop — NOT the
+    # per-session FastMCP lifespan. A no-op fallback keeps back-compat for callers
+    # that don't pass ctx.
+    lifespan_cm = ctx.app_lifespan() if ctx is not None and ctx.app_lifespan is not None else None
+
+    @asynccontextmanager
+    async def _noop():
+        yield
+
+    async with (lifespan_cm if lifespan_cm is not None else _noop()):
+        match settings.transport:
+            case "stdio":
+                # stdio: no REST API — process is private to Claude Desktop.
+                # Approval via in-band ctx.elicit() only.
+                await mcp.run_stdio_async()
+            case "sse" | "streamable-http":
+                rest_config = uvicorn.Config(
+                    rest_app,
+                    host=settings.host,
+                    port=settings.approval_port,
+                    log_level="warning",
+                )
+                rest_server = uvicorn.Server(rest_config)
+                async with asyncio.TaskGroup() as tg:
+                    tg.create_task(rest_server.serve())
+                    if settings.transport == "sse":
+                        tg.create_task(mcp.run_sse_async())
+                    else:
+                        tg.create_task(mcp.run_streamable_http_async())
+            case _:
+                raise ValueError(f"unknown transport: {settings.transport}")
 
 
 def serve_main(argv: list[str] | None = None) -> None:
@@ -355,8 +393,8 @@ def serve_main(argv: list[str] | None = None) -> None:
         )
         raise SystemExit(2)
 
-    mcp, rest_app, _ = build(settings)
-    asyncio.run(_run_with_approval_api(mcp, rest_app, settings))
+    mcp, rest_app, ctx = build(settings)
+    asyncio.run(_run_with_approval_api(mcp, rest_app, settings, ctx))
 
 
 # Back-compat alias: importers of `guardmcp.__main__:main` still get the server.
