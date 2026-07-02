@@ -18,7 +18,7 @@ from __future__ import annotations
 from mcp.server.fastmcp import FastMCP
 
 from .._common import ToolContext
-from . import capabilities, explain, plan, setup, status
+from . import capabilities, explain, plan, plan_query, setup, status
 
 
 def register(mcp: FastMCP, ctx: ToolContext) -> None:
@@ -27,4 +27,5 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
     setup.register(mcp, ctx)
     capabilities.register(mcp, ctx)
     plan.register(mcp, ctx)
+    plan_query.register(mcp, ctx)
     explain.register(mcp, ctx)
