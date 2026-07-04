@@ -22,14 +22,14 @@ class MongoClient:
         )
         self._db: AsyncIOMotorDatabase = self._client[database]
 
-    def get_collection(self, name: str):
-        return self._db[name]
+    def get_db(self, name: str | None = None):
+        return self._client[name] if name else self._db
 
-    async def list_collection_names(self) -> list[str]:
-        return await self._db.list_collection_names()
+    def get_collection(self, name: str, database: str | None = None):
+        return self.get_db(database)[name]
 
-    def get_db(self):
-        return self._db
+    async def list_collection_names(self, database: str | None = None) -> list[str]:
+        return await self.get_db(database).list_collection_names()
 
     async def list_databases(self) -> list[dict]:
         result: Any = await self._client.list_databases()

@@ -183,6 +183,11 @@ class AuditLogger:
 
     async def log(self, record: AuditRecord) -> None:
         data = record.model_dump(mode="json")
+        # Preserve byte-identical HMAC chain for single-DB callers: omit the
+        # "database" key entirely when it is None so existing records are
+        # unchanged and their signatures continue to verify.
+        if data.get("database") is None:
+            data.pop("database", None)
         loop = asyncio.get_running_loop()
         fut = loop.create_future()
         self._ensure_flusher()
@@ -202,6 +207,7 @@ class AuditLogger:
         risk: str | None = None,
         request_id: str | None = None,
         params: dict | None = None,
+        database: str | None = None,
     ) -> AuditRecord:
         return AuditRecord(
             timestamp=datetime.now(UTC),
@@ -215,4 +221,5 @@ class AuditLogger:
             params=params,
             node_id=self._node_id,
             trace_id=get_trace_id(),
+            database=database,
         )

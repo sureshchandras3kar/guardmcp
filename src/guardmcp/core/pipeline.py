@@ -72,10 +72,10 @@ class GuardPipeline:
         """
         if not req.params:
             return {}
-        if policy is None or not policy.mask_fields_for(req.collection):
+        if policy is None or not policy.mask_fields_for(req.collection, req.database):
             return req.params
-        # M1: cached, collection-aware masker
-        return policy.audit_masker(req.collection).mask_result(req.params)
+        # M1: cached, collection- AND database-aware masker
+        return policy.audit_masker(req.collection, req.database).mask_result(req.params)
 
     async def _audit_event(
         self,
@@ -88,6 +88,7 @@ class GuardPipeline:
         risk: "RiskLevel | None" = None,
         request_id: str | None = None,
         params: dict[str, Any] | None = None,
+        database: str | None = None,
     ) -> None:
         """Build + emit a single audit record.
 
@@ -106,6 +107,7 @@ class GuardPipeline:
                 risk=risk.value if risk else None,
                 request_id=request_id,
                 params=params,
+                database=database,
             )
         )
 
@@ -127,6 +129,7 @@ class GuardPipeline:
         params: dict[str, Any],
         trace: "PolicyTrace | None" = None,
         policy_override: Policy | None = None,
+        database: str | None = None,
     ) -> EvalResult:
         """Run policy + risk check. Does NOT execute or audit.
 
@@ -139,8 +142,12 @@ class GuardPipeline:
         loader's policy for `agent`. Used by guardmcp_simulate_policy to run the
         SAME evaluation against a hypothetical policy without touching the loader.
         When None (the default) the loader lookup is used exactly as before.
+
+        `database` (optional): the target database name for multi-database
+        governance. When None (default), single-DB back-compat path is used.
         """
-        request = Request(agent=agent, collection=collection, action=action, params=params)
+        request = Request(agent=agent, collection=collection, action=action, params=params,
+                          database=database)
         policy = policy_override if policy_override is not None else self._policies.get(agent)
 
         if policy is None:
@@ -176,6 +183,21 @@ class GuardPipeline:
         if trace is not None and (policy.not_before is not None or policy.not_after is not None):
             trace.add("pipeline", "temporal_window", "passed", "within active window")
 
+        # Database gate: deny if the policy does not permit the requested database.
+        if not policy.database_permitted(database):
+            if trace is not None:
+                trace.add("policy", "database_access", "matched",
+                          f"database '{database}' not permitted by policy")
+            return EvalResult(
+                request=request,
+                decision=Decision(
+                    status=DecisionStatus.DENIED,
+                    reason=f"database '{database}' is not permitted by policy.",
+                    code=ErrorCode.DATABASE_NOT_ALLOWED.value,
+                ),
+                policy=policy,
+            )
+
         # C1 + C2: aggregation pipelines can reach other collections ($lookup)
         # and leak masked values via field aliasing ($group/$project). Enforce
         # before the normal decision so a permitted action can still be denied
@@ -194,7 +216,9 @@ class GuardPipeline:
             trace.add("pipeline", "aggregation_guard", "passed", "pipeline references permitted")
 
         risk = self._risk_engine.classify(action, params)
-        decision = self._policy_engine.evaluate(request, policy, risk, trace=trace)
+        decision = self._policy_engine.evaluate(
+            request, policy, risk, trace=trace, database=database
+        )
         return EvalResult(request=request, decision=decision, policy=policy)
 
     def evaluate_capability(
@@ -286,11 +310,17 @@ class GuardPipeline:
         ref_collections = getattr(executor, "referenced_collections", None)
         masked_refs = getattr(executor, "masked_field_references", None)
 
+        # Resolve against the PER-DATABASE scope so an aggregation in DB-A is
+        # judged by DB-A's collection allow/deny and masked fields — not the flat
+        # policy, which could permit a collection or unmask a field governed
+        # differently in another database.
+        scope = policy.scope_for(request.database)
+
         # C1: every foreign collection ($lookup.from, $graphLookup.from,
         # $unionWith, nested sub-pipelines) must pass the collection policy.
         if ref_collections is not None:
             for ref in ref_collections(request.params):
-                if not collection_permitted(ref, policy.collections.allow, policy.collections.deny):
+                if not collection_permitted(ref, scope.collections.allow, scope.collections.deny):
                     return Decision(
                         status=DecisionStatus.DENIED,
                         reason=(
@@ -304,7 +334,10 @@ class GuardPipeline:
         # references a masked field path, the masked VALUE could surface under a
         # different key — deny rather than leak.
         leaked = (
-            masked_refs(request.params, policy.mask_fields_for(request.collection))
+            masked_refs(
+                request.params,
+                policy.mask_fields_for(request.collection, request.database),
+            )
             if masked_refs is not None
             else set()
         )
@@ -333,8 +366,11 @@ class GuardPipeline:
         # #8: one trace id per executed request, shared by logs + audit record.
         new_trace_id()
 
-        # TOCTOU fix: re-check policy now, not the cached eval from before elicit
-        fresh = self.evaluate(req.agent, req.collection, req.action, req.params)
+        # TOCTOU fix: re-check policy now, not the cached eval from before elicit.
+        # Preserve the target database so the re-check + masking stay db-aware.
+        fresh = self.evaluate(
+            req.agent, req.collection, req.action, req.params, database=req.database
+        )
         if fresh.decision.status == DecisionStatus.DENIED:
             await self._audit_event(
                 agent=req.agent,
@@ -362,7 +398,7 @@ class GuardPipeline:
             params=self._audit_params(req, fresh.policy),
         )
 
-        return await self._execute_and_build(req, fresh.policy)
+        return await self._execute_and_build(req, fresh.policy, database=req.database)
 
     # ── Full pipeline (REST approval mode) ────────────────────────────────────
 
@@ -373,6 +409,7 @@ class GuardPipeline:
         action: Action,
         params: dict[str, Any],
         incoming_traceparent: str | None = None,
+        database: str | None = None,
     ) -> dict[str, Any]:
         """Full pipeline: evaluate → approve (REST API) → execute → mask.
 
@@ -380,6 +417,9 @@ class GuardPipeline:
         passed to CONTINUE the caller's distributed trace. Wiring the transport
         header into this param is transport-specific; default None mints a fresh
         trace-id as before.
+
+        `database` (optional): the target database name for multi-database
+        governance. When None (default), single-DB back-compat path is used.
         """
         # #8/#9: one trace id per request, shared by structured logs + audit
         # record; continues an inbound traceparent when supplied.
@@ -391,7 +431,7 @@ class GuardPipeline:
                 "code": ErrorCode.RATE_LIMITED.value,
             }
 
-        eval_result = self.evaluate(agent, collection, action, params)
+        eval_result = self.evaluate(agent, collection, action, params, database=database)
         req = eval_result.request
         decision = eval_result.decision
         policy = eval_result.policy
@@ -440,19 +480,21 @@ class GuardPipeline:
                     "code": ErrorCode.APPROVAL_DECLINED.value,
                 }
 
-        return await self._execute_and_build(req, policy)
+        return await self._execute_and_build(req, policy, database=req.database)
 
     # ── Shared execution helper ───────────────────────────────────────────────
 
-    async def _execute_and_build(self, req: Request, policy: Policy | None) -> dict[str, Any]:
+    async def _execute_and_build(
+        self, req: Request, policy: Policy | None, database: str | None = None
+    ) -> dict[str, Any]:
         """Execute request and build masked success response."""
         executor = self._get_executor()
         params = req.params
         # Inject policy mask_fields for schema inference (collection-aware)
         if req.action == Action.COLLECTION_SCHEMA and policy is not None:
-            params = {**params, "mask_fields": policy.mask_fields_for(req.collection)}
+            params = {**params, "mask_fields": policy.mask_fields_for(req.collection, req.database)}
         try:
-            raw = await executor.execute(req.collection, req.action, params)
+            raw = await executor.execute(req.collection, req.action, params, database=database)
         except TypeMarshalError as exc:
             # A typed filter value could not be coerced to the field's known
             # BSON type (the marshalling layer raised). Surface a LOUD,
@@ -507,7 +549,7 @@ class GuardPipeline:
             )
             return {"status": "error", "reason": safe_msg, "code": ErrorCode.BACKEND_ERROR.value}
 
-        return self._build_success(raw, req.action, policy, req.collection)
+        return self._build_success(raw, req.action, policy, req.collection, req.database)
 
     # ── Discovery ─────────────────────────────────────────────────────────────
 
@@ -606,7 +648,12 @@ class GuardPipeline:
     # ── Helpers ────────────────────────────────────────────────────────────────
 
     def _build_success(
-        self, raw: Any, action: Action, policy: Policy | None, collection: str = "*"
+        self,
+        raw: Any,
+        action: Action,
+        policy: Policy | None,
+        collection: str = "*",
+        database: str | None = None,
     ) -> dict[str, Any]:
         if policy is None:
             data = raw
@@ -616,7 +663,7 @@ class GuardPipeline:
         # literals + index bounds into the plan. Run the plan through the masker
         # so any nested key matching a masked field is redacted in the output.
         if action == Action.EXPLAIN:
-            masked_plan = policy.audit_masker(collection).mask_result(raw)  # M1
+            masked_plan = policy.audit_masker(collection, database).mask_result(raw)  # M1
             return self._with_neutral(
                 {"status": "success", "data": masked_plan}, action, masked_plan
             )
@@ -625,7 +672,7 @@ class GuardPipeline:
             return self._with_neutral({"status": "success", "data": raw}, action, raw)
 
         # H3/M1: single-pass field-allow + mask via the policy-cached transformer.
-        transform = policy.result_transformer(collection).transform_result
+        transform = policy.result_transformer(collection, database).transform_result
 
         # find returns {documents: [...], ...} — transform only the documents list
         if isinstance(raw, dict) and "documents" in raw:

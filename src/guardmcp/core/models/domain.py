@@ -93,6 +93,7 @@ class Request(BaseModel):
     collection: str
     action: Action
     params: dict[str, Any] = Field(default_factory=dict)
+    database: str | None = None
 
 
 class Decision(BaseModel):
@@ -125,3 +126,7 @@ class AuditRecord(BaseModel):
     # so a single request can be traced across components at 3 AM. Stamped by
     # AuditLogger.build() from the current trace_id contextvar.
     trace_id: str = ""
+    # Multi-database governance: which database this operation targeted.
+    # Omitted from the serialised chain when None so single-DB HMAC chains
+    # remain byte-identical to records written before this field existed.
+    database: str | None = None

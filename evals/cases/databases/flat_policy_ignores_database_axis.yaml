@@ -1,0 +1,21 @@
+name: flat_policy_ignores_database_axis
+description: >
+  A flat policy (mode: readonly, collections allow-list, no databases config)
+  should allow a permitted collection regardless of which database is named.
+  The database axis is transparent when no databases config exists.
+tags:
+  - databases
+  - authorization
+policy:
+  mode: readonly
+  collections:
+    allow:
+      - customers
+request:
+  collection: customers
+  action: find
+  database: anydb
+  params:
+    filter: {}
+expected:
+  decision: allow

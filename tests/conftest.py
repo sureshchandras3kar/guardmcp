@@ -56,13 +56,13 @@ def mock_mongo_client(monkeypatch):
     real_client = AsyncMongoMockClient()
 
     class _Client:
-        def get_collection(self, name):
+        def get_collection(self, name, database=None):
             return real_client["testdb"][name]
 
-        def get_db(self):
+        def get_db(self, database=None):
             return real_client["testdb"]
 
-        async def list_collection_names(self):
+        async def list_collection_names(self, database=None):
             return await real_client["testdb"].list_collection_names()
 
         async def list_databases(self):  # noqa: RUF029 – async for consistent interface

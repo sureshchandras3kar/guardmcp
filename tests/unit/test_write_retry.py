@@ -41,7 +41,7 @@ class _FakeClient:
     def __init__(self, counter):
         self._col = _CountingCollection(counter)
 
-    def get_collection(self, name):
+    def get_collection(self, name, database=None):
         return self._col
 
 
@@ -68,7 +68,7 @@ async def test_execute_once_call_counts_via_monkeypatch():
 
     calls = {"n": 0}
 
-    async def fake_execute_once(collection, action, params):
+    async def fake_execute_once(collection, action, params, database=None):
         calls["n"] += 1
         raise AutoReconnect("boom")
 

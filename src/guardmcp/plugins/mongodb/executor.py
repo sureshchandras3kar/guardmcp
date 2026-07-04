@@ -64,32 +64,42 @@ class MongoExecutor:
 
     # ── Discovery helpers ──────────────────────────────────────────────────────
 
-    async def list_collections(self) -> list[str]:
-        return await self._client.list_collection_names()
+    async def list_collections(self, database: str | None = None) -> list[str]:
+        return await self._client.list_collection_names(database)
 
     async def list_databases(self) -> list[dict]:
         result = await self._client.list_databases()
         return _bson_to_json(result)
 
-    async def db_stats(self) -> dict:
-        stats = await self._client.get_db().command("dbStats")
+    async def db_stats(self, database: str | None = None) -> dict:
+        stats = await self._client.get_db(database).command("dbStats")
         return _bson_to_json(stats)
 
-    async def type_map_for(self, collection: str) -> dict[str, str]:
+    async def type_map_for(
+        self, collection: str, database: str | None = None
+    ) -> dict[str, str]:
         """Canonical BSON type map for the filter marshaller (cached).
 
         Delegates to the schema-cache collaborator; kept on the executor so the
         marshaller wiring (``_marshal``) and any external callers are unchanged.
         """
-        return await self._schema.type_map_for(collection)
+        return await self._schema.type_map_for(collection, database)
 
     async def collection_schema(
-        self, collection: str, mask_fields: list[str], sample_size: int | None = None
+        self,
+        collection: str,
+        mask_fields: list[str],
+        sample_size: int | None = None,
+        database: str | None = None,
     ) -> dict:
-        return await self._schema.collection_schema(collection, mask_fields, sample_size)
+        return await self._schema.collection_schema(
+            collection, mask_fields, sample_size, database=database
+        )
 
-    async def collection_indexes(self, collection: str) -> list[dict]:
-        col = self._client.get_collection(collection)
+    async def collection_indexes(
+        self, collection: str, database: str | None = None
+    ) -> list[dict]:
+        col = self._client.get_collection(collection, database)
         info = await col.index_information()
         result = []
         for name, idx in info.items():
@@ -106,11 +116,13 @@ class MongoExecutor:
 
     # ── Index scan enforcement ─────────────────────────────────────────────────
 
-    async def _check_index_coverage(self, collection: str, filter_keys: set[str]) -> bool:
+    async def _check_index_coverage(
+        self, collection: str, filter_keys: set[str], database: str | None = None
+    ) -> bool:
         """True if at least one filter field has an index (or _id is filtered)."""
         if not filter_keys or "_id" in filter_keys:
             return True
-        col = self._client.get_collection(collection)
+        col = self._client.get_collection(collection, database)
         info = await col.index_information()
         for idx in info.values():
             indexed = {k for k, _ in idx.get("key", [])}
@@ -118,12 +130,14 @@ class MongoExecutor:
                 return True
         return False
 
-    async def enforce_index_for_find(self, collection: str, filter_: dict) -> None:
+    async def enforce_index_for_find(
+        self, collection: str, filter_: dict, database: str | None = None
+    ) -> None:
         """Raise ValueError if enforce_index_usage is True and filter has no index."""
         if not self._enforce_index:
             return
         keys = set(filter_.keys())
-        if keys and not await self._check_index_coverage(collection, keys):
+        if keys and not await self._check_index_coverage(collection, keys, database):
             raise ValueError(
                 f"Query on '{collection}' with fields {sorted(keys)} has no covering index. "
                 "Create an index first or use mongodb_collection_indexes to inspect "
@@ -133,30 +147,40 @@ class MongoExecutor:
     # ── Explain ────────────────────────────────────────────────────────────────
 
     async def explain_find(
-        self, collection: str, filter_: dict, projection: dict | None = None
+        self,
+        collection: str,
+        filter_: dict,
+        projection: dict | None = None,
+        database: str | None = None,
     ) -> dict:
-        col = self._client.get_collection(collection)
+        col = self._client.get_collection(collection, database)
         cursor = col.find(filter_, projection)
         plan = await cursor.explain()
         return _bson_to_json(plan)
 
-    async def explain_aggregate(self, collection: str, pipeline: list) -> dict:
+    async def explain_aggregate(
+        self, collection: str, pipeline: list, database: str | None = None
+    ) -> dict:
         # Motor aggregate with explain
-        plan = await self._client.get_db().command(
+        plan = await self._client.get_db(database).command(
             "explain",
             {"aggregate": collection, "pipeline": pipeline, "cursor": {}},
         )
         return _bson_to_json(plan)
 
     async def explain_find_stats(
-        self, collection: str, filter_: dict, projection: dict | None = None
+        self,
+        collection: str,
+        filter_: dict,
+        projection: dict | None = None,
+        database: str | None = None,
     ) -> dict:
         """Explain a find in ``executionStats`` mode (planner + execution metrics,
         WITHOUT returning documents). Used by cost estimation to read
         totalDocsExamined / totalKeysExamined / nReturned / executionTimeMillis
         and the winning-plan stage. Raw plan stays inside the plugin boundary —
         the plugin normalizes it to a CostEstimate and never leaks it."""
-        plan = await self._client.get_db().command(
+        plan = await self._client.get_db(database).command(
             "explain",
             {
                 "find": collection,
@@ -167,9 +191,11 @@ class MongoExecutor:
         )
         return _bson_to_json(plan)
 
-    async def explain_aggregate_stats(self, collection: str, pipeline: list) -> dict:
+    async def explain_aggregate_stats(
+        self, collection: str, pipeline: list, database: str | None = None
+    ) -> dict:
         """Explain an aggregate in ``executionStats`` mode (no result materialized)."""
-        plan = await self._client.get_db().command(
+        plan = await self._client.get_db(database).command(
             "explain",
             {"aggregate": collection, "pipeline": pipeline, "cursor": {}},
             verbosity="executionStats",
@@ -188,7 +214,13 @@ class MongoExecutor:
 
         return isinstance(exc, (AutoReconnect, ConnectionFailure, NetworkTimeout))
 
-    async def execute(self, collection: str, action: Action, params: dict[str, Any]) -> Any:
+    async def execute(
+        self,
+        collection: str,
+        action: Action,
+        params: dict[str, Any],
+        database: str | None = None,
+    ) -> Any:
         # S-8: client-side retry re-issues the operation. For NON-idempotent
         # writes (insert/update/delete), a NetworkTimeout AFTER the server
         # committed but before the ack would cause a duplicate/double-applied
@@ -203,7 +235,7 @@ class MongoExecutor:
         last_exc: Exception | None = None
         for attempt in range(max_attempts):
             try:
-                return await self._execute_once(collection, action, params)
+                return await self._execute_once(collection, action, params, database)
             except Exception as exc:
                 if not self._is_retryable(exc) or attempt == max_attempts - 1:
                     raise
@@ -223,41 +255,47 @@ class MongoExecutor:
         assert last_exc is not None  # unreachable but satisfies type checker
         raise last_exc
 
-    async def _execute_once(self, collection: str, action: Action, params: dict[str, Any]) -> Any:
+    async def _execute_once(
+        self,
+        collection: str,
+        action: Action,
+        params: dict[str, Any],
+        database: str | None = None,
+    ) -> Any:
         col = (
-            self._client.get_collection(collection)
+            self._client.get_collection(collection, database)
             if action not in self._DB_LEVEL_ACTIONS
             else None
         )
         match action:
             case Action.FIND:
-                return await self._exec_find(col, params)
+                return await self._exec_find(col, params, database)
             case Action.COUNT:
-                return await self._exec_count(col, params)
+                return await self._exec_count(col, params, database)
             case Action.AGGREGATE:
                 return await self._exec_aggregate(col, params)
             case Action.EXPLAIN:
-                return await self._exec_explain(collection, params)
+                return await self._exec_explain(collection, params, database)
             case Action.COLLECTION_SCHEMA:
-                return await self._exec_collection_schema(collection, params)
+                return await self._exec_collection_schema(collection, params, database)
             case Action.COLLECTION_INDEXES:
-                return await self.collection_indexes(collection)
+                return await self.collection_indexes(collection, database)
             case Action.LIST_DATABASES:
                 return await self.list_databases()
             case Action.DB_STATS:
-                return await self.db_stats()
+                return await self.db_stats(database)
             case Action.INSERT_ONE:
                 return await self._exec_insert_one(col, params)
             case Action.INSERT_MANY:
                 return await self._exec_insert_many(col, params)
             case Action.UPDATE_ONE:
-                return await self._exec_update_one(col, params)
+                return await self._exec_update_one(col, params, database)
             case Action.UPDATE_MANY:
-                return await self._exec_update_many(col, params)
+                return await self._exec_update_many(col, params, database)
             case Action.DELETE_ONE:
-                return await self._exec_delete_one(col, params)
+                return await self._exec_delete_one(col, params, database)
             case Action.DELETE_MANY:
-                return await self._exec_delete_many(col, params)
+                return await self._exec_delete_many(col, params, database)
             case Action.CREATE_INDEX:
                 return await self._exec_create_index(col, params)
             case Action.DROP_INDEX:
@@ -269,7 +307,9 @@ class MongoExecutor:
 
     # ── Action handlers ────────────────────────────────────────────────────────
 
-    async def _marshal(self, collection: str, filter_: Any) -> Any:
+    async def _marshal(
+        self, collection: str, filter_: Any, database: str | None = None
+    ) -> Any:
         """Schema-driven type-marshal a filter at the Mongo boundary.
 
         Fetches the (cached) canonical type map for the collection and coerces
@@ -277,12 +317,14 @@ class MongoExecutor:
         to TYPE_MISMATCH upstream) when a known-typed field gets an
         un-coercible value — instead of silently matching nothing.
         """
-        type_map = await self.type_map_for(collection)
+        type_map = await self.type_map_for(collection, database)
         return marshal_filter(filter_, type_map)
 
-    async def _exec_find(self, col, params: dict) -> dict:
-        filter_ = await self._marshal(col.name, params.get("filter", {}))
-        await self.enforce_index_for_find(col.name, filter_)
+    async def _exec_find(
+        self, col, params: dict, database: str | None = None
+    ) -> dict:
+        filter_ = await self._marshal(col.name, params.get("filter", {}), database)
+        await self.enforce_index_for_find(col.name, filter_, database)
         limit = min(int(params.get("limit", 20)), self._max_limit)
         skip = max(0, int(params.get("skip", 0)))
         projection = params.get("projection")
@@ -302,8 +344,8 @@ class MongoExecutor:
             "has_more": len(serialized) == limit,
         }
 
-    async def _exec_count(self, col, params: dict) -> int:
-        filter_ = await self._marshal(col.name, params.get("filter", {}))
+    async def _exec_count(self, col, params: dict, database: str | None = None) -> int:
+        filter_ = await self._marshal(col.name, params.get("filter", {}), database)
         return await col.count_documents(filter_)
 
     async def _exec_aggregate(self, col, params: dict) -> list:
@@ -331,19 +373,26 @@ class MongoExecutor:
             )
         return result
 
-    async def _exec_explain(self, collection: str, params: dict) -> dict:
+    async def _exec_explain(
+        self, collection: str, params: dict, database: str | None = None
+    ) -> dict:
         mode = params.get("mode", "find")
         if mode == "aggregate":
-            return await self.explain_aggregate(collection, params.get("pipeline", []))
+            return await self.explain_aggregate(
+                collection, params.get("pipeline", []), database
+            )
         return await self.explain_find(
-            collection, params.get("filter", {}), params.get("projection")
+            collection, params.get("filter", {}), params.get("projection"), database
         )
 
-    async def _exec_collection_schema(self, collection: str, params: dict) -> dict:
+    async def _exec_collection_schema(
+        self, collection: str, params: dict, database: str | None = None
+    ) -> dict:
         return await self.collection_schema(
             collection,
             params.get("mask_fields", []),
             params.get("sample_size"),
+            database=database,
         )
 
     async def _exec_insert_one(self, col, params: dict) -> dict:
@@ -358,23 +407,31 @@ class MongoExecutor:
             "inserted_ids": [str(i) for i in result.inserted_ids],
         }
 
-    async def _exec_update_one(self, col, params: dict) -> dict:
-        filter_ = await self._marshal(col.name, params["filter"])
+    async def _exec_update_one(
+        self, col, params: dict, database: str | None = None
+    ) -> dict:
+        filter_ = await self._marshal(col.name, params["filter"], database)
         result = await col.update_one(filter_, params["update"])
         return {"matched": result.matched_count, "modified": result.modified_count}
 
-    async def _exec_update_many(self, col, params: dict) -> dict:
-        filter_ = await self._marshal(col.name, params["filter"])
+    async def _exec_update_many(
+        self, col, params: dict, database: str | None = None
+    ) -> dict:
+        filter_ = await self._marshal(col.name, params["filter"], database)
         result = await col.update_many(filter_, params["update"])
         return {"matched": result.matched_count, "modified": result.modified_count}
 
-    async def _exec_delete_one(self, col, params: dict) -> dict:
-        filter_ = await self._marshal(col.name, params["filter"])
+    async def _exec_delete_one(
+        self, col, params: dict, database: str | None = None
+    ) -> dict:
+        filter_ = await self._marshal(col.name, params["filter"], database)
         result = await col.delete_one(filter_)
         return {"deleted": result.deleted_count}
 
-    async def _exec_delete_many(self, col, params: dict) -> dict:
-        filter_ = await self._marshal(col.name, params["filter"])
+    async def _exec_delete_many(
+        self, col, params: dict, database: str | None = None
+    ) -> dict:
+        filter_ = await self._marshal(col.name, params["filter"], database)
         result = await col.delete_many(filter_)
         return {"deleted": result.deleted_count}
 

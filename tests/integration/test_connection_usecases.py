@@ -61,13 +61,13 @@ def _patch_mongo_factory(monkeypatch):
             self._client = AsyncMongoMockClient()
             self.closed = False
 
-        def get_collection(self, name):
+        def get_collection(self, name, database=None):
             return self._client[self.database][name]
 
-        def get_db(self):
+        def get_db(self, database=None):
             return self._client[self.database]
 
-        async def list_collection_names(self):
+        async def list_collection_names(self, database=None):
             return await self._client[self.database].list_collection_names()
 
         async def list_databases(self):

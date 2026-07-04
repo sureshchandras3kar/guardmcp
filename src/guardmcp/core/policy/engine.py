@@ -19,7 +19,9 @@ class PolicyEngine:
         policy: Policy,
         risk: RiskLevel,
         trace: PolicyTrace | None = None,
+        database: str | None = None,
     ) -> Decision:
+        scope = policy.scope_for(database)
         # Rule 1: readonly mode blocks all writes
         if policy.mode == "readonly" and request.action in WRITE_ACTIONS:
             if trace is not None:
@@ -52,16 +54,16 @@ class PolicyEngine:
         if request.action not in DB_LEVEL_ACTIONS:
             if not collection_permitted(
                 request.collection,
-                allow=policy.collections.allow,
-                deny=policy.collections.deny,
+                allow=scope.collections.allow,
+                deny=scope.collections.deny,
             ):
-                if request.collection in policy.collections.deny:
+                if request.collection in scope.collections.deny:
                     reason = f"collection '{request.collection}' is not permitted."
                     detail = f"collection '{request.collection}' in deny list"
                 else:
                     reason = (
                         f"collection '{request.collection}' is not in the allowed list. "
-                        f"Allowed: {sorted(policy.collections.allow)}."
+                        f"Allowed: {sorted(scope.collections.allow)}."
                     )
                     detail = f"collection '{request.collection}' not in allow list"
                 if trace is not None:
