@@ -64,6 +64,7 @@ __all__ = [
     "_annot",
     "_capability_check",
     "_elicit_confirm",
+    "_resolve_database",
     "_run_with_confirm",
     "_validation_guard",
     "err",
@@ -227,10 +228,11 @@ async def _run_with_confirm(
     collection: str,
     action: Action,
     params: dict[str, Any],
+    database: str | None = None,
 ) -> str:
     from ...core.models.domain import DecisionStatus
 
-    eval_result = pipeline.evaluate(agent, collection, action, params)
+    eval_result = pipeline.evaluate(agent, collection, action, params, database=database)
     decision = eval_result.decision
 
     if decision.status == DecisionStatus.DENIED:
@@ -265,7 +267,9 @@ async def _run_with_confirm(
             request_id=eval_result.request.request_id,
         )
     )
-    result = await pipeline._execute_and_build(eval_result.request, eval_result.policy)
+    result = await pipeline._execute_and_build(
+        eval_result.request, eval_result.policy, database=database
+    )
     return from_pipeline_result(result)
 
 
@@ -279,6 +283,8 @@ class ToolContext:
     get_pipeline: Callable[[], GuardPipeline]
     get_agent: Callable[[], str]
     get_settings: Callable[[], Any]
+    get_active_database: Callable[[], str | None] = lambda: None
+    set_active_database: Callable[[str | None], None] = lambda _v: None
 
     def __post_init__(self) -> None:
         self.RO = _annot(readOnlyHint=True)
@@ -287,3 +293,8 @@ class ToolContext:
         self.DESTRUCTIVE_IDEMPOTENT = _annot(
             readOnlyHint=False, destructiveHint=True, idempotentHint=True
         )
+
+
+def _resolve_database(ctx: ToolContext, per_call: str | None) -> str | None:
+    """Effective database: per-call arg → active session db → None (connection default)."""
+    return per_call or ctx.get_active_database()

@@ -65,12 +65,16 @@ def register_tools(
     get_pipeline: "Callable[[], GuardPipeline]",
     get_agent: "Callable[[], str]",
     get_settings: "Callable[[], Any]" = lambda: None,
+    get_active_database: "Callable[[], str | None]" = lambda: None,
+    set_active_database: "Callable[[str | None], None]" = lambda _v: None,
 ) -> None:
     """Register all GuardMCP tools onto `mcp`. Same signature as before."""
     ctx = ToolContext(
         get_pipeline=get_pipeline,
         get_agent=get_agent,
         get_settings=get_settings,
+        get_active_database=get_active_database,
+        set_active_database=set_active_database,
     )
     meta.register(mcp, ctx)
     read.register(mcp, ctx)

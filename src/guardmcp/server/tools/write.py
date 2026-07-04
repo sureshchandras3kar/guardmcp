@@ -24,6 +24,7 @@ from ._common import (
     ToolContext,
     UpdateParam,
     _capability_check,
+    _resolve_database,
     _run_with_confirm,
     _validation_guard,
     err,
@@ -37,6 +38,7 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
     _WRITE = ctx.WRITE
     _DESTRUCTIVE = ctx.DESTRUCTIVE
     _DESTRUCTIVE_IDEMPOTENT = ctx.DESTRUCTIVE_IDEMPOTENT
+    tool_ctx = ctx  # ToolContext captured for _resolve_database (inner ctx is FastMCP Context)
 
     # ── Write operations (in-band confirmation for HIGH/CRITICAL) ─────────────
 
@@ -49,15 +51,19 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
     )
 
     @_validation_guard
-    async def _insert_one(ctx: Context, collection: str, document: DocumentParam) -> str:
+    async def _insert_one(
+        ctx: Context, collection: str, document: DocumentParam, database: str | None = None
+    ) -> str:
         pipeline = get_pipeline()
         unsupported = _capability_check(pipeline, Action.INSERT_ONE)
         if unsupported:
             return unsupported
         if not document:
             return err(ErrorCode.VALIDATION, "document must not be empty.", retryable=False)
+        db = _resolve_database(tool_ctx, database)
         return await _run_with_confirm(
-            ctx, pipeline, get_agent(), collection, Action.INSERT_ONE, {"document": document}
+            ctx, pipeline, get_agent(), collection, Action.INSERT_ONE, {"document": document},
+            database=db,
         )
 
     register_dual(mcp, "db_insert_one", "mongodb_insert_one", _INSERT_ONE_DESC, _WRITE, _insert_one)
@@ -71,15 +77,19 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
     )
 
     @_validation_guard
-    async def _insert_many(ctx: Context, collection: str, documents: JsonList) -> str:
+    async def _insert_many(
+        ctx: Context, collection: str, documents: JsonList, database: str | None = None
+    ) -> str:
         pipeline = get_pipeline()
         unsupported = _capability_check(pipeline, Action.INSERT_MANY)
         if unsupported:
             return unsupported
         if not documents:
             return err(ErrorCode.VALIDATION, "documents list must not be empty.", retryable=False)
+        db = _resolve_database(tool_ctx, database)
         return await _run_with_confirm(
-            ctx, pipeline, get_agent(), collection, Action.INSERT_MANY, {"documents": documents}
+            ctx, pipeline, get_agent(), collection, Action.INSERT_MANY, {"documents": documents},
+            database=db,
         )
 
     register_dual(
@@ -97,13 +107,18 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
 
     @_validation_guard
     async def _update_one(
-        ctx: Context, collection: str, filter: FilterParam, update: UpdateParam
+        ctx: Context,
+        collection: str,
+        filter: FilterParam,
+        update: UpdateParam,
+        database: str | None = None,
     ) -> str:
         pipeline = get_pipeline()
         unsupported = _capability_check(pipeline, Action.UPDATE_ONE)
         if unsupported:
             return unsupported
         validate_filter(filter or {})
+        db = _resolve_database(tool_ctx, database)
         return await _run_with_confirm(
             ctx,
             pipeline,
@@ -111,6 +126,7 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
             collection,
             Action.UPDATE_ONE,
             {"filter": filter or {}, "update": update or {}},
+            database=db,
         )
 
     register_dual(
@@ -128,13 +144,18 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
 
     @_validation_guard
     async def _update_many(
-        ctx: Context, collection: str, filter: FilterParam, update: UpdateParam
+        ctx: Context,
+        collection: str,
+        filter: FilterParam,
+        update: UpdateParam,
+        database: str | None = None,
     ) -> str:
         pipeline = get_pipeline()
         unsupported = _capability_check(pipeline, Action.UPDATE_MANY)
         if unsupported:
             return unsupported
         validate_filter(filter or {})
+        db = _resolve_database(tool_ctx, database)
         return await _run_with_confirm(
             ctx,
             pipeline,
@@ -142,6 +163,7 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
             collection,
             Action.UPDATE_MANY,
             {"filter": filter or {}, "update": update or {}},
+            database=db,
         )
 
     register_dual(
@@ -157,14 +179,18 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
     )
 
     @_validation_guard
-    async def _delete_one(ctx: Context, collection: str, filter: FilterParam) -> str:
+    async def _delete_one(
+        ctx: Context, collection: str, filter: FilterParam, database: str | None = None
+    ) -> str:
         pipeline = get_pipeline()
         unsupported = _capability_check(pipeline, Action.DELETE_ONE)
         if unsupported:
             return unsupported
         validate_filter(filter or {})
+        db = _resolve_database(tool_ctx, database)
         return await _run_with_confirm(
-            ctx, pipeline, get_agent(), collection, Action.DELETE_ONE, {"filter": filter or {}}
+            ctx, pipeline, get_agent(), collection, Action.DELETE_ONE, {"filter": filter or {}},
+            database=db,
         )
 
     register_dual(
@@ -186,14 +212,18 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
     )
 
     @_validation_guard
-    async def _delete_many(ctx: Context, collection: str, filter: FilterParam) -> str:
+    async def _delete_many(
+        ctx: Context, collection: str, filter: FilterParam, database: str | None = None
+    ) -> str:
         pipeline = get_pipeline()
         unsupported = _capability_check(pipeline, Action.DELETE_MANY)
         if unsupported:
             return unsupported
         validate_filter(filter or {})
+        db = _resolve_database(tool_ctx, database)
         return await _run_with_confirm(
-            ctx, pipeline, get_agent(), collection, Action.DELETE_MANY, {"filter": filter or {}}
+            ctx, pipeline, get_agent(), collection, Action.DELETE_MANY, {"filter": filter or {}},
+            database=db,
         )
 
     register_dual(
@@ -222,6 +252,7 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
             ),
         ],
         options: JsonDict = None,
+        database: str | None = None,
     ) -> str:
         pipeline = get_pipeline()
         unsupported = _capability_check(pipeline, Action.CREATE_INDEX)
@@ -234,6 +265,7 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
             key_pairs = [[field, int(direction)] for field, direction in keys.items()]
         else:
             key_pairs = keys
+        db = _resolve_database(tool_ctx, database)
         return await _run_with_confirm(
             ctx,
             pipeline,
@@ -241,6 +273,7 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
             collection,
             Action.CREATE_INDEX,
             {"keys": key_pairs, "options": options or {}},
+            database=db,
         )
 
     register_dual(
@@ -257,13 +290,17 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
     )
 
     @_validation_guard
-    async def _drop_index(ctx: Context, collection: str, index_name: str) -> str:
+    async def _drop_index(
+        ctx: Context, collection: str, index_name: str, database: str | None = None
+    ) -> str:
         pipeline = get_pipeline()
         unsupported = _capability_check(pipeline, Action.DROP_INDEX)
         if unsupported:
             return unsupported
+        db = _resolve_database(tool_ctx, database)
         return await _run_with_confirm(
-            ctx, pipeline, get_agent(), collection, Action.DROP_INDEX, {"index_name": index_name}
+            ctx, pipeline, get_agent(), collection, Action.DROP_INDEX, {"index_name": index_name},
+            database=db,
         )
 
     register_dual(

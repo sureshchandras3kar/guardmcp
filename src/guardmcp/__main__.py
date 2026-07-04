@@ -44,6 +44,7 @@ class AppContext:
     # session (pymongo "Cannot use MongoClient after close"). Runs exactly once
     # per process in _run_with_approval_api, spanning all transports.
     app_lifespan: Any = None
+    active_database: str | None = None
 
 
 def _build_plugin_registry() -> PluginRegistry:
@@ -275,6 +276,8 @@ def build(settings: Settings) -> tuple[FastMCP, object, AppContext]:
         get_pipeline=lambda: ctx.pipeline,
         get_agent=lambda: ctx.agent,
         get_settings=lambda: ctx.settings,
+        get_active_database=lambda: ctx.active_database,
+        set_active_database=lambda v: setattr(ctx, "active_database", v),
     )
 
     async def _readiness() -> tuple[bool, str]:

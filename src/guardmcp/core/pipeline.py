@@ -553,7 +553,9 @@ class GuardPipeline:
 
     # ── Discovery ─────────────────────────────────────────────────────────────
 
-    async def discover_collections(self, agent: str) -> list[str]:
+    async def discover_collections(
+        self, agent: str, database: str | None = None
+    ) -> list[str]:
         """Return only collections the agent's policy permits."""
         policy = self._policies.get(agent)
         # CR-2: discovery was previously unaudited — a collection-enumeration
@@ -564,22 +566,33 @@ class GuardPipeline:
             action="list_collections",
             status="allowed" if policy is not None else "denied",
             reason=None if policy is not None else f"no policy for agent '{agent}'",
+            database=database,
         )
         if policy is None:
             return []
         executor = self._get_executor()
-        all_cols = await executor.list_collections()
+        all_cols = await executor.list_collections(database)
+        if database is not None:
+            scope = policy.scope_for(database)
+            return [
+                c
+                for c in all_cols
+                if collection_permitted(c, scope.collections.allow, scope.collections.deny)
+            ]
         return [
             c
             for c in all_cols
             if collection_permitted(c, policy.collections.allow, policy.collections.deny)
         ]
 
-    async def describe_collection(self, agent: str, collection: str) -> dict[str, Any] | None:
+    async def describe_collection(
+        self, agent: str, collection: str, database: str | None = None
+    ) -> dict[str, Any] | None:
         """Field schema with masked fields hidden."""
         policy = self._policies.get(agent)
+        scope = policy.scope_for(database) if policy is not None else None
         permitted = policy is not None and collection_permitted(
-            collection, policy.collections.allow, policy.collections.deny
+            collection, scope.collections.allow, scope.collections.deny
         )
         # CR-2: schema inference samples real documents — audit it.
         await self._audit_event(
@@ -587,16 +600,30 @@ class GuardPipeline:
             collection=collection,
             action="collection_schema",
             status="allowed" if permitted else "denied",
+            database=database,
         )
         if policy is None:
             return None
         if not permitted:
             return None
         executor = self._get_executor()
-        schema = await executor.collection_schema(collection, policy.mask_fields_for(collection))
+        schema = await executor.collection_schema(
+            collection, policy.mask_fields_for(collection, database), database=database
+        )
         if not schema:
             return {"fields": {}, "note": "collection is empty"}
         return {"fields": schema}
+
+    async def use_database_audited(self, agent: str, name: str) -> bool:
+        policy = self._policies.get(agent)
+        permitted = policy is not None and policy.database_permitted(name)
+        await self._audit_event(
+            agent=agent, collection="*", action="use_database",
+            status="allowed" if permitted else "denied",
+            reason=None if permitted else f"database '{name}' not permitted by policy",
+            database=name,
+        )
+        return permitted
 
     async def switch_connection_audited(self, agent: str, name: str) -> bool:
         """
