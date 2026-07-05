@@ -7,6 +7,7 @@ from __future__ import annotations
 
 from mcp.server.fastmcp import FastMCP
 
+from ....core.planning.cross_db_resolver import CrossDatabaseResolver
 from ....core.planning.pipeline import PlanningPipeline
 from ....core.planning.relationships import RelationshipResolver
 from .._common import ErrorCode, ToolContext, _active_plugin, err, ok
@@ -61,7 +62,25 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
         try:
             planner, agent = _build_planning_pipeline()
             graph = await planner.relationships(agent)
-            return ok({"relationships": graph.model_dump(mode="json")})
+            data: dict = {"relationships": graph.model_dump(mode="json")}
+
+            # Cross-database edges (additive; never breaks existing response)
+            try:
+                pipeline = get_pipeline()
+                policy = pipeline._policies.get(agent) if pipeline._policies is not None else None
+                allowed_dbs = list(policy.databases_allow) if policy else []
+                if allowed_dbs:
+                    resolver = CrossDatabaseResolver(
+                        pipeline, lambda: _active_plugin(pipeline)
+                    )
+                    edges = await resolver.edges(agent, allowed_dbs)
+                else:
+                    edges = []
+                data["cross_db_edges"] = [e.model_dump(by_alias=True) for e in edges]
+            except Exception:
+                data["cross_db_edges"] = []
+
+            return ok(data)
         except Exception as exc:
             return err(
                 ErrorCode.BACKEND_ERROR,

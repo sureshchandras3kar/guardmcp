@@ -96,6 +96,23 @@ class MongoExecutor:
             collection, mask_fields, sample_size, database=database
         )
 
+    async def sample_field_values(
+        self, collection: str, field: str, database: str | None = None, cap: int = 100
+    ) -> list:
+        col = self._client.get_collection(collection, database)
+        cursor = col.find({field: {"$ne": None}}, {field: 1, "_id": 0}).limit(cap)
+        docs = await cursor.to_list(cap)
+        seen: list = []
+        seen_set: set = set()
+        for d in docs:
+            if field in d:
+                v = _bson_to_json(d[field])
+                key = str(v)
+                if key not in seen_set:
+                    seen_set.add(key)
+                    seen.append(v)
+        return seen
+
     async def collection_indexes(
         self, collection: str, database: str | None = None
     ) -> list[dict]:

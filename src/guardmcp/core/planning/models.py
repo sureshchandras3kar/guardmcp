@@ -75,3 +75,19 @@ class PlannerResult(BaseModel):
     plans: list[AlternativePlan] = Field(default_factory=list)
     recommended_plan: AlternativePlan | None = None
     notes: list[str] = Field(default_factory=list)
+
+
+class CrossDbEndpoint(BaseModel):
+    database: str
+    collection: str
+    field: str
+
+
+class CrossDbEdge(BaseModel):
+    model_config = {"populate_by_name": True}
+    from_: CrossDbEndpoint = Field(alias="from")
+    to: CrossDbEndpoint
+    kind: str  # "shared_name" | "value_overlap"
+    confidence: float
+    overlap_ratio: float | None = None
+    evidence: str = ""
