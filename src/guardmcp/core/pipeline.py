@@ -612,7 +612,122 @@ class GuardPipeline:
         )
         if not schema:
             return {"fields": {}, "note": "collection is empty"}
-        return {"fields": schema}
+        result: dict[str, Any] = {"fields": schema}
+        semantics, masked_fields = await self._field_semantics(
+            agent, collection, schema, policy, database
+        )
+        if semantics is not None:
+            result["semantics"] = semantics
+        result["masked_fields"] = masked_fields
+        return result
+
+    async def _field_semantics(
+        self,
+        agent: str,
+        collection: str,
+        schema: dict[str, Any],
+        policy: "Policy",
+        database: str | None = None,
+    ) -> "tuple[dict[str, Any] | None, list[str]]":
+        """Best-effort per-field semantics enrichment. NEVER raises.
+
+        Returns (semantics_dict, masked_fields) where semantics_dict may be None
+        when analysis fails. masked_fields is always a list (possibly empty).
+        """
+        from .context.models import FieldStat, SemanticsInput
+        from .context.semantics import FieldSemanticsAnalyzer
+
+        # Masked fields: those whose schema type is the sentinel string "masked".
+        masked_fields = [f for f, t in schema.items() if t == "masked"]
+
+        try:
+            executor = self._get_executor()
+
+            # Resolve plugin from active registry entry (best-effort).
+            plugin = None
+            if self._registry is not None:
+                entry = self._registry.get_active()
+                if entry is not None:
+                    plugin = getattr(entry, "plugin", None)
+
+            # Index metadata — call without database kwarg (Protocol doesn't define it;
+            # try with database first for MongoExecutor, fall back to no-kwarg).
+            indexes: list[dict[str, Any]] = []
+            getter = getattr(executor, "collection_indexes", None)
+            if getter is not None:
+                try:
+                    indexes = await getter(collection, database)
+                except TypeError:
+                    try:
+                        indexes = await getter(collection)
+                    except Exception:
+                        indexes = []
+                except Exception:
+                    indexes = []
+
+            # Per-field stats from plugin (database-threaded).
+            raw_stats: dict[str, Any] = {}
+            if plugin is not None and hasattr(plugin, "field_stats"):
+                try:
+                    raw_stats = await plugin.field_stats(
+                        collection, masked_fields, database=database
+                    )
+                except Exception:
+                    raw_stats = {}
+            field_stats = {k: FieldStat(**v) for k, v in raw_stats.items()}
+
+            # Relationship edges: get all permitted collections in this DB, then
+            # ask the plugin for relationship hints. Filter to edges FROM this collection.
+            # Use an UNAUDITED path — discover_collections emits a list_collections
+            # audit event, which would pollute the trail with a spurious event that
+            # the agent never requested. Compute the allowed set directly instead.
+            edges: list[dict[str, Any]] = []
+            fan_in: dict[str, int] = {}
+            if plugin is not None and hasattr(plugin, "relationships"):
+                try:
+                    policy_ref = self._policies.get(agent)
+                    all_cols = await executor.list_collections(database)
+                    if policy_ref is not None:
+                        scope = policy_ref.scope_for(database)
+                        allowed = [
+                            c for c in all_cols
+                            if collection_permitted(
+                                c, scope.collections.allow, scope.collections.deny
+                            )
+                        ]
+                    else:
+                        allowed = []
+                    all_edges = await plugin.relationships(allowed)
+                    fan_in_sets: dict[str, set[str]] = {}
+                    for e in all_edges:
+                        if e.get("from_resource") == collection:
+                            edges.append(e)
+                        ff = e.get("from_field")
+                        fr = e.get("from_resource")
+                        if ff and fr:
+                            fan_in_sets.setdefault(ff, set()).add(fr)
+                    fan_in = {k: len(v) for k, v in fan_in_sets.items()}
+                except Exception:
+                    edges = []
+                    fan_in = {}
+
+            inp = SemanticsInput(
+                resource=collection,
+                fields=schema,
+                indexes=indexes,
+                edges=edges,
+                fan_in=fan_in,
+                field_stats=field_stats,
+                masked_fields=masked_fields,
+            )
+            sem_result = FieldSemanticsAnalyzer().analyze(inp)
+            sem_dict = {
+                f: s.model_dump(exclude_none=True) for f, s in sem_result.fields.items()
+            }
+            return sem_dict, masked_fields
+
+        except Exception:
+            return None, masked_fields
 
     async def use_database_audited(self, agent: str, name: str) -> bool:
         policy = self._policies.get(agent)

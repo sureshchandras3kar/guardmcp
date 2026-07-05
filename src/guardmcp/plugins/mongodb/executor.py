@@ -96,6 +96,14 @@ class MongoExecutor:
             collection, mask_fields, sample_size, database=database
         )
 
+    async def field_stats(
+        self,
+        collection: str,
+        mask_fields: list[str],
+        database: str | None = None,
+    ) -> dict[str, dict]:
+        return await self._schema.field_stats(collection, mask_fields, database=database)
+
     async def sample_field_values(
         self, collection: str, field: str, database: str | None = None, cap: int = 100
     ) -> list:

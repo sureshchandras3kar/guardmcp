@@ -106,3 +106,57 @@ def apply_mask(schema: dict[str, Any], mask_fields: list[str]) -> dict[str, Any]
     """Replace type of masked fields with 'masked' so AI knows the field exists but can't infer type."""  # noqa: E501
     masked = set(mask_fields)
     return {k: "masked" if k in masked else v for k, v in schema.items()}
+
+
+_ENUM_TRACK_CAP = 50
+_ENUM_VALUES_CAP = 20
+
+
+def build_field_stats(raw_docs: list[dict], mask_fields: list[str]) -> dict[str, dict]:
+    """Per-field sample stats from RAW sampled docs. Masking-aware: masked fields
+    record NO values (distinct_count/sample_values = None). Absent fields count as
+    null. Only hashable scalars (str/int/float/bool) contribute to distinct/values;
+    fields with >_ENUM_TRACK_CAP distinct overflow to distinct_count=None."""
+    masked = set(mask_fields)
+    total = len(raw_docs)
+    present: dict[str, int] = {}
+    nulls: dict[str, int] = {}
+    vals: dict[str, set] = {}
+    overflow: dict[str, bool] = {}
+    for doc in raw_docs:
+        if not isinstance(doc, dict):
+            continue
+        for k, v in doc.items():
+            present[k] = present.get(k, 0) + 1
+            if v is None:
+                nulls[k] = nulls.get(k, 0) + 1
+                continue
+            if k in masked or overflow.get(k):
+                continue
+            if isinstance(v, (str, int, float, bool)):
+                s = vals.setdefault(k, set())
+                s.add(v)
+                if len(s) > _ENUM_TRACK_CAP:
+                    overflow[k] = True
+                    vals[k] = set()
+    out: dict[str, dict] = {}
+    for k in present:
+        null_count = nulls.get(k, 0) + (total - present[k])
+        if k in masked or overflow.get(k):
+            distinct_count = None
+            sample_values = None
+        else:
+            s = vals.get(k, set())
+            distinct_count = len(s)
+            sample_values = (
+                sorted(s, key=lambda x: str(x))[:_ENUM_VALUES_CAP]
+                if 0 < distinct_count <= _ENUM_VALUES_CAP
+                else None
+            )
+        out[k] = {
+            "count": total,
+            "null_count": null_count,
+            "distinct_count": distinct_count,
+            "sample_values": sample_values,
+        }
+    return out
