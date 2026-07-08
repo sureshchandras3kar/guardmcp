@@ -91,3 +91,11 @@ class CrossDbEdge(BaseModel):
     confidence: float
     overlap_ratio: float | None = None
     evidence: str = ""
+
+
+class CrossDbPath(BaseModel):
+    """A multi-hop chain of CrossDbEdges, e.g. identity -> inventory -> cost."""
+
+    nodes: list[str] = Field(default_factory=list)  # "database.collection", in hop order
+    edges: list[CrossDbEdge] = Field(default_factory=list)
+    confidence: float  # weakest-link (min) confidence across the chain

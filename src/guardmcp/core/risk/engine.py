@@ -29,8 +29,14 @@ _RISK_MAP: dict[Action, RiskLevel] = {
     Action.COLLECTION_INDEXES: RiskLevel.LOW,
     Action.LIST_DATABASES: RiskLevel.LOW,
     Action.DB_STATS: RiskLevel.LOW,
+    Action.COLLECTION_STORAGE_SIZE: RiskLevel.LOW,
+    Action.MONGODB_LOGS: RiskLevel.LOW,
     # Write
     Action.AGGREGATE: RiskLevel.HIGH,  # was MEDIUM — can scan entire collections
+    # HIGH: $currentOp exposes OTHER agents'/connections' running operations
+    # (cross-tenant visibility); $changeStream is a long-lived stream bounded
+    # to a short best-effort window by the executor, not a cheap read.
+    Action.AGGREGATE_DB: RiskLevel.HIGH,
     Action.INSERT_ONE: RiskLevel.MEDIUM,
     Action.INSERT_MANY: RiskLevel.MEDIUM,
     Action.UPDATE_ONE: RiskLevel.HIGH,
@@ -41,6 +47,8 @@ _RISK_MAP: dict[Action, RiskLevel] = {
     Action.CREATE_INDEX: RiskLevel.MEDIUM,
     Action.DROP_INDEX: RiskLevel.HIGH,
     Action.DROP: RiskLevel.CRITICAL,
+    Action.CREATE_COLLECTION: RiskLevel.MEDIUM,
+    Action.RENAME_COLLECTION: RiskLevel.HIGH,
 }
 
 

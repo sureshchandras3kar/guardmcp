@@ -203,6 +203,49 @@ def validate_pipeline_stages(pipeline: list[Any]) -> None:
             )
 
 
+# ── DB-level aggregation ($currentOp/$changeStream/etc — NOT collection data) ──
+# Distinct, narrower allow-list from validate_pipeline_stages: db.aggregate()
+# only accepts a handful of admin/server-introspection stages as the FIRST
+# stage. This is NOT arbitrary cross-collection data aggregation.
+_DB_AGGREGATE_STAGE_OPERATORS: frozenset[str] = frozenset(
+    {"$changeStream", "$currentOp", "$documents", "$listLocalSessions", "$queryStats"}
+)
+
+
+def validate_db_pipeline_stages(pipeline: list[Any]) -> None:
+    """Reject a db-level aggregation pipeline unless its FIRST stage is one of
+    the permitted db-level operators, and every stage is single-key / free of
+    banned JS-execution operators (same discipline as validate_pipeline_stages,
+    reused rather than duplicated for the operator-injection checks)."""
+    if not pipeline or not isinstance(pipeline[0], dict) or len(pipeline[0]) != 1:
+        raise ToolError(
+            "The first pipeline stage must be a single-key object naming a "
+            f"db-level stage. Allowed: {sorted(_DB_AGGREGATE_STAGE_OPERATORS)}."
+        )
+    first_op = next(iter(pipeline[0]))
+    if first_op not in _DB_AGGREGATE_STAGE_OPERATORS:
+        raise ToolError(
+            f"The first stage must be a db-level aggregation stage, got '{first_op}'. "
+            f"Allowed: {sorted(_DB_AGGREGATE_STAGE_OPERATORS)}."
+        )
+    for i, stage in enumerate(pipeline):
+        if not isinstance(stage, dict) or len(stage) != 1:
+            raise ToolError(
+                f'Pipeline stage {i} must be a single-key object, e.g. {{"$currentOp": {{}}}}.'
+            )
+        op = next(iter(stage))
+        if op in _BANNED_OPERATORS:
+            raise ToolError(
+                f"Pipeline stage '{op}' is not permitted. "
+                f"Banned operators: {sorted(_BANNED_OPERATORS)}."
+            )
+        if has_dangerous_operators(stage[op]):
+            raise ToolError(
+                f"Pipeline stage '{op}' contains a disallowed operator. "
+                f"Banned: {sorted(_BANNED_OPERATORS)}."
+            )
+
+
 # ── Fix 6 ─────────────────────────────────────────────────────────────────────
 
 

@@ -1,3 +1,5 @@
+from datetime import UTC, datetime
+
 import pytest
 
 from guardmcp.plugins.mongodb.schema import build_field_stats
@@ -10,6 +12,34 @@ def test_build_field_stats_counts_and_distinct():
     assert s["a"]["null_count"] == 1
     assert s["a"]["distinct_count"] == 2
     assert set(s["a"]["sample_values"]) == {"X", "Y"}
+
+
+# ── Data-trust signal v1: freshness (min/max sampled datetime) ──────────────
+
+
+def test_datetime_field_gets_min_max_value():
+    t1 = datetime(2024, 1, 1, tzinfo=UTC)
+    t2 = datetime(2025, 6, 1, tzinfo=UTC)
+    t3 = datetime(2024, 12, 1, tzinfo=UTC)
+    docs = [{"updated_at": t1}, {"updated_at": t2}, {"updated_at": t3}]
+    s = build_field_stats(docs, [])
+    assert s["updated_at"]["min_value"] == t1
+    assert s["updated_at"]["max_value"] == t2
+
+
+def test_non_datetime_field_has_no_min_max():
+    docs = [{"a": "X"}, {"a": "Y"}]
+    s = build_field_stats(docs, [])
+    assert s["a"]["min_value"] is None
+    assert s["a"]["max_value"] is None
+
+
+def test_masked_datetime_field_has_no_min_max():
+    t1 = datetime(2024, 1, 1, tzinfo=UTC)
+    docs = [{"deleted_at": t1}]
+    s = build_field_stats(docs, ["deleted_at"])
+    assert s["deleted_at"]["min_value"] is None
+    assert s["deleted_at"]["max_value"] is None
 
 
 def test_build_field_stats_counts_absent_as_null():

@@ -69,15 +69,23 @@ config reference: **[INSTALL.md](INSTALL.md)**.
 
 ## Tools
 
-44 MCP tools. Capability-neutral `db_*` names are primary; `mongodb_*` aliases are kept for
-compatibility. Uniform `{ok, data, error, meta}` envelope; destructive tools are annotated.
+63 MCP tools (27 `db_*`, dual-named with `mongodb_*` aliases, + 9 `guardmcp_*` meta).
+Capability-neutral `db_*` names are primary; `mongodb_*` aliases are kept for compatibility.
+Uniform `{ok, data, error, meta}` envelope; destructive tools are annotated.
 
 | Group | Tools |
 |-------|-------|
-| **Read** | `db_find` · `db_count` · `db_aggregate` · `db_explain` |
-| **Discovery** | `db_schema` · `db_indexes` · `db_list_collections` · `db_list_databases` · `db_stats` · `db_list_connections` · `db_switch_connection` |
-| **Write** (readonly-blocked, approval-gated) | `db_insert_one/many` · `db_update_one/many` · `db_delete_one/many` · `db_create_index` · `db_drop_index` |
-| **Governance** | `guardmcp_status` · `guardmcp_capabilities` · `guardmcp_plan` · `guardmcp_setup` · `guardmcp_explain_policy` · `guardmcp_simulate_policy` |
+| **Read** | `db_find` · `db_count` · `db_aggregate` · `db_aggregate_db` · `db_explain` · `db_export` |
+| **Discovery** | `db_schema` · `db_indexes` · `db_list_collections` · `db_list_databases` · `db_stats` · `db_collection_storage_size` · `db_logs` · `db_list_connections` · `db_switch_connection` |
+| **Write** (readonly-blocked, approval-gated) | `db_insert_one/many` · `db_update_one/many` · `db_delete_one/many` · `db_create_index` · `db_drop_index` · `db_create_collection` · `db_rename_collection` · `db_drop_collection` |
+| **Governance** | `guardmcp_status` · `guardmcp_capabilities` · `guardmcp_plan` · `guardmcp_plan_query` · `guardmcp_relationships` · `guardmcp_context` · `guardmcp_setup` · `guardmcp_explain_policy` · `guardmcp_simulate_policy` |
+
+`db_aggregate_db` is DATABASE-level aggregation ($currentOp/$changeStream/$documents/etc — server
+introspection, NOT collection data; $currentOp shows every connection's running ops, $changeStream
+is bounded to a short best-effort window, not a persistent watch). `db_export` writes an
+already-masked find/aggregate result to a local file (`GUARDMCP_EXPORT_DIR`) instead of returning it
+inline, for bulk reads. Deliberately NOT provided: an ad-hoc `connect` (arbitrary URI) tool or a
+`drop-database` tool — both would let an agent bypass the pre-registered-connection policy boundary.
 
 `guardmcp_capabilities` (_what may I do?_) and `guardmcp_plan` (_what would this do — without
 executing?_) let an agent plan deterministically instead of trial-and-error.

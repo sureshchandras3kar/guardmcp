@@ -14,7 +14,11 @@ from pydantic import Field
 
 from ...core.models.domain import Action
 from ...core.validation import JsonList
-from ...plugins.mongodb.guard import validate_filter, validate_pipeline_stages
+from ...plugins.mongodb.guard import (
+    validate_db_pipeline_stages,
+    validate_filter,
+    validate_pipeline_stages,
+)
 from ._common import (
     ErrorCode,
     FilterParam,
@@ -125,6 +129,36 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
 
     register_dual(mcp, "db_indexes", "mongodb_collection_indexes", _INDEXES_DESC, _RO, _indexes)
 
+    _STORAGE_SIZE_DESC = (
+        "Return a collection's storage statistics: document count, data size, "
+        "storage size, average object size, and total index size.\n"
+        "Use when: assessing whether a specific collection is large/needs cleanup.\n"
+        "Do NOT use when: you need whole-database stats — call db_stats.\n"
+        "Side effects: none (read-only).\n"
+        "Example: db_collection_storage_size(collection='users')"
+    )
+
+    @_validation_guard
+    async def _collection_storage_size(collection: str, database: str | None = None) -> str:
+        db = _resolve_database(ctx, database)
+        pipeline = get_pipeline()
+        unsupported = _capability_check(pipeline, Action.COLLECTION_STORAGE_SIZE)
+        if unsupported:
+            return unsupported
+        result = await pipeline.run(
+            get_agent(), collection, Action.COLLECTION_STORAGE_SIZE, {}, database=db
+        )
+        return from_pipeline_result(result)
+
+    register_dual(
+        mcp,
+        "db_collection_storage_size",
+        "mongodb_collection_storage_size",
+        _STORAGE_SIZE_DESC,
+        _RO,
+        _collection_storage_size,
+    )
+
     _LIST_DB_DESC = (
         "List all databases on the active server.\n"
         "Use when: discovering available databases.\n"
@@ -230,8 +264,8 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
         "Set the active database for subsequent calls that omit a `database` arg.\n"
         "Use when: running several operations against one database.\n"
         "Do NOT use when: a single call — pass `database=` on that call instead.\n"
-        "Side effects: changes which database later calls target (until changed or "
-        "switch_connection resets it).\n"
+        "Side effects: changes which database later calls target on THIS connection "
+        "(per-connection: switching to another connection and back restores it).\n"
         "Example: db_use_database(database='corestack_identity')"
     )
 
@@ -259,7 +293,6 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
                 f"Available: {available}",
                 retryable=False,
             )
-        set_active_database(None)
         return ok({"active_connection": connection_name})
 
     register_dual(
@@ -413,3 +446,65 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
         return from_pipeline_result(result)
 
     register_dual(mcp, "db_aggregate", "mongodb_aggregate", _AGG_DESC, _RO, _aggregate)
+
+    _AGG_DB_DESC = (
+        "Run a DATABASE-LEVEL aggregation — NOT collection data. The first "
+        "stage must be one of $currentOp/$changeStream/$documents/"
+        "$listLocalSessions/$queryStats.\n"
+        "Use when: inspecting currently-running operations ($currentOp) or "
+        "server-side query stats — server introspection, not your data.\n"
+        "Do NOT use when: querying collection data — call db_aggregate/db_find.\n"
+        "Side effects: none (read-only). $currentOp shows operations from ALL "
+        "connections/agents, not just this one — treat results as sensitive. "
+        "$changeStream is bounded to a short best-effort collection window "
+        "(not a persistent watch — this is a single request/response call). "
+        "Risk: HIGH.\n"
+        "Example: db_aggregate_db(pipeline_stages=[{'$currentOp': {}}])"
+    )
+
+    @_validation_guard
+    async def _aggregate_db(pipeline_stages: JsonList, database: str | None = None) -> str:
+        db = _resolve_database(ctx, database)
+        guard_pipeline = get_pipeline()
+        unsupported = _capability_check(guard_pipeline, Action.AGGREGATE_DB)
+        if unsupported:
+            return unsupported
+        stages = pipeline_stages or []
+        validate_db_pipeline_stages(stages)
+        result = await guard_pipeline.run(
+            agent=get_agent(),
+            collection="",
+            action=Action.AGGREGATE_DB,
+            params={"pipeline": stages},
+            database=db,
+        )
+        return from_pipeline_result(result)
+
+    register_dual(mcp, "db_aggregate_db", "mongodb_aggregate_db", _AGG_DB_DESC, _RO, _aggregate_db)
+
+    _LOGS_DESC = (
+        "Return the most recent mongod log lines (admin `getLog` command).\n"
+        "Use when: debugging server-side errors/warnings alongside a slow or "
+        "failing operation.\n"
+        "Do NOT use when: you need query-level detail — call db_explain.\n"
+        "Side effects: none (read-only). Log lines are raw server text, not "
+        "masked (they are not documents — see docs). Risk: LOW.\n"
+        "Example: db_mongodb_logs()"
+    )
+
+    @_validation_guard
+    async def _mongodb_logs(
+        log_type: Annotated[
+            Literal["global", "startupWarnings"], Field(description="Which log buffer to read.")
+        ] = "global",
+    ) -> str:
+        pipeline = get_pipeline()
+        unsupported = _capability_check(pipeline, Action.MONGODB_LOGS)
+        if unsupported:
+            return unsupported
+        result = await pipeline.run(
+            get_agent(), "", Action.MONGODB_LOGS, {"log_type": log_type}
+        )
+        return from_pipeline_result(result)
+
+    register_dual(mcp, "db_logs", "mongodb_logs", _LOGS_DESC, _RO, _mongodb_logs)

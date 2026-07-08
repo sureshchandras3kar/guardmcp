@@ -30,7 +30,7 @@ from typing import TYPE_CHECKING, Any
 
 from mcp.server.fastmcp import FastMCP
 
-from . import meta, read, write
+from . import export, meta, read, write
 from ._common import (
     ANNOTATIONS_SUPPORTED,
     ToolContext,
@@ -79,3 +79,4 @@ def register_tools(
     meta.register(mcp, ctx)
     read.register(mcp, ctx)
     write.register(mcp, ctx)
+    export.register(mcp, ctx)

@@ -103,9 +103,26 @@ class FieldSemanticsAnalyzer:
                     conf = min(0.85, conf + 0.1)
                     ev += " + status-like name"
 
+            # Data-trust signals (v1): surfaced from FieldStat independent of
+            # role — a field's nullability/cardinality/freshness is useful
+            # regardless of which role branch (if any) matched above.
+            null_ratio = distinct_ratio = None
+            oldest_value = newest_value = None
+            if stat is not None and stat.count > 0:
+                null_ratio = round(stat.null_count / stat.count, 4)
+                if stat.distinct_count is not None:
+                    distinct_ratio = round(stat.distinct_count / stat.count, 4)
+                if role == ROLE_TIMESTAMP:
+                    if stat.min_value is not None:
+                        oldest_value = str(stat.min_value)
+                    if stat.max_value is not None:
+                        newest_value = str(stat.max_value)
+
             out[field] = FieldSemantics(
                 role=role, confidence=round(conf, 4), evidence=ev,
                 references=refs, values=values, pii=pii,
+                null_ratio=null_ratio, distinct_ratio=distinct_ratio,
+                oldest_value=oldest_value, newest_value=newest_value,
             )
         return SemanticsResult(fields=out)
 

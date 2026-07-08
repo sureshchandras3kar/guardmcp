@@ -6,6 +6,7 @@ if TYPE_CHECKING:
     from .interfaces.capability import Capability, CapabilityRequest
 
 from .interfaces.backend import Backend
+from .interfaces.cost import CostLevel
 from .interfaces.errors import ErrorCode, TypeMarshalError
 from .interfaces.stores import (
     ApprovalStoreProtocol,
@@ -28,6 +29,19 @@ from .policy.models import Policy
 from .policy.trace import PolicyTrace
 from .risk.engine import RiskEngine
 from .validation import collection_permitted
+
+# Mutations whose blast radius is really a SCAN cost (same estimation trick used
+# by guardmcp_plan's would_affect/cost block): estimate the equivalent read.
+_SCAN_LIKE_ACTIONS = frozenset(
+    {Action.UPDATE_ONE, Action.UPDATE_MANY, Action.DELETE_ONE, Action.DELETE_MANY}
+)
+
+_COST_ORDER = {
+    CostLevel.LOW: 0,
+    CostLevel.MEDIUM: 1,
+    CostLevel.HIGH: 2,
+    CostLevel.CRITICAL: 3,
+}
 
 
 @dataclass
@@ -96,7 +110,14 @@ class GuardPipeline:
         normalization so every call site stays byte-identical. The HMAC audit
         chain is order-sensitive — this helper does NOT reorder or batch; callers
         must invoke it in the SAME sequence as the records were emitted before.
+
+        Also increments the in-process `guardmcp_requests_total{action,status}`
+        metrics counter (core/metrics.py) — additive, never raises, never
+        affects the audit chain itself.
         """
+        from .metrics import increment as _metrics_increment
+
+        _metrics_increment("guardmcp_requests_total", action=action, status=status)
         await self._audit.log(
             self._audit.build(
                 agent=agent,
@@ -118,6 +139,78 @@ class GuardPipeline:
             if entry is not None and getattr(entry, "executor", None) is not None:
                 return entry.executor
         return self._executor
+
+    def _get_plugin(self):
+        """Return the active connection's DatabasePlugin, or None.
+
+        Mirrors _get_executor's registry walk. Used ONLY by the opt-in
+        cost-escalation seam (policy.max_cost) to request a best-effort cost
+        estimate; agents that don't set max_cost never call this.
+        """
+        if self._registry:
+            entry = self._registry.get_active()
+            if entry is not None and getattr(entry, "plugin", None) is not None:
+                return entry.plugin
+        return None
+
+    async def _maybe_escalate_for_cost(
+        self, decision: Decision, policy: Policy, req: Request
+    ) -> Decision:
+        """OPT-IN (policy.max_cost) cost-aware risk escalation.
+
+        Skipped entirely (zero I/O) unless policy.max_cost is set and the
+        action is cost-estimable. Never denies by itself and never raises:
+        estimation failure silently falls back to the un-escalated decision.
+        Escalated risk only changes the outcome (ALLOWED -> APPROVAL_REQUIRED)
+        when it crosses an existing approval.high/critical flag.
+        """
+        if policy.max_cost is None or decision.status == DecisionStatus.DENIED:
+            return decision
+
+        from .interfaces.capability import ACTION_TO_CAPABILITY, Capability, CapabilityRequest
+
+        capability = (
+            Capability.READ
+            if req.action in _SCAN_LIKE_ACTIONS
+            else ACTION_TO_CAPABILITY.get(req.action)
+        )
+        if capability not in (Capability.READ, Capability.AGGREGATE):
+            return decision
+
+        plugin = self._get_plugin()
+        if plugin is None:
+            return decision
+
+        try:
+            estimate = await plugin.estimate(
+                CapabilityRequest(
+                    capability=capability,
+                    resource=req.collection,
+                    filter=req.params.get("filter"),
+                    pipeline=req.params.get("pipeline"),
+                )
+            )
+        except Exception:
+            return decision  # estimation must NEVER break authorization
+
+        cost = estimate.estimated_cost
+        if cost not in _COST_ORDER or _COST_ORDER[cost] < _COST_ORDER[policy.max_cost]:
+            return decision  # below the agent's opted-in threshold
+
+        base_risk = decision.risk or self._risk_engine.classify(req.action, req.params)
+        new_risk = self._risk_engine.escalate_for_cost(base_risk, estimate)
+        if new_risk == base_risk:
+            return decision
+
+        needs_approval = decision.status == DecisionStatus.ALLOWED and (
+            (new_risk == RiskLevel.HIGH and policy.approval.high)
+            or (new_risk == RiskLevel.CRITICAL and policy.approval.critical)
+        )
+        update: dict[str, Any] = {"risk": new_risk}
+        if needs_approval:
+            update["status"] = DecisionStatus.APPROVAL_REQUIRED
+            update["reason"] = f"{decision.reason} (cost-escalated risk to {new_risk.value})"
+        return decision.model_copy(update=update)
 
     # ── Policy evaluation (no execution) ──────────────────────────────────────
 
@@ -435,6 +528,9 @@ class GuardPipeline:
         req = eval_result.request
         decision = eval_result.decision
         policy = eval_result.policy
+
+        if policy is not None:
+            decision = await self._maybe_escalate_for_cost(decision, policy, req)
 
         await self._audit_event(
             agent=agent,

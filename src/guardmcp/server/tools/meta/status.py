@@ -63,7 +63,20 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
         except Exception:
             pass
 
-        db_name = settings.mongodb_database if settings else "unknown"
+        # Bug fix: this was hardcoded to settings.mongodb_database (the
+        # DEFAULT connection's configured db) regardless of which connection
+        # is actually active. Resolve in priority order: session
+        # active_database override > the ACTIVE connection's own configured
+        # database > settings fallback (single-connection/no-registry case).
+        active_db_override = get_active_database()
+        registry = getattr(pipeline, "_registry", None)
+        active_entry = registry.get_active() if registry is not None else None
+        if active_db_override:
+            db_name = active_db_override
+        elif active_entry is not None and getattr(active_entry, "database", None):
+            db_name = active_entry.database
+        else:
+            db_name = settings.mongodb_database if settings else "unknown"
 
         policy = pipeline._policies.get(agent)
         if policy is not None:

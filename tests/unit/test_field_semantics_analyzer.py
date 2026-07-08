@@ -1,3 +1,5 @@
+import pytest
+
 from guardmcp.core.context.models import (
     ROLE_ENUM,
     ROLE_FOREIGN,
@@ -86,6 +88,58 @@ def test_deterministic():
     inp = SemanticsInput(resource="user", fields={"_id": "objectId", "st": "string"},
         field_stats={"st": FieldStat(count=10, distinct_count=2, sample_values=["A", "B"])})
     assert A.analyze(inp).model_dump() == A.analyze(inp).model_dump()
+
+
+# ── Data-trust signals v1: null_ratio / distinct_ratio / freshness ─────────
+
+
+def test_null_ratio_surfaced_for_plain_field():
+    inp = SemanticsInput(resource="user", fields={"notes": "string"},
+        field_stats={"notes": FieldStat(count=100, null_count=25, distinct_count=80)})
+    fs = A.analyze(inp).fields["notes"]
+    assert fs.null_ratio == pytest.approx(0.25)
+    assert fs.distinct_ratio == pytest.approx(0.8)
+
+
+def test_null_ratio_none_when_no_stat():
+    fs = A.analyze(SemanticsInput(resource="user", fields={"notes": "string"})).fields["notes"]
+    assert fs.null_ratio is None and fs.distinct_ratio is None
+
+
+def test_distinct_ratio_none_when_distinct_count_unknown():
+    inp = SemanticsInput(resource="user", fields={"notes": "string"},
+        field_stats={"notes": FieldStat(count=100, null_count=0, distinct_count=None)})
+    fs = A.analyze(inp).fields["notes"]
+    assert fs.null_ratio == 0.0
+    assert fs.distinct_ratio is None
+
+
+def test_freshness_surfaced_for_timestamp_role_field():
+    inp = SemanticsInput(resource="user", fields={"updated_at": "date"},
+        field_stats={"updated_at": FieldStat(
+            count=10, min_value="2024-01-01T00:00:00", max_value="2025-06-01T00:00:00"
+        )})
+    fs = A.analyze(inp).fields["updated_at"]
+    assert fs.role == ROLE_TIMESTAMP
+    assert fs.oldest_value == "2024-01-01T00:00:00"
+    assert fs.newest_value == "2025-06-01T00:00:00"
+
+
+def test_freshness_none_for_non_timestamp_field():
+    inp = SemanticsInput(resource="user", fields={"name": "string"},
+        field_stats={"name": FieldStat(count=10, min_value="x", max_value="y")})
+    fs = A.analyze(inp).fields["name"]
+    assert fs.oldest_value is None and fs.newest_value is None
+
+
+def test_masked_field_has_no_data_trust_signals():
+    inp = SemanticsInput(
+        resource="user", fields={"password": "masked"}, masked_fields=["password"],
+        field_stats={"password": FieldStat(count=10, null_count=2, distinct_count=8)},
+    )
+    fs = A.analyze(inp).fields["password"]
+    assert fs.null_ratio is None and fs.distinct_ratio is None
+    assert fs.oldest_value is None and fs.newest_value is None
 
 
 def test_false_positives_candidate_mandate_not_timestamp():

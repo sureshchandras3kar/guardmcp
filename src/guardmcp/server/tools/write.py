@@ -311,3 +311,101 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
         _DESTRUCTIVE_IDEMPOTENT,
         _drop_index,
     )
+
+    _DROP_COLLECTION_DESC = (
+        "Drop an entire collection (and all its indexes). "
+        "Use db_list_collections to confirm the name first.\n"
+        "Use when: permanently removing a collection you no longer need "
+        "(idempotent — dropping a gone collection is a no-op intent).\n"
+        "Do NOT use when: you only want to remove some documents — call "
+        "db_delete_many instead.\n"
+        "Side effects: destroys ALL documents and indexes in the collection "
+        "irrecoverably. Risk: CRITICAL.\n"
+        "Example: db_drop_collection(collection='staging_import')"
+    )
+
+    @_validation_guard
+    async def _drop_collection(ctx: Context, collection: str, database: str | None = None) -> str:
+        pipeline = get_pipeline()
+        unsupported = _capability_check(pipeline, Action.DROP)
+        if unsupported:
+            return unsupported
+        db = _resolve_database(tool_ctx, database)
+        return await _run_with_confirm(
+            ctx, pipeline, get_agent(), collection, Action.DROP, {}, database=db,
+        )
+
+    register_dual(
+        mcp,
+        "db_drop_collection",
+        "mongodb_drop_collection",
+        _DROP_COLLECTION_DESC,
+        _DESTRUCTIVE_IDEMPOTENT,
+        _drop_collection,
+    )
+
+    _CREATE_COLLECTION_DESC = (
+        "Create a new (empty) collection. Blocked in readonly mode.\n"
+        "Use when: you need a collection to exist before writing to it with "
+        "non-default options (capped, validator, ...).\n"
+        "Do NOT use when: a plain insert is enough — inserting into a missing "
+        "collection creates it automatically.\n"
+        "Side effects: creates a collection; fails if it already exists. Risk: MEDIUM.\n"
+        "Example: db_create_collection(collection='events')"
+    )
+
+    @_validation_guard
+    async def _create_collection(
+        ctx: Context, collection: str, options: JsonDict = None, database: str | None = None
+    ) -> str:
+        pipeline = get_pipeline()
+        unsupported = _capability_check(pipeline, Action.CREATE_COLLECTION)
+        if unsupported:
+            return unsupported
+        db = _resolve_database(tool_ctx, database)
+        return await _run_with_confirm(
+            ctx, pipeline, get_agent(), collection, Action.CREATE_COLLECTION,
+            {"options": options or {}}, database=db,
+        )
+
+    register_dual(
+        mcp,
+        "db_create_collection",
+        "mongodb_create_collection",
+        _CREATE_COLLECTION_DESC,
+        _WRITE,
+        _create_collection,
+    )
+
+    _RENAME_COLLECTION_DESC = (
+        "Rename a collection. Blocked in readonly mode.\n"
+        "Use when: relabeling a collection without recreating/reinserting its data.\n"
+        "Do NOT use when: the target name already exists — this fails rather than "
+        "overwriting (no silent data loss).\n"
+        "Side effects: the OLD name stops resolving; any code/policy referencing "
+        "it by the old name breaks. Risk: HIGH.\n"
+        "Example: db_rename_collection(collection='old_name', new_name='new_name')"
+    )
+
+    @_validation_guard
+    async def _rename_collection(
+        ctx: Context, collection: str, new_name: str, database: str | None = None
+    ) -> str:
+        pipeline = get_pipeline()
+        unsupported = _capability_check(pipeline, Action.RENAME_COLLECTION)
+        if unsupported:
+            return unsupported
+        db = _resolve_database(tool_ctx, database)
+        return await _run_with_confirm(
+            ctx, pipeline, get_agent(), collection, Action.RENAME_COLLECTION,
+            {"new_name": new_name}, database=db,
+        )
+
+    register_dual(
+        mcp,
+        "db_rename_collection",
+        "mongodb_rename_collection",
+        _RENAME_COLLECTION_DESC,
+        _DESTRUCTIVE,
+        _rename_collection,
+    )

@@ -18,6 +18,10 @@ class FieldStat(BaseModel):
     null_count: int = 0
     distinct_count: int | None = None  # None = unknown/overflow
     sample_values: list[Any] | None = None
+    # Freshness signal (v1): min/max sampled value for datetime fields only.
+    # None for non-datetime fields and for masked fields.
+    min_value: Any | None = None
+    max_value: Any | None = None
 
 
 class FieldSemantics(BaseModel):
@@ -27,6 +31,12 @@ class FieldSemantics(BaseModel):
     references: str | None = None  # target resource for foreign/tenant
     values: list[Any] | None = None  # enum value set (capped)
     pii: bool = False
+    # Data-trust signals (v1) — surfaced from FieldStat, independent of role.
+    # None for masked fields (no stats are ever computed for them).
+    null_ratio: float | None = None  # null_count / count
+    distinct_ratio: float | None = None  # distinct_count / count, when known
+    oldest_value: str | None = None  # freshness: min sampled value (ISO), timestamp fields only
+    newest_value: str | None = None  # freshness: max sampled value (ISO), timestamp fields only
 
 
 class SemanticsInput(BaseModel):

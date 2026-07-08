@@ -28,6 +28,14 @@ class Action(str, Enum):
     DROP = "drop"
     CREATE_INDEX = "create_index"
     DROP_INDEX = "drop_index"
+    CREATE_COLLECTION = "create_collection"
+    RENAME_COLLECTION = "rename_collection"
+    # Read/introspection (collection-scoped storage size; DB-level log read)
+    COLLECTION_STORAGE_SIZE = "collection_storage_size"
+    MONGODB_LOGS = "mongodb_logs"
+    # DB-level aggregation ($currentOp/$changeStream/$documents/$listLocalSessions/
+    # $queryStats only — NOT general cross-collection data aggregation).
+    AGGREGATE_DB = "aggregate_db"
 
 
 # Action classifications — single source of truth, imported by all modules
@@ -42,6 +50,8 @@ WRITE_ACTIONS: frozenset["Action"] = frozenset(
         Action.DROP,
         Action.CREATE_INDEX,
         Action.DROP_INDEX,
+        Action.CREATE_COLLECTION,
+        Action.RENAME_COLLECTION,
     }
 )
 
@@ -50,6 +60,8 @@ DB_LEVEL_ACTIONS: frozenset["Action"] = frozenset(
     {
         Action.LIST_DATABASES,
         Action.DB_STATS,
+        Action.MONGODB_LOGS,
+        Action.AGGREGATE_DB,
     }
 )
 
@@ -70,6 +82,10 @@ NO_MASK_ACTIONS: frozenset["Action"] = frozenset(
         Action.CREATE_INDEX,
         Action.DROP_INDEX,
         Action.DROP,
+        Action.CREATE_COLLECTION,
+        Action.RENAME_COLLECTION,
+        Action.COLLECTION_STORAGE_SIZE,
+        Action.MONGODB_LOGS,
     }
 )
 

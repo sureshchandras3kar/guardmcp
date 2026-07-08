@@ -37,6 +37,7 @@ from guardmcp.core.policy.engine import PolicyEngine
 from guardmcp.core.policy.loader import PolicyLoader
 from guardmcp.core.risk.engine import RiskEngine
 from guardmcp.plugins.mongodb.executor import MongoExecutor
+from guardmcp.server.tools import export as export_tools
 from guardmcp.server.tools import read as read_tools
 from guardmcp.server.tools import write as write_tools
 from guardmcp.server.tools._common import ToolContext
@@ -71,6 +72,15 @@ _CALL_SITE_KWARGS: dict[str, set[str]] = {
     "discover_collections": {"agent", "database"},
     # read.py: describe_collection(agent, collection, database=...)
     "describe_collection": {"agent", "collection", "database"},
+    # meta/capabilities.py, meta/status.py: pipeline._get_executor() — no args.
+    "_get_executor": set(),
+    # meta/status.py, read.py: pipeline.active_connection() — no args.
+    "active_connection": set(),
+    # read.py: pipeline.list_connections() — no args.
+    "list_connections": set(),
+    # read.py: pipeline.switch_connection_audited(agent, connection_name)
+    # — called positionally, but the PARAM NAMES still catch a rename/removal.
+    "switch_connection_audited": {"agent", "name"},
 }
 
 
@@ -177,16 +187,17 @@ async def real_pipeline(rw_policy_file, tmp_path):
     )
 
 
-def _make_mcp(pipeline):
-    """Register read + write tools against the REAL pipeline."""
+def _make_mcp(pipeline, settings=None):
+    """Register read + write + export tools against the REAL pipeline."""
     mcp = FastMCP("contract")
     ctx = ToolContext(
         get_pipeline=lambda: pipeline,
         get_agent=lambda: "claude",
-        get_settings=lambda: None,
+        get_settings=lambda: settings,
     )
     read_tools.register(mcp, ctx)
     write_tools.register(mcp, ctx)
+    export_tools.register(mcp, ctx)
     return mcp
 
 
@@ -237,3 +248,33 @@ async def test_write_approval_path_smoke_through_real_pipeline(real_pipeline):
     # The document seeded in the fixture was actually deleted.
     remaining = await real_pipeline.run("claude", "orders", Action.FIND, {"filter": {"_id": 42}})
     assert remaining["data"]["documents"] == []
+
+
+@pytest.mark.asyncio
+async def test_create_collection_ddl_smoke_through_real_pipeline(real_pipeline):
+    """Newest DDL tool (this session) through the REAL pipeline — same
+    regression class as the delete_one smoke above, for the newer call sites."""
+    mcp = _make_mcp(real_pipeline)
+    # "users" is policy-permitted (rw_policy_file) but not yet created —
+    # unlike "orders", which the fixture already seeded via insert_one.
+    raw = await mcp._tool_manager.get_tool("mongodb_create_collection").fn(
+        _ConfirmingContext(), collection="users"
+    )
+    result = json.loads(raw)
+    assert result.get("ok") is True, result
+
+
+@pytest.mark.asyncio
+async def test_export_smoke_through_real_pipeline(real_pipeline, tmp_path):
+    """db_export (this session's newest tool) — reuses pipeline.run(), same
+    contract as db_find, through the REAL pipeline end to end."""
+
+    class _Settings:
+        export_dir = tmp_path / "exports"
+        export_ttl_seconds = 300.0
+
+    mcp = _make_mcp(real_pipeline, settings=_Settings())
+    raw = await mcp._tool_manager.get_tool("db_export").fn(collection="orders", mode="find")
+    result = json.loads(raw)
+    assert result.get("ok") is True, result
+    assert result["data"]["document_count"] == 1

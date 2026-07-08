@@ -17,6 +17,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Annotated, Any, Literal
 
 from mcp.server.fastmcp import Context
+from mcp.server.fastmcp.exceptions import ToolError
 from pydantic import BaseModel, Field
 
 from ...core.interfaces.capability import ACTION_TO_CAPABILITY, Capability
@@ -61,11 +62,13 @@ __all__ = [
     "SortParam",
     "ToolContext",
     "UpdateParam",
+    "VerbosityParam",
     "_annot",
     "_capability_check",
     "_elicit_confirm",
     "_resolve_database",
     "_run_with_confirm",
+    "_strip_evidence",
     "_validation_guard",
     "err",
     "from_pipeline_result",
@@ -140,7 +143,14 @@ def _validation_guard(fn):
     async def wrapper(*args: Any, **kwargs: Any) -> str:
         try:
             return await fn(*args, **kwargs)
-        except (GuardValidationError, ValueError) as exc:
+        except (GuardValidationError, ValueError, ToolError) as exc:
+            # ToolError: FastMCP's native tool-error exception, raised by the
+            # mongodb/guard.py validators (banned aggregation operator,
+            # malformed pipeline shape, ...). Previously uncaught here, so it
+            # bypassed this codebase's own structured {ok,data,error} envelope
+            # and surfaced as a raw FastMCP-level tool error instead — caught
+            # now for the SAME uniform VALIDATION envelope as every other
+            # validation failure.
             return err(ErrorCode.VALIDATION, str(exc), retryable=False)
         except GuardError as exc:
             return err(ErrorCode.BACKEND_ERROR, str(exc), retryable=True)
@@ -298,3 +308,24 @@ class ToolContext:
 def _resolve_database(ctx: ToolContext, per_call: str | None) -> str | None:
     """Effective database: per-call arg → active session db → None (connection default)."""
     return per_call or ctx.get_active_database()
+
+
+# ── Compact/verbose response mode ────────────────────────────────────────────
+# Opt-in token-minimization: strip ONLY the `evidence` field (human-readable
+# "how we know this" reasoning trace) recursively from a response payload.
+# Every decision-relevant field (kind/confidence/role/overlap_ratio/references/
+# etc.) is untouched — this never removes data an agent's decision depends on,
+# only the prose explaining how that data was derived. Used by
+# guardmcp_relationships/plan_query/context's optional `verbosity="compact"`.
+VerbosityParam = Literal["compact", "full"]
+
+
+def _strip_evidence(value: Any) -> Any:
+    """Return a COPY of value with every dict key literally named "evidence"
+    removed, recursively through nested dicts/lists. Scalars pass through
+    unchanged. Never mutates the input."""
+    if isinstance(value, dict):
+        return {k: _strip_evidence(v) for k, v in value.items() if k != "evidence"}
+    if isinstance(value, list):
+        return [_strip_evidence(v) for v in value]
+    return value

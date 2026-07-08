@@ -29,6 +29,7 @@ def test_capability_enum_members():
         "STATS",
         "DDL_CREATE",
         "DDL_DESTROY",
+        "LOGS",
     }
     assert {c.name for c in Capability} == expected
     assert Capability.READ.value == "read"

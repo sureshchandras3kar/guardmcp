@@ -20,6 +20,7 @@ __all__ = [
     "default_state_dir",
     "default_audit_log_path",
     "resolve_audit_path",
+    "default_export_dir",
 ]
 
 
@@ -49,6 +50,13 @@ def default_state_dir(app: str = "guardmcp") -> Path:
 def default_audit_log_path(app: str = "guardmcp") -> Path:
     """Default absolute audit log path: ``<state_dir>/audit.jsonl``."""
     return default_state_dir(app) / "audit.jsonl"
+
+
+def default_export_dir(app: str = "guardmcp") -> Path:
+    """Default absolute directory for db_export's temporary EJSON files:
+    ``<state_dir>/exports``. Same cwd-independence reasoning as the audit log —
+    an operator must secure this directory (exported data may be sensitive)."""
+    return default_state_dir(app) / "exports"
 
 
 def resolve_audit_path(configured: Path, app: str = "guardmcp") -> Path:

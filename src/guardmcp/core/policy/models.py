@@ -11,6 +11,8 @@ from pydantic import (
     model_validator,
 )
 
+from ..interfaces.cost import CostLevel
+
 if TYPE_CHECKING:
     from ..masking.masker import FieldMasker, ResultTransformer
 
@@ -89,17 +91,17 @@ class Policy(BaseModel):
     connections_allow: list[str] = []
     approval: ApprovalPolicy = ApprovalPolicy()
 
-    # ── Cost-policy seam (Feature 1 — DOCUMENTED, NOT yet wired) ──────────────
-    # A future "deny/escalate expensive operations" rule would add a `max_cost`
-    # field here (e.g. max_cost: CostLevel = None) and have PolicyEngine.evaluate
-    # consult it. It is intentionally NOT added as an accepted-but-unenforced
-    # field: an unenforced security-looking knob misleads operators into thinking
-    # expensive ops are blocked when they are not. The mechanics already exist —
-    # RiskEngine.escalate_for_cost(base, cost) maps a HIGH/CRITICAL CostEstimate
-    # to a higher RiskLevel, and guardmcp_plan surfaces both `cost` and
-    # `cost_aware_risk`. Wiring this into live authorization requires moving the
-    # estimation DB round-trip onto the authorize path (currently deliberately
-    # avoided to keep evaluate() synchronous and cheap), so it is left as a seam.
+    # ── Cost-aware risk escalation (OPT-IN) ────────────────────────────────────
+    # None (default) = no behavior change: GuardPipeline.run() never estimates
+    # cost, so agents without this set pay zero extra latency on the hot path.
+    # When set, GuardPipeline.run() runs a best-effort backend explain for
+    # cost-estimable actions (read/aggregate/scan-like mutations) and, if the
+    # estimate is at or above this CostLevel, escalates risk via
+    # RiskEngine.escalate_for_cost. That escalated risk only changes the
+    # decision (ALLOWED -> APPROVAL_REQUIRED) if it crosses an existing
+    # `approval.high`/`approval.critical` flag — it never denies outright and
+    # estimation failure never breaks authorization.
+    max_cost: CostLevel | None = None
 
     # M1: result transformer (field-allow + masking, fused) and audit masker are
     # built ONCE per policy and reused across requests, not rebuilt per call.

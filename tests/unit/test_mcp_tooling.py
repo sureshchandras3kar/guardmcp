@@ -138,6 +138,13 @@ def test_both_db_and_mongodb_names_registered():
         ("db_aggregate", "mongodb_aggregate"),
         ("db_delete_many", "mongodb_delete_many"),
         ("db_create_index", "mongodb_create_index"),
+        ("db_drop_collection", "mongodb_drop_collection"),
+        ("db_create_collection", "mongodb_create_collection"),
+        ("db_rename_collection", "mongodb_rename_collection"),
+        ("db_collection_storage_size", "mongodb_collection_storage_size"),
+        ("db_aggregate_db", "mongodb_aggregate_db"),
+        ("db_logs", "mongodb_logs"),
+        ("db_export", "mongodb_export"),
         ("db_list_collections", "mongodb_list_collections"),
     ]:
         assert primary in fake.names, primary

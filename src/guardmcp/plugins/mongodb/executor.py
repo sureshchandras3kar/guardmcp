@@ -2,6 +2,7 @@ from typing import Any
 
 from ...core.models.domain import Action
 from ...core.observability import log_event
+from ...core.response_limits import cap_by_bytes, cap_lines
 from ._serialize import _bson_to_json
 from .client import MongoClient
 from .marshal import marshal_filter
@@ -19,6 +20,7 @@ class MongoExecutor:
         max_retries: int = 3,
         retry_base_delay: float = 0.1,
         schema_cache_ttl: int = 300,
+        change_stream_timeout: float = 2.0,
     ) -> None:
         self._client = client
         self._max_limit = max_limit
@@ -26,6 +28,11 @@ class MongoExecutor:
         self._enforce_index = enforce_index_usage
         self._max_retries = max_retries
         self._retry_base_delay = retry_base_delay
+        # Bounded best-effort collection window for $changeStream via
+        # aggregate_db — there is no persistent-watch primitive in this
+        # request/response tool shape, so we cap how long we'll wait for the
+        # first change event rather than blocking indefinitely.
+        self._change_stream_timeout = change_stream_timeout
         # Schema sampling + the bounded TTL/LRU type-map/display-schema cache are
         # owned by a MongoSchemaCache collaborator; the executor delegates
         # collection_schema / type_map_for to it (and the marshaller reads
@@ -230,7 +237,9 @@ class MongoExecutor:
     # ── Core CRUD + DDL ────────────────────────────────────────────────────────
 
     # Actions that operate at DB level and don't need a collection handle
-    _DB_LEVEL_ACTIONS: frozenset[Action] = frozenset({Action.LIST_DATABASES, Action.DB_STATS})
+    _DB_LEVEL_ACTIONS: frozenset[Action] = frozenset(
+        {Action.LIST_DATABASES, Action.DB_STATS, Action.AGGREGATE_DB, Action.MONGODB_LOGS}
+    )
 
     @staticmethod
     def _is_retryable(exc: Exception) -> bool:
@@ -327,6 +336,16 @@ class MongoExecutor:
                 return await self._exec_drop_index(col, params)
             case Action.DROP:
                 return await self._exec_drop(col, collection)
+            case Action.CREATE_COLLECTION:
+                return await self._exec_create_collection(col, collection, params)
+            case Action.RENAME_COLLECTION:
+                return await self._exec_rename_collection(col, params)
+            case Action.COLLECTION_STORAGE_SIZE:
+                return await self._exec_collection_storage_size(collection, database)
+            case Action.AGGREGATE_DB:
+                return await self._exec_aggregate_db(params, database)
+            case Action.MONGODB_LOGS:
+                return await self._exec_mongodb_logs(params)
             case _:
                 raise ValueError(f"unsupported action: {action}")
 
@@ -360,13 +379,18 @@ class MongoExecutor:
         cursor = cursor.skip(skip).limit(limit)
         docs = await cursor.to_list(limit)
         serialized = _bson_to_json(docs)
+        # Byte-budget cap layered on top of the doc-count cap above: a small
+        # number of large documents (embedded arrays/blobs) can still blow a
+        # response budget even when `limit` is small.
+        capped, truncated_by_size = cap_by_bytes(serialized)
         return {
-            "documents": serialized,
+            "documents": capped,
             "skip": skip,
             "limit": limit,
-            "count": len(serialized),
-            "next_skip": skip + len(serialized),
-            "has_more": len(serialized) == limit,
+            "count": len(capped),
+            "next_skip": skip + len(capped),
+            "has_more": len(serialized) == limit or truncated_by_size,
+            "truncated_by_size": truncated_by_size,
         }
 
     async def _exec_count(self, col, params: dict, database: str | None = None) -> int:
@@ -387,12 +411,19 @@ class MongoExecutor:
         if truncated:
             docs = docs[:cap]
         result = _bson_to_json(docs)
-        if truncated:
+        # Byte-budget cap layered on top of the doc-count cap above (S-5).
+        result, truncated_by_size = cap_by_bytes(result)
+        if truncated or truncated_by_size:
             # marker doc so the agent knows results were capped
+            reason = (
+                f"capped at {cap} documents"
+                if truncated
+                else "capped by response size budget"
+            )
             result.append(
                 {
                     "_guardmcp_truncated": True,
-                    "_note": f"aggregation result capped at {cap} documents. "
+                    "_note": f"aggregation result {reason}. "
                     "Add $limit/$match to narrow the result set.",
                 }
             )
@@ -474,3 +505,75 @@ class MongoExecutor:
     async def _exec_drop(self, col, collection: str) -> dict:
         await col.drop()
         return {"dropped": collection}
+
+    async def _exec_create_collection(self, col, collection: str, params: dict) -> dict:
+        options = params.get("options", {})
+        await col.database.create_collection(collection, **options)
+        return {"created": collection}
+
+    async def _exec_rename_collection(self, col, params: dict) -> dict:
+        new_name = params["new_name"]
+        await col.rename(new_name)
+        return {"renamed_to": new_name}
+
+    async def _exec_aggregate_db(self, params: dict, database: str | None = None) -> dict:
+        """DB-level aggregation ($currentOp/$changeStream/$documents/etc — NOT
+        collection data). $changeStream is a long-lived stream with no natural
+        request/response shape; bounded to a short best-effort collection
+        window (never blocks indefinitely) instead of a true persistent watch."""
+        import asyncio
+
+        pipeline = params["pipeline"]
+        first_op = next(iter(pipeline[0])) if pipeline else None
+        # Bug fix: $currentOp/$listLocalSessions are server-scoped admin
+        # operations — MongoDB REQUIRES them to run against the "admin"
+        # database regardless of the request's target `database` (real
+        # server rejects them elsewhere with "must be run against the
+        # 'admin' database"). Found running the live-MongoDB verification
+        # suite — untested before since mongomock never enforced this.
+        target_db = (
+            "admin" if first_op in ("$currentOp", "$listLocalSessions") else database
+        )
+        cursor = self._client.get_db(target_db).aggregate(pipeline)
+        if first_op == "$changeStream":
+            try:
+                docs = await asyncio.wait_for(
+                    cursor.to_list(length=self._max_limit),
+                    timeout=self._change_stream_timeout,
+                )
+            except TimeoutError:
+                docs = []
+        else:
+            docs = await cursor.to_list(length=self._max_limit)
+        serialized = _bson_to_json(docs)
+        capped, truncated_by_size = cap_by_bytes(serialized)
+        return {"documents": capped, "truncated_by_size": truncated_by_size}
+
+    async def _exec_mongodb_logs(self, params: dict) -> dict:
+        """Recent mongod log lines (admin `getLog` command). Log lines are
+        opaque strings, not documents — key-name field masking doesn't apply
+        (same reasoning as EXPLAIN/DB_STATS; see NO_MASK_ACTIONS). Capped to
+        the last `max_limit` lines, then to a byte/per-line budget (a single
+        very long line, e.g. a stack trace, is shortened too)."""
+        log_type = params.get("log_type", "global")
+        result = await self._client.get_log(log_type)
+        lines = result.get("log", [])
+        capped, truncated = cap_lines(lines[-self._max_limit :])
+        return {
+            "log_type": log_type,
+            "total_lines_written": result.get("totalLinesWritten", len(lines)),
+            "lines": capped,
+            "truncated_by_size": truncated,
+        }
+
+    async def _exec_collection_storage_size(
+        self, collection: str, database: str | None = None
+    ) -> dict:
+        stats = await self._client.get_db(database).command("collStats", collection)
+        return {
+            "size": stats.get("size"),
+            "storage_size": stats.get("storageSize"),
+            "count": stats.get("count"),
+            "avg_obj_size": stats.get("avgObjSize"),
+            "total_index_size": stats.get("totalIndexSize"),
+        }

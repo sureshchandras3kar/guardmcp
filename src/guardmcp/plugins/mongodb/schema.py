@@ -114,15 +114,19 @@ _ENUM_VALUES_CAP = 20
 
 def build_field_stats(raw_docs: list[dict], mask_fields: list[str]) -> dict[str, dict]:
     """Per-field sample stats from RAW sampled docs. Masking-aware: masked fields
-    record NO values (distinct_count/sample_values = None). Absent fields count as
-    null. Only hashable scalars (str/int/float/bool) contribute to distinct/values;
-    fields with >_ENUM_TRACK_CAP distinct overflow to distinct_count=None."""
+    record NO values (distinct_count/sample_values/min_value/max_value = None).
+    Absent fields count as null. Only hashable scalars (str/int/float/bool)
+    contribute to distinct/values; fields with >_ENUM_TRACK_CAP distinct overflow
+    to distinct_count=None. Datetime fields separately track min/max sampled
+    value (freshness signal) — kept out of the enum-tracking set since a
+    datetime isn't a useful enum value."""
     masked = set(mask_fields)
     total = len(raw_docs)
     present: dict[str, int] = {}
     nulls: dict[str, int] = {}
     vals: dict[str, set] = {}
     overflow: dict[str, bool] = {}
+    date_range: dict[str, list] = {}  # field -> [min, max]
     for doc in raw_docs:
         if not isinstance(doc, dict):
             continue
@@ -131,7 +135,13 @@ def build_field_stats(raw_docs: list[dict], mask_fields: list[str]) -> dict[str,
             if v is None:
                 nulls[k] = nulls.get(k, 0) + 1
                 continue
-            if k in masked or overflow.get(k):
+            if k in masked:
+                continue
+            if isinstance(v, datetime):
+                lo, hi = date_range.get(k, (v, v))
+                date_range[k] = [min(lo, v), max(hi, v)]
+                continue
+            if overflow.get(k):
                 continue
             if isinstance(v, (str, int, float, bool)):
                 s = vals.setdefault(k, set())
@@ -153,10 +163,13 @@ def build_field_stats(raw_docs: list[dict], mask_fields: list[str]) -> dict[str,
                 if 0 < distinct_count <= _ENUM_VALUES_CAP
                 else None
             )
+        rng = date_range.get(k) if k not in masked else None
         out[k] = {
             "count": total,
             "null_count": null_count,
             "distinct_count": distinct_count,
             "sample_values": sample_values,
+            "min_value": rng[0] if rng else None,
+            "max_value": rng[1] if rng else None,
         }
     return out

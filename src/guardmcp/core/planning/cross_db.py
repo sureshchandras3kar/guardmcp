@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 from collections.abc import Awaitable, Callable
 
-from .models import CrossDbEdge, CrossDbEndpoint
+from .models import CrossDbEdge, CrossDbEndpoint, CrossDbPath
 
 _ID_NAME_RE = re.compile(r"(^_id$|_id$|Id$)")
 OVERLAP_MIN = 0.3
@@ -199,3 +199,62 @@ def merge_edges(*edge_lists: list[CrossDbEdge]) -> list[CrossDbEdge]:
         key=lambda e: (e.from_.database, e.from_.collection, e.from_.field,
                        e.to.database, e.to.collection, e.to.field),
     )
+
+
+def _node_key(ep: CrossDbEndpoint) -> str:
+    return f"{ep.database}.{ep.collection}"
+
+
+def _edge_key(e: CrossDbEdge) -> frozenset:
+    """Same unordered-endpoint-pair key as merge_edges, for content-based dedup."""
+    return frozenset({
+        (e.from_.database, e.from_.collection, e.from_.field),
+        (e.to.database, e.to.collection, e.to.field),
+    })
+
+
+def compose_transitive_paths(
+    edges: list[CrossDbEdge], max_hops: int = 3
+) -> list[CrossDbPath]:
+    """Chain pairwise cross-DB edges into multi-hop paths (e.g. identity ->
+    inventory -> cost), reusing already-computed edges (no new sampling/I/O).
+    Nodes are `(database, collection)`; a path never revisits a node. Confidence
+    is the weakest-link (min) across the chain. Deterministic regardless of
+    input edge order."""
+    adj: dict[str, list[tuple[str, CrossDbEdge]]] = {}
+    for e in edges:
+        a, b = _node_key(e.from_), _node_key(e.to)
+        if a == b:
+            continue
+        adj.setdefault(a, []).append((b, e))
+        adj.setdefault(b, []).append((a, e))
+    for node in adj:
+        adj[node].sort(key=lambda t: (t[0], t[1].from_.field, t[1].to.field))
+
+    seen: set[frozenset] = set()
+    results: list[CrossDbPath] = []
+
+    def dfs(path_nodes: list[str], path_edges: list[CrossDbEdge], visited: set[str]) -> None:
+        if len(path_edges) >= 2:
+            key = frozenset(_edge_key(e) for e in path_edges)
+            if key not in seen:
+                seen.add(key)
+                results.append(
+                    CrossDbPath(
+                        nodes=list(path_nodes),
+                        edges=list(path_edges),
+                        confidence=min(e.confidence for e in path_edges),
+                    )
+                )
+        if len(path_edges) >= max_hops:
+            return
+        for neighbor, edge in adj.get(path_nodes[-1], []):
+            if neighbor in visited:
+                continue
+            dfs(path_nodes + [neighbor], path_edges + [edge], visited | {neighbor})
+
+    for start in sorted(adj.keys()):
+        dfs([start], [], {start})
+
+    results.sort(key=lambda p: (p.nodes, [e.evidence for e in p.edges]))
+    return results

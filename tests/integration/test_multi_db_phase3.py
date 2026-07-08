@@ -304,16 +304,23 @@ async def test_req3_use_database_not_allowed_leaves_active_unchanged():
 
 
 # ═════════════════════════════════════════════════════════════════════════════
-# Requirement 4: switch_connection resets active db to None;
-#                subsequent no-db call resolves to None
+# Requirement 4: active db is PER-CONNECTION (core/registry/connections.py:
+# ConnectionEntry.active_database), not a single server-level slot. Switching to
+# a connection restores THAT connection's own remembered active db instead of
+# unconditionally clearing it — see tests/unit/test_connections.py for the
+# cross-connection isolation coverage (registry-level, two distinct entries).
+# This harness only has one fake connection ("default"), so it covers the
+# self-switch case: switching to the connection you're already on must NOT lose
+# its remembered db (the old single-slot design cleared it unconditionally).
 # ═════════════════════════════════════════════════════════════════════════════
 
 
 @pytest.mark.asyncio
-async def test_req4_switch_connection_resets_active_db():
+async def test_req4_switch_connection_preserves_that_connections_active_db():
     """
-    After use_database("db1"), switch_connection resets active db to None.
-    A subsequent read with no database resolves to None (connection default).
+    After use_database("db1"), switching to the SAME connection ("default")
+    must NOT lose its remembered active db (per-connection memory, not a
+    single shared slot cleared by every switch).
     """
     policy = Policy(
         agent="claude",
@@ -328,16 +335,16 @@ async def test_req4_switch_connection_resets_active_db():
     await _call_read(mcp, "mongodb_use_database", database="db1")
     assert box["db"] == "db1"
 
-    # Switch connection → must reset active db to None
+    # Switch to the connection we're already on → its own remembered db stays.
     out = await _call_read(mcp, "mongodb_switch_connection", connection_name="default")
     assert out["ok"] is True, f"switch_connection failed: {out}"
-    assert box["db"] is None, f"Expected active db=None after switch, got {box['db']}"
+    assert box["db"] == "db1", f"Expected db1 preserved after self-switch, got {box['db']}"
 
-    # Subsequent no-db count must resolve to None
+    # Subsequent no-db count still resolves to the remembered db1.
     pipe.run_calls.clear()
     await _call_read(mcp, "mongodb_count", collection="user", filter={})
-    assert any(c[0] == "user" and c[2] is None for c in pipe.run_calls), (
-        f"Expected None threaded through after reset, got {pipe.run_calls}"
+    assert any(c[0] == "user" and c[2] == "db1" for c in pipe.run_calls), (
+        f"Expected db1 threaded through, got {pipe.run_calls}"
     )
 
 

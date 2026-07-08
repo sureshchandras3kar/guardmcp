@@ -56,6 +56,7 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 markers = [
     "integration: live-backend tests that spin real databases via testcontainers/Docker (skip cleanly when unavailable)",
+    "perf: performance/load sanity checks (throughput, concurrency, latency bounds) — generous bounds, not strict SLAs; run by default, filter with -m \"not perf\" for a fast pass",
 ]
 
 [tool.ruff]
