@@ -275,6 +275,10 @@ def build(settings: Settings) -> tuple[FastMCP, object, AppContext]:
         get_pipeline=lambda: ctx.pipeline,
         get_agent=lambda: ctx.agent,
         get_settings=lambda: ctx.settings,
+        # Per-connection (not server-level): stored on the currently active
+        # ConnectionEntry so switch_connection + switching back restores it.
+        get_active_database=registry.get_active_database,
+        set_active_database=registry.set_active_database,
     )
 
     async def _readiness() -> tuple[bool, str]:

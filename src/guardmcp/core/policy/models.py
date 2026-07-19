@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from datetime import datetime
 from typing import TYPE_CHECKING, Any
 
@@ -9,6 +10,8 @@ from pydantic import (
     field_validator,
     model_validator,
 )
+
+from ..interfaces.cost import CostLevel
 
 if TYPE_CHECKING:
     from ..masking.masker import FieldMasker, ResultTransformer
@@ -26,9 +29,22 @@ class CollectionPolicy(BaseModel):
         return self
 
 
+class DatabaseScope(BaseModel):
+    collections: CollectionPolicy = CollectionPolicy()
+    mask_fields: list[str] | dict[str, list[str]] = []
+    fields_allow: list[str] = []
+
+
 class ActionPolicy(BaseModel):
     allow: list[str] = []
     deny: list[str] = []
+
+
+@dataclass
+class ResolvedScope:
+    collections: CollectionPolicy
+    mask_fields: "list[str] | dict[str, list[str]]"
+    fields_allow: list[str]
 
 
 class ApprovalPolicy(BaseModel):
@@ -54,6 +70,9 @@ class Policy(BaseModel):
     not_after: datetime | None = None
     mode: str = "readonly"
     collections: CollectionPolicy = CollectionPolicy()
+    databases_allow: list[str] = []
+    databases: dict[str, DatabaseScope] = {}
+    default_database_scope: DatabaseScope | None = Field(default=None, alias="default")
     actions: ActionPolicy = ActionPolicy()
     # mask_fields may be EITHER a flat list[str] (global — applies to every
     # collection, backward compatible) OR a dict[str, list[str]] mapping
@@ -72,23 +91,26 @@ class Policy(BaseModel):
     connections_allow: list[str] = []
     approval: ApprovalPolicy = ApprovalPolicy()
 
-    # ── Cost-policy seam (Feature 1 — DOCUMENTED, NOT yet wired) ──────────────
-    # A future "deny/escalate expensive operations" rule would add a `max_cost`
-    # field here (e.g. max_cost: CostLevel = None) and have PolicyEngine.evaluate
-    # consult it. It is intentionally NOT added as an accepted-but-unenforced
-    # field: an unenforced security-looking knob misleads operators into thinking
-    # expensive ops are blocked when they are not. The mechanics already exist —
-    # RiskEngine.escalate_for_cost(base, cost) maps a HIGH/CRITICAL CostEstimate
-    # to a higher RiskLevel, and guardmcp_plan surfaces both `cost` and
-    # `cost_aware_risk`. Wiring this into live authorization requires moving the
-    # estimation DB round-trip onto the authorize path (currently deliberately
-    # avoided to keep evaluate() synchronous and cheap), so it is left as a seam.
+    # ── Cost-aware risk escalation (OPT-IN) ────────────────────────────────────
+    # None (default) = no behavior change: GuardPipeline.run() never estimates
+    # cost, so agents without this set pay zero extra latency on the hot path.
+    # When set, GuardPipeline.run() runs a best-effort backend explain for
+    # cost-estimable actions (read/aggregate/scan-like mutations) and, if the
+    # estimate is at or above this CostLevel, escalates risk via
+    # RiskEngine.escalate_for_cost. That escalated risk only changes the
+    # decision (ALLOWED -> APPROVAL_REQUIRED) if it crosses an existing
+    # `approval.high`/`approval.critical` flag — it never denies outright and
+    # estimation failure never breaks authorization.
+    max_cost: CostLevel | None = None
 
     # M1: result transformer (field-allow + masking, fused) and audit masker are
     # built ONCE per policy and reused across requests, not rebuilt per call.
-    # Masking is collection-dependent, so caches are keyed by collection name.
-    _transformers: dict[str, Any] = PrivateAttr(default_factory=dict)
-    _audit_maskers: dict[str, Any] = PrivateAttr(default_factory=dict)
+    # Masking is collection- AND database-dependent (per-database scopes can mask
+    # different fields for the same collection name), so caches are keyed by the
+    # (collection, database) pair — keying by collection alone would return a
+    # DB-A transformer for a DB-B read and leak a field masked only in DB-B.
+    _transformers: dict[tuple[str, str | None], Any] = PrivateAttr(default_factory=dict)
+    _audit_maskers: dict[tuple[str, str | None], Any] = PrivateAttr(default_factory=dict)
 
     @field_validator("mode")
     @classmethod
@@ -116,13 +138,41 @@ class Policy(BaseModel):
         """True if this is a base-only role (agent starts with 'role:')."""
         return self.agent.startswith("role:")
 
-    def mask_fields_for(self, collection: str) -> list[str]:
+    def _has_db_config(self) -> bool:
+        return bool(self.databases) or self.default_database_scope is not None
+
+    def database_permitted(self, database: str | None) -> bool:
+        if database is None or not self.databases_allow:
+            return True
+        return database in self.databases_allow
+
+    def scope_for(self, database: str | None) -> ResolvedScope:
+        flat = ResolvedScope(
+            collections=self.collections,
+            mask_fields=self.mask_fields,
+            fields_allow=self.fields_allow,
+        )
+        if database is None or not self._has_db_config():
+            return flat
+        block = self.databases.get(database) or self.default_database_scope
+        if block is None:
+            return flat
+        cols = (
+            block.collections
+            if (block.collections.allow or block.collections.deny)
+            else self.collections
+        )
+        mask = block.mask_fields if block.mask_fields else self.mask_fields
+        fa = block.fields_allow if block.fields_allow else self.fields_allow
+        return ResolvedScope(collections=cols, mask_fields=mask, fields_allow=fa)
+
+    def mask_fields_for(self, collection: str, database: str | None = None) -> list[str]:
         """
         Effective mask fields for a collection. Flat list → global (same list
         for every collection). Dict → union of the "*" bucket and the
-        per-collection bucket.
+        per-collection bucket. Resolves per-database mask_fields via scope_for.
         """
-        mf = self.mask_fields
+        mf = self.scope_for(database).mask_fields
         if isinstance(mf, dict):
             seen: dict[str, None] = {}
             for f in mf.get("*", []):
@@ -132,22 +182,35 @@ class Policy(BaseModel):
             return list(seen)
         return mf
 
-    def result_transformer(self, collection: str = "*") -> "ResultTransformer":
-        """Cached single-pass field-allow + mask transformer (H3/M1)."""
-        t = self._transformers.get(collection)
+    def result_transformer(
+        self, collection: str = "*", database: str | None = None
+    ) -> "ResultTransformer":
+        """Cached single-pass field-allow + mask transformer (H3/M1).
+
+        Keyed and resolved per (collection, database): both mask_fields and
+        fields_allow come from the per-database scope so masking is not stale
+        across databases that share a collection name.
+        """
+        key = (collection, database)
+        t = self._transformers.get(key)
         if t is None:
             from ..masking.masker import ResultTransformer
 
-            t = ResultTransformer(self.mask_fields_for(collection), self.fields_allow)
-            self._transformers[collection] = t
+            scope = self.scope_for(database)
+            t = ResultTransformer(self.mask_fields_for(collection, database), scope.fields_allow)
+            self._transformers[key] = t
         return t
 
-    def audit_masker(self, collection: str = "*") -> "FieldMasker":
-        """Cached mask-only masker for audit-param scrubbing + explain (M1)."""
-        m = self._audit_maskers.get(collection)
+    def audit_masker(self, collection: str = "*", database: str | None = None) -> "FieldMasker":
+        """Cached mask-only masker for audit-param scrubbing + explain (M1).
+
+        Keyed and resolved per (collection, database) — see result_transformer.
+        """
+        key = (collection, database)
+        m = self._audit_maskers.get(key)
         if m is None:
             from ..masking.masker import FieldMasker
 
-            m = FieldMasker(self.mask_fields_for(collection))
-            self._audit_maskers[collection] = m
+            m = FieldMasker(self.mask_fields_for(collection, database))
+            self._audit_maskers[key] = m
         return m

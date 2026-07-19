@@ -14,7 +14,7 @@ from collections import OrderedDict
 
 from ._serialize import _bson_to_json
 from .client import MongoClient
-from .schema import apply_mask, build_type_map, infer_schema
+from .schema import apply_mask, build_field_stats, build_type_map, infer_schema
 
 
 class MongoSchemaCache:
@@ -27,16 +27,23 @@ class MongoSchemaCache:
         self._client = client
         self._schema_sample = schema_sample_size
         self._schema_cache_ttl = schema_cache_ttl
-        # M3: bounded LRU cache: collection → (raw_schema, type_map, expiry).
+        # M3: bounded LRU cache: (database, collection) → (raw_schema, type_map, raw_stats, expiry).
+        # database=None means the configured default DB (back-compat bucket).
         # raw_schema is the canonical display schema (pre-mask); type_map is the
-        # canonical BSON type map consumed by the filter marshaller. Both are
-        # derived from the SAME document sample so they never disagree.
+        # canonical BSON type map consumed by the filter marshaller; raw_stats is
+        # the per-field sample stats (mask applied at read time). All are derived
+        # from the SAME document sample so they never disagree.
         # Capped so a DB with thousands of collections can't grow it unbounded.
         self._schema_cache_max = 256
-        self._schema_cache: OrderedDict[str, tuple[dict, dict, float]] = OrderedDict()
+        self._schema_cache: OrderedDict[
+            tuple[str | None, str], tuple[dict, dict, dict, float]
+        ] = OrderedDict()
 
     async def _sample_schema(
-        self, collection: str, sample_size: int | None = None
+        self,
+        collection: str,
+        sample_size: int | None = None,
+        database: str | None = None,
     ) -> tuple[dict, dict]:
         """Return (canonical display schema, canonical type_map) for a collection.
 
@@ -45,30 +52,37 @@ class MongoSchemaCache:
         canonical BSON tokens (objectId/date/decimal/int/long/double/string/
         bool/array/object) so db_schema reports the same types the marshaller
         coerces to. The type_map drops polymorphic fields (see build_type_map).
+
+        Cache key is (database, collection): database=None → configured default DB
+        (backward-compatible with the previous single-DB cache bucket).
         """
+        cache_key = (database, collection)
+
         if self._schema_cache_ttl > 0:
-            cached = self._schema_cache.get(collection)
+            cached = self._schema_cache.get(cache_key)
             if cached is not None:
-                raw_schema, type_map, expiry = cached
+                raw_schema, type_map, _raw_stats, expiry = cached
                 if time.monotonic() < expiry:
-                    self._schema_cache.move_to_end(collection)  # LRU touch
+                    self._schema_cache.move_to_end(cache_key)  # LRU touch
                     return raw_schema, type_map
 
-        col = self._client.get_collection(collection)
+        col = self._client.get_collection(collection, database)
         n = sample_size or self._schema_sample
         docs = await col.find({}).limit(n).to_list(n)
         # Canonical type map is built from RAW docs (ObjectId/datetime/Decimal128
         # intact); the display schema reuses that per-field canonical token.
         type_map = build_type_map(docs)
         raw_schema = self._display_schema(docs, type_map)
+        raw_stats = build_field_stats(docs, [])
 
         if self._schema_cache_ttl > 0:
-            self._schema_cache[collection] = (
+            self._schema_cache[cache_key] = (
                 raw_schema,
                 type_map,
+                raw_stats,
                 time.monotonic() + self._schema_cache_ttl,
             )
-            self._schema_cache.move_to_end(collection)
+            self._schema_cache.move_to_end(cache_key)
             while len(self._schema_cache) > self._schema_cache_max:
                 self._schema_cache.popitem(last=False)  # evict LRU
 
@@ -85,13 +99,50 @@ class MongoSchemaCache:
             canonical.setdefault(field, label)
         return canonical
 
-    async def type_map_for(self, collection: str) -> dict[str, str]:
+    async def type_map_for(
+        self, collection: str, database: str | None = None
+    ) -> dict[str, str]:
         """Canonical BSON type map for the filter marshaller (cached)."""
-        _, type_map = await self._sample_schema(collection)
+        _, type_map = await self._sample_schema(collection, database=database)
         return type_map
 
     async def collection_schema(
-        self, collection: str, mask_fields: list[str], sample_size: int | None = None
+        self,
+        collection: str,
+        mask_fields: list[str],
+        sample_size: int | None = None,
+        database: str | None = None,
     ) -> dict:
-        raw_schema, _ = await self._sample_schema(collection, sample_size)
+        raw_schema, _ = await self._sample_schema(collection, sample_size, database=database)
         return apply_mask(raw_schema, mask_fields)
+
+    async def field_stats(
+        self,
+        collection: str,
+        mask_fields: list[str],
+        sample_size: int | None = None,
+        database: str | None = None,
+    ) -> dict[str, dict]:
+        """Per-field sample stats reusing the SAME cached sample as schema
+        inference (no new reads). Masking applied at read time so masked fields
+        never carry values."""
+        await self._sample_schema(collection, sample_size, database=database)
+        cached = self._schema_cache.get((database, collection))
+        if cached is not None:
+            raw_stats = cached[2]
+        else:
+            # caching disabled (ttl<=0) or evicted: sample directly so stats are
+            # never silently empty. Uses the same bounded sample size.
+            col = self._client.get_collection(collection, database)
+            n = sample_size or self._schema_sample
+            docs = await col.find({}).limit(n).to_list(n)
+            raw_stats = build_field_stats(docs, [])
+        masked = set(mask_fields)
+        redacted: dict[str, dict] = {}
+        for field, st in raw_stats.items():
+            if field in masked:
+                redacted[field] = {**st, "distinct_count": None, "sample_values": None}
+            else:
+                redacted[field] = dict(st)
+        return redacted
+

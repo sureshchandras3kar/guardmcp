@@ -1,0 +1,25 @@
+name: database_not_allowed_denied
+description: >
+  A request targeting a database not in databases_allow must be denied,
+  even if the collection is explicitly allowed in another database's scope.
+tags:
+  - databases
+  - authorization
+policy:
+  mode: readonly
+  databases_allow:
+    - db1
+  databases:
+    db1:
+      collections:
+        allow:
+          - customers
+request:
+  collection: customers
+  action: find
+  database: db2
+  params:
+    filter: {}
+expected:
+  decision: deny
+  reason_contains: "not permitted"

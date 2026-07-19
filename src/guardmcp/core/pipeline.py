@@ -6,6 +6,7 @@ if TYPE_CHECKING:
     from .interfaces.capability import Capability, CapabilityRequest
 
 from .interfaces.backend import Backend
+from .interfaces.cost import CostLevel
 from .interfaces.errors import ErrorCode, TypeMarshalError
 from .interfaces.stores import (
     ApprovalStoreProtocol,
@@ -28,6 +29,19 @@ from .policy.models import Policy
 from .policy.trace import PolicyTrace
 from .risk.engine import RiskEngine
 from .validation import collection_permitted
+
+# Mutations whose blast radius is really a SCAN cost (same estimation trick used
+# by guardmcp_plan's would_affect/cost block): estimate the equivalent read.
+_SCAN_LIKE_ACTIONS = frozenset(
+    {Action.UPDATE_ONE, Action.UPDATE_MANY, Action.DELETE_ONE, Action.DELETE_MANY}
+)
+
+_COST_ORDER = {
+    CostLevel.LOW: 0,
+    CostLevel.MEDIUM: 1,
+    CostLevel.HIGH: 2,
+    CostLevel.CRITICAL: 3,
+}
 
 
 @dataclass
@@ -72,10 +86,10 @@ class GuardPipeline:
         """
         if not req.params:
             return {}
-        if policy is None or not policy.mask_fields_for(req.collection):
+        if policy is None or not policy.mask_fields_for(req.collection, req.database):
             return req.params
-        # M1: cached, collection-aware masker
-        return policy.audit_masker(req.collection).mask_result(req.params)
+        # M1: cached, collection- AND database-aware masker
+        return policy.audit_masker(req.collection, req.database).mask_result(req.params)
 
     async def _audit_event(
         self,
@@ -88,6 +102,7 @@ class GuardPipeline:
         risk: "RiskLevel | None" = None,
         request_id: str | None = None,
         params: dict[str, Any] | None = None,
+        database: str | None = None,
     ) -> None:
         """Build + emit a single audit record.
 
@@ -95,7 +110,14 @@ class GuardPipeline:
         normalization so every call site stays byte-identical. The HMAC audit
         chain is order-sensitive — this helper does NOT reorder or batch; callers
         must invoke it in the SAME sequence as the records were emitted before.
+
+        Also increments the in-process `guardmcp_requests_total{action,status}`
+        metrics counter (core/metrics.py) — additive, never raises, never
+        affects the audit chain itself.
         """
+        from .metrics import increment as _metrics_increment
+
+        _metrics_increment("guardmcp_requests_total", action=action, status=status)
         await self._audit.log(
             self._audit.build(
                 agent=agent,
@@ -106,6 +128,7 @@ class GuardPipeline:
                 risk=risk.value if risk else None,
                 request_id=request_id,
                 params=params,
+                database=database,
             )
         )
 
@@ -117,6 +140,78 @@ class GuardPipeline:
                 return entry.executor
         return self._executor
 
+    def _get_plugin(self):
+        """Return the active connection's DatabasePlugin, or None.
+
+        Mirrors _get_executor's registry walk. Used ONLY by the opt-in
+        cost-escalation seam (policy.max_cost) to request a best-effort cost
+        estimate; agents that don't set max_cost never call this.
+        """
+        if self._registry:
+            entry = self._registry.get_active()
+            if entry is not None and getattr(entry, "plugin", None) is not None:
+                return entry.plugin
+        return None
+
+    async def _maybe_escalate_for_cost(
+        self, decision: Decision, policy: Policy, req: Request
+    ) -> Decision:
+        """OPT-IN (policy.max_cost) cost-aware risk escalation.
+
+        Skipped entirely (zero I/O) unless policy.max_cost is set and the
+        action is cost-estimable. Never denies by itself and never raises:
+        estimation failure silently falls back to the un-escalated decision.
+        Escalated risk only changes the outcome (ALLOWED -> APPROVAL_REQUIRED)
+        when it crosses an existing approval.high/critical flag.
+        """
+        if policy.max_cost is None or decision.status == DecisionStatus.DENIED:
+            return decision
+
+        from .interfaces.capability import ACTION_TO_CAPABILITY, Capability, CapabilityRequest
+
+        capability = (
+            Capability.READ
+            if req.action in _SCAN_LIKE_ACTIONS
+            else ACTION_TO_CAPABILITY.get(req.action)
+        )
+        if capability not in (Capability.READ, Capability.AGGREGATE):
+            return decision
+
+        plugin = self._get_plugin()
+        if plugin is None:
+            return decision
+
+        try:
+            estimate = await plugin.estimate(
+                CapabilityRequest(
+                    capability=capability,
+                    resource=req.collection,
+                    filter=req.params.get("filter"),
+                    pipeline=req.params.get("pipeline"),
+                )
+            )
+        except Exception:
+            return decision  # estimation must NEVER break authorization
+
+        cost = estimate.estimated_cost
+        if cost not in _COST_ORDER or _COST_ORDER[cost] < _COST_ORDER[policy.max_cost]:
+            return decision  # below the agent's opted-in threshold
+
+        base_risk = decision.risk or self._risk_engine.classify(req.action, req.params)
+        new_risk = self._risk_engine.escalate_for_cost(base_risk, estimate)
+        if new_risk == base_risk:
+            return decision
+
+        needs_approval = decision.status == DecisionStatus.ALLOWED and (
+            (new_risk == RiskLevel.HIGH and policy.approval.high)
+            or (new_risk == RiskLevel.CRITICAL and policy.approval.critical)
+        )
+        update: dict[str, Any] = {"risk": new_risk}
+        if needs_approval:
+            update["status"] = DecisionStatus.APPROVAL_REQUIRED
+            update["reason"] = f"{decision.reason} (cost-escalated risk to {new_risk.value})"
+        return decision.model_copy(update=update)
+
     # ── Policy evaluation (no execution) ──────────────────────────────────────
 
     def evaluate(
@@ -127,6 +222,7 @@ class GuardPipeline:
         params: dict[str, Any],
         trace: "PolicyTrace | None" = None,
         policy_override: Policy | None = None,
+        database: str | None = None,
     ) -> EvalResult:
         """Run policy + risk check. Does NOT execute or audit.
 
@@ -139,8 +235,12 @@ class GuardPipeline:
         loader's policy for `agent`. Used by guardmcp_simulate_policy to run the
         SAME evaluation against a hypothetical policy without touching the loader.
         When None (the default) the loader lookup is used exactly as before.
+
+        `database` (optional): the target database name for multi-database
+        governance. When None (default), single-DB back-compat path is used.
         """
-        request = Request(agent=agent, collection=collection, action=action, params=params)
+        request = Request(agent=agent, collection=collection, action=action, params=params,
+                          database=database)
         policy = policy_override if policy_override is not None else self._policies.get(agent)
 
         if policy is None:
@@ -176,6 +276,21 @@ class GuardPipeline:
         if trace is not None and (policy.not_before is not None or policy.not_after is not None):
             trace.add("pipeline", "temporal_window", "passed", "within active window")
 
+        # Database gate: deny if the policy does not permit the requested database.
+        if not policy.database_permitted(database):
+            if trace is not None:
+                trace.add("policy", "database_access", "matched",
+                          f"database '{database}' not permitted by policy")
+            return EvalResult(
+                request=request,
+                decision=Decision(
+                    status=DecisionStatus.DENIED,
+                    reason=f"database '{database}' is not permitted by policy.",
+                    code=ErrorCode.DATABASE_NOT_ALLOWED.value,
+                ),
+                policy=policy,
+            )
+
         # C1 + C2: aggregation pipelines can reach other collections ($lookup)
         # and leak masked values via field aliasing ($group/$project). Enforce
         # before the normal decision so a permitted action can still be denied
@@ -194,7 +309,9 @@ class GuardPipeline:
             trace.add("pipeline", "aggregation_guard", "passed", "pipeline references permitted")
 
         risk = self._risk_engine.classify(action, params)
-        decision = self._policy_engine.evaluate(request, policy, risk, trace=trace)
+        decision = self._policy_engine.evaluate(
+            request, policy, risk, trace=trace, database=database
+        )
         return EvalResult(request=request, decision=decision, policy=policy)
 
     def evaluate_capability(
@@ -286,11 +403,17 @@ class GuardPipeline:
         ref_collections = getattr(executor, "referenced_collections", None)
         masked_refs = getattr(executor, "masked_field_references", None)
 
+        # Resolve against the PER-DATABASE scope so an aggregation in DB-A is
+        # judged by DB-A's collection allow/deny and masked fields — not the flat
+        # policy, which could permit a collection or unmask a field governed
+        # differently in another database.
+        scope = policy.scope_for(request.database)
+
         # C1: every foreign collection ($lookup.from, $graphLookup.from,
         # $unionWith, nested sub-pipelines) must pass the collection policy.
         if ref_collections is not None:
             for ref in ref_collections(request.params):
-                if not collection_permitted(ref, policy.collections.allow, policy.collections.deny):
+                if not collection_permitted(ref, scope.collections.allow, scope.collections.deny):
                     return Decision(
                         status=DecisionStatus.DENIED,
                         reason=(
@@ -304,7 +427,10 @@ class GuardPipeline:
         # references a masked field path, the masked VALUE could surface under a
         # different key — deny rather than leak.
         leaked = (
-            masked_refs(request.params, policy.mask_fields_for(request.collection))
+            masked_refs(
+                request.params,
+                policy.mask_fields_for(request.collection, request.database),
+            )
             if masked_refs is not None
             else set()
         )
@@ -333,8 +459,11 @@ class GuardPipeline:
         # #8: one trace id per executed request, shared by logs + audit record.
         new_trace_id()
 
-        # TOCTOU fix: re-check policy now, not the cached eval from before elicit
-        fresh = self.evaluate(req.agent, req.collection, req.action, req.params)
+        # TOCTOU fix: re-check policy now, not the cached eval from before elicit.
+        # Preserve the target database so the re-check + masking stay db-aware.
+        fresh = self.evaluate(
+            req.agent, req.collection, req.action, req.params, database=req.database
+        )
         if fresh.decision.status == DecisionStatus.DENIED:
             await self._audit_event(
                 agent=req.agent,
@@ -362,7 +491,7 @@ class GuardPipeline:
             params=self._audit_params(req, fresh.policy),
         )
 
-        return await self._execute_and_build(req, fresh.policy)
+        return await self._execute_and_build(req, fresh.policy, database=req.database)
 
     # ── Full pipeline (REST approval mode) ────────────────────────────────────
 
@@ -373,6 +502,7 @@ class GuardPipeline:
         action: Action,
         params: dict[str, Any],
         incoming_traceparent: str | None = None,
+        database: str | None = None,
     ) -> dict[str, Any]:
         """Full pipeline: evaluate → approve (REST API) → execute → mask.
 
@@ -380,6 +510,9 @@ class GuardPipeline:
         passed to CONTINUE the caller's distributed trace. Wiring the transport
         header into this param is transport-specific; default None mints a fresh
         trace-id as before.
+
+        `database` (optional): the target database name for multi-database
+        governance. When None (default), single-DB back-compat path is used.
         """
         # #8/#9: one trace id per request, shared by structured logs + audit
         # record; continues an inbound traceparent when supplied.
@@ -391,10 +524,13 @@ class GuardPipeline:
                 "code": ErrorCode.RATE_LIMITED.value,
             }
 
-        eval_result = self.evaluate(agent, collection, action, params)
+        eval_result = self.evaluate(agent, collection, action, params, database=database)
         req = eval_result.request
         decision = eval_result.decision
         policy = eval_result.policy
+
+        if policy is not None:
+            decision = await self._maybe_escalate_for_cost(decision, policy, req)
 
         await self._audit_event(
             agent=agent,
@@ -440,19 +576,21 @@ class GuardPipeline:
                     "code": ErrorCode.APPROVAL_DECLINED.value,
                 }
 
-        return await self._execute_and_build(req, policy)
+        return await self._execute_and_build(req, policy, database=req.database)
 
     # ── Shared execution helper ───────────────────────────────────────────────
 
-    async def _execute_and_build(self, req: Request, policy: Policy | None) -> dict[str, Any]:
+    async def _execute_and_build(
+        self, req: Request, policy: Policy | None, database: str | None = None
+    ) -> dict[str, Any]:
         """Execute request and build masked success response."""
         executor = self._get_executor()
         params = req.params
         # Inject policy mask_fields for schema inference (collection-aware)
         if req.action == Action.COLLECTION_SCHEMA and policy is not None:
-            params = {**params, "mask_fields": policy.mask_fields_for(req.collection)}
+            params = {**params, "mask_fields": policy.mask_fields_for(req.collection, req.database)}
         try:
-            raw = await executor.execute(req.collection, req.action, params)
+            raw = await executor.execute(req.collection, req.action, params, database=database)
         except TypeMarshalError as exc:
             # A typed filter value could not be coerced to the field's known
             # BSON type (the marshalling layer raised). Surface a LOUD,
@@ -507,11 +645,13 @@ class GuardPipeline:
             )
             return {"status": "error", "reason": safe_msg, "code": ErrorCode.BACKEND_ERROR.value}
 
-        return self._build_success(raw, req.action, policy, req.collection)
+        return self._build_success(raw, req.action, policy, req.collection, req.database)
 
     # ── Discovery ─────────────────────────────────────────────────────────────
 
-    async def discover_collections(self, agent: str) -> list[str]:
+    async def discover_collections(
+        self, agent: str, database: str | None = None
+    ) -> list[str]:
         """Return only collections the agent's policy permits."""
         policy = self._policies.get(agent)
         # CR-2: discovery was previously unaudited — a collection-enumeration
@@ -522,22 +662,33 @@ class GuardPipeline:
             action="list_collections",
             status="allowed" if policy is not None else "denied",
             reason=None if policy is not None else f"no policy for agent '{agent}'",
+            database=database,
         )
         if policy is None:
             return []
         executor = self._get_executor()
-        all_cols = await executor.list_collections()
+        all_cols = await executor.list_collections(database)
+        if database is not None:
+            scope = policy.scope_for(database)
+            return [
+                c
+                for c in all_cols
+                if collection_permitted(c, scope.collections.allow, scope.collections.deny)
+            ]
         return [
             c
             for c in all_cols
             if collection_permitted(c, policy.collections.allow, policy.collections.deny)
         ]
 
-    async def describe_collection(self, agent: str, collection: str) -> dict[str, Any] | None:
+    async def describe_collection(
+        self, agent: str, collection: str, database: str | None = None
+    ) -> dict[str, Any] | None:
         """Field schema with masked fields hidden."""
         policy = self._policies.get(agent)
+        scope = policy.scope_for(database) if policy is not None else None
         permitted = policy is not None and collection_permitted(
-            collection, policy.collections.allow, policy.collections.deny
+            collection, scope.collections.allow, scope.collections.deny
         )
         # CR-2: schema inference samples real documents — audit it.
         await self._audit_event(
@@ -545,16 +696,145 @@ class GuardPipeline:
             collection=collection,
             action="collection_schema",
             status="allowed" if permitted else "denied",
+            database=database,
         )
         if policy is None:
             return None
         if not permitted:
             return None
         executor = self._get_executor()
-        schema = await executor.collection_schema(collection, policy.mask_fields_for(collection))
+        schema = await executor.collection_schema(
+            collection, policy.mask_fields_for(collection, database), database=database
+        )
         if not schema:
             return {"fields": {}, "note": "collection is empty"}
-        return {"fields": schema}
+        result: dict[str, Any] = {"fields": schema}
+        semantics, masked_fields = await self._field_semantics(
+            agent, collection, schema, policy, database
+        )
+        if semantics is not None:
+            result["semantics"] = semantics
+        result["masked_fields"] = masked_fields
+        return result
+
+    async def _field_semantics(
+        self,
+        agent: str,
+        collection: str,
+        schema: dict[str, Any],
+        policy: "Policy",
+        database: str | None = None,
+    ) -> "tuple[dict[str, Any] | None, list[str]]":
+        """Best-effort per-field semantics enrichment. NEVER raises.
+
+        Returns (semantics_dict, masked_fields) where semantics_dict may be None
+        when analysis fails. masked_fields is always a list (possibly empty).
+        """
+        from .context.models import FieldStat, SemanticsInput
+        from .context.semantics import FieldSemanticsAnalyzer
+
+        # Masked fields: those whose schema type is the sentinel string "masked".
+        masked_fields = [f for f, t in schema.items() if t == "masked"]
+
+        try:
+            executor = self._get_executor()
+
+            # Resolve plugin from active registry entry (best-effort).
+            plugin = None
+            if self._registry is not None:
+                entry = self._registry.get_active()
+                if entry is not None:
+                    plugin = getattr(entry, "plugin", None)
+
+            # Index metadata — call without database kwarg (Protocol doesn't define it;
+            # try with database first for MongoExecutor, fall back to no-kwarg).
+            indexes: list[dict[str, Any]] = []
+            getter = getattr(executor, "collection_indexes", None)
+            if getter is not None:
+                try:
+                    indexes = await getter(collection, database)
+                except TypeError:
+                    try:
+                        indexes = await getter(collection)
+                    except Exception:
+                        indexes = []
+                except Exception:
+                    indexes = []
+
+            # Per-field stats from plugin (database-threaded).
+            raw_stats: dict[str, Any] = {}
+            if plugin is not None and hasattr(plugin, "field_stats"):
+                try:
+                    raw_stats = await plugin.field_stats(
+                        collection, masked_fields, database=database
+                    )
+                except Exception:
+                    raw_stats = {}
+            field_stats = {k: FieldStat(**v) for k, v in raw_stats.items()}
+
+            # Relationship edges: get all permitted collections in this DB, then
+            # ask the plugin for relationship hints. Filter to edges FROM this collection.
+            # Use an UNAUDITED path — discover_collections emits a list_collections
+            # audit event, which would pollute the trail with a spurious event that
+            # the agent never requested. Compute the allowed set directly instead.
+            edges: list[dict[str, Any]] = []
+            fan_in: dict[str, int] = {}
+            if plugin is not None and hasattr(plugin, "relationships"):
+                try:
+                    policy_ref = self._policies.get(agent)
+                    all_cols = await executor.list_collections(database)
+                    if policy_ref is not None:
+                        scope = policy_ref.scope_for(database)
+                        allowed = [
+                            c for c in all_cols
+                            if collection_permitted(
+                                c, scope.collections.allow, scope.collections.deny
+                            )
+                        ]
+                    else:
+                        allowed = []
+                    all_edges = await plugin.relationships(allowed)
+                    fan_in_sets: dict[str, set[str]] = {}
+                    for e in all_edges:
+                        if e.get("from_resource") == collection:
+                            edges.append(e)
+                        ff = e.get("from_field")
+                        fr = e.get("from_resource")
+                        if ff and fr:
+                            fan_in_sets.setdefault(ff, set()).add(fr)
+                    fan_in = {k: len(v) for k, v in fan_in_sets.items()}
+                except Exception:
+                    edges = []
+                    fan_in = {}
+
+            inp = SemanticsInput(
+                resource=collection,
+                fields=schema,
+                indexes=indexes,
+                edges=edges,
+                fan_in=fan_in,
+                field_stats=field_stats,
+                masked_fields=masked_fields,
+            )
+            sem_result = FieldSemanticsAnalyzer().analyze(inp)
+            sem_dict = {
+                f: s.model_dump(exclude_none=True) for f, s in sem_result.fields.items()
+            }
+            return sem_dict, masked_fields
+
+        except Exception:
+            return None, masked_fields
+
+    async def use_database_audited(self, agent: str, name: str) -> bool:
+        policy = self._policies.get(agent)
+        permitted = policy is not None and policy.database_permitted(name)
+        await self._audit_event(
+            agent=agent, collection="*", action="use_database",
+            status="allowed" if permitted else "denied",
+            reason=None if permitted else f"database '{name}' not permitted by policy",
+            database=name,
+        )
+        return permitted
 
     async def switch_connection_audited(self, agent: str, name: str) -> bool:
         """
@@ -606,7 +886,12 @@ class GuardPipeline:
     # ── Helpers ────────────────────────────────────────────────────────────────
 
     def _build_success(
-        self, raw: Any, action: Action, policy: Policy | None, collection: str = "*"
+        self,
+        raw: Any,
+        action: Action,
+        policy: Policy | None,
+        collection: str = "*",
+        database: str | None = None,
     ) -> dict[str, Any]:
         if policy is None:
             data = raw
@@ -616,7 +901,7 @@ class GuardPipeline:
         # literals + index bounds into the plan. Run the plan through the masker
         # so any nested key matching a masked field is redacted in the output.
         if action == Action.EXPLAIN:
-            masked_plan = policy.audit_masker(collection).mask_result(raw)  # M1
+            masked_plan = policy.audit_masker(collection, database).mask_result(raw)  # M1
             return self._with_neutral(
                 {"status": "success", "data": masked_plan}, action, masked_plan
             )
@@ -625,7 +910,7 @@ class GuardPipeline:
             return self._with_neutral({"status": "success", "data": raw}, action, raw)
 
         # H3/M1: single-pass field-allow + mask via the policy-cached transformer.
-        transform = policy.result_transformer(collection).transform_result
+        transform = policy.result_transformer(collection, database).transform_result
 
         # find returns {documents: [...], ...} — transform only the documents list
         if isinstance(raw, dict) and "documents" in raw:

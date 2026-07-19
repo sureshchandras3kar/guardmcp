@@ -75,3 +75,27 @@ class PlannerResult(BaseModel):
     plans: list[AlternativePlan] = Field(default_factory=list)
     recommended_plan: AlternativePlan | None = None
     notes: list[str] = Field(default_factory=list)
+
+
+class CrossDbEndpoint(BaseModel):
+    database: str
+    collection: str
+    field: str
+
+
+class CrossDbEdge(BaseModel):
+    model_config = {"populate_by_name": True}
+    from_: CrossDbEndpoint = Field(alias="from")
+    to: CrossDbEndpoint
+    kind: str  # "shared_name" | "value_overlap"
+    confidence: float
+    overlap_ratio: float | None = None
+    evidence: str = ""
+
+
+class CrossDbPath(BaseModel):
+    """A multi-hop chain of CrossDbEdges, e.g. identity -> inventory -> cost."""
+
+    nodes: list[str] = Field(default_factory=list)  # "database.collection", in hop order
+    edges: list[CrossDbEdge] = Field(default_factory=list)
+    confidence: float  # weakest-link (min) confidence across the chain

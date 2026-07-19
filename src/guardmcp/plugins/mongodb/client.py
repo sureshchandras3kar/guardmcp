@@ -22,22 +22,33 @@ class MongoClient:
         )
         self._db: AsyncIOMotorDatabase = self._client[database]
 
-    def get_collection(self, name: str):
-        return self._db[name]
+    def get_db(self, name: str | None = None):
+        return self._client[name] if name else self._db
 
-    async def list_collection_names(self) -> list[str]:
-        return await self._db.list_collection_names()
+    def get_collection(self, name: str, database: str | None = None):
+        return self.get_db(database)[name]
 
-    def get_db(self):
-        return self._db
+    async def list_collection_names(self, database: str | None = None) -> list[str]:
+        return await self.get_db(database).list_collection_names()
 
     async def list_databases(self) -> list[dict]:
-        result: Any = await self._client.list_databases()
+        # Bug fix: list_databases() returns a CommandCursor (awaitable-then-
+        # async-iterable), not a plain list — `for db in result` raised
+        # TypeError against the REAL driver ("CommandCursor object is not
+        # iterable"). mongomock's fake silently returned a plain list, hiding
+        # this. Found building the live-MongoDB verification suite.
+        cursor: Any = await self._client.list_databases()
+        result = await cursor.to_list(length=None)
         return [{"name": db["name"], "sizeOnDisk": db.get("sizeOnDisk", 0)} for db in result]
 
     async def ping(self) -> bool:
         await self._client.admin.command("ping")
         return True
+
+    async def get_log(self, log_type: str = "global") -> dict:
+        """Admin-only `getLog` command (mongod's recent in-memory log buffer).
+        `log_type`: "global" (default) or "startupWarnings"."""
+        return await self._client.admin.command("getLog", log_type)
 
     def close(self) -> None:
         self._client.close()

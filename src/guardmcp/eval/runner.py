@@ -16,7 +16,13 @@ from ..core.audit.logger import AuditLogger
 from ..core.models.domain import Action, DecisionStatus
 from ..core.pipeline import GuardPipeline
 from ..core.policy.engine import PolicyEngine
-from ..core.policy.models import ActionPolicy, ApprovalPolicy, CollectionPolicy, Policy
+from ..core.policy.models import (
+    ActionPolicy,
+    ApprovalPolicy,
+    CollectionPolicy,
+    DatabaseScope,
+    Policy,
+)
 from ..core.risk.engine import RiskEngine
 from ..plugins.mongodb.executor import MongoExecutor
 from .assertions.engine import AssertionEngine
@@ -73,10 +79,28 @@ class _InlineLoader:
 # ── Policy builder ────────────────────────────────────────────────────────────
 
 
+def _build_database_scope(raw: dict) -> DatabaseScope:
+    """Convert a raw dict (from YAML) into a DatabaseScope model."""
+    col = raw.get("collections", {})
+    return DatabaseScope(
+        collections=CollectionPolicy(
+            allow=col.get("allow", []),
+            deny=col.get("deny", []),
+        ),
+        mask_fields=raw.get("mask_fields", []),
+        fields_allow=raw.get("fields_allow", []),
+    )
+
+
 def _build_policy(inline: InlinePolicy) -> Policy:
     col = inline.collections
     act = inline.actions
     appr = inline.approval
+
+    # Build per-database scopes from the raw dicts in InlinePolicy.
+    databases = {k: _build_database_scope(v) for k, v in inline.databases.items()}
+    default_database_scope = _build_database_scope(inline.default) if inline.default else None
+
     return Policy(
         agent=inline.agent,
         mode=inline.mode,
@@ -91,6 +115,9 @@ def _build_policy(inline: InlinePolicy) -> Policy:
         mask_fields=inline.mask_fields,
         fields_allow=inline.fields_allow,
         connections_allow=inline.connections_allow,
+        databases_allow=inline.databases_allow,
+        databases=databases,
+        default_database_scope=default_database_scope,
         approval=ApprovalPolicy(
             high=appr.get("high", False),
             critical=appr.get("critical", False),
@@ -103,13 +130,13 @@ def _build_policy(inline: InlinePolicy) -> Policy:
 
 def _build_mock_client(mongo_client: AsyncMongoMockClient, db_name: str = "evaldb"):
     class _Client:
-        def get_collection(self, name):
+        def get_collection(self, name, database=None):
             return mongo_client[db_name][name]
 
-        def get_db(self):
+        def get_db(self, database=None):
             return mongo_client[db_name]
 
-        async def list_collection_names(self):
+        async def list_collection_names(self, database=None):
             return await mongo_client[db_name].list_collection_names()
 
         async def list_databases(self):
@@ -175,13 +202,26 @@ async def run_case(case: EvalCase) -> EvalCaseResult:
     agent = case.request.agent
     collection = case.request.collection
     params = case.request.params
+    database = case.request.database
 
     # Phase 1: policy evaluation (always — no side effects)
-    eval_result = pipeline.evaluate(agent, collection, action, params)
+    eval_result = pipeline.evaluate(agent, collection, action, params, database=database)
     decision_status = eval_result.decision.status.value  # allowed | denied | approval_required
 
     # Phase 2: execution (skip for approval_required unless simulating approval)
+    # When Phase 1 already produced a denied decision, seed `actual` from the
+    # eval decision reason so that reason_contains / reason_matches can match
+    # it without re-running pipeline.run (which would lose the `database`
+    # context and produce a different deny reason via an internal evaluate call
+    # that lacks the database argument).
     actual: dict[str, Any] | None = None
+    if decision_status == DecisionStatus.DENIED.value:
+        actual = {
+            "status": "denied",
+            "reason": eval_result.decision.reason,
+            "code": eval_result.decision.code,
+        }
+
     needs_execution = (
         case.expected.status is not None
         or case.expected.masked_fields
@@ -193,7 +233,7 @@ async def run_case(case: EvalCase) -> EvalCaseResult:
         or case.expected.reason_matches is not None
     )
 
-    if needs_execution and (
+    if needs_execution and actual is None and (
         decision_status != DecisionStatus.APPROVAL_REQUIRED.value or auto_approve
     ):
         actual = await pipeline.run(agent, collection, action, params)

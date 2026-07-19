@@ -27,6 +27,7 @@ class Capability(str, Enum):
     STATS = "stats"
     DDL_CREATE = "ddl_create"
     DDL_DESTROY = "ddl_destroy"
+    LOGS = "logs"
 
 
 WRITE_CAPS = frozenset(
@@ -122,6 +123,11 @@ ACTION_TO_CAPABILITY: dict[Action, Capability] = {
     Action.DROP: Capability.DDL_DESTROY,
     Action.CREATE_INDEX: Capability.DDL_CREATE,
     Action.DROP_INDEX: Capability.DDL_DESTROY,
+    Action.CREATE_COLLECTION: Capability.DDL_CREATE,
+    Action.RENAME_COLLECTION: Capability.DDL_DESTROY,
+    Action.COLLECTION_STORAGE_SIZE: Capability.STATS,
+    Action.MONGODB_LOGS: Capability.LOGS,
+    Action.AGGREGATE_DB: Capability.AGGREGATE,
 }
 
 
@@ -148,6 +154,7 @@ CAPABILITY_TO_ACTION: dict[Capability, str] = {
     # Ambiguous DDL — default to create/drop; req.action overrides.
     Capability.DDL_CREATE: Action.CREATE_INDEX.value,
     Capability.DDL_DESTROY: Action.DROP.value,
+    Capability.LOGS: Action.MONGODB_LOGS.value,
 }
 
 

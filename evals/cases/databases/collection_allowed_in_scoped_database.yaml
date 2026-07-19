@@ -1,0 +1,29 @@
+name: collection_allowed_in_scoped_database
+description: >
+  A request for collection x in database db1 is allowed when the policy
+  scopes db1 to allow [x] and db2 to allow [y].
+tags:
+  - databases
+  - authorization
+policy:
+  mode: readonly
+  databases_allow:
+    - db1
+    - db2
+  databases:
+    db1:
+      collections:
+        allow:
+          - x
+    db2:
+      collections:
+        allow:
+          - y
+request:
+  collection: x
+  action: find
+  database: db1
+  params:
+    filter: {}
+expected:
+  decision: allow

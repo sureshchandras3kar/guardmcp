@@ -1,0 +1,30 @@
+name: collection_denied_in_other_database
+description: >
+  Collection x is allowed in db1 but not in db2. A request for x in db2
+  must be denied because db2's scope only allows [y].
+tags:
+  - databases
+  - authorization
+policy:
+  mode: readonly
+  databases_allow:
+    - db1
+    - db2
+  databases:
+    db1:
+      collections:
+        allow:
+          - x
+    db2:
+      collections:
+        allow:
+          - y
+request:
+  collection: x
+  action: find
+  database: db2
+  params:
+    filter: {}
+expected:
+  decision: deny
+  reason_contains: "x"

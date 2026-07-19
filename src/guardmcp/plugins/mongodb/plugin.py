@@ -219,6 +219,26 @@ class MongoPlugin(DatabasePlugin):
             return []
         return await self._executor.list_collections()
 
+    async def sample_field_values(
+        self, collection: str, field: str, database: str | None = None, cap: int = 100
+    ) -> list:
+        if self._executor is None:
+            return []
+        try:
+            return await self._executor.sample_field_values(collection, field, database, cap)
+        except Exception:
+            return []
+
+    async def field_stats(
+        self, resource: str, mask_fields: list[str] | None = None, database: str | None = None
+    ) -> dict:
+        if self._executor is None:
+            return {}
+        try:
+            return await self._executor.field_stats(resource, mask_fields or [], database=database)
+        except Exception:
+            return {}
+
     async def relationships(self, resources: list[str]) -> list[dict]:
         """Infer relationships among `resources` from field names + indexes.
         Best-effort: any per-resource introspection failure is skipped, never

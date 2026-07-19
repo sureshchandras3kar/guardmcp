@@ -16,6 +16,7 @@ class EvalRequest(BaseModel):
     agent: str = "test-agent"
     collection: str = ""
     action: str
+    database: str | None = None
     params: dict[str, Any] = Field(default_factory=dict)
 
 
@@ -38,6 +39,10 @@ class InlinePolicy(BaseModel):
     fields_allow: list[str] = Field(default_factory=list)
     # S-6: named connections this agent may switch to (eval-expressible).
     connections_allow: list[str] = Field(default_factory=list)
+    # Multi-database governance fields — mirror product Policy.
+    databases_allow: list[str] = Field(default_factory=list)
+    databases: dict[str, Any] = Field(default_factory=dict)
+    default: dict[str, Any] | None = None
     approval: dict[str, Any] = Field(default_factory=dict)
 
 

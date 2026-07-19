@@ -29,13 +29,13 @@ def _client():
     real = AsyncMongoMockClient()
 
     class _C:
-        def get_collection(self, name):
+        def get_collection(self, name, database=None):
             return real["t"][name]
 
-        def get_db(self):
+        def get_db(self, database=None):
             return real["t"]
 
-        async def list_collection_names(self):
+        async def list_collection_names(self, database=None):
             return await real["t"].list_collection_names()
 
         async def list_databases(self):  # noqa: RUF029

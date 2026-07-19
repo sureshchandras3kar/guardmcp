@@ -50,13 +50,13 @@ class _Loader:
 
 def _mock_client(mongo: AsyncMongoMockClient, db: str = "testdb"):
     class _C:
-        def get_collection(self, name):
+        def get_collection(self, name, database=None):
             return mongo[db][name]
 
-        def get_db(self):
+        def get_db(self, database=None):
             return mongo[db]
 
-        async def list_collection_names(self):
+        async def list_collection_names(self, database=None):
             return await mongo[db].list_collection_names()
 
         async def list_databases(self):

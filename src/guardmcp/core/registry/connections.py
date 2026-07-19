@@ -47,14 +47,33 @@ _active_connection: contextvars.ContextVar[str] = contextvars.ContextVar(
 )
 
 
+# Per-session active-database-per-connection map (set by db_use_database).
+#
+# Same Risk #8 isolation requirement as _active_connection above: this MUST be
+# a ContextVar, not a field on the shared ConnectionEntry (which lives in the
+# process-global registry dict and would leak a use_database() call across
+# every concurrent session sharing that connection). Keyed by connection name
+# so switching connections and back restores THAT connection's own remembered
+# database, without requiring per-connection storage on the shared entry.
+#
+# default=None (not a mutable {}) — a shared mutable default is a ContextVar
+# footgun even with disciplined copy-on-write elsewhere. get_active_database/
+# set_active_database below always treat None as "no database set yet".
+_active_databases: contextvars.ContextVar[dict[str, str] | None] = contextvars.ContextVar(
+    "active_databases", default=None
+)
+
+
 def reset_active() -> None:
-    """Reset the active connection for the CURRENT context back to the default.
+    """Reset the active connection AND active-database map for the CURRENT
+    context back to defaults.
 
     Only affects the current contextvars.Context — a reset here is invisible to
     other requests running in their own copied contexts. Useful for explicit
     request teardown or tests that want a clean baseline.
     """
     _active_connection.set("default")
+    _active_databases.set(None)
 
 
 @dataclass
@@ -108,6 +127,33 @@ class ConnectionRegistry:
 
     def active_name(self) -> str:
         return _active_connection.get()
+
+    def get_active_database(self) -> str | None:
+        """Active database for the CURRENTLY ACTIVE connection, scoped to the
+        CURRENT contextvars.Context (per-connection AND per-session — see
+        _active_databases above). None if no entry is active or that
+        connection never called set_active_database in this context."""
+        entry = self.get_active()
+        if entry is None:
+            return None
+        current = _active_databases.get()
+        return current.get(self.active_name()) if current is not None else None
+
+    def set_active_database(self, name: str | None) -> None:
+        """Store the active database for the CURRENTLY ACTIVE connection, in
+        THIS context only. No-op if no connection is currently active.
+
+        Copy-on-write: never mutate the ContextVar's dict in place (it may be
+        shared with a not-yet-diverged parent context) — always .set() a
+        fresh dict.
+        """
+        entry = self.get_active()
+        if entry is None:
+            return
+        current = _active_databases.get()
+        updated = dict(current) if current is not None else {}
+        updated[self.active_name()] = name
+        _active_databases.set(updated)
 
     def list_names(self) -> list[str]:
         return list(self._registry.keys())

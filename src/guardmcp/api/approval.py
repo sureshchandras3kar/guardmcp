@@ -2,11 +2,12 @@ import hmac
 from collections.abc import Awaitable, Callable
 
 from fastapi import APIRouter, Depends, FastAPI, Header, HTTPException
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel
 
 from ..core.approval.models import ApprovalRequest
 from ..core.approval.store import ApprovalStore
+from ..core.metrics import render_prometheus
 
 # A readiness probe returns (ready, detail). It must be best-effort and never
 # raise; detail explains a not-ready state WITHOUT leaking secrets.
@@ -78,6 +79,15 @@ def build_approval_app(
         if ready_ok:
             return JSONResponse({"status": "ready"})
         return JSONResponse({"status": "not_ready", "detail": detail}, status_code=503)
+
+    @app.get("/metrics", tags=["health"])
+    async def metrics_endpoint() -> PlainTextResponse:
+        """Prometheus text-exposition metrics — no auth, same posture as the
+        health endpoints (no PII/query content, just per-action/status
+        request counters). Process-local only; see core/metrics.py."""
+        return PlainTextResponse(
+            render_prometheus(), media_type="text/plain; version=0.0.4"
+        )
 
     def _verify_token(x_approval_token: str = Header(default="")) -> None:
         # S-2: constant-time comparison — plain != leaks token bytes via timing

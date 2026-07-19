@@ -4,7 +4,7 @@ from typing import Any
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from .core.paths import default_audit_log_path
+from .core.paths import default_audit_log_path, default_export_dir
 
 
 class ConnectionConfig(BaseModel):
@@ -34,6 +34,12 @@ class Settings(BaseSettings):
     # in __main__.build(), never against cwd.
     audit_log_path: Path = Field(default_factory=default_audit_log_path)
     approval_timeout_seconds: float = 300.0
+
+    # db_export: writes an ALREADY-MASKED find/aggregate result to a local file
+    # instead of returning it inline (for bulk reads too large for a normal
+    # response). Secure this directory — exported data may be sensitive.
+    export_dir: Path = Field(default_factory=default_export_dir)
+    export_ttl_seconds: float = 300.0  # expired files swept on the next export call
 
     # Fix 1: agent identity set by operator at server startup, never by AI.
     # For stdio (Claude Desktop): set GUARDMCP_AGENT in the MCP server config.

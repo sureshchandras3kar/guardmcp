@@ -58,15 +58,15 @@ def _patch_raise_after_close(monkeypatch):
             if self._closed:
                 raise _AfterCloseError("Cannot use MongoClient after close")
 
-        def get_collection(self, name):
+        def get_collection(self, name, database=None):
             self._check()
             return object()
 
-        def get_db(self):
+        def get_db(self, database=None):
             self._check()
             return object()
 
-        async def list_collection_names(self):
+        async def list_collection_names(self, database=None):
             self._check()
             return []
 

@@ -110,6 +110,20 @@ class DatabasePlugin(ABC):
         """
         return []
 
+    async def field_stats(
+        self, resource: str, mask_fields: list[str] | None = None, database: str | None = None
+    ) -> dict:
+        """Return per-field sample stats {field: {count,null_count,distinct_count,
+        sample_values}}. Safe default {} so backends without sampling stay valid."""
+        return {}
+
+    async def sample_field_values(
+        self, collection: str, field: str, database: str | None = None, cap: int = 100
+    ) -> list:
+        """Bounded distinct sample of one field's values (for cross-DB value
+        overlap). Safe default [] so backends without sampling stay valid."""
+        return []
+
     # ── Cost estimation (NOT abstract: safe default) ─────────────────────────
     # A backend that can estimate an operation's cost via its native explain
     # overrides this and NORMALIZES the result into a CostEstimate (never the raw

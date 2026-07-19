@@ -6,6 +6,23 @@ from datetime import UTC, datetime
 
 from .models import Relationship, RelationshipGraph
 
+DEFAULT_CENTRALITY_TOP_N = 3
+
+
+def rank_by_centrality(graph: RelationshipGraph, top_n: int | None = None) -> list[str]:
+    """Rank graph.nodes by edge degree (in + out), descending; ties broken
+    alphabetically for determinism. Nodes with zero edges still appear (rank
+    last). Used to cap expensive per-collection lookups (e.g. field semantics)
+    to the most-connected collections first. `top_n=None` returns every node."""
+    degree: dict[str, int] = dict.fromkeys(graph.nodes, 0)
+    for e in graph.edges:
+        if e.from_resource in degree:
+            degree[e.from_resource] += 1
+        if e.to_resource in degree:
+            degree[e.to_resource] += 1
+    ranked = sorted(degree, key=lambda n: (-degree[n], n))
+    return ranked[:top_n] if top_n is not None else ranked
+
 
 class RelationshipResolver:
     def __init__(self, get_plugin: Callable[[], object | None], *, ttl_seconds: int = 300,

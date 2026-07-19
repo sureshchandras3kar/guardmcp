@@ -15,6 +15,7 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
     get_pipeline = ctx.get_pipeline
     get_agent = ctx.get_agent
     get_settings = ctx.get_settings
+    get_active_database = ctx.get_active_database
     _RO = ctx.RO
 
     @mcp.tool(
@@ -62,7 +63,20 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
         except Exception:
             pass
 
-        db_name = settings.mongodb_database if settings else "unknown"
+        # Bug fix: this was hardcoded to settings.mongodb_database (the
+        # DEFAULT connection's configured db) regardless of which connection
+        # is actually active. Resolve in priority order: session
+        # active_database override > the ACTIVE connection's own configured
+        # database > settings fallback (single-connection/no-registry case).
+        active_db_override = get_active_database()
+        registry = getattr(pipeline, "_registry", None)
+        active_entry = registry.get_active() if registry is not None else None
+        if active_db_override:
+            db_name = active_db_override
+        elif active_entry is not None and getattr(active_entry, "database", None):
+            db_name = active_entry.database
+        else:
+            db_name = settings.mongodb_database if settings else "unknown"
 
         policy = pipeline._policies.get(agent)
         if policy is not None:
@@ -74,12 +88,14 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
             )
             col_allow = policy.collections.allow
             col_deny = policy.collections.deny
+            databases_allow = policy.databases_allow
         else:
             mode = "none"
             policy_loaded = "✗ not configured — run guardmcp_setup"
             masked_fields = []
             col_allow = []
             col_deny = []
+            databases_allow = []
 
         rate_info = ""
         if settings and getattr(settings, "rate_limit_rps", 0) > 0:
@@ -123,12 +139,14 @@ def register(mcp: FastMCP, ctx: ToolContext) -> None:
         stats_obj: dict = {
             "connection": conn_name,
             "database": db_name,
+            "active_database": get_active_database(),
             "agent": agent,
             "mode": mode,
             "policy_loaded": policy is not None,
             "collection_count": collection_count,
             "collections_allow": col_allow,
             "collections_deny": col_deny,
+            "allowed_databases": databases_allow,
             "masked_fields": masked_fields,
             "db_stats": raw_stats,
             "server_version": server_version,

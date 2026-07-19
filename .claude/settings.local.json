@@ -281,7 +281,17 @@
       "Bash(.venv/bin/python -m pytest tests/unit/test_ambiguity_detector.py tests/unit/test_planning_models.py tests/unit/test_relationship_resolver.py tests/unit/test_mongo_relationships.py -q)",
       "Bash(.venv/bin/python -m ruff check src tests)",
       "Bash(python graphify-out/.graphify_python -m graphify.cli query \"planning models ExecutionPlan AlternativePlan Interpretation PlanningContext\")",
-      "Bash(/Users/suresh/guardmcp/.venv/bin/python -m pytest tests/unit/test_query_planner.py -v)"
+      "Bash(/Users/suresh/guardmcp/.venv/bin/python -m pytest tests/unit/test_query_planner.py -v)",
+      "Bash(grep -viE '\"\\(and|or|read|aggregate|eq|gt|gte|lt|lte|ne|in|fields|key|name|unique|sparse|type|regular|index|naming|fk|sampled|from_resource|from_field|to_resource|to_field|kind|confidence|evidence|_id|status|state|is_active|active|enabled|account_enabled|top|highest|most|largest|by|collection_scan|index_scan|low|medium|high|denied|approval_required|allowed|aggregation|\\\\\\\\$match|\\\\\\\\$limit\\)\"')",
+      "Bash(git commit -q -m 'docs: field semantics design \\(Context Engine slice 1, data-agnostic\\) *)",
+      "Bash(grep -rn -E \"\\(collection|field|schema\\)\\\\s*=\\\\s*['\\\\\"][a-z_]{3,}['\\\\\"]\" /Users/suresh/guardmcp/src/guardmcp/)",
+      "Bash(git commit -q -m 'docs: field semantics implementation plan \\(Context Engine slice 1\\) *)",
+      "Bash(.venv/bin/python -m pytest tests/unit/test_cross_db_paths.py -q)",
+      "Bash(.venv/bin/python -m pytest tests/unit/test_cross_db_matcher.py tests/unit/test_cross_db_resolver.py tests/unit/test_cross_db_signal3.py tests/unit/test_cross_db_resolver_signal3.py tests/unit/test_cross_db_models.py tests/unit/test_relationships_cross_db_tool.py tests/unit/test_cross_db_paths.py tests/integration/test_cross_db_relationships.py tests/integration/test_cross_db_signal3_integration.py -q)",
+      "Bash(.venv/bin/python -m ruff check src/guardmcp/core/planning/cross_db.py src/guardmcp/core/planning/models.py src/guardmcp/server/tools/meta/plan_query.py tests/unit/test_cross_db_paths.py)",
+      "Bash(.venv/bin/python -)",
+      "Bash(.venv/bin/python -m ruff check tests/unit/test_cross_db_paths.py)",
+      "Bash(.venv/bin/python -m pytest tests/unit/test_relationship_centrality.py -q)"
     ]
   }
 }
